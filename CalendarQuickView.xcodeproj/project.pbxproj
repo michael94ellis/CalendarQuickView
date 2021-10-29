@@ -3,26 +3,39 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
-		2FCC6CE5272C3A08006D5C7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE4272C3A08006D5C7D /* ContentView.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
 		2FCC6CED272C3A09006D5C7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CEB272C3A09006D5C7D /* Main.storyboard */; };
+		2FCC6CF7272C3B4E006D5C7D /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2FCC6CF6272C3B4E006D5C7D /* LaunchAtLogin */; };
+		2FCC6CFA272C3C6C006D5C7D /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CF9272C3C6C006D5C7D /* CalendarView.swift */; };
+		2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */; };
+		2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */; };
+		2FCC6D00272C481F006D5C7D /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFF272C481F006D5C7D /* WeekView.swift */; };
+		2FCC6D02272C4839006D5C7D /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D01272C4839006D5C7D /* MonthView.swift */; };
+		2FCC6D04272C486E006D5C7D /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D03272C486E006D5C7D /* StatusBarView.swift */; };
+		2FCC6D06272C80C5006D5C7D /* Date-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarQuickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2FCC6CE4272C3A08006D5C7D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2FCC6CEC272C3A09006D5C7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FCC6CEE272C3A09006D5C7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FCC6CEF272C3A09006D5C7D /* CalendarQuickView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarQuickView.entitlements; sourceTree = "<group>"; };
+		2FCC6CF9272C3C6C006D5C7D /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter-Extension.swift"; sourceTree = "<group>"; };
+		2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar-Extension.swift"; sourceTree = "<group>"; };
+		2FCC6CFF272C481F006D5C7D /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
+		2FCC6D01272C4839006D5C7D /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		2FCC6D03272C486E006D5C7D /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
+		2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-Extention.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FCC6CF7272C3B4E006D5C7D /* LaunchAtLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +70,13 @@
 			isa = PBXGroup;
 			children = (
 				2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */,
-				2FCC6CE4272C3A08006D5C7D /* ContentView.swift */,
+				2FCC6D03272C486E006D5C7D /* StatusBarView.swift */,
+				2FCC6CF9272C3C6C006D5C7D /* CalendarView.swift */,
+				2FCC6D01272C4839006D5C7D /* MonthView.swift */,
+				2FCC6CFF272C481F006D5C7D /* WeekView.swift */,
+				2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */,
+				2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */,
+				2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */,
 				2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */,
 				2FCC6CEB272C3A09006D5C7D /* Main.storyboard */,
 				2FCC6CEE272C3A09006D5C7D /* Info.plist */,
@@ -84,12 +104,16 @@
 				2FCC6CDB272C3A08006D5C7D /* Sources */,
 				2FCC6CDC272C3A08006D5C7D /* Frameworks */,
 				2FCC6CDD272C3A08006D5C7D /* Resources */,
+				2FCC6CF8272C3B65006D5C7D /* LaunchAtLogin Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = CalendarQuickView;
+			packageProductDependencies = (
+				2FCC6CF6272C3B4E006D5C7D /* LaunchAtLogin */,
+			);
 			productName = CalendarQuickView;
 			productReference = 2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +141,9 @@
 				Base,
 			);
 			mainGroup = 2FCC6CD6272C3A08006D5C7D;
+			packageReferences = (
+				2FCC6CF5272C3B4E006D5C7D /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+			);
 			productRefGroup = 2FCC6CE0272C3A08006D5C7D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,12 +166,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2FCC6CF8272C3B65006D5C7D /* LaunchAtLogin Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "LaunchAtLogin Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2FCC6CDB272C3A08006D5C7D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FCC6CE5272C3A08006D5C7D /* ContentView.swift in Sources */,
+				2FCC6D06272C80C5006D5C7D /* Date-Extention.swift in Sources */,
+				2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */,
+				2FCC6D02272C4839006D5C7D /* MonthView.swift in Sources */,
+				2FCC6D04272C486E006D5C7D /* StatusBarView.swift in Sources */,
+				2FCC6D00272C481F006D5C7D /* WeekView.swift in Sources */,
+				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,
+				2FCC6CFA272C3C6C006D5C7D /* CalendarView.swift in Sources */,
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +349,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaellis.CalendarQuickView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -319,7 +373,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaellis.CalendarQuickView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -348,6 +402,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2FCC6CF5272C3B4E006D5C7D /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2FCC6CF6272C3B4E006D5C7D /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2FCC6CF5272C3B4E006D5C7D /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2FCC6CD7272C3A08006D5C7D /* Project object */;
 }
