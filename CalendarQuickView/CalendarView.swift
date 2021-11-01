@@ -7,29 +7,28 @@
 
 import SwiftUI
 
-struct CalendarView<DateView>: View where DateView: View {
+struct CalendarView: View {
     @Environment(\.calendar) var calendar
 
     let interval: DateInterval
-    let content: (Date) -> DateView
 
-    init(interval: DateInterval, @ViewBuilder content: @escaping (Date) -> DateView) {
-        self.interval = interval
-        self.content = content
-    }
-
-    private var months: [Date] {
-        calendar.generateDates(
-            inside: interval,
-            matching: DateComponents(day: 1, hour: 0, minute: 0, second: 0)
-        )
+    private var month: Date {
+        let dayComponent = DateComponents(day: 1, hour: 0, minute: 0, second: 0)
+        guard let month = calendar.generateDates(inside: interval, matching: dayComponent).first else {
+            return Date()
+        }
+        return month
     }
     
     var body: some View {
         VStack {
-            ForEach(months, id: \.self) { month in
-                MonthView(month: month, content: self.content)
+            HStack {
+                Text(DateFormatter.monthAndYear.string(from: month))
+                    .font(.title)
+                    .padding(.vertical, 5)
+                Spacer()
             }
+            MonthView(month: month)
         }
     }
 }
