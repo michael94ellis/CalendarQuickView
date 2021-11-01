@@ -26,6 +26,7 @@
 		2FDFB0932730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2FDFB08E2730241C00BE49CC /* CalendarQuickWidget.intentdefinition */; };
 		2FDFB0942730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2FDFB08E2730241C00BE49CC /* CalendarQuickWidget.intentdefinition */; };
 		2FDFB0972730241F00BE49CC /* CalendarQuickWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2FDFB0852730241B00BE49CC /* CalendarQuickWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2FDFB09D2730B09800BE49CC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDFB09C2730B09800BE49CC /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		2FDFB08F2730241F00BE49CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FDFB0912730241F00BE49CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FDFB0922730241F00BE49CC /* CalendarQuickWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarQuickWidget.entitlements; sourceTree = "<group>"; };
+		2FDFB09C2730B09800BE49CC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			children = (
 				2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */,
 				2FCC6D03272C486E006D5C7D /* StatusBarView.swift */,
+				2FDFB09C2730B09800BE49CC /* SettingsView.swift */,
 				2FCC6CF9272C3C6C006D5C7D /* CalendarView.swift */,
 				2FCC6D01272C4839006D5C7D /* MonthView.swift */,
 				2FCC6CFF272C481F006D5C7D /* WeekView.swift */,
@@ -299,6 +302,7 @@
 				2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */,
 				2FCC6D02272C4839006D5C7D /* MonthView.swift in Sources */,
 				2FCC6D04272C486E006D5C7D /* StatusBarView.swift in Sources */,
+				2FDFB09D2730B09800BE49CC /* SettingsView.swift in Sources */,
 				2FCC6D00272C481F006D5C7D /* WeekView.swift in Sources */,
 				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,
 				2FDFB0942730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
