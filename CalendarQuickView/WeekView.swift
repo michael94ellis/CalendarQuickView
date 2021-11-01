@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeekView<DateView>: View where DateView: View {
+struct WeekView: View {
     @Environment(\.calendar) var calendar
 
     let week: Date

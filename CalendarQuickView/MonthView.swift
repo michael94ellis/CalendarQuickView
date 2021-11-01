@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MonthView<DateView>: View where DateView: View {
+struct MonthView: View {
     @Environment(\.calendar) var calendar
 
     let month: Date
