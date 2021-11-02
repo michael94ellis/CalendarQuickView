@@ -16,7 +16,7 @@ struct SettingsView: View {
         VStack {
             Text("Calendar Quick View Settings")
             LaunchAtLogin.Toggle("Launch on Login")
-            Toggle("Show Menu Bar Item", isOn: $showMenuButton)
+            Toggle("Example Toggle Item", isOn: $showMenuButton)
         }
         .frame(width: 480, height: 300)
     }

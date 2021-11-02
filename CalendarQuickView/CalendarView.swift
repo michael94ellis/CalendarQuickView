@@ -21,14 +21,16 @@ struct CalendarView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top) {
                 Text(DateFormatter.monthAndYear.string(from: month))
                     .font(.title)
                     .padding(.vertical, 5)
+                    .padding(.horizontal, 12)
                 Spacer()
             }
             MonthView(month: month)
+                .padding(.horizontal, 12)
         }
     }
 }

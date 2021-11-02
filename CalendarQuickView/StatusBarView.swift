@@ -44,6 +44,7 @@ struct StatusBarView: View {
             Button("Open Settings") {
                 openSettingsWindow()
             }
+            .padding(.bottom, 5)
         }
     }
     
