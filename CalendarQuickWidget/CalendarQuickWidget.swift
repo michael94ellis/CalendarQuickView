@@ -7,7 +7,6 @@
 
 import WidgetKit
 import SwiftUI
-import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -44,7 +43,9 @@ struct CalendarQuickWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text("Quick Calendar Widget \(Date()))")
+        ForEach([1, 2, 3], id: \.self) { num in
+            Text("\(num)")
+        }
     }
 }
 
