@@ -44,7 +44,7 @@ struct CalendarQuickWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        Text("Quick Calendar Widget \(Date()))")
     }
 }
 
@@ -56,14 +56,7 @@ struct CalendarQuickWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             CalendarQuickWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
-    }
-}
-
-struct CalendarQuickWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        CalendarQuickWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        .configurationDisplayName("Quick Calendar Widget")
+        .description("This is a calendar view widget.")
     }
 }

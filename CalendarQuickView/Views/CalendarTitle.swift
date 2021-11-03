@@ -13,8 +13,8 @@ struct CalendarTitle: View {
     let calendar: Calendar
     private let monthFormatter: DateFormatter
     
-    init(date: State<Date>, calendar: Calendar) {
-        self._displayDate = date
+    init(date: Date, calendar: Calendar) {
+        self._displayDate = State(wrappedValue: date)
         self.calendar = calendar
         self.monthFormatter = DateFormatter(dateFormat: "MMMM", calendar: calendar)
     }

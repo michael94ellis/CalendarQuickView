@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2F6FB9382732127E00DD0ACC /* CalendarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */; };
+		2F6FB94127322BFE00DD0ACC /* DateFormatter-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */; };
+		2F6FB94227322BFE00DD0ACC /* Date-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */; };
+		2F6FB94327322BFE00DD0ACC /* Calendar-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */; };
+		2F6FB94427322C1400DD0ACC /* CalendarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */; };
+		2F6FB94727322C7700DD0ACC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94627322C7700DD0ACC /* CalendarView.swift */; };
+		2F6FB94827322D0D00DD0ACC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94627322C7700DD0ACC /* CalendarView.swift */; };
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
@@ -53,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTitle.swift; sourceTree = "<group>"; };
+		2F6FB94627322C7700DD0ACC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarQuickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				2FCC6D03272C486E006D5C7D /* StatusBarView.swift */,
+				2F6FB94627322C7700DD0ACC /* CalendarView.swift */,
 				2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */,
 				2FDFB09C2730B09800BE49CC /* SettingsView.swift */,
 			);
@@ -229,7 +237,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					2FCC6CDE272C3A08006D5C7D = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -313,6 +321,7 @@
 				2F6FB9382732127E00DD0ACC /* CalendarTitle.swift in Sources */,
 				2FCC6D04272C486E006D5C7D /* StatusBarView.swift in Sources */,
 				2FDFB09D2730B09800BE49CC /* SettingsView.swift in Sources */,
+				2F6FB94727322C7700DD0ACC /* CalendarView.swift in Sources */,
 				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,
 				2FDFB0942730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
@@ -323,6 +332,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F6FB94127322BFE00DD0ACC /* DateFormatter-Extension.swift in Sources */,
+				2F6FB94827322D0D00DD0ACC /* CalendarView.swift in Sources */,
+				2F6FB94227322BFE00DD0ACC /* Date-Extention.swift in Sources */,
+				2F6FB94427322C1400DD0ACC /* CalendarTitle.swift in Sources */,
+				2F6FB94327322BFE00DD0ACC /* Calendar-Extension.swift in Sources */,
 				2FDFB0932730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
 				2FDFB08D2730241C00BE49CC /* CalendarQuickWidget.swift in Sources */,
 			);
@@ -472,12 +486,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CalendarQuickView/CalendarQuickView.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarQuickView/Preview Content\"";
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = CalendarQuickView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,12 +514,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CalendarQuickView/CalendarQuickView.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarQuickView/Preview Content\"";
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = CalendarQuickView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -523,6 +541,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = CalendarQuickWidget/CalendarQuickWidget.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -546,6 +565,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = CalendarQuickWidget/CalendarQuickWidget.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
