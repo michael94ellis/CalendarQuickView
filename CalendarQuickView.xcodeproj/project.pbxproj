@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F6FB9382732127E00DD0ACC /* CalendarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */; };
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTitle.swift; sourceTree = "<group>"; };
 		2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarQuickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				2FCC6D03272C486E006D5C7D /* StatusBarView.swift */,
+				2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */,
 				2FDFB09C2730B09800BE49CC /* SettingsView.swift */,
 			);
 			path = Views;
@@ -307,6 +310,7 @@
 			files = (
 				2FCC6D06272C80C5006D5C7D /* Date-Extention.swift in Sources */,
 				2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */,
+				2F6FB9382732127E00DD0ACC /* CalendarTitle.swift in Sources */,
 				2FCC6D04272C486E006D5C7D /* StatusBarView.swift in Sources */,
 				2FDFB09D2730B09800BE49CC /* SettingsView.swift in Sources */,
 				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,

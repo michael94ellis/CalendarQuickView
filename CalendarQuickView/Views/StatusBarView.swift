@@ -11,7 +11,7 @@ import LaunchAtLogin
 
 struct StatusBarView: View {
     
-    @State var displayDate: Date
+    @State var displayDate: Date = Date()
     
     private var calendar: Calendar
     private let monthFormatter: DateFormatter
@@ -22,7 +22,6 @@ struct StatusBarView: View {
     private let daysInWeek = 7
     
     init() {
-        self._displayDate = State(wrappedValue: Date())
         self.calendar = Calendar(identifier: .iso8601)
         self.monthFormatter = DateFormatter(dateFormat: "MMMM", calendar: calendar)
         self.weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: calendar)
@@ -33,69 +32,39 @@ struct StatusBarView: View {
         calendar.dateInterval(of: .month, for: displayDate)!
     }
     
-    private var titleView: some View {
-        HStack {
-            Button(action: {
-                guard let newDate = calendar.date(byAdding: .month, value: -1, to: displayDate) else {
-                    return
-                }
-                displayDate = newDate
-            },
-                   label: {
-                Label(title: { Text("Previous") }, icon: { Image(systemName: "chevron.left") })
-                    .labelStyle(IconOnlyLabelStyle())
-                    .frame(maxHeight: .infinity)
-            })
-                .frame(width: 65)
-            Spacer()
-            Text(monthFormatter.string(from: displayDate))
-                .font(.headline)
-                .padding()
-            Spacer()
-            Button(action: {
-                guard let newDate = calendar.date(byAdding: .month, value: 1, to: displayDate) else {
-                    return
-                }
-                displayDate = newDate
-            }, label: {
-                Label(title: { Text("Next") }, icon: { Image(systemName: "chevron.right") })
-                    .labelStyle(IconOnlyLabelStyle())
-                    .frame(maxHeight: .infinity)
-            })
-                .frame(width: 65)
-        }
-    }
-    
     var body: some View {
         let month = displayDate.startOfMonth(using: calendar)
         let days = makeDays()
         return VStack {
+            CalendarTitle(date: _displayDate, calendar: calendar)
             LazyVGrid(columns: Array(repeating: GridItem(), count: daysInWeek)) {
-                Section(header: titleView, content: {
-                    ForEach(days.prefix(daysInWeek), id: \.self) { date in
-                        Text(weekDayFormatter.string(from: date))
+                // M T W T F S S
+                // Weekday Headers
+                ForEach(days.prefix(daysInWeek), id: \.self) { date in
+                    Text(weekDayFormatter.string(from: date))
+                }
+                ForEach(days, id: \.self) { date in
+                    if calendar.isDate(date, equalTo: month, toGranularity: .month) {
+                        Text(String(self.calendar.component(.day, from: date)))
+                            .frame(width: 20, height: 20)
+                            .padding(1)
+                            .background(calendar.isDateInToday(date) ? Color.green : Color.blue)
+                            .clipShape(RoundedRectangle(cornerRadius: 4.0))
+                            .padding(.vertical, 4)
+                    } else {
+                        Text(String(self.calendar.component(.day, from: date)))
+                            .frame(width: 20, height: 20)
+                            .padding(1)
+                            .background(Color(NSColor.lightGray).opacity(0.18))
+                            .clipShape(RoundedRectangle(cornerRadius: 4.0))
+                            .padding(.vertical, 4)
                     }
-                    ForEach(days, id: \.self) { date in
-                        if calendar.isDate(date, equalTo: month, toGranularity: .month) {
-                            Text(String(self.calendar.component(.day, from: date)))
-                                .frame(width: 20, height: 20)
-                                .padding(1)
-                                .background(Color.blue.opacity(0.88))
-                                .clipShape(RoundedRectangle(cornerRadius: 4.0))
-                                .padding(.vertical, 4)
-                        } else {
-                            Text(String(self.calendar.component(.day, from: date)))
-                                .frame(width: 20, height: 20)
-                                .padding(1)
-                                .background(Color(NSColor.lightGray).opacity(0.18))
-                                .clipShape(RoundedRectangle(cornerRadius: 4.0))
-                                .padding(.vertical, 4)
-                        }
-                    }
-                })
+                }
             }
+            .padding(.horizontal, 10)
             Spacer()
             Button(action: { self.openSettingsWindow() }, label: { Text("Open Settings") })
+                .padding(.bottom, 10)
         }
     }
     
