@@ -11,47 +11,38 @@ import EventKit
 class EventKitManager {
     
     static let shared = EventKitManager()
+    private init() { }
     
     let eventStore = EKEventStore()
     
     var calendars: [EKCalendar]?
     
-    func checkCalendarAuthStatus() {
+    func checkCalendarAuthStatus(completion: @escaping (Bool) -> ()) {
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
         
         switch(status) {
-            
         case EKAuthorizationStatus.notDetermined:
             //first run
-            requestAccessToCalendar()
-            
+            requestAccessToCalendar(completion: completion)
         case EKAuthorizationStatus.authorized:
-            print("Authorized")
-            
+            completion(true)
         case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
-            
-            break
-            
+            completion(false)
         @unknown default:
-            fatalError()
+            completion(false)
         }
-        
     }
     
-    func requestAccessToCalendar() {
+    func requestAccessToCalendar(completion: @escaping (Bool) -> ()) {
         eventStore.requestAccess(to: .event) { accessGranted, error in
-            
             if accessGranted == true {
                 DispatchQueue.main.async {
-                    print("success")
                     self.calendars = self.eventStore.calendars(for: EKEntityType.event)
-                    print("\(String(describing: self.calendars?.count))")
-                    print(self.calendars![0].title)
-                    
+                    completion(true)
                 }
             } else {
                 DispatchQueue.main.async {
-                    print("fail")
+                    completion(false)
                 }
             }
         }

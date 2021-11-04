@@ -19,7 +19,11 @@ struct SettingsView: View {
             LaunchAtLogin.Toggle("Launch on Login")
                 .padding()
             Button(action: {
-                EventKitManager.shared.requestAccessToCalendar() }, label: { Text("Enable Calendar Access") })
+                EventKitManager.shared.requestAccessToCalendar { success in
+                    print("Event access - \(success)")
+                }
+            },
+                   label: { Text("Enable Calendar Access") })
                 .padding()
             Button(action: {
                 // FIXME: takes 2 clicks to close, should only take 1 even if it has to have a delay

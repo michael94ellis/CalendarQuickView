@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var newHostingView: NSHostingView<StatusBarView> {
         let newView = NSHostingView(rootView: StatusBarView())
         // Set the frame or it won't be shown
-        newView.frame = NSRect(x: 0, y: 0, width: 250, height: 350)
+        newView.frame = NSRect(x: 0, y: 0, width: 250, height: 300)
         return newView
     }
     

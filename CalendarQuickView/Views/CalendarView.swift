@@ -35,7 +35,7 @@ struct CalendarView: View {
         let month = displayDate.startOfMonth(using: calendar)
         let days: [[Date]] = makeDays().chunked(into: 7)
         let weekDaysForHeader = days.first ?? []
-        return VStack {
+        return VStack(spacing: 0) {
             CalendarTitle(date: $displayDate, calendar: calendar)
             // M T W T F S S
             // Weekday Headers
@@ -68,7 +68,6 @@ struct CalendarView: View {
                 }
             }
             .padding(.horizontal, 10)
-            Spacer()
         }
     }
     
