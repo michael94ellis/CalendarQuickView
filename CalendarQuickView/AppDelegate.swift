@@ -46,6 +46,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         self.statusBarItem?.menu = menu
         self.statusBarItem?.button?.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "Quick View Calendar")
+        
+        EventKitManager.shared.checkCalendarAuthStatus()
+        
+    
     }
     
     func menuWillOpen(_ menu: NSMenu) {
