@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    var displayDate: Date = Date()
+    @State var displayDate: Date = Date()
     
     private var calendar: Calendar
     private let monthFormatter: DateFormatter
@@ -19,8 +19,8 @@ struct CalendarView: View {
     // Constants
     private let daysInWeek = 7
     
-    init() {
-        self.calendar = Calendar(identifier: .iso8601)
+    init(calendar: Calendar) {
+        self.calendar = calendar
         self.monthFormatter = DateFormatter(dateFormat: "MMMM", calendar: calendar)
         self.weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: calendar)
         self.dayFormatter = DateFormatter(dateFormat: "dd", calendar: calendar)
@@ -77,3 +77,14 @@ struct CalendarView: View {
     }
     
 }
+
+//struct CalendarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            CalendarView(calendar: Calendar(identifier: .gregorian))
+//            CalendarView(calendar: Calendar(identifier: .islamicUmmAlQura))
+//            CalendarView(calendar: Calendar(identifier: .hebrew))
+//            CalendarView(calendar: Calendar(identifier: .indian))
+//        }
+//    }
+//}

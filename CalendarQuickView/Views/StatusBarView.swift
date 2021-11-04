@@ -11,7 +11,7 @@ import AppKit
 struct StatusBarView: View {
     
     var body: some View {
-        CalendarView()
+        CalendarView(calendar: Calendar(identifier: .iso8601))
         Button(action: { self.openSettingsWindow() }, label: { Text("Open Settings") })
             .padding(.bottom, 10)
     }

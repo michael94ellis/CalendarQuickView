@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSRemindersUsageDescription</key>
-	<string>CalendarQuickView would like access to your reminders.</string>
+	<string>Enable to add, edit, and display reminders with Calendar Quick View</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>CalendarQuickView would like access to your calendars.</string>
+	<string>Enable to add, edit, and display calendar events with Calendar Quick View</string>
 	<key>NSContactsUsageDescription</key>
-	<string>CalendarQuickView would like access to your contacts.</string>
+	<string>CalendarQuickView would like access to your contacts for use with events and reminders</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
