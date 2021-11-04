@@ -10,23 +10,16 @@ import WidgetKit
 
 struct CalendarView: View {
     
-    @State var displayDate: Date = Date()
-    
-    private var calendar: Calendar
-    private let monthFormatter: DateFormatter
-    private let weekDayFormatter: DateFormatter
-    private let dayFormatter: DateFormatter
+    @Binding var displayDate: Date
+    public var calendar: Calendar
+    private let monthFormatter = DateFormatter.monthFormatter
+    private let weekDayFormatter = DateFormatter.weekDayFormatter
+    private let dayFormatter = DateFormatter.dayFormatter
     
     // Constants
     private let daysInWeek = 7
     
     // TODO: Make feature where user can change Calendar.Identifier
-    init(calendar: Calendar) {
-        self.calendar = calendar
-        self.monthFormatter = DateFormatter(dateFormat: "MMMM", calendar: calendar)
-        self.weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: calendar)
-        self.dayFormatter = DateFormatter(dateFormat: "dd", calendar: calendar)
-    }
     
     private var displayMonth: DateInterval {
         calendar.dateInterval(of: .month, for: displayDate)!
@@ -38,7 +31,6 @@ struct CalendarView: View {
         let days: [[Date]] = makeDays().chunked(into: 7)
         let weekDaysForHeader = days.first ?? []
         return VStack(spacing: 0) {
-            CalendarTitle(date: $displayDate, calendar: calendar)
             // M T W T F S S
             // Weekday Headers
             HStack {

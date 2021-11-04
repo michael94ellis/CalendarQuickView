@@ -10,8 +10,12 @@ import AppKit
 
 struct StatusBarView: View {
     
+    @State var displayDate: Date = Date()
+    public var calendar: Calendar
+    
     var body: some View {
-        CalendarView(calendar: Calendar(identifier: .iso8601))
+        CalendarTitle(date: $displayDate, calendar: calendar)
+        CalendarView(displayDate: $displayDate, calendar: self.calendar)
         Spacer()
         // Button to open Settings Window on bottom right
         HStack(spacing: 0) {

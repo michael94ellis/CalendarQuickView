@@ -11,17 +11,17 @@ struct CalendarTitle: View {
     
     @Binding var displayDate: Date
     let calendar: Calendar
-    private let monthFormatter: DateFormatter
+    private let titleFormatter: DateFormatter
     
     init(date: Binding<Date>, calendar: Calendar) {
         self._displayDate = date
         self.calendar = calendar
-        self.monthFormatter = DateFormatter(dateFormat: "MMM YY", calendar: calendar)
+        self.titleFormatter = DateFormatter(dateFormat: "MMMM YY", calendar: calendar)
     }
     
     var body: some View {
         HStack(spacing: 0) {
-            Text(monthFormatter.string(from: displayDate))
+            Text(titleFormatter.string(from: displayDate))
                 .font(.title)
                 .padding()
             Spacer()

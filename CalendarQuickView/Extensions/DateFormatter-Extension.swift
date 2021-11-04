@@ -9,6 +9,10 @@ import Foundation
 
 extension DateFormatter {
     
+    static var monthFormatter: DateFormatter { DateFormatter(dateFormat: "MMMM", calendar: Calendar.current) }
+    static var weekDayFormatter: DateFormatter { DateFormatter(dateFormat: "EEEEE", calendar: Calendar.current) }
+    static var dayFormatter: DateFormatter { DateFormatter(dateFormat: "dd", calendar: Calendar.current) }
+    
     convenience init(dateFormat: String, calendar: Calendar) {
         self.init()
         self.dateFormat = dateFormat

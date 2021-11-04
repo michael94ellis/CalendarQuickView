@@ -11,12 +11,11 @@
 		2F6FB94127322BFE00DD0ACC /* DateFormatter-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */; };
 		2F6FB94227322BFE00DD0ACC /* Date-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */; };
 		2F6FB94327322BFE00DD0ACC /* Calendar-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */; };
-		2F6FB94427322C1400DD0ACC /* CalendarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */; };
 		2F6FB94727322C7700DD0ACC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94627322C7700DD0ACC /* CalendarView.swift */; };
-		2F6FB94827322D0D00DD0ACC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94627322C7700DD0ACC /* CalendarView.swift */; };
 		2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */; };
 		2F6FB94B2734317700DD0ACC /* Array-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */; };
 		2F6FB94E273431DB00DD0ACC /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2F6FB94D273431DB00DD0ACC /* LaunchAtLogin */; };
+		2F6FB953273469F100DD0ACC /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94627322C7700DD0ACC /* CalendarView.swift */; };
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
@@ -123,8 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				2FCC6D03272C486E006D5C7D /* StatusBarView.swift */,
-				2F6FB94627322C7700DD0ACC /* CalendarView.swift */,
 				2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */,
+				2F6FB94627322C7700DD0ACC /* CalendarView.swift */,
 				2FDFB09C2730B09800BE49CC /* SettingsView.swift */,
 			);
 			path = Views;
@@ -342,10 +341,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F6FB94127322BFE00DD0ACC /* DateFormatter-Extension.swift in Sources */,
+				2F6FB953273469F100DD0ACC /* CalendarView.swift in Sources */,
 				2F6FB94B2734317700DD0ACC /* Array-Extension.swift in Sources */,
-				2F6FB94827322D0D00DD0ACC /* CalendarView.swift in Sources */,
 				2F6FB94227322BFE00DD0ACC /* Date-Extention.swift in Sources */,
-				2F6FB94427322C1400DD0ACC /* CalendarTitle.swift in Sources */,
 				2F6FB94327322BFE00DD0ACC /* Calendar-Extension.swift in Sources */,
 				2FDFB0932730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
 				2FDFB08D2730241C00BE49CC /* CalendarQuickWidget.swift in Sources */,
