@@ -13,6 +13,7 @@ struct StatusBarView: View {
     var body: some View {
         CalendarView(calendar: Calendar(identifier: .iso8601))
         Spacer()
+        // Button to open Settings Window on bottom right
         HStack(spacing: 0) {
             Spacer()
             Button(action: { self.openSettingsWindow() }, label: { Image(systemName: "gear") })
@@ -22,15 +23,15 @@ struct StatusBarView: View {
     }
     
     func openSettingsWindow() {
-        var windowRef:NSWindow
+        var windowRef: NSWindow
         windowRef = NSWindow(
             contentRect: NSRect(x: 100, y: 100, width: 100, height: 300),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
             backing: .buffered, defer: false)
         windowRef.setFrameAutosaveName("Calendar Quick View Settings")
         windowRef.isReleasedWhenClosed = false
-        windowRef.contentView = NSHostingView(rootView: SettingsView())
-        windowRef.makeKey()
+        windowRef.contentView = NSHostingView(rootView: SettingsView(windowRef: windowRef))
         windowRef.orderFrontRegardless()
+        windowRef.makeKey()
     }
 }

@@ -152,8 +152,8 @@
 		2FCC6CE1272C3A08006D5C7D /* CalendarQuickView */ = {
 			isa = PBXGroup;
 			children = (
-				41EA3BBF27336B77001070CF /* EventKitManager.swift */,
 				2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */,
+				41EA3BBF27336B77001070CF /* EventKitManager.swift */,
 				2F6FB93627320EEE00DD0ACC /* Views */,
 				2F6FB93527320EDC00DD0ACC /* Extensions */,
 				2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */,

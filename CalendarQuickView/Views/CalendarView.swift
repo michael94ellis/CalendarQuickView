@@ -20,6 +20,7 @@ struct CalendarView: View {
     // Constants
     private let daysInWeek = 7
     
+    // TODO: Make feature where user can change Calendar.Identifier
     init(calendar: Calendar) {
         self.calendar = calendar
         self.monthFormatter = DateFormatter(dateFormat: "MMMM", calendar: calendar)
@@ -32,6 +33,7 @@ struct CalendarView: View {
     }
     
     var body: some View {
+        // TODO: Make week able to start on any day of week(customizable)
         let month = displayDate.startOfMonth(using: calendar)
         let days: [[Date]] = makeDays().chunked(into: 7)
         let weekDaysForHeader = days.first ?? []
