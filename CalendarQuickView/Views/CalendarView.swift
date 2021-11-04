@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct CalendarView: View {
     
@@ -34,7 +35,7 @@ struct CalendarView: View {
         let month = displayDate.startOfMonth(using: calendar)
         let days = makeDays()
         return VStack {
-            CalendarTitle(date: displayDate, calendar: calendar)
+            CalendarTitle(date: $displayDate, calendar: calendar)
             LazyVGrid(columns: Array(repeating: GridItem(), count: daysInWeek)) {
                 // M T W T F S S
                 // Weekday Headers
@@ -67,12 +68,11 @@ struct CalendarView: View {
     func makeDays() -> [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: displayDate),
               let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
-              let monthLastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end - 1)
-        else {
+              let sixWeeksFromStart = Calendar.current.date(byAdding: .day, value: 7 * 6, to: monthFirstWeek.start) else {
             return []
         }
-        
-        let dateInterval = DateInterval(start: monthFirstWeek.start, end: monthLastWeek.end)
+        // get 6 weeks of days
+        let dateInterval = DateInterval(start: monthFirstWeek.start, end: sixWeeksFromStart)
         return calendar.generateDays(for: dateInterval)
     }
     

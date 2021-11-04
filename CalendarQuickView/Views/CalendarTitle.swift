@@ -9,12 +9,12 @@ import SwiftUI
 
 struct CalendarTitle: View {
     
-    @State var displayDate: Date = Date()
+    @Binding var displayDate: Date
     let calendar: Calendar
     private let monthFormatter: DateFormatter
     
-    init(date: Date, calendar: Calendar) {
-        self._displayDate = State(wrappedValue: date)
+    init(date: Binding<Date>, calendar: Calendar) {
+        self._displayDate = date
         self.calendar = calendar
         self.monthFormatter = DateFormatter(dateFormat: "MMMM", calendar: calendar)
     }

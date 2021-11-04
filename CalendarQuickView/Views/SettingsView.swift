@@ -21,7 +21,10 @@ struct SettingsView: View {
             Button(action: {
                 EventKitManager.shared.requestAccessToCalendar() }, label: { Text("Enable Calendar Access") })
                 .padding()
-            Button(action: { AppDelegate.terminate() }, label: { Text("Quit") })
+            Button(action: {
+                // FIXME: takes 2 clicks to close, should only take 1 even if it has to have a delay
+                AppDelegate.terminate()
+            }, label: { Text("Quit") })
                 .padding()
         }
         .frame(width: 480, height: 300)

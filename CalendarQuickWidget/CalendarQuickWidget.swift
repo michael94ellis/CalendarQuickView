@@ -43,9 +43,7 @@ struct CalendarQuickWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        ForEach([1, 2, 3], id: \.self) { num in
-            Text("\(num)")
-        }
+        CalendarView(calendar: .current)
     }
 }
 
