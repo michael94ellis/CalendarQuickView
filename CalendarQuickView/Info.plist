@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>CalendarQuickView would like access to your reminders.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>CalendarQuickView would like access to your calendars.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>CalendarQuickView would like access to your contacts.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
