@@ -60,6 +60,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Insert code here to tear down your application
     }
     
+    static func terminate() {
+        NSApp.terminate(self)
+    }
     
 }
 
