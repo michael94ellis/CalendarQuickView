@@ -16,7 +16,7 @@ struct CalendarTitle: View {
     init(date: Binding<Date>, calendar: Calendar) {
         self._displayDate = date
         self.calendar = calendar
-        self.monthFormatter = DateFormatter(dateFormat: "MMMM", calendar: calendar)
+        self.monthFormatter = DateFormatter(dateFormat: "MMM YYYY", calendar: calendar)
     }
     
     var body: some View {
@@ -29,7 +29,9 @@ struct CalendarTitle: View {
                 guard let newDate = calendar.date(byAdding: .month, value: -1, to: displayDate) else {
                     return
                 }
-                displayDate = newDate
+                withAnimation(.easeOut) {
+                    displayDate = newDate
+                }
             },
                    label: {
                 Label(title: { Text("Previous") }, icon: { Image(systemName: "chevron.left") })
@@ -41,7 +43,9 @@ struct CalendarTitle: View {
                 guard let newDate = calendar.date(byAdding: .month, value: 1, to: displayDate) else {
                     return
                 }
-                displayDate = newDate
+                withAnimation(.easeIn) {
+                    displayDate = newDate
+                }
             }, label: {
                 Label(title: { Text("Next") }, icon: { Image(systemName: "chevron.right") })
                     .labelStyle(IconOnlyLabelStyle())

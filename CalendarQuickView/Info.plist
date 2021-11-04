@@ -4,12 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSRemindersUsageDescription</key>
-	<string>Enable to add, edit, and display reminders with Calendar Quick View</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Enable to add, edit, and display calendar events with Calendar Quick View</string>
-	<key>NSContactsUsageDescription</key>
-	<string>CalendarQuickView would like access to your contacts for use with events and reminders</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
@@ -32,9 +26,15 @@
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Enable to add, edit, and display calendar events with Calendar Quick View</string>
+	<key>NSContactsUsageDescription</key>
+	<string>CalendarQuickView would like access to your contacts for use with events and reminders</string>
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Enable to add, edit, and display reminders with Calendar Quick View</string>
 </dict>
 </plist>
