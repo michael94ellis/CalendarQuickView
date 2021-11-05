@@ -10,7 +10,15 @@ import WidgetKit
 
 struct CalendarView: View {
     
+    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.blue
+    @AppStorage(AppStorageKeys.prevMonthDaysColor) private var prevMonthDaysColor: Color = Color.lightGray
+    @AppStorage(AppStorageKeys.nextMonthDaysColor) private var nextMonthDaysColor: Color = Color.lightGray
+    @AppStorage(AppStorageKeys.currentDayColor) private var currentDayColor: Color = Color.green
+    @AppStorage(AppStorageKeys.selectedDayColor) private var selectedDayColor: Color = Color.yellow
+
     @Binding var displayDate: Date
+    @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
+    
     public var calendar: Calendar
     private let monthFormatter = DateFormatter.monthFormatter
     private let weekDayFormatter = DateFormatter.weekDayFormatter
@@ -24,15 +32,43 @@ struct CalendarView: View {
     private var displayMonth: DateInterval {
         calendar.dateInterval(of: .month, for: displayDate)!
     }
+    // MARK: - View Representing Each Day
+    /// This will do the required info gathering to create a Day view
+    private func createDayNumberView(_ date: Date) -> some View {
+        let month = displayDate.startOfMonth(using: calendar)
+        let backgroundColor: Color
+        if calendar.isDate(date, inSameDayAs: selectedDate) {
+            // Selected Day
+            backgroundColor = selectedDayColor
+        } else if calendar.isDateInToday(date) {
+            // Current Day
+            backgroundColor = currentDayColor
+        } else if calendar.isDate(date, equalTo: month, toGranularity: .month) {
+            // Day in Current Displayed Month
+            backgroundColor = currentMonthDaysColor
+        } else if date < displayDate {
+            // Day is before Current Displayed Month
+            backgroundColor = prevMonthDaysColor
+        } else {
+            // Day is after Current Displayed Month
+            backgroundColor = nextMonthDaysColor
+        }
+        return Text(String(self.calendar.component(.day, from: date)))
+            .frame(width: 20, height: 20)
+            .padding(1)
+            .background(backgroundColor)
+            .clipShape(RoundedRectangle(cornerRadius: 4.0))
+            .padding(.vertical, 4)
+    }
     
     var body: some View {
         // TODO: Make week able to start on any day of week(customizable)
-        let month = displayDate.startOfMonth(using: calendar)
         let days: [[Date]] = makeDays().chunked(into: 7)
         let weekDaysForHeader = days.first ?? []
         return VStack(spacing: 0) {
+            // TODO: Make this customizable as a feature
+            // MARK: - Weekday Header Row
             // M T W T F S S
-            // Weekday Headers
             HStack {
                 ForEach(weekDaysForHeader.prefix(daysInWeek), id: \.self) { date in
                     Text(weekDayFormatter.string(from: date))
@@ -40,31 +76,24 @@ struct CalendarView: View {
                         .padding(.horizontal, 1)
                 }
             }
+            .padding(.vertical, 8)
+            // Iterating over the days of the month
             ForEach(days, id: \.self) { weekDays in
                 HStack {
                     ForEach(weekDays, id:\.self) { date in
-                        if calendar.isDate(date, equalTo: month, toGranularity: .month) {
-                            Text(String(self.calendar.component(.day, from: date)))
-                                .frame(width: 20, height: 20)
-                                .padding(1)
-                                .background(calendar.isDateInToday(date) ? Color.green : Color.blue)
-                                .clipShape(RoundedRectangle(cornerRadius: 4.0))
-                                .padding(.vertical, 4)
-                        } else {
-                            Text(String(self.calendar.component(.day, from: date)))
-                                .frame(width: 20, height: 20)
-                                .padding(1)
-                                .background(Color(NSColor.lightGray).opacity(0.18))
-                                .clipShape(RoundedRectangle(cornerRadius: 4.0))
-                                .padding(.vertical, 4)
-                        }
+                        // Each individual day
+                        createDayNumberView(date)
+                        // Logic to select date
+                            .onTapGesture {
+                                self.selectedDate = date
+                            }
                     }
                 }
             }
-            .padding(.horizontal, 10)
         }
     }
     
+    /// Generates 6 weeks worth of days in an array
     func makeDays() -> [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: displayDate),
               let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
