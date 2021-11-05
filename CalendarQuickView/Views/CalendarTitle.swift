@@ -21,9 +21,11 @@ struct CalendarTitle: View {
     
     var body: some View {
         HStack(spacing: 0) {
+            // Month Name "MMM"
             Text(titleFormatter.string(from: displayDate))
                 .font(.title)
             Spacer()
+            // Previous Month Button
             Button(action: {
                 guard let newDate = calendar.date(byAdding: .month, value: -1, to: displayDate) else {
                     return
@@ -33,10 +35,13 @@ struct CalendarTitle: View {
                 }
             },
                    label: {
-                Label(title: { Text("Previous") }, icon: { Image(systemName: "chevron.left") })
+                Label(title: { Text("Previous") },
+                      icon: { Image(systemName: "chevron.left") })
                     .labelStyle(IconOnlyLabelStyle())
                     .frame(maxHeight: .infinity)
             })
+                .padding(.horizontal, 5)
+            // Next Month Button
             Button(action: {
                 guard let newDate = calendar.date(byAdding: .month, value: 1, to: displayDate) else {
                     return
@@ -45,7 +50,8 @@ struct CalendarTitle: View {
                     displayDate = newDate
                 }
             }, label: {
-                Label(title: { Text("Next") }, icon: { Image(systemName: "chevron.right") })
+                Label(title: { Text("Next") },
+                      icon: { Image(systemName: "chevron.right") })
                     .labelStyle(IconOnlyLabelStyle())
                     .frame(maxHeight: .infinity)
             })        }
