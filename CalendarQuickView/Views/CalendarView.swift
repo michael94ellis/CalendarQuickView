@@ -10,7 +10,11 @@ import WidgetKit
 
 struct CalendarView: View {
     
-    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.white
+    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.blue
+    @AppStorage(AppStorageKeys.prevMonthDaysColor) private var prevMonthDaysColor: Color = Color.lightGray
+    @AppStorage(AppStorageKeys.nextMonthDaysColor) private var nextMonthDaysColor: Color = Color.lightGray
+    @AppStorage(AppStorageKeys.currentDayColor) private var currentDayColor: Color = Color.green
+    @AppStorage(AppStorageKeys.selectedDayColor) private var selectedDayColor: Color = Color.yellow
 
     @Binding var displayDate: Date
     public var calendar: Calendar
@@ -32,13 +36,13 @@ struct CalendarView: View {
         let month = displayDate.startOfMonth(using: calendar)
         let backgroundColor: Color
         if calendar.isDateInToday(date) {
-            backgroundColor = .green.opacity(0.88)
+            backgroundColor = currentDayColor
         } else if calendar.isDate(date, equalTo: month, toGranularity: .month) {
             backgroundColor = currentMonthDaysColor
         } else if date < displayDate {
-            backgroundColor = .prevMonthDays
+            backgroundColor = prevMonthDaysColor
         } else {
-            backgroundColor = .nextMonthDays
+            backgroundColor = nextMonthDaysColor
         }
         return Text(String(self.calendar.component(.day, from: date)))
             .frame(width: 20, height: 20)

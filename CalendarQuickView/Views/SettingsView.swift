@@ -19,8 +19,12 @@ struct SettingsView: View {
 //            UserDefaults.standard.setColor(color: currentMonthDaysColor, forKey: AppStorageKeys.currentMonthDaysColor)
 //        }
 //    }
-    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.white
-    
+    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.blue
+    @AppStorage(AppStorageKeys.prevMonthDaysColor) private var prevMonthDaysColor: Color = Color.lightGray
+    @AppStorage(AppStorageKeys.nextMonthDaysColor) private var nextMonthDaysColor: Color = Color.lightGray
+    @AppStorage(AppStorageKeys.currentDayColor) private var currentDayColor: Color = Color.green
+    @AppStorage(AppStorageKeys.selectedDayColor) private var selectedDayColor: Color = Color.yellow
+
     var body: some View {
         VStack {
             Text("Calendar Quick View Settings")
@@ -31,7 +35,11 @@ struct SettingsView: View {
                 VStack(alignment: .trailing, spacing: 10) {
                     Text("Launch on Login")
                     Text("Calendar Access")
-                    Text("Current Month Color Day Color")
+                    Text("Current Day Color")
+                    Text("Selected Day Color")
+                    Text("Previous Month Day Color")
+                    Text("Current Month Day Color")
+                    Text("Next Month Day Color")
                 }
                 // Controls
                 VStack(alignment: .leading, spacing: 10) {
@@ -46,7 +54,11 @@ struct SettingsView: View {
                            label: { Image(systemName:  EventKitManager.shared.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle")
                             .foregroundColor(EventKitManager.shared.isAbleToAccessUserCalendar ? .green : .white)
                     })
+                    ColorPicker("", selection: $currentDayColor)
+                    ColorPicker("", selection: $selectedDayColor)
+                    ColorPicker("", selection: $prevMonthDaysColor)
                     ColorPicker("", selection: $currentMonthDaysColor)
+                    ColorPicker("", selection: $nextMonthDaysColor)
                 }
             }
             // Quit Button
