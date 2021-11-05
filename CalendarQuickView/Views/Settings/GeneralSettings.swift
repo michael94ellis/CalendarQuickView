@@ -37,7 +37,7 @@ struct GeneralSettings: View {
             }
             Button(action: {
                 // FIXME: takes 2 clicks to close, should only take 1 even if it has to have a delay
-                AppDelegate.terminate()
+                NSApp.terminate(self)
             }, label: { Text("Quit") })
                 .padding()
         }
