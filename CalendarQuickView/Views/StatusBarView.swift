@@ -18,7 +18,7 @@ struct StatusBarView: View {
     static var windowRef: NSWindow?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .center, spacing: 0) {
             CalendarTitle(displayDate: $displayDate, calendar: self.calendar, titleFormatter: self.titleDateFormatter)
                 .padding(.bottom, 4)
                 .padding(.top, 8)

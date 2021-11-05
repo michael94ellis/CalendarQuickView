@@ -18,11 +18,20 @@ struct CalendarView: View {
 
     @Binding var displayDate: Date
     @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
-    
+    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
+
     public var calendar: Calendar
     private let monthFormatter = DateFormatter.monthFormatter
     private let weekDayFormatter = DateFormatter.weekDayFormatter
     private let dayFormatter = DateFormatter.dayFormatter
+    
+    var size: CGFloat = 20
+    
+    init(displayDate: Binding<Date>, calendar: Calendar) {
+        self.calendar = calendar
+        self._displayDate = displayDate
+        self.size = self.calendarSize == .small ? 20 : calendarSize == .medium ? 30 : 40
+    }
     
     // Constants
     private let daysInWeek = 7
@@ -54,29 +63,31 @@ struct CalendarView: View {
             backgroundColor = nextMonthDaysColor
         }
         return Text(String(self.calendar.component(.day, from: date)))
-            .frame(width: 20, height: 20)
+            .frame(width: size, height: size)
             .padding(1)
             .background(backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: 4.0))
             .padding(.vertical, 4)
     }
     
+    private func weekDayHeaders(for weekDays: [Date]) -> some View {
+        return HStack {
+            ForEach(weekDays.prefix(daysInWeek), id: \.self) { date in
+                Text(weekDayFormatter.string(from: date))
+                    .frame(width: size, height: size)
+                    .padding(.horizontal, 1)
+            }
+        }
+    }
+    
     var body: some View {
         // TODO: Make week able to start on any day of week(customizable)
         let days: [[Date]] = makeDays().chunked(into: 7)
-        let weekDaysForHeader = days.first ?? []
+        let weekDaysForHeader = days.first
         return VStack(spacing: 0) {
-            // TODO: Make this customizable as a feature
-            // MARK: - Weekday Header Row
             // M T W T F S S
-            HStack {
-                ForEach(weekDaysForHeader.prefix(daysInWeek), id: \.self) { date in
-                    Text(weekDayFormatter.string(from: date))
-                        .frame(width: 20, height: 20)
-                        .padding(.horizontal, 1)
-                }
-            }
-            .padding(.vertical, 8)
+            weekDayHeaders(for: weekDaysForHeader ?? [])
+                .padding(.vertical, 8)
             // Iterating over the days of the month
             ForEach(days, id: \.self) { weekDays in
                 HStack {
@@ -106,14 +117,3 @@ struct CalendarView: View {
     }
     
 }
-
-//struct CalendarView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            CalendarView(calendar: Calendar(identifier: .gregorian))
-//            CalendarView(calendar: Calendar(identifier: .islamicUmmAlQura))
-//            CalendarView(calendar: Calendar(identifier: .hebrew))
-//            CalendarView(calendar: Calendar(identifier: .indian))
-//        }
-//    }
-//}

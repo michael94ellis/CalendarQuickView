@@ -35,7 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         case .medium:
             size = CGSize(width: 300, height: 360)
         case .large:
-            size = CGSize(width: 400, height: 460)
+            size = CGSize(width: 400, height: 500)
         }
         newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
         return newView
