@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SettingsTabView.swift
 //  CalendarQuickView
 //
 //  Created by Michael Ellis on 11/1/21.
@@ -8,9 +8,8 @@
 import SwiftUI
 import Combine
 
-struct SettingsView: View {
+struct SettingsTabView: View {
     
-    var windowRef: NSWindow
     @State var showMenuButton: Bool = true
     
     private enum Tabs: Hashable {

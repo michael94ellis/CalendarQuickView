@@ -7,12 +7,30 @@
 
 import SwiftUI
 
+enum CalendarSize: String, CaseIterable, Codable {
+    case small
+    case medium
+    case large
+}
+
 struct GeneralSettings: View {
+    
+    @AppStorage(AppStorageKeys.calendarSize) var calendarViewSize: CalendarSize = CalendarSize.small
     
     @ObservedObject var launchAtLoginMonitor = LaunchAtLoginMonitor.shared
     
     var body: some View {
         VStack {
+            HStack {
+                Text("Calendar Size")
+                Picker("", selection: $calendarViewSize) {
+                    ForEach(CalendarSize.allCases, id: \.self) { calendarSize in
+                        Text(calendarSize.rawValue)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 150)
+            }
             HStack(alignment: .bottom) {
                 Text("\(self.launchAtLoginMonitor.isLaunchAtLoginEnabled ? "App is currently in" : "Click to add to") Login Items")
                 LaunchAtLoginMonitorToggle()

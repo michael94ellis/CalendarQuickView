@@ -22,12 +22,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let menuItem = NSMenuItem()
     /// Displayed as the content of the NSMenuItem
     var hostingView: NSHostingView<StatusBarView>?
+    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
     /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
     /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
     var newHostingView: NSHostingView<StatusBarView> {
         let newView = NSHostingView(rootView: StatusBarView(calendar: .current))
         // Set the frame or it won't be shown
-        newView.frame = NSRect(x: 0, y: 0, width: 250, height: 300)
+        let size: CGSize
+        switch(self.calendarSize) {
+        case .small:
+            size = CGSize(width: 250, height: 300)
+        case .medium:
+            size = CGSize(width: 300, height: 360)
+        case .large:
+            size = CGSize(width: 400, height: 460)
+        }
+        newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
         return newView
     }
     

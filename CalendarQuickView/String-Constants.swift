@@ -16,4 +16,5 @@ struct AppStorageKeys {
     static let selectedDayColor = "selectedDayColor"
     
     static let selectedDay = "selectedDay"
+    static let calendarSize = "calendarSize"
 }
