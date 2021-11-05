@@ -20,6 +20,7 @@
 		2F6FB95627347F3800DD0ACC /* String-Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95427347B0300DD0ACC /* String-Constants.swift */; };
 		2F6FB9582734C16C00DD0ACC /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9572734C16C00DD0ACC /* Color-Extension.swift */; };
 		2F6FB9592734C32500DD0ACC /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9572734C16C00DD0ACC /* Color-Extension.swift */; };
+		2F6FB95B27357DF800DD0ACC /* LaunchAtLoginMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */; };
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Extension.swift"; sourceTree = "<group>"; };
 		2F6FB95427347B0300DD0ACC /* String-Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Constants.swift"; sourceTree = "<group>"; };
 		2F6FB9572734C16C00DD0ACC /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
+		2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginMonitor.swift; sourceTree = "<group>"; };
 		2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarQuickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */,
 				41EA3BBF27336B77001070CF /* EventKitManager.swift */,
+				2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */,
 				2F6FB95427347B0300DD0ACC /* String-Constants.swift */,
 				2F6FB93627320EEE00DD0ACC /* Views */,
 				2F6FB93527320EDC00DD0ACC /* Extensions */,
@@ -342,6 +345,7 @@
 				41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */,
 				2FDFB0942730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
 				2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */,
+				2F6FB95B27357DF800DD0ACC /* LaunchAtLoginMonitor.swift in Sources */,
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

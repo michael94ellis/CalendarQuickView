@@ -17,7 +17,8 @@ struct CalendarView: View {
     @AppStorage(AppStorageKeys.selectedDayColor) private var selectedDayColor: Color = Color.yellow
 
     @Binding var displayDate: Date
-    @State var selectedDate: Date?
+    @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
+    
     public var calendar: Calendar
     private let monthFormatter = DateFormatter.monthFormatter
     private let weekDayFormatter = DateFormatter.weekDayFormatter
@@ -36,8 +37,7 @@ struct CalendarView: View {
     private func createDayNumberView(_ date: Date) -> some View {
         let month = displayDate.startOfMonth(using: calendar)
         let backgroundColor: Color
-        if let selectedDate = selectedDate,
-                  calendar.isDate(date, inSameDayAs: selectedDate) {
+        if calendar.isDate(date, inSameDayAs: selectedDate) {
             // Selected Day
             backgroundColor = selectedDayColor
         } else if calendar.isDateInToday(date) {

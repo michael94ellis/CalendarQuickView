@@ -7,17 +7,24 @@
 
 import Foundation
 
-extension Date {
+extension Date: RawRepresentable {
+    
+    private static let formatter = ISO8601DateFormatter()
+    
+    public var rawValue: String {
+        Date.formatter.string(from: self)
+    }
+    
+    public init?(rawValue: String) {
+        self = Date.formatter.date(from: rawValue) ?? Date()
+    }
     
     func startOfMonth(using calendar: Calendar) -> Date {
-        calendar.date(
-            from: calendar.dateComponents([.year, .month], from: self)
-        ) ?? self
+        calendar.date(from: calendar.dateComponents([.year, .month], from: self)) ?? self
     }
     
     public func addMonths(_ n: Int) -> Date {
-        let calendar = Calendar.current
-        return calendar.date(byAdding: .month, value: n, to: self)!
+        Calendar.current.date(byAdding: .month, value: n, to: self)!
     }
     
 }

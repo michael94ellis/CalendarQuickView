@@ -12,6 +12,8 @@ struct AppStorageKeys {
     static let currentMonthDaysColor = "currentMonthDays"
     static let prevMonthDaysColor = "prevMonthDays"
     static let nextMonthDaysColor = "nextMonthDays"
-    static let currentDayColor = "currentDay"
-    static let selectedDayColor = "selectedDay"
+    static let currentDayColor = "currentDayColor"
+    static let selectedDayColor = "selectedDayColor"
+    
+    static let selectedDay = "selectedDay"
 }

@@ -13,7 +13,7 @@ extension Color: RawRepresentable {
         let red =   Double((rawValue & 0xFF0000) >> 16) / 0xFF
         let green = Double((rawValue & 0x00FF00) >> 8) / 0xFF
         let blue =  Double(rawValue & 0x0000FF) / 0xFF
-        self = Color(red: red, green: green, blue: blue, opacity: 1)
+        self = Color(red: red, green: green, blue: blue)
     }
     public var rawValue: Int {
         let red = Int(coreImageColor.red * 255 + 0.5)
