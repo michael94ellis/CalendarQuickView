@@ -39,6 +39,7 @@
 		2FDFB0942730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2FDFB08E2730241C00BE49CC /* CalendarQuickWidget.intentdefinition */; };
 		2FDFB0972730241F00BE49CC /* CalendarQuickWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2FDFB0852730241B00BE49CC /* CalendarQuickWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2FDFB09D2730B09800BE49CC /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDFB09C2730B09800BE49CC /* SettingsTabView.swift */; };
+		41AB3E502735C4EB002DB4EF /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AB3E4F2735C4EB002DB4EF /* CalendarDayCell.swift */; };
 		41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventKitManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		2FDFB0912730241F00BE49CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FDFB0922730241F00BE49CC /* CalendarQuickWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarQuickWidget.entitlements; sourceTree = "<group>"; };
 		2FDFB09C2730B09800BE49CC /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
+		41AB3E4F2735C4EB002DB4EF /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
 		41EA3BBF27336B77001070CF /* EventKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 				2FCC6D03272C486E006D5C7D /* StatusBarView.swift */,
 				2F6FB9372732127E00DD0ACC /* CalendarTitle.swift */,
 				2F6FB94627322C7700DD0ACC /* CalendarView.swift */,
+				41AB3E4F2735C4EB002DB4EF /* CalendarDayCell.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
 			);
 			path = Views;
@@ -363,6 +366,7 @@
 				2FDFB0942730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
 				2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */,
 				2F6FB95B27357DF800DD0ACC /* LaunchAtLoginMonitor.swift in Sources */,
+				41AB3E502735C4EB002DB4EF /* CalendarDayCell.swift in Sources */,
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
 				2F6FB95D27358A1900DD0ACC /* ColorSettings.swift in Sources */,
 				2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */,
