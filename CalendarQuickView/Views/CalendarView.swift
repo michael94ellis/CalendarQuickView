@@ -10,6 +10,8 @@ import WidgetKit
 
 struct CalendarView: View {
     
+    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.white
+
     @Binding var displayDate: Date
     public var calendar: Calendar
     private let monthFormatter = DateFormatter.monthFormatter
@@ -19,15 +21,35 @@ struct CalendarView: View {
     // Constants
     private let daysInWeek = 7
     
+    
     // TODO: Make feature where user can change Calendar.Identifier
     
     private var displayMonth: DateInterval {
         calendar.dateInterval(of: .month, for: displayDate)!
     }
+    /// This will do the required info gathering to create a Day view
+    private func createDayNumberView(_ date: Date) -> some View {
+        let month = displayDate.startOfMonth(using: calendar)
+        let backgroundColor: Color
+        if calendar.isDateInToday(date) {
+            backgroundColor = .green.opacity(0.88)
+        } else if calendar.isDate(date, equalTo: month, toGranularity: .month) {
+            backgroundColor = currentMonthDaysColor
+        } else if date < displayDate {
+            backgroundColor = .prevMonthDays
+        } else {
+            backgroundColor = .nextMonthDays
+        }
+        return Text(String(self.calendar.component(.day, from: date)))
+            .frame(width: 20, height: 20)
+            .padding(1)
+            .background(backgroundColor)
+            .clipShape(RoundedRectangle(cornerRadius: 4.0))
+            .padding(.vertical, 4)
+    }
     
     var body: some View {
         // TODO: Make week able to start on any day of week(customizable)
-        let month = displayDate.startOfMonth(using: calendar)
         let days: [[Date]] = makeDays().chunked(into: 7)
         let weekDaysForHeader = days.first ?? []
         return VStack(spacing: 0) {
@@ -40,28 +62,16 @@ struct CalendarView: View {
                         .padding(.horizontal, 1)
                 }
             }
+            .padding(.vertical, 8)
+            // The days of the month
             ForEach(days, id: \.self) { weekDays in
                 HStack {
                     ForEach(weekDays, id:\.self) { date in
-                        if calendar.isDate(date, equalTo: month, toGranularity: .month) {
-                            Text(String(self.calendar.component(.day, from: date)))
-                                .frame(width: 20, height: 20)
-                                .padding(1)
-                                .background(calendar.isDateInToday(date) ? Color.green : Color.blue)
-                                .clipShape(RoundedRectangle(cornerRadius: 4.0))
-                                .padding(.vertical, 4)
-                        } else {
-                            Text(String(self.calendar.component(.day, from: date)))
-                                .frame(width: 20, height: 20)
-                                .padding(1)
-                                .background(Color(NSColor.lightGray).opacity(0.18))
-                                .clipShape(RoundedRectangle(cornerRadius: 4.0))
-                                .padding(.vertical, 4)
-                        }
+                        // Each individual day
+                        createDayNumberView(date)
                     }
                 }
             }
-            .padding(.horizontal, 10)
         }
     }
     

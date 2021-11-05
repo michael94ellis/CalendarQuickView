@@ -13,6 +13,13 @@ struct SettingsView: View {
     var windowRef: NSWindow
     @State var showMenuButton: Bool = true
     @ObservedObject var eventManager = EventKitManager.shared
+
+//    @State var currentMonthDaysColor: Color = .white {
+//        didSet {
+//            UserDefaults.standard.setColor(color: currentMonthDaysColor, forKey: AppStorageKeys.currentMonthDaysColor)
+//        }
+//    }
+    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.white
     
     var body: some View {
         VStack {
@@ -23,7 +30,8 @@ struct SettingsView: View {
                 // Labels
                 VStack(alignment: .trailing, spacing: 10) {
                     Text("Launch on Login")
-                    Text("Calendar Access") 
+                    Text("Calendar Access")
+                    Text("Current Month Color Day Color")
                 }
                 // Controls
                 VStack(alignment: .leading, spacing: 10) {
@@ -38,6 +46,7 @@ struct SettingsView: View {
                            label: { Image(systemName:  EventKitManager.shared.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle")
                             .foregroundColor(EventKitManager.shared.isAbleToAccessUserCalendar ? .green : .white)
                     })
+                    ColorPicker("", selection: $currentMonthDaysColor)
                 }
             }
             // Quit Button

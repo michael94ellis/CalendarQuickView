@@ -11,9 +11,7 @@ import EventKit
 class EventKitManager: ObservableObject {
     
     static let shared = EventKitManager()
-    private init() {
-        checkCalendarAuthStatus(completion: { _ in })
-    }
+    private init() { }
     
     let eventStore = EKEventStore()
     @Published var isAbleToAccessUserCalendar: Bool = false
