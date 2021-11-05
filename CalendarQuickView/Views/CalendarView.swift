@@ -27,12 +27,12 @@ struct CalendarView: View {
     // Constants
     private let daysInWeek = 7
     
-    
     // TODO: Make feature where user can change Calendar.Identifier
     
     private var displayMonth: DateInterval {
         calendar.dateInterval(of: .month, for: displayDate)!
     }
+    // MARK: - View Representing Each Day
     /// This will do the required info gathering to create a Day view
     private func createDayNumberView(_ date: Date) -> some View {
         let month = displayDate.startOfMonth(using: calendar)
@@ -66,8 +66,9 @@ struct CalendarView: View {
         let days: [[Date]] = makeDays().chunked(into: 7)
         let weekDaysForHeader = days.first ?? []
         return VStack(spacing: 0) {
+            // TODO: Make this customizable as a feature
+            // MARK: - Weekday Header Row
             // M T W T F S S
-            // Weekday Headers
             HStack {
                 ForEach(weekDaysForHeader.prefix(daysInWeek), id: \.self) { date in
                     Text(weekDayFormatter.string(from: date))
@@ -76,7 +77,7 @@ struct CalendarView: View {
                 }
             }
             .padding(.vertical, 8)
-            // The days of the month
+            // Iterating over the days of the month
             ForEach(days, id: \.self) { weekDays in
                 HStack {
                     ForEach(weekDays, id:\.self) { date in
@@ -92,6 +93,7 @@ struct CalendarView: View {
         }
     }
     
+    /// Generates 6 weeks worth of days in an array
     func makeDays() -> [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: displayDate),
               let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),

@@ -12,12 +12,13 @@ struct StatusBarView: View {
     
     @State var displayDate: Date = Date()
     public var calendar: Calendar
+    let titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
     
     static var windowRef: NSWindow?
     
     var body: some View {
-        VStack(spacing: 0) {
-            CalendarTitle(date: $displayDate, calendar: calendar)
+        VStack(alignment: .leading, spacing: 0) {
+            CalendarTitle(displayDate: $displayDate, calendar: self.calendar, titleFormatter: self.titleDateFormatter)
             CalendarView(displayDate: $displayDate, calendar: self.calendar)
             Spacer()
             // Button to open Settings Window on bottom right
@@ -30,12 +31,12 @@ struct StatusBarView: View {
         .padding(.horizontal, 20)
         .padding(.bottom, 10)
     }
-    
+    /// Opens a window displaying a Swiftui View for app settings
     static func openSettingsWindow() {
         if windowRef == nil {
             let newWindowRef = NSWindow(
-                contentRect: NSRect(x: 100, y: 100, width: 100, height: 300),
-                styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+                contentRect: NSRect(x: 100, y: 100, width: 100, height: 400),
+                styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
                 backing: .buffered, defer: false)
             self.windowRef = newWindowRef
             self.windowRef?.setFrameAutosaveName("Calendar Quick View Settings")
