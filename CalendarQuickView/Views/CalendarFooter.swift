@@ -21,11 +21,11 @@ struct CalendarFooter: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Button(action: { }, label: { Image(systemName: "plus")                        .frame(width: buttonSize, height: buttonSize)
- })
+            Button(action: { }, label: { Image(systemName: "plus")
+                    .frame(width: buttonSize, height: buttonSize)
+            })
             Spacer()
-            Button(action: { settingWindowCallback() }, label: { Image(systemName: "gear")                        .frame(width: buttonSize, height: buttonSize)
- })
+            CalendarButton(imageName: "gear", buttonSize: self.buttonSize, animation: .linear, action: self.settingWindowCallback)
         }
     }
 }

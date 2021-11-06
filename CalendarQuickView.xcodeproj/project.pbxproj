@@ -24,6 +24,7 @@
 		2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */; };
 		2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB96027358AAF00DD0ACC /* EventSettings.swift */; };
 		2F6FB96727362A3400DD0ACC /* CalendarFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB96627362A3400DD0ACC /* CalendarFooter.swift */; };
+		2F6FB9692736A44900DD0ACC /* CalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9682736A44900DD0ACC /* CalendarButton.swift */; };
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		2F6FB96027358AAF00DD0ACC /* EventSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSettings.swift; sourceTree = "<group>"; };
 		2F6FB96627362A3400DD0ACC /* CalendarFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFooter.swift; sourceTree = "<group>"; };
+		2F6FB9682736A44900DD0ACC /* CalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarButton.swift; sourceTree = "<group>"; };
 		2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarQuickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				2FCC6D03272C486E006D5C7D /* StatusBarCalendar.swift */,
 				2F6FB9372732127E00DD0ACC /* CalendarHeader.swift */,
+				2F6FB9682736A44900DD0ACC /* CalendarButton.swift */,
 				2F6FB94627322C7700DD0ACC /* CalendarBody.swift */,
 				2F6FB96627362A3400DD0ACC /* CalendarFooter.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
@@ -356,6 +359,7 @@
 				2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */,
 				2F6FB9382732127E00DD0ACC /* CalendarHeader.swift in Sources */,
 				2F6FB96727362A3400DD0ACC /* CalendarFooter.swift in Sources */,
+				2F6FB9692736A44900DD0ACC /* CalendarButton.swift in Sources */,
 				2FCC6D04272C486E006D5C7D /* StatusBarCalendar.swift in Sources */,
 				2FDFB09D2730B09800BE49CC /* SettingsTabView.swift in Sources */,
 				2F6FB94727322C7700DD0ACC /* CalendarBody.swift in Sources */,
