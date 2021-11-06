@@ -1,5 +1,5 @@
 //
-//  CalendarTitle.swift
+//  CalendarHeader.swift
 //  CalendarQuickView
 //
 //  Created by Michael Ellis on 11/2/21.
@@ -7,19 +7,31 @@
 
 import SwiftUI
 
-struct CalendarTitle: View {
+struct CalendarHeader: View {
     
+    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
     @Binding var displayDate: Date
     let calendar: Calendar
     let titleFormatter: DateFormatter
+    var fontSize: Font = .body
+    var buttonSize: CGFloat = 20
+    
+    init(displayDate: Binding<Date>, calendar: Calendar, titleFormatter: DateFormatter) {
+        self._displayDate = displayDate
+        self.calendar = calendar
+        self.titleFormatter = titleFormatter
+        self.fontSize = self.calendarSize == .small ? .title2 : calendarSize == .medium ? .title : .largeTitle
+        self.buttonSize = self.calendarSize == .small ? 20 : calendarSize == .medium ? 30 : 40
+
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
-                // MARK: - Month Name "MMM"
+                // MARK: - Month Name "MMM YY"
                 Text(titleFormatter.string(from: displayDate))
-                    .font(.title)
-                Spacer()
+                    .font(fontSize)
+                Spacer()    
                 // MARK: - Previous Month Button
                 Button(action: {
                     guard let newDate = calendar.date(byAdding: .month, value: -1, to: displayDate) else {
@@ -30,10 +42,8 @@ struct CalendarTitle: View {
                     }
                 },
                        label: {
-                    Label(title: { Text("Previous") },
-                          icon: { Image(systemName: "chevron.left") })
-                        .labelStyle(IconOnlyLabelStyle())
-                        .frame(maxHeight: .infinity)
+                    Image(systemName: "chevron.left")
+                        .frame(width: buttonSize, height: buttonSize)
                 })
                     .padding(.horizontal, 5)
                 // MARK: - GoTo Current Date Button
@@ -42,7 +52,8 @@ struct CalendarTitle: View {
                         displayDate = Date()
                     }
                 }, label: {
-                    Image(systemName: "circle.fill")
+                    Image(systemName: "calendar")
+                        .frame(width: buttonSize, height: buttonSize)
                 })
                     .padding(.trailing, 5)
                 // MARK: - Next Month Button
@@ -54,10 +65,8 @@ struct CalendarTitle: View {
                         displayDate = newDate
                     }
                 }, label: {
-                    Label(title: { Text("Next") },
-                          icon: { Image(systemName: "chevron.right") })
-                        .labelStyle(IconOnlyLabelStyle())
-                        .frame(maxHeight: .infinity)
+                    Image(systemName: "chevron.right")
+                        .frame(width: buttonSize, height: buttonSize)
                 })
             }
         }

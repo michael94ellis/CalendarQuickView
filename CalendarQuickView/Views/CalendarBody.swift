@@ -1,5 +1,5 @@
 //
-//  CalendarView.swift
+//  CalendarBody.swift
 //  CalendarQuickView
 //
 //  Created by Michael Ellis on 11/2/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct CalendarView: View {
+struct CalendarBody: View {
     
     @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.blue
     @AppStorage(AppStorageKeys.prevMonthDaysColor) private var prevMonthDaysColor: Color = Color.lightGray
@@ -71,11 +71,12 @@ struct CalendarView: View {
     }
     
     private func weekDayHeaders(for weekDays: [Date]) -> some View {
+        let fontSize: Font = self.calendarSize == .small ? .body : calendarSize == .medium ? .title3 : .title2
         return HStack {
             ForEach(weekDays.prefix(daysInWeek), id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
+                    .font(fontSize)
                     .frame(width: size, height: size)
-                    .font(font)
                     .padding(.horizontal, 1)
             }
         }
