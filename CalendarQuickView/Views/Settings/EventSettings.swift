@@ -26,6 +26,8 @@ struct EventSettings: View {
                         .foregroundColor(EventKitManager.shared.isAbleToAccessUserCalendar ? .green : .white)
                 }
             })
+            Spacer()
         }
+        .padding(.vertical, 20)
     }
 }

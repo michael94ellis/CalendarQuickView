@@ -14,6 +14,7 @@ class CalendarViewModel: ObservableObject {
     @AppStorage(AppStorageKeys.currentMonthDaysColor) var currentMonthDaysColor: Color = Color.blue
     @AppStorage(AppStorageKeys.prevMonthDaysColor) var prevMonthDaysColor: Color = Color.lightGray
     @AppStorage(AppStorageKeys.nextMonthDaysColor) var nextMonthDaysColor: Color = Color.lightGray
+    @AppStorage(AppStorageKeys.weekDayHeaderColor) var weekDayHeaderColor: Color = Color.darkGray
     @AppStorage(AppStorageKeys.currentDayColor) var currentDayColor: Color = Color.green
     @AppStorage(AppStorageKeys.selectedDayColor) var selectedDayColor: Color = Color.yellow
     
@@ -41,7 +42,13 @@ class CalendarViewModel: ObservableObject {
     @Published var displayDate: Date = Date()
     public var calendar: Calendar = .current
     
-    static let shared = CalendarViewModel()
-    private init() { }
+    static public private(set) var shared = CalendarViewModel()
+    private init() {
+        self.displayDate = Date()
+    }
+    
+    public func reset() {
+        Self.shared = CalendarViewModel()
+    }
     
 }

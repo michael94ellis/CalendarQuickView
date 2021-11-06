@@ -15,11 +15,20 @@ struct CalendarBody: View {
     private let monthFormatter = DateFormatter.monthFormatter
     private let weekDayFormatter = DateFormatter.weekDayFormatter
     private let dayFormatter = DateFormatter.dayFormatter
-    
-    var calendarDayCellSize: CGFloat = 20
+    // 175, 245, 294
+    var calendarDayCellSize: CGFloat = 25 {
+        didSet {
+            self.weekDayCellSpacing =
+            viewModel.calendarSize == .small ? 10 :
+            viewModel.calendarSize == .medium ? 12 : 18
+        }
+    }
+    var weekDayCellSpacing: CGFloat = 10
     
     init() {
-        self.calendarDayCellSize = viewModel.calendarSize == .small ? 20 : viewModel.calendarSize == .medium ? 30 : 40
+        self.calendarDayCellSize =
+        viewModel.calendarSize == .small ? 25 :
+        viewModel.calendarSize == .medium ? 30 : 42
     }
     
     // Constants
@@ -53,7 +62,6 @@ struct CalendarBody: View {
         }
         return Text(String(viewModel.calendar.component(.day, from: date)))
             .frame(width: calendarDayCellSize, height: calendarDayCellSize)
-            .padding(1)
             .background(backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: 4.0))
             .padding(.vertical, 4)
@@ -61,14 +69,15 @@ struct CalendarBody: View {
     
     private func weekDayHeaders(for weekDays: [Date]) -> some View {
         let fontSize: Font = viewModel.calendarSize == .small ? .body : viewModel.calendarSize == .medium ? .title3 : .title2
-        return HStack {
+        return HStack(spacing: weekDayCellSpacing) {
             ForEach(weekDays.prefix(daysInWeek), id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
                     .font(fontSize)
                     .frame(width: calendarDayCellSize, height: calendarDayCellSize)
-                    .padding(.horizontal, 1)
             }
         }
+        .background(viewModel.weekDayHeaderColor)
+        .clipShape(RoundedRectangle(cornerRadius: 4.0))
     }
     
     var body: some View {
@@ -81,7 +90,7 @@ struct CalendarBody: View {
                 .padding(.vertical, 8)
             // Iterating over the days of the month
             ForEach(days, id: \.self) { weekDays in
-                HStack {
+                HStack(spacing: weekDayCellSpacing) {
                     ForEach(weekDays, id:\.self) { date in
                         // Each individual day
                         createDayNumberView(date)

@@ -9,6 +9,7 @@ import AppKit
 import SwiftUI
 
 struct AppStorageKeys {
+    static let weekDayHeaderColor = "weekDayHeaderColor"
     static let currentMonthDaysColor = "currentMonthDays"
     static let prevMonthDaysColor = "prevMonthDays"
     static let nextMonthDaysColor = "nextMonthDays"

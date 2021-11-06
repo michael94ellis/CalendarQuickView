@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct ColorSettings: View {
-    // Saved Colors
-    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.blue
-    @AppStorage(AppStorageKeys.prevMonthDaysColor) private var prevMonthDaysColor: Color = Color.lightGray
-    @AppStorage(AppStorageKeys.nextMonthDaysColor) private var nextMonthDaysColor: Color = Color.lightGray
-    @AppStorage(AppStorageKeys.currentDayColor) private var currentDayColor: Color = Color.green
-    @AppStorage(AppStorageKeys.selectedDayColor) private var selectedDayColor: Color = Color.yellow
+    
+    @ObservedObject var viewModel = CalendarViewModel.shared
     
     func TextWithFrame(_ text: String) -> some View {
         Text(text).frame(height: 25)
@@ -24,10 +20,22 @@ struct ColorSettings: View {
     
     var body: some View {
         VStack(spacing: 10) {
+            HStack {
+                Text("Reset All")
+                CalendarButton(imageName: "arrow.triangle.2.circlepath", buttonSize: viewModel.buttonSize, animation: .linear, action: {
+                    viewModel.currentMonthDaysColor = Color.blue
+                    viewModel.prevMonthDaysColor = Color.lightGray
+                    viewModel.nextMonthDaysColor = Color.lightGray
+                    viewModel.currentDayColor = Color.green
+                    viewModel.selectedDayColor = Color.yellow
+                    viewModel.weekDayHeaderColor = Color.darkGray
+                })
+            }
             Text("Day Colors").font(.title2).fontWeight(.bold)
             HStack {
                 // Labels
                 VStack(alignment: .leading) {
+                    TextWithFrame("Weekday Header Row")
                     TextWithFrame("Current")
                     TextWithFrame("Selected")
                     TextWithFrame("Previous Month")
@@ -36,14 +44,16 @@ struct ColorSettings: View {
                 }
                 // Color Pickers
                 VStack(alignment: .trailing) {
-                    ColorPickerWithFrame($currentDayColor)
-                    ColorPickerWithFrame($selectedDayColor)
-                    ColorPickerWithFrame($prevMonthDaysColor)
-                    ColorPickerWithFrame($currentMonthDaysColor)
-                    ColorPickerWithFrame($nextMonthDaysColor)
+                    ColorPickerWithFrame($viewModel.weekDayHeaderColor)
+                    ColorPickerWithFrame($viewModel.currentDayColor)
+                    ColorPickerWithFrame($viewModel.selectedDayColor)
+                    ColorPickerWithFrame($viewModel.prevMonthDaysColor)
+                    ColorPickerWithFrame($viewModel.currentMonthDaysColor)
+                    ColorPickerWithFrame($viewModel.nextMonthDaysColor)
                 }
             }
+            Spacer()
         }
+        .padding(.vertical, 20)
     }
-    
 }

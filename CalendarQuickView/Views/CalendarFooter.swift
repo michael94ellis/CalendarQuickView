@@ -19,7 +19,6 @@ struct CalendarFooter: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            CalendarButton(imageName: "plus", buttonSize: viewModel.buttonSize, animation: .linear, action: { })
             Spacer()
             CalendarButton(imageName: "gear", buttonSize: viewModel.buttonSize, animation: .linear, action: self.settingWindowCallback)
         }

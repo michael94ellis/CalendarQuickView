@@ -16,6 +16,12 @@ struct StatusBarCalendar: View {
     
     static var windowRef: NSWindow?
     
+    var horizontalPadding: CGFloat = 8
+    
+    init() {
+        self.horizontalPadding = viewModel.calendarSize == .small ? 8 : viewModel.calendarSize == .medium ? 15 : 21
+    }
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             CalendarHeader(displayDate: $viewModel.displayDate, calendar: viewModel.calendar, titleFormatter: self.titleDateFormatter)
@@ -25,7 +31,7 @@ struct StatusBarCalendar: View {
             Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, horizontalPadding)
         .padding(.bottom, 10)
     }
     
@@ -45,6 +51,7 @@ struct StatusBarCalendar: View {
             self.windowRef?.makeKey()
             self.windowRef?.becomeFirstResponder()
         } else {
+            windowRef?.close()
             windowRef = nil
         }
     }
