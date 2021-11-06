@@ -75,6 +75,7 @@ struct CalendarView: View {
             ForEach(weekDays.prefix(daysInWeek), id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
                     .frame(width: size, height: size)
+                    .font(font)
                     .padding(.horizontal, 1)
             }
         }

@@ -36,6 +36,15 @@ struct CalendarTitle: View {
                         .frame(maxHeight: .infinity)
                 })
                     .padding(.horizontal, 5)
+                // MARK: - GoTo Current Date Button
+                Button(action: {
+                    withAnimation(.easeIn) {
+                        displayDate = Date()
+                    }
+                }, label: {
+                    Image(systemName: "circle.fill")
+                })
+                    .padding(.trailing, 5)
                 // MARK: - Next Month Button
                 Button(action: {
                     guard let newDate = calendar.date(byAdding: .month, value: 1, to: displayDate) else {
@@ -49,7 +58,8 @@ struct CalendarTitle: View {
                           icon: { Image(systemName: "chevron.right") })
                         .labelStyle(IconOnlyLabelStyle())
                         .frame(maxHeight: .infinity)
-                })        }
+                })
+            }
         }
     }
 }
