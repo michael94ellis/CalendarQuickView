@@ -38,6 +38,9 @@ class CalendarViewModel: ObservableObject {
     
     // MARK: - Calendar Data
     
+    @AppStorage(AppStorageKeys.titleDateFormat) var titleDateFormatter: TitleDateFormat = .shortMonthAndYear
+    @AppStorage(AppStorageKeys.showWeekDayHeader) var showWeekDayHeader: Bool = true
+    
     @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
     @Published var displayDate: Date = Date()
     public var calendar: Calendar = .current

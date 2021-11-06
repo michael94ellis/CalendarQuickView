@@ -59,6 +59,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func menuWillOpen(_ menu: NSMenu) {
+        // Every time the menu bar view is opened it should show the current date
+        // Example: User opens at 11:59PM, then re-opens at 12:01AM, two different dates
+        CalendarViewModel.shared.reset()
         menuItem.view = newHostingView
     }
     

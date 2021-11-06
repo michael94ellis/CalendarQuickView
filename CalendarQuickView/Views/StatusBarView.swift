@@ -12,14 +12,15 @@ struct StatusBarCalendar: View {
     
     @ObservedObject var viewModel = CalendarViewModel.shared
     
-    let titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
+    var titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
     
     static var windowRef: NSWindow?
     
     var horizontalPadding: CGFloat = 8
     
     init() {
-        self.horizontalPadding = viewModel.calendarSize == .small ? 8 : viewModel.calendarSize == .medium ? 15 : 21
+        self.titleDateFormatter = DateFormatter(dateFormat: viewModel.titleDateFormatter.rawValue, calendar: .current)
+        self.horizontalPadding = viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 21
     }
     
     var body: some View {
@@ -43,7 +44,6 @@ struct StatusBarCalendar: View {
                 styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
                 backing: .buffered, defer: false)
             self.windowRef = newWindowRef
-            self.windowRef?.title = "RRR"
             self.windowRef?.setFrameAutosaveName("Calendar Quick View Settings")
             self.windowRef?.isReleasedWhenClosed = false
             self.windowRef?.contentView = NSHostingView(rootView: SettingsTabView())
@@ -51,8 +51,9 @@ struct StatusBarCalendar: View {
             self.windowRef?.makeKey()
             self.windowRef?.becomeFirstResponder()
         } else {
-            windowRef?.close()
-            windowRef = nil
+            self.windowRef?.orderFrontRegardless()
+            self.windowRef?.makeKey()
+            self.windowRef?.becomeFirstResponder()
         }
     }
 }

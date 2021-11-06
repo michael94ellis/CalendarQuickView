@@ -85,9 +85,11 @@ struct CalendarBody: View {
         let days: [[Date]] = makeDays().chunked(into: 7)
         let weekDaysForHeader = days.first
         return VStack(spacing: 0) {
-            // M T W T F S S
-            weekDayHeaders(for: weekDaysForHeader ?? [])
-                .padding(.vertical, 8)
+            if viewModel.$showWeekDayHeader.wrappedValue {
+                // M T W T F S S
+                weekDayHeaders(for: weekDaysForHeader ?? [])
+                    .padding(.vertical, 8)
+            }
             // Iterating over the days of the month
             ForEach(days, id: \.self) { weekDays in
                 HStack(spacing: weekDayCellSpacing) {
