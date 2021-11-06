@@ -1,5 +1,5 @@
 //
-//  StatusBarView.swift
+//  StatusBarCalendar.swift
 //  CalendarQuickView
 //
 //  Created by Michael Ellis on 10/29/21.
@@ -8,32 +8,27 @@
 import SwiftUI
 import AppKit
 
-struct StatusBarView: View {
+struct StatusBarCalendar: View {
     
-    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
-    @State var displayDate: Date = Date()
-    public var calendar: Calendar
+    @ObservedObject var viewModel = CalendarViewModel.shared
+    
     let titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
     
     static var windowRef: NSWindow?
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            CalendarTitle(displayDate: $displayDate, calendar: self.calendar, titleFormatter: self.titleDateFormatter)
+            CalendarHeader(displayDate: $viewModel.displayDate, calendar: viewModel.calendar, titleFormatter: self.titleDateFormatter)
                 .padding(.bottom, 4)
                 .padding(.top, 8)
-            CalendarView(displayDate: $displayDate, calendar: self.calendar)
+            CalendarBody()
             Spacer()
-            // Button to open Settings Window on bottom right
-            HStack(spacing: 0) {
-                Button(action: { Self.openSettingsWindow() }, label: { Image(systemName: "plus") })
-                Spacer()
-                Button(action: { Self.openSettingsWindow() }, label: { Image(systemName: "gear") })
-            }
+            CalendarFooter(openSettings: Self.openSettingsWindow)
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 10)
     }
+    
     /// Opens a window displaying a Swiftui View for app settings
     static func openSettingsWindow() {
         if windowRef == nil {

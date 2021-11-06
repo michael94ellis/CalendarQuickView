@@ -21,15 +21,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// Holds the Calendar View, belongs to the NSMenu
     let menuItem = NSMenuItem()
     /// Displayed as the content of the NSMenuItem
-    var hostingView: NSHostingView<StatusBarView>?
-    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
+    var hostingView: NSHostingView<StatusBarCalendar>?
     /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
     /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
-    var newHostingView: NSHostingView<StatusBarView> {
-        let newView = NSHostingView(rootView: StatusBarView(calendar: .current))
+    var newHostingView: NSHostingView<StatusBarCalendar> {
+        let newView = NSHostingView(rootView: StatusBarCalendar())
         // Set the frame or it won't be shown
         let size: CGSize
-        switch(self.calendarSize) {
+        switch(CalendarViewModel.shared.calendarSize) {
         case .small:
             size = CGSize(width: 250, height: 300)
         case .medium:

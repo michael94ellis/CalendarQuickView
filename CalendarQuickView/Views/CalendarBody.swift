@@ -1,5 +1,5 @@
 //
-//  CalendarView.swift
+//  CalendarBody.swift
 //  CalendarQuickView
 //
 //  Created by Michael Ellis on 11/2/21.
@@ -8,29 +8,18 @@
 import SwiftUI
 import WidgetKit
 
-struct CalendarView: View {
+struct CalendarBody: View {
     
-    @AppStorage(AppStorageKeys.currentMonthDaysColor) private var currentMonthDaysColor: Color = Color.blue
-    @AppStorage(AppStorageKeys.prevMonthDaysColor) private var prevMonthDaysColor: Color = Color.lightGray
-    @AppStorage(AppStorageKeys.nextMonthDaysColor) private var nextMonthDaysColor: Color = Color.lightGray
-    @AppStorage(AppStorageKeys.currentDayColor) private var currentDayColor: Color = Color.green
-    @AppStorage(AppStorageKeys.selectedDayColor) private var selectedDayColor: Color = Color.yellow
+    @ObservedObject var viewModel = CalendarViewModel.shared
 
-    @Binding var displayDate: Date
-    @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
-    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
-
-    public var calendar: Calendar
     private let monthFormatter = DateFormatter.monthFormatter
     private let weekDayFormatter = DateFormatter.weekDayFormatter
     private let dayFormatter = DateFormatter.dayFormatter
     
-    var size: CGFloat = 20
+    var calendarDayCellSize: CGFloat = 20
     
-    init(displayDate: Binding<Date>, calendar: Calendar) {
-        self.calendar = calendar
-        self._displayDate = displayDate
-        self.size = self.calendarSize == .small ? 20 : calendarSize == .medium ? 30 : 40
+    init() {
+        self.calendarDayCellSize = viewModel.calendarSize == .small ? 20 : viewModel.calendarSize == .medium ? 30 : 40
     }
     
     // Constants
@@ -39,31 +28,31 @@ struct CalendarView: View {
     // TODO: Make feature where user can change Calendar.Identifier
     
     private var displayMonth: DateInterval {
-        calendar.dateInterval(of: .month, for: displayDate)!
+        viewModel.calendar.dateInterval(of: .month, for: viewModel.displayDate)!
     }
     // MARK: - View Representing Each Day
     /// This will do the required info gathering to create a Day view
     private func createDayNumberView(_ date: Date) -> some View {
-        let month = displayDate.startOfMonth(using: calendar)
+        let month = viewModel.displayDate.startOfMonth(using: viewModel.calendar)
         let backgroundColor: Color
-        if calendar.isDate(date, inSameDayAs: selectedDate) {
+        if viewModel.calendar.isDate(date, inSameDayAs: viewModel.selectedDate) {
             // Selected Day
-            backgroundColor = selectedDayColor
-        } else if calendar.isDateInToday(date) {
+            backgroundColor = viewModel.selectedDayColor
+        } else if viewModel.calendar.isDateInToday(date) {
             // Current Day
-            backgroundColor = currentDayColor
-        } else if calendar.isDate(date, equalTo: month, toGranularity: .month) {
+            backgroundColor = viewModel.currentDayColor
+        } else if viewModel.calendar.isDate(date, equalTo: month, toGranularity: .month) {
             // Day in Current Displayed Month
-            backgroundColor = currentMonthDaysColor
-        } else if date < displayDate {
+            backgroundColor = viewModel.currentMonthDaysColor
+        } else if date < viewModel.displayDate {
             // Day is before Current Displayed Month
-            backgroundColor = prevMonthDaysColor
+            backgroundColor = viewModel.prevMonthDaysColor
         } else {
             // Day is after Current Displayed Month
-            backgroundColor = nextMonthDaysColor
+            backgroundColor = viewModel.nextMonthDaysColor
         }
-        return Text(String(self.calendar.component(.day, from: date)))
-            .frame(width: size, height: size)
+        return Text(String(viewModel.calendar.component(.day, from: date)))
+            .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             .padding(1)
             .background(backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: 4.0))
@@ -71,10 +60,12 @@ struct CalendarView: View {
     }
     
     private func weekDayHeaders(for weekDays: [Date]) -> some View {
+        let fontSize: Font = viewModel.calendarSize == .small ? .body : viewModel.calendarSize == .medium ? .title3 : .title2
         return HStack {
             ForEach(weekDays.prefix(daysInWeek), id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
-                    .frame(width: size, height: size)
+                    .font(fontSize)
+                    .frame(width: calendarDayCellSize, height: calendarDayCellSize)
                     .padding(.horizontal, 1)
             }
         }
@@ -96,7 +87,7 @@ struct CalendarView: View {
                         createDayNumberView(date)
                         // Logic to select date
                             .onTapGesture {
-                                self.selectedDate = date
+                                viewModel.selectedDate = date
                             }
                     }
                 }
@@ -106,14 +97,14 @@ struct CalendarView: View {
     
     /// Generates 6 weeks worth of days in an array
     func makeDays() -> [Date] {
-        guard let monthInterval = calendar.dateInterval(of: .month, for: displayDate),
-              let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
+        guard let monthInterval = viewModel.calendar.dateInterval(of: .month, for: viewModel.displayDate),
+              let monthFirstWeek = viewModel.calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
               let sixWeeksFromStart = Calendar.current.date(byAdding: .day, value: 7 * 6, to: monthFirstWeek.start) else {
                   return []
               }
         // get 6 weeks of days
         let dateInterval = DateInterval(start: monthFirstWeek.start, end: sixWeeksFromStart)
-        return calendar.generateDays(for: dateInterval)
+        return viewModel.calendar.generateDays(for: dateInterval)
     }
     
 }

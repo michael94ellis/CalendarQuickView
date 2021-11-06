@@ -19,12 +19,16 @@ extension Date: RawRepresentable {
         self = Date.formatter.date(from: rawValue) ?? Date()
     }
     
-    func startOfMonth(using calendar: Calendar) -> Date {
+    public func startOfMonth(using calendar: Calendar) -> Date {
         calendar.date(from: calendar.dateComponents([.year, .month], from: self)) ?? self
     }
     
     public func addMonths(_ n: Int) -> Date {
         Calendar.current.date(byAdding: .month, value: n, to: self)!
+    }
+    
+    public mutating func incrementMonths(by n: Int, using calendar: Calendar = .current) {
+        self = calendar.date(byAdding: .month, value: n, to: self) ?? self
     }
     
 }
