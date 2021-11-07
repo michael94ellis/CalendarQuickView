@@ -28,17 +28,20 @@ struct ColorSettings: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack {
+                Spacer()
+                Text("Background Colors").font(.title2).fontWeight(.bold)
+                Spacer()
                 Text("Reset All")
                 CalendarButton(imageName: "arrow.triangle.2.circlepath", buttonSize: viewModel.buttonSize, animation: .linear, action: {
-                    viewModel.currentMonthDaysColor = Color.blue
-                    viewModel.prevMonthDaysColor = Color.lightGray
-                    viewModel.nextMonthDaysColor = Color.lightGray
-                    viewModel.currentDayColor = Color.green
-                    viewModel.selectedDayColor = Color.yellow
-                    viewModel.weekDayHeaderColor = Color.darkGray
+                    viewModel.currentMonthDaysBGColor = Color.blue
+                    viewModel.prevMonthDaysBGColor = Color.darkGray
+                    viewModel.nextMonthDaysBGColor = Color.darkGray
+                    viewModel.currentDayBGColor = Color.green
+                    viewModel.selectedDayBGColor = Color.yellow
+                    viewModel.weekDayHeaderBGColor = Color.darkGray
                 })
+                Spacer()
             }
-            Text("Customize Your Colors").font(.title2).fontWeight(.bold)
             HStack {
                 // Labels
                 VStack(alignment: .leading) {
@@ -51,12 +54,48 @@ struct ColorSettings: View {
                 }
                 // Color Pickers
                 VStack(alignment: .trailing) {
-                    ColorPickerWithFrame($viewModel.weekDayHeaderColor)
-                    ColorPickerWithFrame($viewModel.currentDayColor)
-                    ColorPickerWithFrame($viewModel.selectedDayColor)
-                    ColorPickerWithFrame($viewModel.prevMonthDaysColor)
-                    ColorPickerWithFrame($viewModel.currentMonthDaysColor)
-                    ColorPickerWithFrame($viewModel.nextMonthDaysColor)
+                    ColorPickerWithFrame($viewModel.weekDayHeaderBGColor)
+                    ColorPickerWithFrame($viewModel.currentDayBGColor)
+                    ColorPickerWithFrame($viewModel.selectedDayBGColor)
+                    ColorPickerWithFrame($viewModel.prevMonthDaysBGColor)
+                    ColorPickerWithFrame($viewModel.currentMonthDaysBGColor)
+                    ColorPickerWithFrame($viewModel.nextMonthDaysBGColor)
+                }
+            }
+            Divider()
+            HStack {
+                Spacer()
+                Text("Text Colors").font(.title2).fontWeight(.bold)
+                Spacer()
+                Text("Reset All")
+                CalendarButton(imageName: "arrow.triangle.2.circlepath", buttonSize: viewModel.buttonSize, animation: .linear, action: {
+                    viewModel.currentMonthDaysTextColor = Color.white
+                    viewModel.prevMonthDaysTextColor = Color.white
+                    viewModel.nextMonthDaysTextColor = Color.white
+                    viewModel.currentDayTextColor = Color.black
+                    viewModel.selectedDayTextColor = Color.darkGray
+                    viewModel.weekDayHeaderTextColor = Color.white
+                })
+                Spacer()
+            }
+            HStack {
+                // Labels
+                VStack(alignment: .leading) {
+                    TextWithFrame("Weekday Header Row")
+                    TextWithFrame("Current")
+                    TextWithFrame("Selected")
+                    TextWithFrame("Previous Month")
+                    TextWithFrame("Current Month")
+                    TextWithFrame("Next Month")
+                }
+                // Color Pickers
+                VStack(alignment: .trailing) {
+                    ColorPickerWithFrame($viewModel.weekDayHeaderTextColor)
+                    ColorPickerWithFrame($viewModel.currentDayTextColor)
+                    ColorPickerWithFrame($viewModel.selectedDayTextColor)
+                    ColorPickerWithFrame($viewModel.prevMonthDaysTextColor)
+                    ColorPickerWithFrame($viewModel.currentMonthDaysTextColor)
+                    ColorPickerWithFrame($viewModel.nextMonthDaysTextColor)
                 }
             }
             Spacer()

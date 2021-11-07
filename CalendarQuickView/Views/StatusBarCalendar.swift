@@ -12,33 +12,23 @@ struct StatusBarCalendar: View {
     
     @ObservedObject var viewModel = CalendarViewModel.shared
     static var windowRef: NSWindow?
-    var titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
-    var eventDateFormatter: DateFormatter = DateFormatter(dateFormat: "d/MM", calendar: .current)
     var horizontalPadding: CGFloat = 10
     
     init() {
-        self.titleDateFormatter = DateFormatter(dateFormat: viewModel.titleDateFormatter.rawValue, calendar: .current)
         self.horizontalPadding = viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 23
     }
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            CalendarHeader(displayDate: $viewModel.displayDate, calendar: viewModel.calendar, titleFormatter: self.titleDateFormatter)
+            CalendarHeader(displayDate: $viewModel.displayDate, calendar: viewModel.calendar)
                 .padding(.bottom, 4)
                 .padding(.top, 8)
             CalendarBody()
                 .padding(.bottom, 4)
-            VStack(alignment: .leading) {
-                ForEach(EventKitManager.shared.events.prefix(4), id: \.self) { event in
-                    HStack {
-                        Capsule().frame(width: 4).background(Color.blue)
-                        Text(event.title)
-                            .font(.body)
-                        Spacer()
-                        Text(eventDateFormatter.string(from: event.startDate))
-                            .font(.callout)
-                    }
-                }
+            // FIXME: make a toggle for this
+            if EventKitManager.shared.isEventFeatureEnabled,
+                EventKitManager.shared.isAbleToAccessUserCalendar {
+                EventListView()
             }
             Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)

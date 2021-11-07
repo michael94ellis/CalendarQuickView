@@ -17,6 +17,9 @@ class EventKitManager: ObservableObject {
     
     let eventStore = EKEventStore()
     @AppStorage(AppStorageKeys.calendarAccessGranted) var isAbleToAccessUserCalendar: Bool = false
+    @AppStorage(AppStorageKeys.isEventFeatureEnabled) var isEventFeatureEnabled: Bool = true
+    @AppStorage(AppStorageKeys.eventDisplayFromDate) var eventDisplayFromDate: EventDisplayDate = .currentDay
+    @AppStorage(AppStorageKeys.numOfEventsToDisplay) var numOfEventsToDisplay: Double = 4
 
     // MARK: - Event Data
     var titles: [String] = []

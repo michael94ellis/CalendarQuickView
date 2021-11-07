@@ -13,37 +13,56 @@ struct GeneralSettings: View {
     @ObservedObject var launchAtLoginMonitor = LaunchAtLoginMonitor.shared
     @State var selectedTitleDateFormat: TitleDateFormat = .shortMonthAndYear
     
+    func TextWithFrame(_ text: String) -> some View {
+        Text(text).frame(height: 25)
+    }
+    
     var body: some View {
         VStack {
             HStack {
-                Text("Title Date Format")
-                Picker("", selection: $viewModel.titleDateFormatter) {
-                    ForEach(TitleDateFormat.allCases, id: \.self) { titleDateFormatOption in
-                        Text(titleDateFormatOption.displayName)
-                    }
+                VStack(alignment: .leading) {
+                    TextWithFrame("Title Date Format")
+                    TextWithFrame("Day Display Shape")
+                    TextWithFrame("Show Weekday Header Row")
+                    TextWithFrame("Calendar Size")
+                    TextWithFrame("\(self.launchAtLoginMonitor.isLaunchAtLoginEnabled ? "App is currently in" : "Click to add to") Login Items")
                 }
-                .frame(width: 200)
-            }
-            HStack {
-                Text("Show Weekday Header Row")
-                Toggle("", isOn: viewModel.$showWeekDayHeader)
-            }
-            HStack {
-                Text("Calendar Size")
-                Picker("", selection: $viewModel.calendarSize) {
-                    ForEach(CalendarSize.allCases, id: \.self) { calendarSize in
-                        Text(calendarSize.rawValue)
+                VStack(alignment: .trailing) {
+                    Picker("", selection: $viewModel.titleDateFormat) {
+                        ForEach(TitleDateFormat.allCases, id: \.self) { dateFormatOption in
+                            Text(dateFormatOption.displayName)
+                        }
                     }
+                    .frame(height: 25)
+                    Picker("", selection: $viewModel.dayDisplayShape) {
+                        ForEach(DayDisplayShape.allCases, id: \.self) { option in
+                            Text(option.displayName)
+                        }
+                    }
+                    .frame(height: 25)
+                    Picker("", selection: $viewModel.calendarSize) {
+                        ForEach(CalendarSize.allCases, id: \.self) { calendarSize in
+                            Text(calendarSize.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(height: 25)
+                    HStack {
+                        Toggle("", isOn: viewModel.$showWeekDayHeader)
+                        Spacer()
+                    }
+                    .padding(.leading, 10)
+                    .frame(height: 25)
+                    HStack {
+                        LaunchAtLoginMonitorToggle()
+                        Spacer()
+                    }
+                    .padding(.leading, 10)
+                    .frame(height: 25)
                 }
-                .pickerStyle(.segmented)
-                .frame(width: 150)
-            }
-            HStack(alignment: .bottom) {
-                Text("\(self.launchAtLoginMonitor.isLaunchAtLoginEnabled ? "App is currently in" : "Click to add to") Login Items")
-                LaunchAtLoginMonitorToggle()
+                .frame(width: 250)
             }
             Button(action: {
-                // FIXME: takes 2 clicks to close, should only take 1 even if it has to have a delay
                 NSApp.terminate(self)
             }, label: { Text("Quit App") })
                 .padding()

@@ -28,11 +28,11 @@ extension Color: RawRepresentable {
 
 // MARK: - App Colors
 
-extension Color {
-    static var currentMonthDays: Color { UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysColor) as? Color ?? .blue }
-    static let prevMonthDays: Color = UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysColor) as? Color ?? .darkGray
-    static let nextMonthDays: Color = UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysColor) as? Color ?? .darkGray
-}
+//extension Color {
+//    static var currentMonthDays: Color { UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysBGColor) as? Color ?? .blue }
+//    static let prevMonthDays: Color = UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysBGColor) as? Color ?? .darkGray
+//    static let nextMonthDays: Color = UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysBGColor) as? Color ?? .darkGray
+//}
 
 // MARK: - NSColor Conversions
 public extension Color {

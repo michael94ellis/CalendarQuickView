@@ -58,24 +58,24 @@ struct CalendarQuickWidget: Widget {
 struct MonthView: View {
     let displayDate = Date()
     let calendar = Calendar.current
-    let weekDayFormatter = DateFormatter.weekDayFormatter
+//    let weekDayFormatter = DateFormatter.weekDayFormatter
     let daysInWeek = 7
     
     var body: some View {
         // TODO: Make week able to start on any day of week(customizable)
         let month = displayDate.startOfMonth(using: calendar)
         let days: [[Date]] = makeDays().chunked(into: 7)
-        let weekDaysForHeader = days.first ?? []
+//        let weekDaysForHeader = days.first ?? []
         return VStack(spacing: 0) {
             // M T W T F S S
             // Weekday Headers
-            HStack {
-                ForEach(weekDaysForHeader.prefix(daysInWeek), id: \.self) { date in
-                    Text(weekDayFormatter.string(from: date))
-                        .frame(width: 20, height: 20)
-                        .padding(.horizontal, 1)
-                }
-            }
+//            HStack {
+//                ForEach(weekDaysForHeader.prefix(daysInWeek), id: \.self) { date in
+//                    Text(weekDayFormatter.string(from: date))
+//                        .frame(width: 20, height: 20)
+//                        .padding(.horizontal, 1)
+//                }
+//            }
             ForEach(days, id: \.self) { weekDays in
                 HStack {
                     ForEach(weekDays, id:\.self) { date in

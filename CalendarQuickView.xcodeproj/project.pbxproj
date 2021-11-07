@@ -42,6 +42,7 @@
 		2FEE6DAE2736B8DD0081C4B8 /* CalendarFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */; };
 		2FEE6DB02736B9840081C4B8 /* CalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */; };
 		2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */; };
+		2FEF62942738024700F0A9DF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF62932738024700F0A9DF /* EventListView.swift */; };
 		41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventKitManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFooter.swift; sourceTree = "<group>"; };
 		2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarButton.swift; sourceTree = "<group>"; };
 		2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarCalendar.swift; sourceTree = "<group>"; };
+		2FEF62932738024700F0A9DF /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		41EA3BBF27336B77001070CF /* EventKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 				2FEE6DAB2736B8DD0081C4B8 /* CalendarHeader.swift */,
 				2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */,
 				2F6FB94627322C7700DD0ACC /* CalendarBody.swift */,
+				2FEF62932738024700F0A9DF /* EventListView.swift */,
 				2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
 			);
@@ -368,6 +371,7 @@
 				2F6FB95527347B0300DD0ACC /* Utilities.swift in Sources */,
 				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,
 				2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */,
+				2FEF62942738024700F0A9DF /* EventListView.swift in Sources */,
 				2F6FB9582734C16C00DD0ACC /* Color-Extension.swift in Sources */,
 				2F6FB96B2736A5DD00DD0ACC /* CalendarViewModel.swift in Sources */,
 				2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */,

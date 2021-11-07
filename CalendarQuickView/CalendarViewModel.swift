@@ -11,12 +11,19 @@ final class CalendarViewModel: ObservableObject {
     
     // MARK: - Colors
     
-    @AppStorage(AppStorageKeys.currentMonthDaysColor) var currentMonthDaysColor: Color = Color.blue
-    @AppStorage(AppStorageKeys.prevMonthDaysColor) var prevMonthDaysColor: Color = Color.lightGray
-    @AppStorage(AppStorageKeys.nextMonthDaysColor) var nextMonthDaysColor: Color = Color.lightGray
-    @AppStorage(AppStorageKeys.weekDayHeaderColor) var weekDayHeaderColor: Color = Color.darkGray
-    @AppStorage(AppStorageKeys.currentDayColor) var currentDayColor: Color = Color.green
-    @AppStorage(AppStorageKeys.selectedDayColor) var selectedDayColor: Color = Color.yellow
+    @AppStorage(AppStorageKeys.currentMonthDaysBGColor) var currentMonthDaysBGColor: Color = Color.blue
+    @AppStorage(AppStorageKeys.prevMonthDaysBGColor) var prevMonthDaysBGColor: Color = Color.darkGray
+    @AppStorage(AppStorageKeys.nextMonthDaysBGColor) var nextMonthDaysBGColor: Color = Color.darkGray
+    @AppStorage(AppStorageKeys.weekDayHeaderBGColor) var weekDayHeaderBGColor: Color = Color.darkGray
+    @AppStorage(AppStorageKeys.currentDayBGColor) var currentDayBGColor: Color = Color.green
+    @AppStorage(AppStorageKeys.selectedDayBGColor) var selectedDayBGColor: Color = Color.yellow
+    
+    @AppStorage(AppStorageKeys.currentMonthDaysTextColor) var currentMonthDaysTextColor: Color = Color.white
+    @AppStorage(AppStorageKeys.prevMonthDaysTextColor) var prevMonthDaysTextColor: Color = Color.white
+    @AppStorage(AppStorageKeys.nextMonthDaysTextColor) var nextMonthDaysTextColor: Color = Color.white
+    @AppStorage(AppStorageKeys.weekDayHeaderTextColor) var weekDayHeaderTextColor: Color = Color.white
+    @AppStorage(AppStorageKeys.currentDayTextColor) var currentDayTextColor: Color = Color.black
+    @AppStorage(AppStorageKeys.selectedDayTextColor) var selectedDayTextColor: Color = Color.darkGray
     
     
     // MARK: - Sizing
@@ -38,12 +45,25 @@ final class CalendarViewModel: ObservableObject {
     
     // MARK: - Calendar Data
     
-    @AppStorage(AppStorageKeys.titleDateFormat) var titleDateFormatter: TitleDateFormat = .shortMonthAndYear
+    @AppStorage(AppStorageKeys.titleDateFormat) var titleDateFormat: TitleDateFormat = .shortMonthAndYear
+    @AppStorage(AppStorageKeys.eventDateFormat) var eventDateFormat: EventDateFormat = .shortDayAndMonth
     @AppStorage(AppStorageKeys.showWeekDayHeader) var showWeekDayHeader: Bool = true
     
     @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
     @Published var displayDate: Date = Date()
     public var calendar: Calendar = .current
+    @AppStorage(AppStorageKeys.dayDisplayShape) var dayDisplayShape: DayDisplayShape = .roundedSquare
+    
+    // MARK: - Date Formats
+    
+    var titleDateFormatter: DateFormatter {
+        DateFormatter(dateFormat: self.titleDateFormat.rawValue, calendar: .current)
+    }
+    var eventDateFormatter: DateFormatter {
+        DateFormatter(dateFormat: self.eventDateFormat.rawValue, calendar: .current)
+    }
+    let weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: Calendar.current)
+    let dayFormatter = DateFormatter(dateFormat: "dd", calendar: Calendar.current)
     
     static public private(set) var shared = CalendarViewModel()
     private init() {

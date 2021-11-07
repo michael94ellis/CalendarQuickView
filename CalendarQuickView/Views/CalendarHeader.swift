@@ -11,11 +11,9 @@ struct CalendarHeader: View {
     
     @ObservedObject var viewModel = CalendarViewModel.shared
 
-    let titleFormatter: DateFormatter
     var fontSize: Font = .body
     
-    init(displayDate: Binding<Date>, calendar: Calendar, titleFormatter: DateFormatter) {
-        self.titleFormatter = titleFormatter
+    init(displayDate: Binding<Date>, calendar: Calendar) {
         self.fontSize = viewModel.calendarSize == .small ? .title2 : viewModel.calendarSize == .medium ? .title : .largeTitle
     }
 
@@ -23,7 +21,7 @@ struct CalendarHeader: View {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
                 // MARK: - Month Name "MMM YY"
-                Text(titleFormatter.string(from: viewModel.displayDate))
+                Text(viewModel.titleDateFormatter.string(from: viewModel.displayDate))
                     .font(fontSize)
                 Spacer()
                 // MARK: - Previous Month Button

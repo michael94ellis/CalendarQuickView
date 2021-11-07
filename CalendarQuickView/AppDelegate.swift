@@ -22,6 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let menuItem = NSMenuItem()
     /// Displayed as the content of the NSMenuItem
     var hostingView: NSHostingView<StatusBarCalendar>?
+    
+    let eventKitManager = EventKitManager.shared
     /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
     /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
     var newHostingView: NSHostingView<StatusBarCalendar> {
@@ -37,12 +39,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             size = CGSize(width: 400, height: 450)
         }
         // Alter size of window to accomodate displaying EKEvent info
-        EventKitManager.shared.checkCalendarAuthStatus() { hasAccess in
-            if hasAccess {
-                EventKitManager.shared.getEvents()
-                let eventCount = EventKitManager.shared.events.count
-                let eventDisplacement = CGFloat(eventCount > 5 ? 4 : eventCount) * 30
-                size.height += eventDisplacement
+        if eventKitManager.isEventFeatureEnabled {
+            eventKitManager.checkCalendarAuthStatus() { hasAccess in
+                if hasAccess {
+                    self.eventKitManager.getEvents()
+                    let eventCount = self.eventKitManager.events.count
+                    let eventsToDisplay = Int(self.eventKitManager.numOfEventsToDisplay)
+                    let eventDisplacement = CGFloat(eventCount > eventsToDisplay ? eventsToDisplay : eventCount) * 30
+                    size.height += eventDisplacement
+                }
             }
         }
         newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -81,7 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Insert code here to tear down your application
     }
     
-    static func terminate() {
+        func terminate() {
         NSApp.terminate(self)
     }
     
