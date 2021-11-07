@@ -20,9 +20,16 @@ struct SettingsTabView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Calendar Quick View Settings")
-                .font(.title)
-                .padding()
+            HStack {
+                Text("Calendar Quick View Settings")
+                    .font(.title)
+                    .padding()
+                Spacer()
+                Button(action: {
+                    NSApp.terminate(self)
+                }, label: { Text("Quit App") })
+                    .padding()
+            }
             TabView {
                 GeneralSettings()
                     .tabItem {

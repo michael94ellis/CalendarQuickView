@@ -23,8 +23,8 @@ struct GeneralSettings: View {
                 VStack(alignment: .leading) {
                     TextWithFrame("Title Date Format")
                     TextWithFrame("Day Display Shape")
-                    TextWithFrame("Show Weekday Header Row")
                     TextWithFrame("Calendar Size")
+                    TextWithFrame("Show Weekday Header Row")
                     TextWithFrame("\(self.launchAtLoginMonitor.isLaunchAtLoginEnabled ? "App is currently in" : "Click to add to") Login Items")
                 }
                 VStack(alignment: .trailing) {
@@ -62,10 +62,6 @@ struct GeneralSettings: View {
                 }
                 .frame(width: 250)
             }
-            Button(action: {
-                NSApp.terminate(self)
-            }, label: { Text("Quit App") })
-                .padding()
             Spacer()
         }
         .padding(.vertical, 20)
