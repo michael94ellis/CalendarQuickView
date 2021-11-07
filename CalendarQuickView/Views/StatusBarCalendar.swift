@@ -10,25 +10,39 @@ import AppKit
 
 struct StatusBarCalendar: View {
     
-    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
-    @State var displayDate: Date = Date()
-    public var calendar: Calendar
-    let titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
+    @ObservedObject var viewModel = CalendarViewModel.shared
+    
+    var titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
     
     static var windowRef: NSWindow?
     
+    var horizontalPadding: CGFloat = 8
+    
+    init() {
+        self.titleDateFormatter = DateFormatter(dateFormat: viewModel.titleDateFormatter.rawValue, calendar: .current)
+        self.horizontalPadding = viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 21
+    }
+    
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
+<<<<<<< HEAD:CalendarQuickView/Views/StatusBarCalendar.swift
             CalendarHeader(displayDate: $displayDate, calendar: self.calendar, titleFormatter: self.titleDateFormatter)
                 .padding(.bottom, 4)
                 .padding(.top, 8)
             CalendarBody(displayDate: $displayDate, calendar: self.calendar)
+=======
+            CalendarHeader(displayDate: $viewModel.displayDate, calendar: viewModel.calendar, titleFormatter: self.titleDateFormatter)
+                .padding(.bottom, 4)
+                .padding(.top, 8)
+            CalendarBody()
+>>>>>>> origin/resizable-calendar:CalendarQuickView/Views/StatusBarView.swift
             Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, horizontalPadding)
         .padding(.bottom, 10)
     }
+    
     /// Opens a window displaying a Swiftui View for app settings
     static func openSettingsWindow() {
         if windowRef == nil {
@@ -37,7 +51,6 @@ struct StatusBarCalendar: View {
                 styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
                 backing: .buffered, defer: false)
             self.windowRef = newWindowRef
-            self.windowRef?.title = "RRR"
             self.windowRef?.setFrameAutosaveName("Calendar Quick View Settings")
             self.windowRef?.isReleasedWhenClosed = false
             self.windowRef?.contentView = NSHostingView(rootView: SettingsTabView())
@@ -45,7 +58,9 @@ struct StatusBarCalendar: View {
             self.windowRef?.makeKey()
             self.windowRef?.becomeFirstResponder()
         } else {
-            windowRef = nil
+            self.windowRef?.orderFrontRegardless()
+            self.windowRef?.makeKey()
+            self.windowRef?.becomeFirstResponder()
         }
     }
 }

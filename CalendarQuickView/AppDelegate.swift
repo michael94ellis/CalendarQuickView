@@ -22,20 +22,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let menuItem = NSMenuItem()
     /// Displayed as the content of the NSMenuItem
     var hostingView: NSHostingView<StatusBarCalendar>?
-    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
     /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
     /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
     var newHostingView: NSHostingView<StatusBarCalendar> {
-        let newView = NSHostingView(rootView: StatusBarCalendar(calendar: .current))
+        let newView = NSHostingView(rootView: StatusBarCalendar())
         // Set the frame or it won't be shown
         let size: CGSize
-        switch(self.calendarSize) {
+        switch(CalendarViewModel.shared.calendarSize) {
         case .small:
             size = CGSize(width: 250, height: 300)
         case .medium:
             size = CGSize(width: 300, height: 360)
         case .large:
-            size = CGSize(width: 400, height: 500)
+            size = CGSize(width: 400, height: 450)
         }
         newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
         return newView
@@ -60,6 +59,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func menuWillOpen(_ menu: NSMenu) {
+        // Every time the menu bar view is opened it should show the current date
+        // Example: User opens at 11:59PM, then re-opens at 12:01AM, two different dates
+        CalendarViewModel.shared.reset()
         menuItem.view = newHostingView
     }
     
