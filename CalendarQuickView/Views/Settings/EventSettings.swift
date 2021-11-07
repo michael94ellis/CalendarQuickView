@@ -18,35 +18,35 @@ struct EventSettings: View {
     
     var body: some View {
         VStack {
-            Button(action: {
-                self.eventManager.requestAccessToCalendar { success in
-                    print("Event access - \(success)")
-                }
-            },
-                   label: {
-                HStack {
-                    Text("Calendar Access")
-                    Image(systemName:  eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle")
-                        .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .white)
-                }
-            })
-            Button(action: {
-                self.eventManager.isEventFeatureEnabled.toggle()
-            },
-                   label: {
-                HStack {
-                    Text("Display Event Info")
-                    Image(systemName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle")
-                        .foregroundColor(eventManager.isEventFeatureEnabled ? .green : .white)
-                }
-            })
             HStack {
                 VStack(alignment: .leading) {
+                    TextWithFrame("Calendar Access")
+                    TextWithFrame("Display Event Info")
                     TextWithFrame("Show Events Starting From: ")
                     TextWithFrame("Event List Date Format")
                     TextWithFrame("Events to display: \(Int(eventManager.numOfEventsToDisplay))")
                 }
                 VStack(alignment: .trailing) {
+                    HStack {
+                        CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", buttonSize: 40, animation: .linear) {
+                            self.eventManager.requestAccessToCalendar { success in
+                                print("Event access - \(success)")
+                            }
+                        }
+                        .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .white)
+                        Spacer()
+                    }
+                    .frame(height: 25)
+                    .padding(.leading, 10)
+                    HStack {
+                        CalendarButton(imageName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", buttonSize: 40, animation: .linear) {
+                            self.eventManager.isEventFeatureEnabled.toggle()
+                        }
+                        .foregroundColor(eventManager.isEventFeatureEnabled ? .green : .white)
+                        Spacer()
+                    }
+                    .frame(height: 25)
+                    .padding(.leading, 10)
                     HStack {
                         Picker("", selection: eventManager.$eventDisplayFromDate) {
                             ForEach(EventDisplayDate.allCases, id: \.self) { eventDisplayDate in
@@ -63,8 +63,10 @@ struct EventSettings: View {
                     .frame(height: 25)
                     Slider(value: $eventManager.numOfEventsToDisplay, in: 1...10, step: 1.0)
                         .frame(height: 25)
+                        .padding(.trailing, 3)
+                        .padding(.leading, 10)
                 }
-                .frame(width: 280)
+                .frame(width: 215)
             }
             Spacer()
         }
