@@ -14,7 +14,8 @@ struct GeneralSettings: View {
     @State var selectedTitleDateFormat: TitleDateFormat = .shortMonthAndYear
     
     func TextWithFrame(_ text: String) -> some View {
-        Text(text).frame(height: 25)
+        Text(text)
+            .frame(width: 200, height: 25, alignment: .leading)
     }
     
     var body: some View {
@@ -27,6 +28,7 @@ struct GeneralSettings: View {
                     TextWithFrame("Show Weekday Header Row")
                     TextWithFrame("\(self.launchAtLoginMonitor.isLaunchAtLoginEnabled ? "App is currently in" : "Click to add to") Login Items")
                 }
+                .frame(width: 200)
                 VStack(alignment: .trailing) {
                     Picker("", selection: $viewModel.titleDateFormat) {
                         ForEach(TitleDateFormat.allCases, id: \.self) { dateFormatOption in
