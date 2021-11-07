@@ -62,7 +62,7 @@ struct GeneralSettings: View {
                     .padding(.leading, 10)
                     .frame(height: 25)
                 }
-                .frame(width: 250)
+                .frame(width: 200)
             }
             Spacer()
         }

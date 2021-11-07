@@ -25,10 +25,20 @@ struct ColorSettings: View {
         }
     }
     
+    var Labels: some View {
+        VStack(alignment: .leading) {
+            TextWithFrame("Weekday Header Row")
+            TextWithFrame("Today")
+            TextWithFrame("Selected")
+            TextWithFrame("Previous Month")
+            TextWithFrame("Current Month")
+            TextWithFrame("Next Month")
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 10) {
             HStack {
-                Spacer()
                 Text("Background Colors").font(.title2).fontWeight(.bold)
                 Spacer()
                 Text("Reset All")
@@ -40,18 +50,9 @@ struct ColorSettings: View {
                     viewModel.selectedDayBGColor = Color.yellow
                     viewModel.weekDayHeaderBGColor = Color.darkGray
                 })
-                Spacer()
             }
             HStack {
-                // Labels
-                VStack(alignment: .leading) {
-                    TextWithFrame("Weekday Header Row")
-                    TextWithFrame("Current")
-                    TextWithFrame("Selected")
-                    TextWithFrame("Previous Month")
-                    TextWithFrame("Current Month")
-                    TextWithFrame("Next Month")
-                }
+                Labels
                 // Color Pickers
                 VStack(alignment: .trailing) {
                     ColorPickerWithFrame($viewModel.weekDayHeaderBGColor)
@@ -64,7 +65,6 @@ struct ColorSettings: View {
             }
             Divider()
             HStack {
-                Spacer()
                 Text("Text Colors").font(.title2).fontWeight(.bold)
                 Spacer()
                 Text("Reset All")
@@ -76,18 +76,9 @@ struct ColorSettings: View {
                     viewModel.selectedDayTextColor = Color.darkGray
                     viewModel.weekDayHeaderTextColor = Color.white
                 })
-                Spacer()
             }
             HStack {
-                // Labels
-                VStack(alignment: .leading) {
-                    TextWithFrame("Weekday Header Row")
-                    TextWithFrame("Current")
-                    TextWithFrame("Selected")
-                    TextWithFrame("Previous Month")
-                    TextWithFrame("Current Month")
-                    TextWithFrame("Next Month")
-                }
+                Labels
                 // Color Pickers
                 VStack(alignment: .trailing) {
                     ColorPickerWithFrame($viewModel.weekDayHeaderTextColor)
@@ -100,6 +91,7 @@ struct ColorSettings: View {
             }
             Spacer()
         }
+        .frame(width: 300)
         .padding(.vertical, 20)
     }
 }

@@ -9,19 +9,19 @@ import AppKit
 import SwiftUI
 
 struct AppStorageKeys {
-    static let weekDayHeaderBGColor = "weekDayHeaderBGColor"
+    static let weekDayHeaderBGColor = "weekDayHeaderBG"
     static let currentMonthDaysBGColor = "currentMonthDaysBG"
     static let prevMonthDaysBGColor = "prevMonthDaysBG"
     static let nextMonthDaysBGColor = "nextMonthDaysBG"
-    static let currentDayBGColor = "currentDayBGColor"
-    static let selectedDayBGColor = "selectedDayBGColor"
+    static let currentDayBGColor = "currentDayBG"
+    static let selectedDayBGColor = "selectedDayBG"
     
-    static let weekDayHeaderTextColor = "weekDayHeaderTextColor"
+    static let weekDayHeaderTextColor = "weekDayHeaderText"
     static let currentMonthDaysTextColor = "currentMonthDaysText"
     static let prevMonthDaysTextColor = "prevMonthDaysText"
     static let nextMonthDaysTextColor = "nextMonthDaysText"
-    static let currentDayTextColor = "currentDayTextColor"
-    static let selectedDayTextColor = "selectedDayTextColor"
+    static let currentDayTextColor = "currentDayText"
+    static let selectedDayTextColor = "selectedDayText"
     
     static let titleDateFormat = "titleDateFormat"
     static let eventDateFormat = "eventDateFormat"
