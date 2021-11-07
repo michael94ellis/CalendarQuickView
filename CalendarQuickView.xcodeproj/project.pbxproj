@@ -42,6 +42,7 @@
 		2FEE6DAE2736B8DD0081C4B8 /* CalendarFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */; };
 		2FEE6DB02736B9840081C4B8 /* CalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */; };
 		2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */; };
+		41998B59273819070021D632 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41998B58273819070021D632 /* CalendarDayCell.swift */; };
 		41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventKitManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,7 @@
 		2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFooter.swift; sourceTree = "<group>"; };
 		2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarButton.swift; sourceTree = "<group>"; };
 		2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarCalendar.swift; sourceTree = "<group>"; };
+		41998B58273819070021D632 /* CalendarDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
 		41EA3BBF27336B77001070CF /* EventKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 				2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */,
 				2F6FB94627322C7700DD0ACC /* CalendarBody.swift */,
 				2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */,
+				41998B58273819070021D632 /* CalendarDayCell.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
 			);
 			path = Views;
@@ -372,6 +375,7 @@
 				2F6FB96B2736A5DD00DD0ACC /* CalendarViewModel.swift in Sources */,
 				2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */,
 				41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */,
+				41998B59273819070021D632 /* CalendarDayCell.swift in Sources */,
 				2FDFB0942730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
 				2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */,
 				2F6FB95B27357DF800DD0ACC /* LaunchAtLoginMonitor.swift in Sources */,
