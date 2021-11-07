@@ -15,11 +15,22 @@ struct CalendarBody: View {
     private let monthFormatter = DateFormatter.monthFormatter
     private let weekDayFormatter = DateFormatter.weekDayFormatter
     private let dayFormatter = DateFormatter.dayFormatter
-    
-    var size: CGFloat = 20
+    // 175, 245, 294
+    var calendarDayCellSize: CGFloat = 25
+    var weekDayCellSpacing: CGFloat = 10
     
     init() {
-        self.size = viewModel.calendarSize == .small ? 20 : viewModel.calendarSize == .medium ? 30 : 40
+        switch(viewModel.calendarSize) {
+        case .small:
+            self.weekDayCellSpacing = 10
+            self.calendarDayCellSize = 25
+        case .medium:
+            self.weekDayCellSpacing = 10
+            self.calendarDayCellSize = 30
+        case .large:
+            self.weekDayCellSpacing = 10
+            self.calendarDayCellSize = 42
+        }
     }
     
     // Constants
@@ -52,8 +63,7 @@ struct CalendarBody: View {
             backgroundColor = viewModel.nextMonthDaysColor
         }
         return Text(String(viewModel.calendar.component(.day, from: date)))
-            .frame(width: size, height: size)
-            .padding(1)
+            .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             .background(backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: 4.0))
             .padding(.vertical, 4)
@@ -61,27 +71,30 @@ struct CalendarBody: View {
     
     private func weekDayHeaders(for weekDays: [Date]) -> some View {
         let fontSize: Font = viewModel.calendarSize == .small ? .body : viewModel.calendarSize == .medium ? .title3 : .title2
-        return HStack {
+        return HStack(spacing: weekDayCellSpacing) {
             ForEach(weekDays.prefix(daysInWeek), id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
                     .font(fontSize)
-                    .frame(width: size, height: size)
-                    .padding(.horizontal, 1)
+                    .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             }
         }
+        .background(viewModel.weekDayHeaderColor)
+        .clipShape(RoundedRectangle(cornerRadius: 4.0))
     }
     
     var body: some View {
         // TODO: Make week able to start on any day of week(customizable)
-        let days: [[Date]] = makeDays().chunked(into: 7)
-        let weekDaysForHeader = days.first
+        let days: [[Date]] = viewModel.getGetCalendarDays().chunked(into: 7)
+        let firstWeek = days.first ?? []
         return VStack(spacing: 0) {
-            // M T W T F S S
-            weekDayHeaders(for: weekDaysForHeader ?? [])
-                .padding(.vertical, 8)
+            if viewModel.$showWeekDayHeader.wrappedValue {
+                // M T W T F S S
+                weekDayHeaders(for: firstWeek)
+                    .padding(.vertical, 8)
+            }
             // Iterating over the days of the month
             ForEach(days, id: \.self) { weekDays in
-                HStack {
+                HStack(spacing: weekDayCellSpacing) {
                     ForEach(weekDays, id:\.self) { date in
                         // Each individual day
                         createDayNumberView(date)
@@ -93,18 +106,5 @@ struct CalendarBody: View {
                 }
             }
         }
-    }
-    
-    /// Generates 6 weeks worth of days in an array
-    func makeDays() -> [Date] {
-        guard let monthInterval = viewModel.calendar.dateInterval(of: .month, for: viewModel.displayDate),
-              let monthFirstWeek = viewModel.calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
-              let sixWeeksFromStart = Calendar.current.date(byAdding: .day, value: 7 * 6, to: monthFirstWeek.start) else {
-                  return []
-              }
-        // get 6 weeks of days
-        let dateInterval = DateInterval(start: monthFirstWeek.start, end: sixWeeksFromStart)
-        return viewModel.calendar.generateDays(for: dateInterval)
-    }
-    
+    }    
 }

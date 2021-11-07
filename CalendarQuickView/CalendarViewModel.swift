@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class CalendarViewModel: ObservableObject {
+final class CalendarViewModel: ObservableObject {
     
     // MARK: - Colors
     
@@ -54,4 +54,15 @@ class CalendarViewModel: ObservableObject {
         Self.shared = CalendarViewModel()
     }
     
+    /// Generates 6 weeks worth of days in an array
+    public func getGetCalendarDays() -> [Date] {
+        guard let monthInterval = calendar.dateInterval(of: .month, for: displayDate),
+              let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
+              let sixWeeksFromStart = Calendar.current.date(byAdding: .day, value: 7 * 6, to: monthFirstWeek.start) else {
+                  return []
+              }
+        // get 6 weeks of days
+        let dateInterval = DateInterval(start: monthFirstWeek.start, end: sixWeeksFromStart)
+        return calendar.generateDays(for: dateInterval)
+    }
 }

@@ -11,16 +11,13 @@ import AppKit
 struct StatusBarCalendar: View {
     
     @ObservedObject var viewModel = CalendarViewModel.shared
-    
-    var titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
-    
     static var windowRef: NSWindow?
-    
-    var horizontalPadding: CGFloat = 8
+    var titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
+    var horizontalPadding: CGFloat = 10
     
     init() {
         self.titleDateFormatter = DateFormatter(dateFormat: viewModel.titleDateFormatter.rawValue, calendar: .current)
-        self.horizontalPadding = viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 21
+        self.horizontalPadding = viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 23
     }
     
     var body: some View {
