@@ -7,10 +7,13 @@
 
 import SwiftUI
 import AppKit
+import Combine
 
 struct StatusBarCalendar: View {
     
     @ObservedObject var viewModel = CalendarViewModel.shared
+    static var windowWillCloseListener: Cancellable?
+
     static var windowRef: NSWindow?
     var horizontalPadding: CGFloat = 10
     
@@ -39,10 +42,18 @@ struct StatusBarCalendar: View {
     
     /// Opens a window displaying a Swiftui View for app settings
     static func openSettingsWindow() {
+        self.windowWillCloseListener = NotificationCenter.default
+            .publisher(for: NSWindow.willCloseNotification)
+            .sink() { _ in
+                // Hide app dock icon
+                NSApp.setActivationPolicy(.accessory)
+            }
+        // Show app dock icon
+        NSApp.setActivationPolicy(.regular)
         if windowRef == nil {
             let newWindowRef = NSWindow(
                 contentRect: NSRect(x: 100, y: 100, width: 100, height: 400),
-                styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
+                styleMask: [.titled, .closable, .miniaturizable],
                 backing: .buffered, defer: false)
             self.windowRef = newWindowRef
             self.windowRef?.setFrameAutosaveName("Calendar Quick View Settings")
