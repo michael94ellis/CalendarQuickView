@@ -7,6 +7,8 @@
 
 import Foundation
 import EventKit
+import AppKit
+import SwiftUI
 
 class EventKitManager: ObservableObject {
     
@@ -14,13 +16,17 @@ class EventKitManager: ObservableObject {
     private init() { }
     
     let eventStore = EKEventStore()
-    @Published var isAbleToAccessUserCalendar: Bool = false
-    var calendars: [EKCalendar]?
-    
+    @AppStorage(AppStorageKeys.calendarAccessGranted) var isAbleToAccessUserCalendar: Bool = false
+
     // MARK: - Event Data
     var titles: [String] = []
     var startDates: [Date] = []
     var endDates: [Date] = []
+    var events: [EKEvent] = []
+    
+    func accessGranted() {
+        isAbleToAccessUserCalendar = true
+    }
     
     func checkCalendarAuthStatus(completion: @escaping (Bool) -> ()) {
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
@@ -30,7 +36,7 @@ class EventKitManager: ObservableObject {
             isAbleToAccessUserCalendar = false
             requestAccessToCalendar(completion: completion)
         case EKAuthorizationStatus.authorized:
-            isAbleToAccessUserCalendar = true
+            accessGranted()
             completion(isAbleToAccessUserCalendar)
         case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
             isAbleToAccessUserCalendar = false
@@ -45,8 +51,7 @@ class EventKitManager: ObservableObject {
         eventStore.requestAccess(to: .event) { accessGranted, error in
             if accessGranted == true {
                 DispatchQueue.main.async {
-                    self.calendars = self.eventStore.calendars(for: EKEntityType.event)
-                    self.isAbleToAccessUserCalendar = true
+                    self.accessGranted()
                     completion(true)
                 }
             } else {
@@ -59,11 +64,8 @@ class EventKitManager: ObservableObject {
     }
     
     func getEvents() {
-        guard let calendars = calendars else {
-            print("Error: No calendars to get events from(\(Self.self).calenders is nil)")
-            return
-        }
-        for calendar in calendars {
+        
+        for calendar in self.eventStore.calendars(for: EKEntityType.event) {
             self.titles = []
             self.startDates = []
             self.endDates = []
@@ -76,7 +78,9 @@ class EventKitManager: ObservableObject {
                 titles.append(event.title)
                 startDates.append(event.startDate)
                 endDates.append(event.endDate)
+                events.append(event)
             }
         }
     }
+
 }

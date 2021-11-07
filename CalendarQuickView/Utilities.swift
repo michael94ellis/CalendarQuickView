@@ -21,6 +21,7 @@ struct AppStorageKeys {
     
     static let selectedDay = "selectedDay"
     static let calendarSize = "calendarSize"
+    static let calendarAccessGranted = "calendarAccessGranted"
 }
 
 enum CalendarSize: String, CaseIterable, Codable {

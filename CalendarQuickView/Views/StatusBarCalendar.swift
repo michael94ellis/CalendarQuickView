@@ -13,6 +13,7 @@ struct StatusBarCalendar: View {
     @ObservedObject var viewModel = CalendarViewModel.shared
     static var windowRef: NSWindow?
     var titleDateFormatter: DateFormatter = DateFormatter(dateFormat: "MMM YY", calendar: .current)
+    var eventDateFormatter: DateFormatter = DateFormatter(dateFormat: "d/MM", calendar: .current)
     var horizontalPadding: CGFloat = 10
     
     init() {
@@ -26,6 +27,19 @@ struct StatusBarCalendar: View {
                 .padding(.bottom, 4)
                 .padding(.top, 8)
             CalendarBody()
+                .padding(.bottom, 4)
+            VStack(alignment: .leading) {
+                ForEach(EventKitManager.shared.events.prefix(4), id: \.self) { event in
+                    HStack {
+                        Capsule().frame(width: 4).background(Color.blue)
+                        Text(event.title)
+                            .font(.body)
+                        Spacer()
+                        Text(eventDateFormatter.string(from: event.startDate))
+                            .font(.callout)
+                    }
+                }
+            }
             Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)
         }

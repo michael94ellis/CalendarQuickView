@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var newHostingView: NSHostingView<StatusBarCalendar> {
         let newView = NSHostingView(rootView: StatusBarCalendar())
         // Set the frame or it won't be shown
-        let size: CGSize
+        var size: CGSize
         switch(CalendarViewModel.shared.calendarSize) {
         case .small:
             size = CGSize(width: 250, height: 300)
@@ -35,6 +35,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             size = CGSize(width: 300, height: 360)
         case .large:
             size = CGSize(width: 400, height: 450)
+        }
+        // Alter size of window to accomodate displaying EKEvent info
+        EventKitManager.shared.checkCalendarAuthStatus() { hasAccess in
+            if hasAccess {
+                EventKitManager.shared.getEvents()
+                let eventCount = EventKitManager.shared.events.count
+                let eventDisplacement = CGFloat(eventCount > 5 ? 4 : eventCount) * 30
+                size.height += eventDisplacement
+            }
         }
         newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
         return newView
@@ -63,6 +72,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Example: User opens at 11:59PM, then re-opens at 12:01AM, two different dates
         CalendarViewModel.shared.reset()
         menuItem.view = newHostingView
+        if EventKitManager.shared.isAbleToAccessUserCalendar {
+            
+        }
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

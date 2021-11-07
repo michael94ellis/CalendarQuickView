@@ -22,13 +22,10 @@ struct CalendarBody: View {
     init() {
         switch(viewModel.calendarSize) {
         case .small:
-            self.weekDayCellSpacing = 10
             self.calendarDayCellSize = 25
         case .medium:
-            self.weekDayCellSpacing = 10
             self.calendarDayCellSize = 30
         case .large:
-            self.weekDayCellSpacing = 10
             self.calendarDayCellSize = 42
         }
     }
