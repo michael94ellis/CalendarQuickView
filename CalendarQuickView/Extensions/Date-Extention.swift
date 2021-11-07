@@ -27,8 +27,4 @@ extension Date: RawRepresentable {
         self = calendar.date(byAdding: .month, value: n, to: self) ?? self
     }
     
-    public mutating func incrementMonths(by n: Int, using calendar: Calendar = .current) {
-        self = calendar.date(byAdding: .month, value: n, to: self) ?? self
-    }
-    
 }

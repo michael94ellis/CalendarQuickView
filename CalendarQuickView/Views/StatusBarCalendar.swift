@@ -25,17 +25,10 @@ struct StatusBarCalendar: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-<<<<<<< HEAD:CalendarQuickView/Views/StatusBarCalendar.swift
-            CalendarHeader(displayDate: $displayDate, calendar: self.calendar, titleFormatter: self.titleDateFormatter)
-                .padding(.bottom, 4)
-                .padding(.top, 8)
-            CalendarBody(displayDate: $displayDate, calendar: self.calendar)
-=======
             CalendarHeader(displayDate: $viewModel.displayDate, calendar: viewModel.calendar, titleFormatter: self.titleDateFormatter)
                 .padding(.bottom, 4)
                 .padding(.top, 8)
             CalendarBody()
->>>>>>> origin/resizable-calendar:CalendarQuickView/Views/StatusBarView.swift
             Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)
         }

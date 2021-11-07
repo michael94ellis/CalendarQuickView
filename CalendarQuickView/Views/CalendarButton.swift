@@ -4,10 +4,7 @@
 //
 //  Created by Michael Ellis on 11/6/21.
 //
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/resizable-calendar
 import SwiftUI
 
 struct CalendarButton: View {
@@ -28,7 +25,3 @@ struct CalendarButton: View {
         })
     }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/resizable-calendar
