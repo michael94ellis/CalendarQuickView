@@ -16,7 +16,8 @@ struct AppStorageKeys {
     static let currentDayBGColor = "currentDayBG"
     static let selectedDayBGColor = "selectedDayBG"
     
-    static let weekDayHeaderTextColor = "weekDayHeaderText"
+    static let primaryTextColor = "primaryTextColor"
+    static let weekdayHeaderTextColor = "weekdayHeaderTextColor"
     static let currentMonthDaysTextColor = "currentMonthDaysText"
     static let prevMonthDaysTextColor = "prevMonthDaysText"
     static let nextMonthDaysTextColor = "nextMonthDaysText"
@@ -109,12 +110,14 @@ enum DayDisplayShape: String, CaseIterable {
     case square
     case roundedSquare
     case circle
+    case none
     
     var displayName: String {
         switch(self) {
         case .square: return "Square"
         case .roundedSquare: return "Rounded Square"
         case .circle: return "Circle"
+        case .none: return "None"
         }
     }
 }

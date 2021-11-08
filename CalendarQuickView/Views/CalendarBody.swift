@@ -23,6 +23,8 @@ struct CalendarBody: View {
             return AnyShape(Circle())
         case .square:
             return AnyShape(Rectangle())
+        case .none:
+            return AnyShape(Rectangle())
         }
     }
     
@@ -75,7 +77,9 @@ struct CalendarBody: View {
             .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             .foregroundColor(textColor)
             .background(backgroundColor)
-            .clipShape(dayShape)
+            .if(viewModel.dayDisplayShape != .none) { textView in
+                textView.clipShape(dayShape)
+            }
             .padding(.vertical, 4)
     }
     
@@ -89,7 +93,7 @@ struct CalendarBody: View {
                     .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             }
         }
-        .foregroundColor(viewModel.weekDayHeaderTextColor)
+        .foregroundColor(viewModel.weekdayHeaderTextColor)
         .background(viewModel.weekDayHeaderBGColor)
         .clipShape(RoundedRectangle(cornerRadius: 4.0))
     }

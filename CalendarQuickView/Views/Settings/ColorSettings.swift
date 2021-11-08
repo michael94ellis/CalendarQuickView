@@ -10,7 +10,6 @@ import SwiftUI
 struct ColorSettings: View {
     
     @ObservedObject var viewModel = CalendarViewModel.shared
-    @State var toggles: [Bool] = []
     
     func TextWithFrame(_ text: String) -> some View {
         Text(text).frame(height: 25)
@@ -20,7 +19,7 @@ struct ColorSettings: View {
         HStack {
             ColorPicker("", selection: colorBinding).frame(height: 25)
             Button("None") {
-                colorBinding.wrappedValue = .clear
+                colorBinding.wrappedValue = .systemBackground
             }
         }
     }
@@ -51,6 +50,7 @@ struct ColorSettings: View {
                     viewModel.weekDayHeaderBGColor = Color.darkGray
                 })
             }
+            ColorThemes()
             HStack {
                 Labels
                 // Color Pickers
@@ -74,14 +74,18 @@ struct ColorSettings: View {
                     viewModel.nextMonthDaysTextColor = Color.white
                     viewModel.currentDayTextColor = Color.black
                     viewModel.selectedDayTextColor = Color.darkGray
-                    viewModel.weekDayHeaderTextColor = Color.white
+                    viewModel.weekdayHeaderTextColor = Color.white
                 })
             }
             HStack {
-                Labels
+                VStack {
+                    TextWithFrame("Title, Events, Buttons")
+                    Labels
+                }
                 // Color Pickers
                 VStack(alignment: .trailing) {
-                    ColorPickerWithFrame($viewModel.weekDayHeaderTextColor)
+                    ColorPickerWithFrame($viewModel.primaryTextColor)
+                    ColorPickerWithFrame($viewModel.weekdayHeaderTextColor)
                     ColorPickerWithFrame($viewModel.currentDayTextColor)
                     ColorPickerWithFrame($viewModel.selectedDayTextColor)
                     ColorPickerWithFrame($viewModel.prevMonthDaysTextColor)

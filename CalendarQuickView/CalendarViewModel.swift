@@ -18,10 +18,11 @@ final class CalendarViewModel: ObservableObject {
     @AppStorage(AppStorageKeys.currentDayBGColor) var currentDayBGColor: Color = Color.green
     @AppStorage(AppStorageKeys.selectedDayBGColor) var selectedDayBGColor: Color = Color.yellow
     
+    @AppStorage(AppStorageKeys.primaryTextColor) var primaryTextColor: Color = Color.white
     @AppStorage(AppStorageKeys.currentMonthDaysTextColor) var currentMonthDaysTextColor: Color = Color.white
     @AppStorage(AppStorageKeys.prevMonthDaysTextColor) var prevMonthDaysTextColor: Color = Color.white
     @AppStorage(AppStorageKeys.nextMonthDaysTextColor) var nextMonthDaysTextColor: Color = Color.white
-    @AppStorage(AppStorageKeys.weekDayHeaderTextColor) var weekDayHeaderTextColor: Color = Color.white
+    @AppStorage(AppStorageKeys.weekdayHeaderTextColor) var weekdayHeaderTextColor: Color = Color.white
     @AppStorage(AppStorageKeys.currentDayTextColor) var currentDayTextColor: Color = Color.black
     @AppStorage(AppStorageKeys.selectedDayTextColor) var selectedDayTextColor: Color = Color.darkGray
     

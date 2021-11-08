@@ -22,6 +22,7 @@ struct CalendarHeader: View {
             HStack(spacing: 0) {
                 // MARK: - Month Name "MMM YY"
                 Text(viewModel.titleDateFormatter.string(from: viewModel.displayDate))
+                    .foregroundColor(viewModel.primaryTextColor)
                     .font(fontSize)
                 Spacer()
                 // MARK: - Previous Month Button

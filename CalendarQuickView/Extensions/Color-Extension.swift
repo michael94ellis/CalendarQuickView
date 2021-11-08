@@ -9,6 +9,7 @@ import AppKit
 import SwiftUI
 
 extension Color: RawRepresentable {
+    // FIXME: add opacity - https://stackoverflow.com/questions/15852122/hex-transparency-in-colors
     public init?(rawValue: Int) {
         let red =   Double((rawValue & 0xFF0000) >> 16) / 0xFF
         let green = Double((rawValue & 0x00FF00) >> 8) / 0xFF
@@ -25,14 +26,6 @@ extension Color: RawRepresentable {
         CIColor(color: NSColor(self))!
     }
 }
-
-// MARK: - App Colors
-
-//extension Color {
-//    static var currentMonthDays: Color { UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysBGColor) as? Color ?? .blue }
-//    static let prevMonthDays: Color = UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysBGColor) as? Color ?? .darkGray
-//    static let nextMonthDays: Color = UserDefaults.standard.object(forKey: AppStorageKeys.currentMonthDaysBGColor) as? Color ?? .darkGray
-//}
 
 // MARK: - NSColor Conversions
 public extension Color {

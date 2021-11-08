@@ -28,11 +28,13 @@ struct StatusBarCalendar: View {
                 .padding(.bottom, 4)
             // FIXME: make a toggle for this
             if EventKitManager.shared.isEventFeatureEnabled,
-                EventKitManager.shared.isAbleToAccessUserCalendar {
+               EventKitManager.shared.isAbleToAccessUserCalendar {
                 EventListView()
+                    .foregroundColor(viewModel.primaryTextColor)
             }
             Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)
+                .foregroundColor(viewModel.primaryTextColor)
         }
         .padding(.horizontal, horizontalPadding)
         .padding(.bottom, 10)
