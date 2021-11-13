@@ -44,6 +44,7 @@
 		2FEE6DB02736B9840081C4B8 /* CalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */; };
 		2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */; };
 		2FEF62942738024700F0A9DF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF62932738024700F0A9DF /* EventListView.swift */; };
+		2FF55752273F641C000FD5C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF55750273F641C000FD5C5 /* Main.storyboard */; };
 		41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventKitManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,8 @@
 		2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarButton.swift; sourceTree = "<group>"; };
 		2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarCalendar.swift; sourceTree = "<group>"; };
 		2FEF62932738024700F0A9DF /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
+		2FF55751273F641C000FD5C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2FF55753273F6562000FD5C5 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Main.strings"; sourceTree = "<group>"; };
 		41EA3BBF27336B77001070CF /* EventKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,6 +219,7 @@
 				2F1BABFE273E8C8300C4708B /* Models */,
 				2F6FB93627320EEE00DD0ACC /* Views */,
 				2F6FB93527320EDC00DD0ACC /* Extensions */,
+				2FF55750273F641C000FD5C5 /* Main.storyboard */,
 				2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */,
 				2F2D8A6E2738AF09002C8EF0 /* Rose-Theme.xcassets */,
 				2F2D8A742738BA2A002C8EF0 /* Spring.xcassets */,
@@ -322,6 +326,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"en-US",
 			);
 			mainGroup = 2FCC6CD6272C3A08006D5C7D;
 			packageReferences = (
@@ -343,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F2D8A6F2738AF09002C8EF0 /* Rose-Theme.xcassets in Resources */,
+				2FF55752273F641C000FD5C5 /* Main.storyboard in Resources */,
 				2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */,
 				2F2D8A752738BA2A002C8EF0 /* Spring.xcassets in Resources */,
 				2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */,
@@ -433,6 +439,18 @@
 			targetProxy = 2FDFB0952730241F00BE49CC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2FF55750273F641C000FD5C5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2FF55751273F641C000FD5C5 /* Base */,
+				2FF55753273F6562000FD5C5 /* en-US */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2FCC6CF0272C3A09006D5C7D /* Debug */ = {
