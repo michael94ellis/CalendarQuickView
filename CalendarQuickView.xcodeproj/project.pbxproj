@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F2AFF542738C4A900206FFA /* ColorThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2AFF532738C4A900206FFA /* ColorThemes.swift */; };
+		2F1BAC01273E94BA00C4708B /* CalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1BAC00273E94B900C4708B /* CalendarDay.swift */; };
 		2F2D8A6F2738AF09002C8EF0 /* Rose-Theme.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2D8A6E2738AF09002C8EF0 /* Rose-Theme.xcassets */; };
 		2F2D8A712738B658002C8EF0 /* View-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D8A702738B658002C8EF0 /* View-Extension.swift */; };
-		2F2D8A732738B8AA002C8EF0 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D8A722738B8AA002C8EF0 /* Themes.swift */; };
+		2F2D8A732738B8AA002C8EF0 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D8A722738B8AA002C8EF0 /* ColorTheme.swift */; };
 		2F2D8A752738BA2A002C8EF0 /* Spring.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2D8A742738BA2A002C8EF0 /* Spring.xcassets */; };
 		2F6FB94127322BFE00DD0ACC /* DateFormatter-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */; };
 		2F6FB94227322BFE00DD0ACC /* Date-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */; };
@@ -20,9 +20,6 @@
 		2F6FB94B2734317700DD0ACC /* Array-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */; };
 		2F6FB94E273431DB00DD0ACC /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2F6FB94D273431DB00DD0ACC /* LaunchAtLogin */; };
 		2F6FB95527347B0300DD0ACC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95427347B0300DD0ACC /* Utilities.swift */; };
-		2F6FB95627347F3800DD0ACC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95427347B0300DD0ACC /* Utilities.swift */; };
-		2F6FB9582734C16C00DD0ACC /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9572734C16C00DD0ACC /* Color-Extension.swift */; };
-		2F6FB9592734C32500DD0ACC /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB9572734C16C00DD0ACC /* Color-Extension.swift */; };
 		2F6FB95B27357DF800DD0ACC /* LaunchAtLoginMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */; };
 		2F6FB95D27358A1900DD0ACC /* ColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95C27358A1900DD0ACC /* ColorSettings.swift */; };
 		2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */; };
@@ -31,7 +28,6 @@
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
-		2FCC6CED272C3A09006D5C7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CEB272C3A09006D5C7D /* Main.storyboard */; };
 		2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */; };
 		2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */; };
 		2FCC6D06272C80C5006D5C7D /* Date-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */; };
@@ -76,15 +72,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2F2AFF532738C4A900206FFA /* ColorThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemes.swift; sourceTree = "<group>"; };
+		2F1BAC00273E94B900C4708B /* CalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDay.swift; sourceTree = "<group>"; };
 		2F2D8A6E2738AF09002C8EF0 /* Rose-Theme.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Rose-Theme.xcassets"; sourceTree = "<group>"; };
 		2F2D8A702738B658002C8EF0 /* View-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Extension.swift"; sourceTree = "<group>"; };
-		2F2D8A722738B8AA002C8EF0 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		2F2D8A722738B8AA002C8EF0 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		2F2D8A742738BA2A002C8EF0 /* Spring.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Spring.xcassets; sourceTree = "<group>"; };
 		2F6FB94627322C7700DD0ACC /* CalendarBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarBody.swift; sourceTree = "<group>"; };
 		2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Extension.swift"; sourceTree = "<group>"; };
 		2F6FB95427347B0300DD0ACC /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		2F6FB9572734C16C00DD0ACC /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
 		2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginMonitor.swift; sourceTree = "<group>"; };
 		2F6FB95C27358A1900DD0ACC /* ColorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSettings.swift; sourceTree = "<group>"; };
 		2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
@@ -94,7 +89,6 @@
 		2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2FCC6CEC272C3A09006D5C7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FCC6CEE272C3A09006D5C7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FCC6CEF272C3A09006D5C7D /* CalendarQuickView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarQuickView.entitlements; sourceTree = "<group>"; };
 		2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter-Extension.swift"; sourceTree = "<group>"; };
@@ -138,13 +132,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F1BABFE273E8C8300C4708B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2F2D8A722738B8AA002C8EF0 /* ColorTheme.swift */,
+				2F6FB96A2736A5DD00DD0ACC /* CalendarViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2F1BABFF273E8C9000C4708B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				41EA3BBF27336B77001070CF /* EventKitManager.swift */,
+				2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		2F6FB93527320EDC00DD0ACC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */,
 				2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */,
 				2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */,
-				2F6FB9572734C16C00DD0ACC /* Color-Extension.swift */,
 				2F2D8A702738B658002C8EF0 /* View-Extension.swift */,
 				2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */,
 			);
@@ -158,6 +169,7 @@
 				2FEE6DAB2736B8DD0081C4B8 /* CalendarHeader.swift */,
 				2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */,
 				2F6FB94627322C7700DD0ACC /* CalendarBody.swift */,
+				2F1BAC00273E94B900C4708B /* CalendarDay.swift */,
 				2FEF62932738024700F0A9DF /* EventListView.swift */,
 				2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
@@ -172,7 +184,6 @@
 				2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */,
 				2F6FB96027358AAF00DD0ACC /* EventSettings.swift */,
 				2F6FB95C27358A1900DD0ACC /* ColorSettings.swift */,
-				2F2AFF532738C4A900206FFA /* ColorThemes.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -200,17 +211,14 @@
 			isa = PBXGroup;
 			children = (
 				2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */,
-				41EA3BBF27336B77001070CF /* EventKitManager.swift */,
-				2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */,
 				2F6FB95427347B0300DD0ACC /* Utilities.swift */,
-				2F2D8A722738B8AA002C8EF0 /* Themes.swift */,
-				2F6FB96A2736A5DD00DD0ACC /* CalendarViewModel.swift */,
+				2F1BABFF273E8C9000C4708B /* Managers */,
+				2F1BABFE273E8C8300C4708B /* Models */,
 				2F6FB93627320EEE00DD0ACC /* Views */,
 				2F6FB93527320EDC00DD0ACC /* Extensions */,
 				2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */,
 				2F2D8A6E2738AF09002C8EF0 /* Rose-Theme.xcassets */,
 				2F2D8A742738BA2A002C8EF0 /* Spring.xcassets */,
-				2FCC6CEB272C3A09006D5C7D /* Main.storyboard */,
 				2FCC6CEE272C3A09006D5C7D /* Info.plist */,
 				2FCC6CEF272C3A09006D5C7D /* CalendarQuickView.entitlements */,
 				2FCC6CE8272C3A09006D5C7D /* Preview Content */,
@@ -335,7 +343,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F2D8A6F2738AF09002C8EF0 /* Rose-Theme.xcassets in Resources */,
-				2FCC6CED272C3A09006D5C7D /* Main.storyboard in Resources */,
 				2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */,
 				2F2D8A752738BA2A002C8EF0 /* Spring.xcassets in Resources */,
 				2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */,
@@ -382,17 +389,16 @@
 				2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */,
 				2FEE6DAE2736B8DD0081C4B8 /* CalendarFooter.swift in Sources */,
 				2FDFB09D2730B09800BE49CC /* SettingsTabView.swift in Sources */,
+				2F1BAC01273E94BA00C4708B /* CalendarDay.swift in Sources */,
 				2F2D8A712738B658002C8EF0 /* View-Extension.swift in Sources */,
 				2FEE6DB02736B9840081C4B8 /* CalendarButton.swift in Sources */,
 				2F6FB94727322C7700DD0ACC /* CalendarBody.swift in Sources */,
 				2FEE6DAD2736B8DD0081C4B8 /* CalendarHeader.swift in Sources */,
 				2F6FB95527347B0300DD0ACC /* Utilities.swift in Sources */,
-				2F2AFF542738C4A900206FFA /* ColorThemes.swift in Sources */,
-				2F2D8A732738B8AA002C8EF0 /* Themes.swift in Sources */,
+				2F2D8A732738B8AA002C8EF0 /* ColorTheme.swift in Sources */,
 				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,
 				2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */,
 				2FEF62942738024700F0A9DF /* EventListView.swift in Sources */,
-				2F6FB9582734C16C00DD0ACC /* Color-Extension.swift in Sources */,
 				2F6FB96B2736A5DD00DD0ACC /* CalendarViewModel.swift in Sources */,
 				2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */,
 				41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */,
@@ -410,9 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F6FB94127322BFE00DD0ACC /* DateFormatter-Extension.swift in Sources */,
-				2F6FB95627347F3800DD0ACC /* Utilities.swift in Sources */,
 				2F6FB94B2734317700DD0ACC /* Array-Extension.swift in Sources */,
-				2F6FB9592734C32500DD0ACC /* Color-Extension.swift in Sources */,
 				2F6FB94227322BFE00DD0ACC /* Date-Extention.swift in Sources */,
 				2F6FB94327322BFE00DD0ACC /* Calendar-Extension.swift in Sources */,
 				2FDFB0932730241F00BE49CC /* CalendarQuickWidget.intentdefinition in Sources */,
@@ -430,22 +434,12 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		2FCC6CEB272C3A09006D5C7D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2FCC6CEC272C3A09006D5C7D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		2FCC6CF0272C3A09006D5C7D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -507,6 +501,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
