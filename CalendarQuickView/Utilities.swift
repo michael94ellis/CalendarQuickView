@@ -8,22 +8,7 @@
 import AppKit
 import SwiftUI
 
-struct AppStorageKeys {
-    static let weekDayHeaderBGColor = "weekDayHeaderBG"
-    static let currentMonthDaysBGColor = "currentMonthDaysBG"
-    static let prevMonthDaysBGColor = "prevMonthDaysBG"
-    static let nextMonthDaysBGColor = "nextMonthDaysBG"
-    static let currentDayBGColor = "currentDayBG"
-    static let selectedDayBGColor = "selectedDayBG"
-    
-    static let primaryTextColor = "primaryTextColor"
-    static let weekdayHeaderTextColor = "weekdayHeaderTextColor"
-    static let currentMonthDaysTextColor = "currentMonthDaysText"
-    static let prevMonthDaysTextColor = "prevMonthDaysText"
-    static let nextMonthDaysTextColor = "nextMonthDaysText"
-    static let currentDayTextColor = "currentDayText"
-    static let selectedDayTextColor = "selectedDayText"
-    
+struct AppStorageKeys {    
     static let titleDateFormat = "titleDateFormat"
     static let eventDateFormat = "eventDateFormat"
     static let showWeekDayHeader = "showWeekDayHeader"
@@ -36,6 +21,7 @@ struct AppStorageKeys {
     static let numOfEventsToDisplay = "numOfEventsToDisplay"
     static let dayDisplayShape = "dayShapeDisplay"
     static let isEventFeatureEnabled = "isEventFeatureEnabled"
+    static let showDockIcon = "showDockIcon"
 }
 
 enum CalendarSize: String, CaseIterable, Codable {
@@ -111,6 +97,19 @@ enum DayDisplayShape: String, CaseIterable {
     case roundedSquare
     case circle
     case none
+    
+    var shape: AnyShape {
+        switch(self) {
+        case .roundedSquare:
+            return AnyShape(RoundedRectangle(cornerRadius: 4))
+        case .circle:
+            return AnyShape(Circle())
+        case .square:
+            return AnyShape(Rectangle())
+        case .none:
+            return AnyShape(Rectangle())
+        }
+    }
     
     var displayName: String {
         switch(self) {

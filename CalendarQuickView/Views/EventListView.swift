@@ -10,10 +10,8 @@ import EventKit
 
 struct EventListView: View {
     
-    @ObservedObject var viewModel = CalendarViewModel.shared
+    @EnvironmentObject var viewModel: CalendarViewModel
     @ObservedObject var eventManager = EventKitManager.shared
-    
-    var eventsToDisplay: [EKEvent] = []
     
     init() {
         var compareDate = Date()
@@ -25,11 +23,12 @@ struct EventListView: View {
         self.eventsToDisplay.append(contentsOf: futureEvents)
     }
     
+    var eventsToDisplay: [EKEvent] = []
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ForEach(self.eventsToDisplay.prefix(Int(eventManager.numOfEventsToDisplay)), id: \.self) { event in
                 HStack {
-                    Capsule().frame(width: 3, height: 12).background(Color.green)
                     Text(event.title)
                         .font(.body)
                     Spacer()
@@ -37,7 +36,7 @@ struct EventListView: View {
                         .font(.callout)
                 }
                 .frame(height: 29)
-                Divider().padding(.horizontal, 8)
+                Divider()
             }
         }
     }

@@ -36,11 +36,11 @@ struct SettingsTabView: View {
                         Label("General", systemImage: "gear")
                     }
                     .tag(Tabs.colors)
-                ColorSettings()
-                    .tabItem {
-                        Label("Colors", systemImage: "star")
-                    }
-                    .tag(Tabs.colors)
+//                ColorSettings()
+//                    .tabItem {
+//                        Label("Colors", systemImage: "star")
+//                    }
+//                    .tag(Tabs.colors)
                 EventSettings()
                     .tabItem {
                         Label("Events", systemImage: "star")

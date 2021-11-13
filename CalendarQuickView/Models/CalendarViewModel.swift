@@ -9,23 +9,8 @@ import SwiftUI
 
 final class CalendarViewModel: ObservableObject {
     
-    // MARK: - Colors
-    
-    @AppStorage(AppStorageKeys.currentMonthDaysBGColor) var currentMonthDaysBGColor: Color = Color.blue
-    @AppStorage(AppStorageKeys.prevMonthDaysBGColor) var prevMonthDaysBGColor: Color = Color.darkGray
-    @AppStorage(AppStorageKeys.nextMonthDaysBGColor) var nextMonthDaysBGColor: Color = Color.darkGray
-    @AppStorage(AppStorageKeys.weekDayHeaderBGColor) var weekDayHeaderBGColor: Color = Color.darkGray
-    @AppStorage(AppStorageKeys.currentDayBGColor) var currentDayBGColor: Color = Color.green
-    @AppStorage(AppStorageKeys.selectedDayBGColor) var selectedDayBGColor: Color = Color.yellow
-    
-    @AppStorage(AppStorageKeys.primaryTextColor) var primaryTextColor: Color = Color.white
-    @AppStorage(AppStorageKeys.currentMonthDaysTextColor) var currentMonthDaysTextColor: Color = Color.white
-    @AppStorage(AppStorageKeys.prevMonthDaysTextColor) var prevMonthDaysTextColor: Color = Color.white
-    @AppStorage(AppStorageKeys.nextMonthDaysTextColor) var nextMonthDaysTextColor: Color = Color.white
-    @AppStorage(AppStorageKeys.weekdayHeaderTextColor) var weekdayHeaderTextColor: Color = Color.white
-    @AppStorage(AppStorageKeys.currentDayTextColor) var currentDayTextColor: Color = Color.black
-    @AppStorage(AppStorageKeys.selectedDayTextColor) var selectedDayTextColor: Color = Color.darkGray
-    
+    /// Stored property to determine if Dock Icon should be displayed
+    @AppStorage(AppStorageKeys.showDockIcon) var showDockIcon: Bool = false
     
     // MARK: - Sizing
     
@@ -43,16 +28,40 @@ final class CalendarViewModel: ObservableObject {
         }
     }
     
-    
     // MARK: - Calendar Data
     
+    /// Typealias for `(text: Color, background: Color)`
+    typealias CalendarDayCellColors = (text: Color, bgColor: Color)
+    func getDayColors(for date: Date, in displayMonth: Date) -> CalendarDayCellColors {
+        if self.calendar.isDateInToday(date) {
+            // Current Day
+            return (Color.text, Color.primaryBackground)
+        } else if self.calendar.isDate(date, equalTo: displayMonth, toGranularity: .month) {
+            // Day in Current Displayed Month
+            return (Color.text, Color.primaryBackground)
+        } else {
+            // Day is not in Current Displayed Month
+            return (Color.text, Color.secondaryBackground)
+        }
+    }
+    
+    /// Stored property to determine date format for the Title of the calendar view
     @AppStorage(AppStorageKeys.titleDateFormat) var titleDateFormat: TitleDateFormat = .shortMonthAndYear
+    
+    var titleFontSize: Font {
+        self.calendarSize == .small ? .title2 : self.calendarSize == .medium ? .title : .largeTitle
+    }
+    var weekdayHeaderSize: Font {
+        self.calendarSize == .small ? .body : self.calendarSize == .medium ? .title3 : .title2
+    }
+    /// Stored property to determine date format for displayed events
     @AppStorage(AppStorageKeys.eventDateFormat) var eventDateFormat: EventDateFormat = .shortDayAndMonth
+    /// Stored property to determine if the S M T W T F S row should be shown
     @AppStorage(AppStorageKeys.showWeekDayHeader) var showWeekDayHeader: Bool = true
     
     @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
-    @Published var displayDate: Date = Date()
-    public var calendar: Calendar = .current
+    @Published var displayDate: Date
+    public var calendar: Calendar
     @AppStorage(AppStorageKeys.dayDisplayShape) var dayDisplayShape: DayDisplayShape = .roundedSquare
     
     // MARK: - Date Formats
@@ -66,13 +75,14 @@ final class CalendarViewModel: ObservableObject {
     let weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: Calendar.current)
     let dayFormatter = DateFormatter(dateFormat: "dd", calendar: Calendar.current)
     
-    static public private(set) var shared = CalendarViewModel()
-    private init() {
+    static var shared: CalendarViewModel = CalendarViewModel()
+    public init() {
         self.displayDate = Date()
+        self.calendar = .current
     }
     
-    public func reset() {
-        Self.shared = CalendarViewModel()
+    public func resetDate() {
+        self.displayDate = Date()
     }
     
     /// Generates 6 weeks worth of days in an array

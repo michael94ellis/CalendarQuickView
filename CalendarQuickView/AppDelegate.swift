@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     let menuItem = NSMenuItem()
     /// Displayed as the content of the NSMenuItem
     var hostingView: NSHostingView<StatusBarCalendar>?
-    
+    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
     let eventKitManager = EventKitManager.shared
     /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
     /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let newView = NSHostingView(rootView: StatusBarCalendar())
         // Set the frame or it won't be shown
         var size: CGSize
-        switch(CalendarViewModel.shared.calendarSize) {
+        switch(self.calendarSize) {
         case .small:
             size = CGSize(width: 250, height: 300)
         case .medium:
@@ -55,10 +55,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Close main app window
-        if let window = NSApplication.shared.windows.first {
-            window.close()
-        }
+        // Set dock icon visibility
+        NSApp.setActivationPolicy(CalendarViewModel.shared.showDockIcon ? .regular : .accessory)
         // Set the view and status menu bar item
         self.hostingView = newHostingView
         menuItem.view = newHostingView
@@ -69,13 +67,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         self.statusBarItem?.menu = menu
         self.statusBarItem?.button?.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "Quick View Calendar")
-        
     }
     
     func menuWillOpen(_ menu: NSMenu) {
         // Every time the menu bar view is opened it should show the current date
         // Example: User opens at 11:59PM, then re-opens at 12:01AM, two different dates
-        CalendarViewModel.shared.reset()
         menuItem.view = newHostingView
         if EventKitManager.shared.isAbleToAccessUserCalendar {
             

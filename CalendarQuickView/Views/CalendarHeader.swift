@@ -9,36 +9,33 @@ import SwiftUI
 
 struct CalendarHeader: View {
     
-    @ObservedObject var viewModel = CalendarViewModel.shared
-
-    var fontSize: Font = .body
-    
-    init(displayDate: Binding<Date>, calendar: Calendar) {
-        self.fontSize = viewModel.calendarSize == .small ? .title2 : viewModel.calendarSize == .medium ? .title : .largeTitle
-    }
+    @EnvironmentObject var viewModel: CalendarViewModel
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
                 // MARK: - Month Name "MMM YY"
                 Text(viewModel.titleDateFormatter.string(from: viewModel.displayDate))
-                    .foregroundColor(viewModel.primaryTextColor)
-                    .font(fontSize)
+                    .foregroundColor(Color.text)
+                    .font(viewModel.titleFontSize)
                 Spacer()
                 // MARK: - Previous Month Button
                 CalendarButton(imageName: "chevron.left", buttonSize: viewModel.buttonSize, animation: .easeOut) {
                     viewModel.displayDate.incrementMonths(by: -1)
                 }
                 .padding(.horizontal, 5)
+                .foregroundColor(Color.button)
                 // MARK: - GoTo Current Date Button
                 CalendarButton(imageName: "calendar", buttonSize: viewModel.buttonSize, animation: .spring()) {
                     viewModel.displayDate = Date()
                 }
                 .padding(.trailing, 5)
+                .foregroundColor(Color.button)
                 // MARK: - Next Month Button
                 CalendarButton(imageName: "chevron.right", buttonSize: viewModel.buttonSize, animation: .easeIn) {
                     viewModel.displayDate.incrementMonths(by: 1)
                 }
+                .foregroundColor(Color.button)
             }
         }
     }

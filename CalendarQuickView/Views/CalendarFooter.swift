@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct CalendarFooter: View {
-
-    @ObservedObject var viewModel = CalendarViewModel.shared
     
+    let buttonSize: CGFloat
     var settingWindowCallback: () -> () = { }
     
-    init(openSettings settingWindowCallback: @escaping () -> ()) {
+    init(buttonSize: CGFloat, openSettings settingWindowCallback: @escaping () -> ()) {
         self.settingWindowCallback = settingWindowCallback
+        self.buttonSize = buttonSize
     }
     
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
-            CalendarButton(imageName: "gear", buttonSize: viewModel.buttonSize, animation: .linear, action: self.settingWindowCallback)
+            CalendarButton(imageName: "gear", buttonSize: buttonSize, animation: .linear, action: self.settingWindowCallback)
+                .foregroundColor(Color.button)
         }
     }
 }
