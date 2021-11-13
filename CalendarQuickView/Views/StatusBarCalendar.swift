@@ -11,13 +11,12 @@ import Combine
 
 struct StatusBarCalendar: View {
     
-    @StateObject var viewModel = CalendarViewModel.shared
+    @ObservedObject var viewModel = CalendarViewModel()
     static var windowRef: NSWindow?
     var horizontalPadding: CGFloat = 10
     
     init() {
         self.horizontalPadding = self.viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 23
-        Self.openSettingsWindow()
     }
     
     var body: some View {
@@ -29,16 +28,13 @@ struct StatusBarCalendar: View {
             CalendarBody(viewModel: viewModel)
                 .padding(.bottom, 4)
                 .environmentObject(viewModel)
-            // FIXME: make a toggle for this
             if EventKitManager.shared.isEventFeatureEnabled,
                EventKitManager.shared.isAbleToAccessUserCalendar {
                 EventListView()
                     .environmentObject(viewModel)
-                    .foregroundColor(Color.text)
             }
             Spacer()
-            CalendarFooter(buttonSize: viewModel.buttonSize, openSettings: Self.openSettingsWindow)
-                .foregroundColor(Color.text)
+            CalendarFooter(openSettings: Self.openSettingsWindow)
                 .environmentObject(viewModel)
         }
         .padding(.horizontal, horizontalPadding)

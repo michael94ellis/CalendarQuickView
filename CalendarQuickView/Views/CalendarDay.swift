@@ -26,9 +26,9 @@ struct CalendarDay: View {
         return Text(String(viewModel.calendar.component(.day, from: date)))
             .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             .foregroundColor(dayColors.text)
-            .background(dayColors.bgColor)
             .if(viewModel.dayDisplayShape != .none) { textView in
-                textView.clipShape(viewModel.dayDisplayShape.shape)
+                textView.background(dayColors.bgColor)
+                    .clipShape(viewModel.dayDisplayShape.shape)
             }
             .padding(.vertical, 4)
     }

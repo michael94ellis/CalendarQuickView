@@ -10,7 +10,7 @@ import SwiftUI
 struct EventSettings: View {
     
     @ObservedObject var eventManager = EventKitManager.shared
-    @ObservedObject var viewModel: CalendarViewModel = CalendarViewModel.shared
+    @EnvironmentObject var viewModel: CalendarViewModel 
 
     func TextWithFrame(_ text: String) -> some View {
         Text(text).frame(height: 25)

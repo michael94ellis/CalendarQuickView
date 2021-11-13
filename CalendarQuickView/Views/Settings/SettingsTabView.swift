@@ -11,6 +11,7 @@ import Combine
 struct SettingsTabView: View {
     
     @State var showMenuButton: Bool = true
+    @StateObject var viewModel = CalendarViewModel()
     
     private enum Tabs: Hashable {
         case general
@@ -36,16 +37,19 @@ struct SettingsTabView: View {
                         Label("General", systemImage: "gear")
                     }
                     .tag(Tabs.colors)
-//                ColorSettings()
-//                    .tabItem {
-//                        Label("Colors", systemImage: "star")
-//                    }
-//                    .tag(Tabs.colors)
+                    .environmentObject(viewModel)
+                ColorSettings()
+                    .tabItem {
+                        Label("Colors", systemImage: "star")
+                    }
+                    .tag(Tabs.colors)
+                    .environmentObject(viewModel)
                 EventSettings()
                     .tabItem {
                         Label("Events", systemImage: "star")
                     }
                     .tag(Tabs.events)
+                    .environmentObject(viewModel)
             }
             Spacer()
         }

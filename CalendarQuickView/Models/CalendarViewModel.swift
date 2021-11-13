@@ -35,25 +35,18 @@ final class CalendarViewModel: ObservableObject {
     func getDayColors(for date: Date, in displayMonth: Date) -> CalendarDayCellColors {
         if self.calendar.isDateInToday(date) {
             // Current Day
-            return (Color.text, Color.primaryBackground)
+            return (self.currentMonthText, self.currentMonthColor)
         } else if self.calendar.isDate(date, equalTo: displayMonth, toGranularity: .month) {
             // Day in Current Displayed Month
-            return (Color.text, Color.primaryBackground)
+            return (self.currentMonthText, self.currentMonthColor)
         } else {
             // Day is not in Current Displayed Month
-            return (Color.text, Color.secondaryBackground)
+            return (self.otherMonthText, self.otherMonthColor)
         }
     }
     
     /// Stored property to determine date format for the Title of the calendar view
     @AppStorage(AppStorageKeys.titleDateFormat) var titleDateFormat: TitleDateFormat = .shortMonthAndYear
-    
-    var titleFontSize: Font {
-        self.calendarSize == .small ? .title2 : self.calendarSize == .medium ? .title : .largeTitle
-    }
-    var weekdayHeaderSize: Font {
-        self.calendarSize == .small ? .body : self.calendarSize == .medium ? .title3 : .title2
-    }
     /// Stored property to determine date format for displayed events
     @AppStorage(AppStorageKeys.eventDateFormat) var eventDateFormat: EventDateFormat = .shortDayAndMonth
     /// Stored property to determine if the S M T W T F S row should be shown
@@ -75,8 +68,7 @@ final class CalendarViewModel: ObservableObject {
     let weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: Calendar.current)
     let dayFormatter = DateFormatter(dateFormat: "dd", calendar: Calendar.current)
     
-    static var shared: CalendarViewModel = CalendarViewModel()
-    public init() {
+    init() {
         self.displayDate = Date()
         self.calendar = .current
     }
@@ -96,4 +88,21 @@ final class CalendarViewModel: ObservableObject {
         let dateInterval = DateInterval(start: monthFirstWeek.start, end: sixWeeksFromStart)
         return calendar.generateDays(for: dateInterval)
     }
+    
+    // MARK: - Colors
+    
+    @AppStorage("titleText") public var _titleTextColor: String = "contrast"
+    @AppStorage("eventTextColor") public var _eventTextColor: String = "contrast"
+    var eventTextColor: Color { Color("\(self._eventTextColor)") }
+    @AppStorage("buttonColor") public var _buttonColor: String = "contrast"
+    var buttonColor: Color { Color("\(self._buttonColor)") }
+    var titleTextColor: Color { Color("\(self._titleTextColor)") }
+    @AppStorage("currentMonthText") public var _currentMonthText: String = "contrast"
+    var currentMonthText: Color { Color("\(self._currentMonthText)") }
+    @AppStorage("currentMonthColor") public var _currentMonthColor: String = "stone"
+    var currentMonthColor: Color { Color("\(self._currentMonthColor)") }
+    @AppStorage("otherMonthText") public var _otherMonthText: String = "contrast"
+    var otherMonthText: Color { Color("\(self._otherMonthText)") }
+    @AppStorage("otherMonthColor") public var _otherMonthColor: String = "stone"
+    var otherMonthColor: Color { Color("\(self._otherMonthColor)") }
 }

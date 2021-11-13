@@ -55,8 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Set dock icon visibility
-        NSApp.setActivationPolicy(CalendarViewModel.shared.showDockIcon ? .regular : .accessory)
         // Set the view and status menu bar item
         self.hostingView = newHostingView
         menuItem.view = newHostingView
@@ -67,6 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         self.statusBarItem?.menu = menu
         self.statusBarItem?.button?.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "Quick View Calendar")
+        StatusBarCalendar.openSettingsWindow()
     }
     
     func menuWillOpen(_ menu: NSMenu) {

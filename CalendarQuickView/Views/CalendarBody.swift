@@ -38,14 +38,15 @@ struct CalendarBody: View {
     
     private func weekDayHeaders(for weekDays: [Date]) -> some View {
         let weekDayFormatter = viewModel.weekDayFormatter
+        let weekdayHeaderSize: Font = self.viewModel.calendarSize == .small ? .body : self.viewModel.calendarSize == .medium ? .title3 : .title2
         return HStack(spacing: weekDayCellSpacing) {
             ForEach(weekDays, id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
-                    .font(viewModel.weekdayHeaderSize)
+                    .font(weekdayHeaderSize)
                     .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             }
         }
-        .foregroundColor(Color.text)
+        .foregroundColor(viewModel.titleTextColor)
     }
     
     var body: some View {

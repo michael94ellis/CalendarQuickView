@@ -9,11 +9,9 @@ import SwiftUI
 
 struct GeneralSettings: View {
     
-    @ObservedObject var viewModel: CalendarViewModel = CalendarViewModel.shared
+    @EnvironmentObject var viewModel: CalendarViewModel 
     @ObservedObject var launchAtLoginMonitor = LaunchAtLoginMonitor.shared
-    
-    @State private var isDockIconDisplayed = CalendarViewModel.shared.showDockIcon
-    
+        
     func TextWithFrame(_ text: String) -> some View {
         Text(text)
             .frame(width: 200, height: 25, alignment: .leading)
@@ -69,10 +67,9 @@ struct GeneralSettings: View {
                     .frame(height: 25)
                     // Show app icon in dock
                     HStack {
-                        Toggle("", isOn: $isDockIconDisplayed)
-                            .onChange(of: isDockIconDisplayed) { newValue in
-                                viewModel.showDockIcon = isDockIconDisplayed
-                                NSApp.setActivationPolicy(isDockIconDisplayed ? .regular : .accessory)
+                        Toggle("", isOn: $viewModel.showDockIcon)
+                            .onChange(of: viewModel.showDockIcon) { newValue in
+                                NSApp.setActivationPolicy(newValue ? .regular : .accessory)
                             }
                         Spacer()
                     }

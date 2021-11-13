@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CalendarButton: View {
     
+    @EnvironmentObject var viewModel: CalendarViewModel
+    
     let imageName: String
     let buttonSize: CGFloat
     let animation: Animation
@@ -22,6 +24,7 @@ struct CalendarButton: View {
         }, label: {
             Image(systemName: imageName)
                 .frame(width: buttonSize, height: buttonSize)
+                .foregroundColor(viewModel.buttonColor)
         })
     }
 }
