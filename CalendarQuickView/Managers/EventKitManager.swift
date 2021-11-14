@@ -12,20 +12,20 @@ import SwiftUI
 
 class EventKitManager: ObservableObject {
     
-    static let shared = EventKitManager()
-    private init() { }
     
-    let eventStore = EKEventStore()
     @AppStorage(AppStorageKeys.calendarAccessGranted) var isAbleToAccessUserCalendar: Bool = false
-    @AppStorage(AppStorageKeys.isEventFeatureEnabled) var isEventFeatureEnabled: Bool = true
+    @AppStorage(AppStorageKeys.isEventFeatureEnabled) var isEventFeatureEnabled: Bool = false
     @AppStorage(AppStorageKeys.eventDisplayFromDate) var eventDisplayFromDate: EventDisplayDate = .currentDay
     @AppStorage(AppStorageKeys.numOfEventsToDisplay) var numOfEventsToDisplay: Double = 4
 
-    // MARK: - Event Data
     var titles: [String] = []
     var startDates: [Date] = []
     var endDates: [Date] = []
     var events: [EKEvent] = []
+    
+    let eventStore = EKEventStore()
+    static let shared = EventKitManager()
+    private init() { }
     
     func accessGranted() {
         isAbleToAccessUserCalendar = true
@@ -67,16 +67,15 @@ class EventKitManager: ObservableObject {
     }
     
     func getEvents() {
-        
         for calendar in self.eventStore.calendars(for: EKEntityType.event) {
             self.titles = []
             self.startDates = []
             self.endDates = []
             
             let oneMonthAgo = Date(timeIntervalSinceNow: -30*24*3600)
-            let oneMonthAfter = Date(timeIntervalSinceNow: +30*24*3600)
+            let oneMonthAfterToday = Date(timeIntervalSinceNow: +30*24*3600)
             
-            let predicate = eventStore.predicateForEvents(withStart: oneMonthAgo, end: oneMonthAfter, calendars: [calendar])
+            let predicate = eventStore.predicateForEvents(withStart: oneMonthAgo, end: oneMonthAfterToday, calendars: [calendar])
             for event in eventStore.events(matching: predicate) {
                 titles.append(event.title)
                 startDates.append(event.startDate)
