@@ -65,7 +65,7 @@ struct CalendarBody: View {
                 HStack(spacing: weekDayCellSpacing) {
                     ForEach(weekDays, id:\.self) { date in
                         // Each individual day
-                        CalendarDay(for: date, size: calendarDayCellSize, displayMonth: month)
+                        CalendarDay(date: date, calendarDayCellSize: calendarDayCellSize, dayColors: viewModel.getDayColors(for: date, in: month), dayShape: viewModel.dayDisplayShape.shape)
                             .environmentObject(viewModel)
                         // Logic to select date
                             .onTapGesture {

@@ -11,24 +11,18 @@ struct CalendarDay: View {
     
     @EnvironmentObject private var viewModel: CalendarViewModel
     
-    private let date: Date
-    private let calendarDayCellSize: CGFloat
-    private var displayMonth: Date
-    
-    init(for date: Date, size: CGFloat, displayMonth: Date) {
-        self.calendarDayCellSize = size
-        self.date = date
-        self.displayMonth = displayMonth
-    }
+    let date: Date
+    let calendarDayCellSize: CGFloat
+    let dayColors: CalendarViewModel.CalendarDayCellColors
+    let dayShape: AnyShape
     
     var body: some View {
-        let dayColors = viewModel.getDayColors(for: date, in: displayMonth)
         return Text(String(viewModel.calendar.component(.day, from: date)))
             .frame(width: calendarDayCellSize, height: calendarDayCellSize)
             .foregroundColor(dayColors.text)
             .if(viewModel.dayDisplayShape != .none) { textView in
                 textView.background(dayColors.bgColor)
-                    .clipShape(viewModel.dayDisplayShape.shape)
+                    .clipShape(dayShape)
             }
             .padding(.vertical, 4)
     }
