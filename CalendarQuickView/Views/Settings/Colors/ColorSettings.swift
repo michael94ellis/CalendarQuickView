@@ -59,7 +59,7 @@ struct ColorSettings: View {
                 Spacer()
                 Text("Reset All")
                     .font(.title3)
-                CalendarButton(imageName: "arrow.triangle.2.circlepath", buttonSize: viewModel.buttonSize, animation: .linear, action: {
+                CalendarButton(imageName: "arrow.triangle.2.circlepath", animation: .linear, action: {
                     viewModel._titleTextColor = "contrast"
                     viewModel._eventTextColor = "contrast"
                     viewModel._buttonColor = "contrast"
@@ -69,7 +69,6 @@ struct ColorSettings: View {
                     
                     viewModel._otherMonthText = "contrast"
                     viewModel._otherMonthColor = "stone"
-                    viewModel.objectWillChange.send()
                 })
                 Spacer()
             }

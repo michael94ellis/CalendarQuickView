@@ -34,14 +34,11 @@ final class CalendarViewModel: ObservableObject {
     @AppStorage(AppStorageKeys.eventDateFormat) var eventDateFormat: EventDateFormat = .shortDayAndMonth
     var titleDateFormatter: DateFormatter { DateFormatter(dateFormat: self.titleDateFormat.rawValue, calendar: .current) }
     var eventDateFormatter: DateFormatter { DateFormatter(dateFormat: self.eventDateFormat.rawValue, calendar: .current) }
-    let weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: Calendar.current)
-    let dayFormatter = DateFormatter(dateFormat: "dd", calendar: Calendar.current)
     
     // MARK: - Sizing
     
     /// This is the storage variable for calendar size, do not use
     @AppStorage(AppStorageKeys.calendarSize) private var storedCalendarSize: CalendarSize = .small
-    var buttonSize: CGFloat = 20
     /// This is for getting and setting the calendar size, will update buttonSize
     var calendarSize: CalendarSize {
         get {
@@ -49,7 +46,6 @@ final class CalendarViewModel: ObservableObject {
         }
         set {
             self.storedCalendarSize = newValue
-            self.buttonSize = calendarSize == .small ? 20 : calendarSize == .medium ? 30 : 40
         }
     }
     

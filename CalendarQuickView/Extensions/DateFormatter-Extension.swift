@@ -9,6 +9,8 @@ import Foundation
 
 extension DateFormatter {
     
+    static let weekDayFormatter = DateFormatter(dateFormat: "EEEEE", calendar: Calendar.current)
+    
     convenience init(dateFormat: String, calendar: Calendar) {
         self.init()
         self.dateFormat = dateFormat

@@ -26,18 +26,22 @@ struct EventListView: View {
     var eventsToDisplay: [EKEvent] = []
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            ForEach(self.eventsToDisplay.prefix(Int(eventManager.numOfEventsToDisplay)), id: \.self) { event in
-                HStack {
-                    Text(event.title)
-                        .font(.body)
-                    Spacer()
-                    Text(viewModel.eventDateFormatter.string(from: event.startDate))
-                        .font(.callout)
+        // Events List
+        if EventKitManager.shared.isEventFeatureEnabled,
+           EventKitManager.shared.isAbleToAccessUserCalendar {
+            VStack(alignment: .leading, spacing: 0) {
+                ForEach(self.eventsToDisplay.prefix(Int(eventManager.numOfEventsToDisplay)), id: \.self) { event in
+                    HStack {
+                        Text(event.title)
+                            .font(.body)
+                        Spacer()
+                        Text(viewModel.eventDateFormatter.string(from: event.startDate))
+                            .font(.callout)
+                    }
+                    .foregroundColor((viewModel.eventTextColor))
+                    .frame(height: 29)
+                    Divider()
                 }
-                .foregroundColor((viewModel.eventTextColor))
-                .frame(height: 29)
-                Divider()
             }
         }
     }

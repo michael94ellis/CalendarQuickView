@@ -23,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// Displayed as the content of the NSMenuItem
     var hostingView: NSHostingView<StatusBarCalendar>?
     @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
+    @AppStorage(AppStorageKeys.showWeekDayHeader) var showWeekDayHeader: Bool = true
     let eventKitManager = EventKitManager.shared
     /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
     /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
@@ -32,12 +33,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         var size: CGSize
         switch(self.calendarSize) {
         case .small:
-            size = CGSize(width: 250, height: 300)
+            size = CGSize(width: 250, height: 270)
+            size.height += showWeekDayHeader ? 25 : 0
         case .medium:
-            size = CGSize(width: 300, height: 360)
+            size = CGSize(width: 300, height: 330)
+            size.height += showWeekDayHeader ? 30 : 0
         case .large:
-            size = CGSize(width: 400, height: 450)
+            size = CGSize(width: 400, height: 408)
+            size.height += showWeekDayHeader ? 42 : 0
         }
+
         // Alter size of window to accomodate displaying EKEvent info
         if eventKitManager.isEventFeatureEnabled {
             eventKitManager.checkCalendarAuthStatus() { hasAccess in

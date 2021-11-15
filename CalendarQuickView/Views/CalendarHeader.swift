@@ -24,19 +24,19 @@ struct CalendarHeader: View {
                 titleText
                 Spacer()
                 // MARK: - Previous Month Button
-                CalendarButton(imageName: "chevron.left", buttonSize: viewModel.buttonSize, animation: .easeOut) {
+                CalendarButton(imageName: "chevron.left", animation: .easeOut) {
                     viewModel.displayDate.incrementMonths(by: -1)
                 }
                 .padding(.horizontal, 5)
                 .foregroundColor(viewModel.buttonColor)
                 // MARK: - GoTo Current Date Button
-                CalendarButton(imageName: "calendar", buttonSize: viewModel.buttonSize, animation: .spring()) {
+                CalendarButton(imageName: "calendar", animation: .spring()) {
                     viewModel.displayDate = Date()
                 }
                 .padding(.trailing, 5)
                 .foregroundColor(viewModel.buttonColor)
                 // MARK: - Next Month Button
-                CalendarButton(imageName: "chevron.right", buttonSize: viewModel.buttonSize, animation: .easeIn) {
+                CalendarButton(imageName: "chevron.right", animation: .easeIn) {
                     viewModel.displayDate.incrementMonths(by: 1)
                 }
                 .foregroundColor(viewModel.buttonColor)

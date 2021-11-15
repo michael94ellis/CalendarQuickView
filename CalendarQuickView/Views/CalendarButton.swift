@@ -12,9 +12,15 @@ struct CalendarButton: View {
     @EnvironmentObject var viewModel: CalendarViewModel
     
     let imageName: String
-    let buttonSize: CGFloat
     let animation: Animation
     let action: () -> ()
+    
+    var buttonImage: some View {
+        let buttonSize: CGFloat = viewModel.calendarSize == .small ? 20 : viewModel.calendarSize == .medium ? 30 : 40
+        return Image(systemName: imageName)
+            .frame(width: buttonSize, height: buttonSize)
+            .foregroundColor(viewModel.buttonColor)
+    }
     
     var body: some View {
         Button(action: {
@@ -22,9 +28,7 @@ struct CalendarButton: View {
                 action()
             }
         }, label: {
-            Image(systemName: imageName)
-                .frame(width: buttonSize, height: buttonSize)
-                .foregroundColor(viewModel.buttonColor)
+            buttonImage
         })
     }
 }

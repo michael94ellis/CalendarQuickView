@@ -28,11 +28,8 @@ struct StatusBarCalendar: View {
             CalendarBody(viewModel: viewModel)
                 .padding(.bottom, 4)
                 .environmentObject(viewModel)
-            if EventKitManager.shared.isEventFeatureEnabled,
-               EventKitManager.shared.isAbleToAccessUserCalendar {
-                EventListView()
-                    .environmentObject(viewModel)
-            }
+            EventListView()
+                .environmentObject(viewModel)
             Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)
                 .environmentObject(viewModel)
