@@ -27,16 +27,17 @@ struct EventListView: View {
     
     var body: some View {
         // Events List
+        let fontSize: Font = self.viewModel.calendarSize == .small ? .callout : self.viewModel.calendarSize == .medium ? .body : .title3
         if EventKitManager.shared.isEventFeatureEnabled,
            EventKitManager.shared.isAbleToAccessUserCalendar {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(self.eventsToDisplay.prefix(Int(eventManager.numOfEventsToDisplay)), id: \.self) { event in
                     HStack {
                         Text(event.title)
-                            .font(.body)
+                            .font(fontSize)
                         Spacer()
                         Text(viewModel.eventDateFormatter.string(from: event.startDate))
-                            .font(.callout)
+                            .font(fontSize)
                     }
                     .foregroundColor((viewModel.eventTextColor))
                     .frame(height: 29)

@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         var size: CGSize
         switch(self.calendarSize) {
         case .small:
-            size = CGSize(width: 250, height: 280)
+            size = CGSize(width: 250, height: 295)
             size.height += showWeekDayHeader ? 25 : 10
         case .medium:
             size = CGSize(width: 300, height: 330)
