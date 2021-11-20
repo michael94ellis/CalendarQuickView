@@ -49,6 +49,10 @@ final class CalendarViewModel: ObservableObject {
         }
     }
     
+    var buttonSize: CGFloat {
+         self.calendarSize == .small ? 20 : self.calendarSize == .medium ? 30 : 40
+    }
+    
     
     // MARK: - Calendar Data
     /// Stored property to determine if the S M T W T F S row should be shown

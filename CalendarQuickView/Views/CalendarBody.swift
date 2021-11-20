@@ -11,16 +11,15 @@ import WidgetKit
 struct CalendarBody: View {
     
     @ObservedObject var viewModel: CalendarViewModel
-    // 175, 245, 294
-    var calendarDayCellSize: CGFloat = 25
-    var weekDayCellSpacing: CGFloat = 10
+    // Constants
+    private let daysInWeek = 7
+    private let calendarDayCellSize: CGFloat = 25
+    private let weekDayCellSpacing: CGFloat = 10
+    private let verticalPadding: CGFloat = 8
     
     init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
     }
-    
-    // Constants
-    private let daysInWeek = 7
     
     // TODO: Make feature where user can change Calendar.Identifier
     
@@ -50,7 +49,7 @@ struct CalendarBody: View {
             if viewModel.$showWeekDayHeader.wrappedValue {
                 // M T W T F S S
                 weekDayHeaders(for: firstWeek)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, verticalPadding)
             }
             // Iterating over the days of the month
             ForEach(days, id: \.self) { weekDays in
@@ -68,6 +67,6 @@ struct CalendarBody: View {
                 }
             }
         }
-        .padding(.top, 8)
+        .padding(.top, verticalPadding)
     }
 }

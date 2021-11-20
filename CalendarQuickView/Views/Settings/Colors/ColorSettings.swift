@@ -59,7 +59,7 @@ struct ColorSettings: View {
                 Spacer()
                 Text("Reset All")
                     .font(.title3)
-                CalendarButton(imageName: "arrow.triangle.2.circlepath", animation: .linear, action: {
+                CalendarButton(imageName: "arrow.triangle.2.circlepath", animation: .linear, color: viewModel.buttonColor, size: viewModel.buttonSize) {
                     viewModel._titleTextColor = "contrast"
                     viewModel._eventTextColor = "contrast"
                     viewModel._buttonColor = "contrast"
@@ -69,7 +69,7 @@ struct ColorSettings: View {
                     
                     viewModel._otherMonthText = "contrast"
                     viewModel._otherMonthColor = "stone"
-                })
+                }
                 Spacer()
             }
             VStack(alignment: .leading) {

@@ -13,7 +13,7 @@ struct StatusBarCalendar: View {
     
     @ObservedObject var viewModel = CalendarViewModel()
     static var windowRef: NSWindow?
-    var horizontalPadding: CGFloat = 10
+    private var horizontalPadding: CGFloat = 10
     
     init() {
         self.horizontalPadding = self.viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 23

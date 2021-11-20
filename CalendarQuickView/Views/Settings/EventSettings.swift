@@ -28,7 +28,7 @@ struct EventSettings: View {
                 }
                 VStack(alignment: .trailing) {
                     HStack {
-                        CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear) {
+                        CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: viewModel.buttonColor, size: viewModel.buttonSize) {
                             self.eventManager.requestAccessToCalendar { success in
                                 print("Event access - \(success)")
                             }
@@ -39,7 +39,7 @@ struct EventSettings: View {
                     .frame(height: 25)
                     .padding(.leading, 10)
                     HStack {
-                        CalendarButton(imageName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear) {
+                        CalendarButton(imageName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear, color: viewModel.buttonColor, size: viewModel.buttonSize) {
                             self.eventManager.isEventFeatureEnabled.toggle()
                         }
                         .foregroundColor(eventManager.isEventFeatureEnabled ? .green : .white)
