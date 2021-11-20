@@ -16,3 +16,4 @@ CalendarQuickView.xcodeproj/project.xcworkspace/xcuserdata/michaelellis.xcuserda
 *.provisionprofile
 *.zip
 fastlane_match_repo/
+*.xcuserstate
