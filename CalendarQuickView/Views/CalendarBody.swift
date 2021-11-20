@@ -17,14 +17,6 @@ struct CalendarBody: View {
     
     init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
-        switch(self.viewModel.calendarSize) {
-        case .small:
-            self.calendarDayCellSize = 25
-        case .medium:
-            self.calendarDayCellSize = 30
-        case .large:
-            self.calendarDayCellSize = 42
-        }
     }
     
     // Constants
@@ -65,8 +57,9 @@ struct CalendarBody: View {
                 HStack(spacing: weekDayCellSpacing) {
                     ForEach(weekDays, id:\.self) { date in
                         // Each individual day
-                        CalendarDay(date: date, calendarDayCellSize: calendarDayCellSize, dayColors: viewModel.getDayColors(for: date, in: month), dayShape: viewModel.dayDisplayShape.shape)
-                            .environmentObject(viewModel)
+                        let fontSize: Font = self.viewModel.calendarSize == .small ? .body : self.viewModel.calendarSize == .medium ? .title3 : .title2
+                        let cellSize = viewModel.getDayCellSize
+                        CalendarDay(date: date, fontSize: fontSize, cellSize: cellSize, dayShape: viewModel.dayDisplayShape, dayColors: viewModel.getDayColors(for: date, in: month))
                         // Logic to select date
                             .onTapGesture {
                                 viewModel.selectedDate = date

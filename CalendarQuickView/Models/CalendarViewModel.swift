@@ -71,6 +71,17 @@ final class CalendarViewModel: ObservableObject {
         self.displayDate = Date()
     }
     
+    var getDayCellSize: CGFloat {
+        switch(self.calendarSize) {
+        case .small:
+            return 25
+        case .medium:
+            return 30
+        case .large:
+            return 42
+        }
+    }
+    
     
     /// Typealias for `(text: Color, background: Color)`
     typealias CalendarDayCellColors = (text: Color, bgColor: Color)

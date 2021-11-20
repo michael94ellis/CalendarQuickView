@@ -172,6 +172,15 @@
 			path = CalendarWidget;
 			sourceTree = "<group>";
 		};
+		2F0B2701274934A200F9D54E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2F6FB95427347B0300DD0ACC /* Utilities.swift */,
+				2F6FB93527320EDC00DD0ACC /* Extensions */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		2F1BABFE273E8C8300C4708B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +239,7 @@
 		2FCC6CD6272C3A08006D5C7D = {
 			isa = PBXGroup;
 			children = (
+				2F0B2701274934A200F9D54E /* Shared */,
 				2FCC6CE1272C3A08006D5C7D /* CalendarQuickView */,
 				2F0B26E32748B28B00F9D54E /* CalendarWidget */,
 				2FDFB0862730241B00BE49CC /* Frameworks */,
@@ -250,11 +260,9 @@
 			isa = PBXGroup;
 			children = (
 				2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */,
-				2F6FB95427347B0300DD0ACC /* Utilities.swift */,
 				2F1BABFF273E8C9000C4708B /* Managers */,
 				2F1BABFE273E8C8300C4708B /* Models */,
 				2F6FB93627320EEE00DD0ACC /* Views */,
-				2F6FB93527320EDC00DD0ACC /* Extensions */,
 				2FF55750273F641C000FD5C5 /* Main.storyboard */,
 				2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */,
 				2F2D8A6E2738AF09002C8EF0 /* Colors.xcassets */,
