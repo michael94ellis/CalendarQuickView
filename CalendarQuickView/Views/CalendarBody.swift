@@ -10,45 +10,46 @@ import WidgetKit
 
 struct CalendarBody: View {
     // TODO: Remove this - make it more reusable
-    @ObservedObject var viewModel: CalendarViewModel
     // Constants
-    private let daysInWeek = 7
-    private let calendarDayCellSize: CGFloat = 25
+    private let daysInWeek: Int = 7
     private let weekDayCellSpacing: CGFloat = 10
     private let verticalPadding: CGFloat = 8
+    private let days: [[Date]]
+    private let fontSize: Font
+    private let dayCellSize: CGFloat
+    private let titleTextColor: Color
+    private let showWeekdayHeaderRow: Bool
+    private let displayMonth: Date
+    private let dayShape: DayDisplayShape
     
     init(viewModel: CalendarViewModel) {
-        self.viewModel = viewModel
+        self.dayCellSize = viewModel.getDayCellSize
+        self.fontSize = viewModel.calendarSize == .small ? .body : viewModel.calendarSize == .medium ? .title3 : .title2
+        self.titleTextColor = ColorStore.shared.titleTextColor
+        self.days = viewModel.getGetCalendarDays().chunked(into: 7)
+        self.showWeekdayHeaderRow = viewModel.showWeekDayHeader
+        self.displayMonth = viewModel.displayDate.startOfMonth(using: viewModel.calendar)
+        self.dayShape = viewModel.dayDisplayShape
     }
-    
-    // TODO: Make feature where user can change Calendar.Identifier
-    
-    private var displayMonth: DateInterval {
-        viewModel.calendar.dateInterval(of: .month, for: viewModel.displayDate)!
-    }
-    
+        
     private func weekDayHeaders(for weekDays: [Date]) -> some View {
         let weekDayFormatter = DateFormatter.weekDayFormatter
-        let weekdayHeaderSize: Font = self.viewModel.calendarSize == .small ? .body : self.viewModel.calendarSize == .medium ? .title3 : .title2
         return HStack(spacing: weekDayCellSpacing) {
             ForEach(weekDays, id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
-                    .font(weekdayHeaderSize)
-                    .frame(width: calendarDayCellSize, height: calendarDayCellSize)
+                    .font(self.fontSize)
+                    .frame(width: self.dayCellSize, height: self.dayCellSize)
             }
         }
-        .foregroundColor(viewModel.titleTextColor)
+        .foregroundColor(self.titleTextColor)
     }
     
     var body: some View {
         // TODO: Make week able to start on any day of week(customizable)
-        let days: [[Date]] = viewModel.getGetCalendarDays().chunked(into: 7)
-        let firstWeek = days.first ?? []
-        let month = viewModel.displayDate.startOfMonth(using: viewModel.calendar)
         return VStack(spacing: 0) {
-            if viewModel.$showWeekDayHeader.wrappedValue {
+            if self.showWeekdayHeaderRow {
                 // M T W T F S S
-                weekDayHeaders(for: firstWeek)
+                weekDayHeaders(for: days.first ?? [])
                     .padding(.vertical, verticalPadding)
             }
             // Iterating over the days of the month
@@ -56,13 +57,11 @@ struct CalendarBody: View {
                 HStack(spacing: weekDayCellSpacing) {
                     ForEach(weekDays, id:\.self) { date in
                         // Each individual day
-                        let fontSize: Font = self.viewModel.calendarSize == .small ? .body : self.viewModel.calendarSize == .medium ? .title3 : .title2
-                        let cellSize = viewModel.getDayCellSize
-                        CalendarDay(date: date, fontSize: fontSize, cellSize: cellSize, dayShape: viewModel.dayDisplayShape, dayColors: viewModel.getDayColors(for: date, in: month))
-                        // Logic to select date
-                            .onTapGesture {
-                                viewModel.selectedDate = date
-                            }
+                        CalendarDay(date: date,
+                                    fontSize: self.fontSize,
+                                    cellSize: self.dayCellSize,
+                                    dayShape: self.dayShape,
+                                    month: self.displayMonth)
                     }
                 }
             }

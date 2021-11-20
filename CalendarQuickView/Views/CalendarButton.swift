@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct CalendarButton: View {
-    
-    @EnvironmentObject var viewModel: CalendarViewModel
-    
+        
     let imageName: String
     let animation: Animation
     let color: Color

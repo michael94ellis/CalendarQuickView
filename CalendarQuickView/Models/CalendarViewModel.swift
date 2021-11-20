@@ -9,23 +9,6 @@ import SwiftUI
 
 final class CalendarViewModel: ObservableObject {
     
-    // MARK: - Colors
-    
-    @AppStorage("titleText") public var _titleTextColor: String = "contrast"
-    @AppStorage("eventTextColor") public var _eventTextColor: String = "contrast"
-    var eventTextColor: Color { Color("\(self._eventTextColor)") }
-    @AppStorage("buttonColor") public var _buttonColor: String = "contrast"
-    var buttonColor: Color { Color("\(self._buttonColor)") }
-    var titleTextColor: Color { Color("\(self._titleTextColor)") }
-    @AppStorage("currentMonthText") public var _currentMonthText: String = "contrast"
-    var currentMonthText: Color { Color("\(self._currentMonthText)") }
-    @AppStorage("currentMonthColor") public var _currentMonthColor: String = "stone"
-    var currentMonthColor: Color { Color("\(self._currentMonthColor)") }
-    @AppStorage("otherMonthText") public var _otherMonthText: String = "contrast"
-    var otherMonthText: Color { Color("\(self._otherMonthText)") }
-    @AppStorage("otherMonthColor") public var _otherMonthColor: String = "stone"
-    var otherMonthColor: Color { Color("\(self._otherMonthColor)") }
-    
     // MARK: - Date Formats
     
     /// Stored property to determine date format for the Title of the calendar view
@@ -52,6 +35,7 @@ final class CalendarViewModel: ObservableObject {
     var buttonSize: CGFloat {
          self.calendarSize == .small ? 20 : self.calendarSize == .medium ? 30 : 40
     }
+    var calendarTitleSize: Font { self.calendarSize == .small ? .title2 : self.calendarSize == .medium ? .title : .largeTitle }
     
     
     // MARK: - Calendar Data
@@ -83,22 +67,6 @@ final class CalendarViewModel: ObservableObject {
             return 30
         case .large:
             return 42
-        }
-    }
-    
-    
-    /// Typealias for `(text: Color, background: Color)`
-    typealias CalendarDayCellColors = (text: Color, bgColor: Color)
-    func getDayColors(for date: Date, in displayMonth: Date) -> CalendarDayCellColors {
-        if self.calendar.isDateInToday(date) {
-            // Current Day
-            return (self.currentMonthText, self.currentMonthColor)
-        } else if self.calendar.isDate(date, equalTo: displayMonth, toGranularity: .month) {
-            // Day in Current Displayed Month
-            return (self.currentMonthText, self.currentMonthColor)
-        } else {
-            // Day is not in Current Displayed Month
-            return (self.otherMonthText, self.otherMonthColor)
         }
     }
     

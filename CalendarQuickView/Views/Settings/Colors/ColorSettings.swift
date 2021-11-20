@@ -59,16 +59,16 @@ struct ColorSettings: View {
                 Spacer()
                 Text("Reset All")
                     .font(.title3)
-                CalendarButton(imageName: "arrow.triangle.2.circlepath", animation: .linear, color: viewModel.buttonColor, size: viewModel.buttonSize) {
-                    viewModel._titleTextColor = "contrast"
-                    viewModel._eventTextColor = "contrast"
-                    viewModel._buttonColor = "contrast"
+                CalendarButton(imageName: "arrow.triangle.2.circlepath", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
+                    ColorStore.shared._titleTextColor = "contrast"
+                    ColorStore.shared._eventTextColor = "contrast"
+                    ColorStore.shared._buttonColor = "contrast"
                     
-                    viewModel._currentMonthText = "contrast"
-                    viewModel._currentMonthColor = "stone"
+                    ColorStore.shared._currentMonthText = "contrast"
+                    ColorStore.shared._currentMonthColor = "stone"
                     
-                    viewModel._otherMonthText = "contrast"
-                    viewModel._otherMonthColor = "stone"
+                    ColorStore.shared._otherMonthText = "contrast"
+                    ColorStore.shared._otherMonthColor = "stone"
                 }
                 Spacer()
             }
@@ -79,9 +79,9 @@ struct ColorSettings: View {
                     Spacer()
                 }
                 Divider()
-                ColorLabel(index: 0, viewModel.titleTextColor, "Calendar Title Text", value: viewModel.$_titleTextColor)
-                ColorLabel(index: 1, viewModel.eventTextColor, "Event Text", value: viewModel.$_eventTextColor)
-                ColorLabel(index: 2, viewModel.buttonColor, "Button Highlight", value: viewModel.$_buttonColor)
+                ColorLabel(index: 0, ColorStore.shared.titleTextColor, "Calendar Title Text", value: ColorStore.shared.$_titleTextColor)
+                ColorLabel(index: 1, ColorStore.shared.eventTextColor, "Event Text", value: ColorStore.shared.$_eventTextColor)
+                ColorLabel(index: 2, ColorStore.shared.buttonColor, "Button Highlight", value: ColorStore.shared.$_buttonColor)
             }
             VStack(alignment: .leading) {
                 HStack {
@@ -90,8 +90,8 @@ struct ColorSettings: View {
                     Spacer()
                 }
                 Divider()
-                ColorLabel(index: 4, viewModel.currentMonthText, "Text", value: viewModel.$_currentMonthText)
-                ColorLabel(index: 3, viewModel.currentMonthColor, "Background", value: viewModel.$_currentMonthColor)
+                ColorLabel(index: 4, ColorStore.shared.currentMonthText, "Text", value: ColorStore.shared.$_currentMonthText)
+                ColorLabel(index: 3, ColorStore.shared.currentMonthColor, "Background", value: ColorStore.shared.$_currentMonthColor)
             }
             VStack(alignment: .leading) {
                 HStack {
@@ -100,8 +100,8 @@ struct ColorSettings: View {
                     Spacer()
                 }
                 Divider()
-                ColorLabel(index: 5, viewModel.otherMonthText, "Text", value: viewModel.$_otherMonthText)
-                ColorLabel(index: 6, viewModel.otherMonthColor, "Background", value: viewModel.$_otherMonthColor)
+                ColorLabel(index: 5, ColorStore.shared.otherMonthText, "Text", value: ColorStore.shared.$_otherMonthText)
+                ColorLabel(index: 6, ColorStore.shared.otherMonthColor, "Background", value: ColorStore.shared.$_otherMonthColor)
             }
             Spacer()
         }
