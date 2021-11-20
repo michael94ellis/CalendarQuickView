@@ -23,11 +23,9 @@ struct StatusBarCalendar: View {
         VStack(alignment: .center, spacing: 0) {
             CalendarHeader()
                 .padding(.bottom, 4)
-                .padding(.top, 8)
                 .environmentObject(viewModel)
             CalendarBody(viewModel: viewModel)
                 .padding(.bottom, 4)
-                .environmentObject(viewModel)
             EventListView()
                 .environmentObject(viewModel)
             Spacer()
@@ -35,7 +33,7 @@ struct StatusBarCalendar: View {
                 .environmentObject(viewModel)
         }
         .padding(.horizontal, horizontalPadding)
-        .padding(.bottom, 10)
+        .padding(.vertical, 10)
     }
     
     /// Opens a window displaying a Swiftui View for app settings

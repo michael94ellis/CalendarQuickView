@@ -1,0 +1,21 @@
+default_platform(:mac)
+
+platform :mac do
+  desc "Build the App"
+  lane :build do
+    increment_build_number
+    increment_version_number(version_number: "1.2")
+    match(platform: "macos")
+    build_mac_app(scheme: "CalendarQuickView", export_method: "mac-application")
+
+    upload_to_app_store(
+      platform: "osx", 
+      submit_for_review: true,
+      reject_if_possible: true,
+      automatic_release: true,
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: true,
+      build_number: "latest")
+  end
+end

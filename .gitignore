@@ -9,3 +9,10 @@ CalendarQuickView.xcodeproj/project.xcworkspace/xcuserdata/michaelellis.xcuserda
 CalendarQuickView.xcodeproj/xcuserdata/michaelellis.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 CalendarQuickView.xcodeproj/project.xcworkspace/xcuserdata/michaelellis.xcuserdatad/UserInterfaceState.xcuserstate
 *.xcuserstate
+*.cer
+*.p12
+*.certSigningRequest
+*.mobileprovision
+*.provisionprofile
+*.zip
+fastlane_match_repo/

@@ -33,14 +33,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         var size: CGSize
         switch(self.calendarSize) {
         case .small:
-            size = CGSize(width: 250, height: 270)
-            size.height += showWeekDayHeader ? 25 : 0
+            size = CGSize(width: 250, height: 280)
+            size.height += showWeekDayHeader ? 25 : 10
         case .medium:
             size = CGSize(width: 300, height: 330)
-            size.height += showWeekDayHeader ? 30 : 0
+            size.height += showWeekDayHeader ? 30 : 10
         case .large:
             size = CGSize(width: 400, height: 408)
-            size.height += showWeekDayHeader ? 42 : 0
+            size.height += showWeekDayHeader ? 42 : 10
         }
 
         // Alter size of window to accomodate displaying EKEvent info
