@@ -15,11 +15,11 @@ class ColorStore: ObservableObject {
     // MARK: - Colors
     
     @AppStorage("titleText") public var _titleTextColor: String = "contrast"
+    var titleTextColor: Color { Color("\(self._titleTextColor)") }
     @AppStorage("eventTextColor") public var _eventTextColor: String = "contrast"
     var eventTextColor: Color { Color("\(self._eventTextColor)") }
     @AppStorage("buttonColor") public var _buttonColor: String = "contrast"
     var buttonColor: Color { Color("\(self._buttonColor)") }
-    var titleTextColor: Color { Color("\(self._titleTextColor)") }
     @AppStorage("currentMonthText") public var _currentMonthText: String = "contrast"
     var currentMonthText: Color { Color("\(self._currentMonthText)") }
     @AppStorage("currentMonthColor") public var _currentMonthColor: String = "stone"

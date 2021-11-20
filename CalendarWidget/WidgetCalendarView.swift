@@ -20,13 +20,14 @@ struct WidgetCalendarView: View {
     
     var body: some View {
         GeometryReader { parent in
+            let fontSize: Font = parent.size.height < 200 ? .caption : parent.size.height < 350 ? .body : .title2
             VStack(spacing: 0) {
                 Spacer()
                 HStack(spacing: 4) {
                     ForEach(self.days.first ?? [], id: \.self) { date in
                         Text(weekDayFormatter.string(from: date))
-                            .font(.caption)
                             .frame(width: parent.size.height / 10, height: parent.size.height / 10)
+                            .font(fontSize)
                     }
                 }
                 .foregroundColor(ColorStore.shared.titleTextColor)
@@ -35,7 +36,7 @@ struct WidgetCalendarView: View {
                         Spacer()
                         ForEach(weekDays, id:\.self) { date in
                             // Each individual day
-                            CalendarDay(date: date, fontSize: .caption, cellSize: parent.size.height / 10, dayShape: .roundedSquare, month: self.displayMonth)
+                            CalendarDay(date: date, fontSize: fontSize, cellSize: parent.size.height / 10, dayShape: .roundedSquare, month: self.displayMonth)
                                 .padding(.vertical, 2)
                         }
                         Spacer()

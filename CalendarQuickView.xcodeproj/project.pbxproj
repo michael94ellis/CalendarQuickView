@@ -10,7 +10,6 @@
 		2F0B26E12748B28B00F9D54E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDFB0872730241B00BE49CC /* WidgetKit.framework */; platformFilter = maccatalyst; };
 		2F0B26E22748B28B00F9D54E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDFB0892730241C00BE49CC /* SwiftUI.framework */; platformFilter = maccatalyst; };
 		2F0B26E52748B28B00F9D54E /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */; };
-		2F0B26E82748B28D00F9D54E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B26E72748B28D00F9D54E /* Assets.xcassets */; };
 		2F0B26EB2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B26E62748B28B00F9D54E /* CalendarWidget.intentdefinition */; };
 		2F0B26EC2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B26E62748B28B00F9D54E /* CalendarWidget.intentdefinition */; };
 		2F0B26EF2748B28D00F9D54E /* CalendarWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2F0B26E02748B28B00F9D54E /* CalendarWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -102,7 +101,6 @@
 		2F0B26E02748B28B00F9D54E /* CalendarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		2F0B26E62748B28B00F9D54E /* CalendarWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CalendarWidget.intentdefinition; sourceTree = "<group>"; };
-		2F0B26E72748B28D00F9D54E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F0B26E92748B28D00F9D54E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F0B26EA2748B28D00F9D54E /* CalendarWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarWidget.entitlements; sourceTree = "<group>"; };
 		2F0B26FF2748BA0400F9D54E /* WidgetCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCalendarView.swift; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 				2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */,
 				2F0B26FF2748BA0400F9D54E /* WidgetCalendarView.swift */,
 				2F0B26E62748B28B00F9D54E /* CalendarWidget.intentdefinition */,
-				2F0B26E72748B28D00F9D54E /* Assets.xcassets */,
 				2F0B26E92748B28D00F9D54E /* Info.plist */,
 				2F0B26EA2748B28D00F9D54E /* CalendarWidget.entitlements */,
 			);
@@ -396,7 +393,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F0B26E82748B28D00F9D54E /* Assets.xcassets in Resources */,
 				2F0B27062749899900F9D54E /* Assets.xcassets in Resources */,
 				2F0B27052749899600F9D54E /* Colors.xcassets in Resources */,
 			);
@@ -524,12 +520,14 @@
 		2F0B26F12748B28D00F9D54E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = CalendarWidget/CalendarWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -542,6 +540,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaellis.CalendarQuickView.CalendarWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -553,12 +552,14 @@
 		2F0B26F22748B28D00F9D54E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = CalendarWidget/CalendarWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 104;
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -571,6 +572,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michaellis.CalendarQuickView.CalendarWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

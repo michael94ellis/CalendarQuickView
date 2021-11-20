@@ -10,6 +10,7 @@ import SwiftUI
 struct ColorSettings: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel
+    @ObservedObject var colorStore: ColorStore = ColorStore.shared
     @State var isShowingPopover: [Bool] = [Bool](repeating: false, count: 7)
     
     func ColorLabel(index: Int, _ color: Color, _ text: String, value: Binding<String>) -> some View {
