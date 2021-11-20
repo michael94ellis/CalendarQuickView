@@ -10,23 +10,29 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+    func placeholder(in context: Context) -> CalendarWidgetData {
+        CalendarWidgetData(date: Date(), configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (CalendarWidgetData) -> ()) {
+        let entry = CalendarWidgetData(date: Date(), configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        var entries: [CalendarWidgetData] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
+        // Current time and Current time + 1 hour
+        for hourOffset in 0 ..< 2 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entry = CalendarWidgetData(date: entryDate, configuration: configuration)
+            entries.append(entry)
+        }
+        // Today and the next 4 days
+        for dayOffset in 0 ..< 5 {
+            let entryDate = Calendar.current.date(byAdding: .day, value: dayOffset, to: currentDate)!
+            let entry = CalendarWidgetData(date: entryDate, configuration: configuration)
             entries.append(entry)
         }
 
@@ -35,20 +41,9 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct CalendarWidgetData: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
-}
-
-struct CalendarWidgetEntryView : View {
-    
-    var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            WidgetCalendar()
-        }
-        .padding(10)
-    }
-    
 }
 
 @main
@@ -57,9 +52,9 @@ struct CalendarWidget: Widget {
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            CalendarWidgetEntryView()
+            WidgetCalendarView()
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Current Month View")
+        .description("This is a calendar view displaying the current month.")
     }
 }

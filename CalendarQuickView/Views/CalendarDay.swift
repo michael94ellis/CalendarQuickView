@@ -33,7 +33,7 @@ struct CalendarDay: View {
     }
     
     var body: some View {
-        return Text(String(Calendar.current.component(.day, from: date)))
+        Text(String(Calendar.current.component(.day, from: date)))
             .frame(width: cellSize, height: cellSize)
             .font(fontSize)
             .foregroundColor(self.dayColors.text)

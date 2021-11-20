@@ -1,5 +1,5 @@
 //
-//  WidgetCalendar.swift
+//  WidgetCalendarView.swift
 //  CalendarQuickView
 //
 //  Created by Michael Ellis on 11/20/21.
@@ -7,24 +7,19 @@
 
 import SwiftUI
 
-struct WidgetCalendar: View {
-    let calendarDayCellSize: CGFloat = 20
-    func dayCell(for date: Date) -> some View {
-        Text(String(Calendar.current.component(.day, from: date)))
-            .frame(width: calendarDayCellSize, height: calendarDayCellSize)
-//            .if(viewModel.dayDisplayShape != .none) { textView in
-//                textView.background(dayColors.bgColor)
-//                    .clipShape(dayShape)
-//            }
-            .padding(.vertical, 4)
-    }
+struct WidgetCalendarView: View {
+    
+    let calendarDayCellSize: CGFloat = 15
+    let displayMonth = Date()
     
     var body: some View {
-        ForEach(getGetCalendarDays().chunked(into: 7), id: \.self) { weekDays in
-            HStack(spacing: 10) {
-                ForEach(weekDays, id:\.self) { date in
-                    // Each individual day
-                    dayCell(for: date)
+        VStack(spacing: 0) {
+            ForEach(getGetCalendarDays().chunked(into: 7), id: \.self) { weekDays in
+                HStack(spacing: 4) {
+                    ForEach(weekDays, id:\.self) { date in
+                        // Each individual day
+                        CalendarDay(date: date, fontSize: .caption, cellSize: self.calendarDayCellSize, dayShape: .roundedSquare, month: self.displayMonth)
+                    }
                 }
             }
         }
@@ -41,6 +36,5 @@ struct WidgetCalendar: View {
         let dateInterval = DateInterval(start: monthFirstWeek.start, end: sixWeeksFromStart)
         return Calendar.current.generateDays(for: dateInterval)
     }
-    
     
 }
