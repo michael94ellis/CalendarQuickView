@@ -9,18 +9,39 @@ import SwiftUI
 
 struct WidgetCalendarView: View {
     
-    let calendarDayCellSize: CGFloat = 15
     let displayMonth = Date()
+    let weekDayFormatter = DateFormatter.weekDayFormatter
+    var days: [[Date]] = []
+    
+    init() {
+        let daysToDisplay = getGetCalendarDays().chunked(into: 7)
+        self.days = daysToDisplay
+    }
     
     var body: some View {
-        VStack(spacing: 0) {
-            ForEach(getGetCalendarDays().chunked(into: 7), id: \.self) { weekDays in
+        GeometryReader { parent in
+            VStack(spacing: 0) {
+                Spacer()
                 HStack(spacing: 4) {
-                    ForEach(weekDays, id:\.self) { date in
-                        // Each individual day
-                        CalendarDay(date: date, fontSize: .caption, cellSize: self.calendarDayCellSize, dayShape: .roundedSquare, month: self.displayMonth)
+                    ForEach(self.days.first ?? [], id: \.self) { date in
+                        Text(weekDayFormatter.string(from: date))
+                            .font(.caption)
+                            .frame(width: parent.size.height / 10, height: parent.size.height / 10)
                     }
                 }
+                .foregroundColor(ColorStore.shared.titleTextColor)
+                ForEach(getGetCalendarDays().chunked(into: 7), id: \.self) { weekDays in
+                    HStack(spacing: 4) {
+                        Spacer()
+                        ForEach(weekDays, id:\.self) { date in
+                            // Each individual day
+                            CalendarDay(date: date, fontSize: .caption, cellSize: parent.size.height / 10, dayShape: .roundedSquare, month: self.displayMonth)
+                                .padding(.vertical, 2)
+                        }
+                        Spacer()
+                    }
+                }
+                Spacer()
             }
         }
     }

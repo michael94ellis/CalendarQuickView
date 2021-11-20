@@ -41,7 +41,6 @@ struct CalendarDay: View {
                 textView.background(self.dayColors.bgColor)
                     .clipShape(dayShape.shape)
             }
-            .padding(.vertical, 4)
     }
 }
 
