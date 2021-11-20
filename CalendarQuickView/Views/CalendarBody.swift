@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct CalendarBody: View {
-    
+    // TODO: Remove this - make it more reusable
     @ObservedObject var viewModel: CalendarViewModel
     // Constants
     private let daysInWeek = 7
