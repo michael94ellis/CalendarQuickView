@@ -98,6 +98,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F07D87E274B28C900C5BBB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2F0B26E02748B28B00F9D54E /* CalendarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		2F0B26E62748B28B00F9D54E /* CalendarWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CalendarWidget.intentdefinition; sourceTree = "<group>"; };
@@ -244,6 +245,7 @@
 		2FCC6CD6272C3A08006D5C7D = {
 			isa = PBXGroup;
 			children = (
+				2F07D87E274B28C900C5BBB0 /* README.md */,
 				2F0B2701274934A200F9D54E /* Shared */,
 				2FCC6CE1272C3A08006D5C7D /* CalendarQuickView */,
 				2F0B26E32748B28B00F9D54E /* CalendarWidget */,
