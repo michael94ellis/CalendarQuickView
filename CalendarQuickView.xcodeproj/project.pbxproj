@@ -29,6 +29,7 @@
 		2F0B270427497BD400F9D54E /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B270227497B7300F9D54E /* ColorStore.swift */; };
 		2F0B27052749899600F9D54E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2D8A6E2738AF09002C8EF0 /* Colors.xcassets */; };
 		2F0B27062749899900F9D54E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
+		2F1765842793AA2A001D305E /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventKitManager.swift */; };
 		2F1BAC01273E94BA00C4708B /* CalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1BAC00273E94B900C4708B /* CalendarDay.swift */; };
 		2F2D8A6F2738AF09002C8EF0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2D8A6E2738AF09002C8EF0 /* Colors.xcassets */; };
 		2F2D8A712738B658002C8EF0 /* View-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D8A702738B658002C8EF0 /* View-Extension.swift */; };
@@ -444,6 +445,7 @@
 				2F0B26FC2748B8E400F9D54E /* DateFormatter-Extension.swift in Sources */,
 				2F0B26EB2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */,
 				2F0B26F42748B87A00F9D54E /* CalendarButton.swift in Sources */,
+				2F1765842793AA2A001D305E /* EventKitManager.swift in Sources */,
 				2F0B26E52748B28B00F9D54E /* CalendarWidget.swift in Sources */,
 				2F0B270427497BD400F9D54E /* ColorStore.swift in Sources */,
 				2F0B26FB2748B8E400F9D54E /* Array-Extension.swift in Sources */,

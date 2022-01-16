@@ -78,20 +78,6 @@ enum EventDateFormat: String, CaseIterable {
     }
 }
 
-/// The type that determines from when events are displayed on the Event List View of upcoming events
-///  All events are displayed on the calendar view for the days, this is for the list of events outside of the calendar
-enum EventDisplayDate: String, CaseIterable {
-    case currentDay
-    case currentTime
-    
-    var displayName: String {
-        switch(self) {
-        case .currentDay: return "Today"
-        case .currentTime: return "Current Time"
-        }
-    }
-}
-
 enum DayDisplayShape: String, CaseIterable {
     case square
     case roundedSquare

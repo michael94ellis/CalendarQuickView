@@ -62,7 +62,7 @@ final class CalendarViewModel: ObservableObject {
     var getDayCellSize: CGFloat {
         switch(self.calendarSize) {
         case .small:
-            return 25
+            return 24
         case .medium:
             return 30
         case .large:

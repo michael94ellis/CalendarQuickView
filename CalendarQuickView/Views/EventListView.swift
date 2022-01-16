@@ -12,18 +12,12 @@ struct EventListView: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel
     @ObservedObject var eventManager = EventKitManager.shared
+    var eventsToDisplay: [EKEvent] = []
     
     init() {
-        var compareDate = Date()
-        if eventManager.eventDisplayFromDate == .currentDay,
-           let midnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: compareDate){
-            compareDate = midnight
-        }
-        let futureEvents = eventManager.events.filter { $0.startDate > compareDate }
-        self.eventsToDisplay.append(contentsOf: futureEvents)
+        self.eventManager.fetchEvents()
+        self.eventsToDisplay = self.eventManager.getFutureEvents()
     }
-    
-    var eventsToDisplay: [EKEvent] = []
     
     var body: some View {
         // Events List

@@ -22,7 +22,6 @@ struct EventSettings: View {
                 VStack(alignment: .leading) {
                     TextWithFrame("Calendar Access")
                     TextWithFrame("Display Event Info")
-                    TextWithFrame("Show Events Starting From: ")
                     TextWithFrame("Event List Date Format")
                     TextWithFrame("Events to display: \(Int(eventManager.numOfEventsToDisplay))")
                 }
@@ -47,14 +46,6 @@ struct EventSettings: View {
                     }
                     .frame(height: 25)
                     .padding(.leading, 10)
-                    HStack {
-                        Picker("", selection: eventManager.$eventDisplayFromDate) {
-                            ForEach(EventDisplayDate.allCases, id: \.self) { eventDisplayDate in
-                                Text(eventDisplayDate.displayName)
-                            }
-                        }
-                    }
-                    .frame(height: 25)
                     Picker("", selection: $viewModel.eventDateFormat) {
                         ForEach(EventDateFormat.allCases, id: \.self) { dateFormatOption in
                             Text(dateFormatOption.displayName)

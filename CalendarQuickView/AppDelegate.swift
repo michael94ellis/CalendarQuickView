@@ -47,11 +47,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if eventKitManager.isEventFeatureEnabled {
             eventKitManager.checkCalendarAuthStatus() { hasAccess in
                 if hasAccess {
-                    self.eventKitManager.getEvents()
-                    let eventCount = self.eventKitManager.events.count
-                    let eventsToDisplay = Int(self.eventKitManager.numOfEventsToDisplay)
-                    let eventDisplacement = CGFloat(eventCount > eventsToDisplay ? eventsToDisplay : eventCount) * 30
-                    size.height += eventDisplacement
+                    self.eventKitManager.fetchEvents()
+                    let displayEventCount = min(Int(self.eventKitManager.numOfEventsToDisplay), self.eventKitManager.futureEvents.count)
+                    size.height += CGFloat(displayEventCount * 30)
                 }
             }
         }

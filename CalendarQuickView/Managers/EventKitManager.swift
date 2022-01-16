@@ -12,16 +12,15 @@ import SwiftUI
 
 class EventKitManager: ObservableObject {
     
-    
     @AppStorage(AppStorageKeys.calendarAccessGranted) var isAbleToAccessUserCalendar: Bool = false
     @AppStorage(AppStorageKeys.isEventFeatureEnabled) var isEventFeatureEnabled: Bool = false
-    @AppStorage(AppStorageKeys.eventDisplayFromDate) var eventDisplayFromDate: EventDisplayDate = .currentDay
     @AppStorage(AppStorageKeys.numOfEventsToDisplay) var numOfEventsToDisplay: Double = 4
 
-    var titles: [String] = []
-    var startDates: [Date] = []
-    var endDates: [Date] = []
-    var events: [EKEvent] = []
+    private(set) var titles: [String] = []
+    private(set) var startDates: [Date] = []
+    private(set) var endDates: [Date] = []
+    private(set) var events: [EKEvent] = []
+    private(set) var futureEvents: [EKEvent] = []
     
     let eventStore = EKEventStore()
     static let shared = EventKitManager()
@@ -32,9 +31,7 @@ class EventKitManager: ObservableObject {
     }
     
     func checkCalendarAuthStatus(completion: @escaping (Bool) -> ()) {
-        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        
-        switch(status) {
+        switch(EKEventStore.authorizationStatus(for: EKEntityType.event)) {
         case EKAuthorizationStatus.notDetermined:
             isAbleToAccessUserCalendar = false
             requestAccessToCalendar(completion: completion)
@@ -66,14 +63,16 @@ class EventKitManager: ObservableObject {
         }
     }
     
-    func getEvents() {
+    func fetchEvents() {
+        defer { print(events) }
+        self.events = []
+        self.titles = []
+        self.startDates = []
+        self.endDates = []
         for calendar in self.eventStore.calendars(for: EKEntityType.event) {
-            self.titles = []
-            self.startDates = []
-            self.endDates = []
             
-            let oneMonthAgo = Date(timeIntervalSinceNow: -30*24*3600)
-            let oneMonthAfterToday = Date(timeIntervalSinceNow: +30*24*3600)
+            let oneMonthAgo = Date(timeIntervalSinceNow: -30 * 24 * 3600)
+            let oneMonthAfterToday = Date(timeIntervalSinceNow: +30 * 24 * 3600)
             
             let predicate = eventStore.predicateForEvents(withStart: oneMonthAgo, end: oneMonthAfterToday, calendars: [calendar])
             for event in eventStore.events(matching: predicate) {
@@ -81,8 +80,21 @@ class EventKitManager: ObservableObject {
                 startDates.append(event.startDate)
                 endDates.append(event.endDate)
                 events.append(event)
+                if events.count >= Int(self.numOfEventsToDisplay) {
+                    return
+                }
             }
         }
+        self.futureEvents = self.getFutureEvents()
+    }
+    
+    func getFutureEvents() -> [EKEvent] {
+        guard let midnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date()) else {
+            print("Error: No Midnight Date can be made")
+            return []
+        }
+        let futureEvents = self.events.filter { $0.startDate > midnight }
+        return futureEvents
     }
 
 }

@@ -74,33 +74,33 @@ struct ColorSettings: View {
                 Spacer()
             }
             VStack(alignment: .leading) {
+                Divider()
                 HStack {
                     Text("General Colors")
                         .font(.title3)
                     Spacer()
                 }
-                Divider()
                 ColorLabel(index: 0, ColorStore.shared.titleTextColor, "Calendar Title Text", value: ColorStore.shared.$_titleTextColor)
                 ColorLabel(index: 1, ColorStore.shared.eventTextColor, "Event Text", value: ColorStore.shared.$_eventTextColor)
                 ColorLabel(index: 2, ColorStore.shared.buttonColor, "Button Highlight", value: ColorStore.shared.$_buttonColor)
             }
             VStack(alignment: .leading) {
+                Divider()
                 HStack {
                     Text("Current Month's Days")
                         .font(.title3)
                     Spacer()
                 }
-                Divider()
                 ColorLabel(index: 4, ColorStore.shared.currentMonthText, "Text", value: ColorStore.shared.$_currentMonthText)
                 ColorLabel(index: 3, ColorStore.shared.currentMonthColor, "Background", value: ColorStore.shared.$_currentMonthColor)
             }
             VStack(alignment: .leading) {
+                Divider()
                 HStack {
                     Text("Other Month's Days")
                         .font(.title3)
                     Spacer()
                 }
-                Divider()
                 ColorLabel(index: 5, ColorStore.shared.otherMonthText, "Text", value: ColorStore.shared.$_otherMonthText)
                 ColorLabel(index: 6, ColorStore.shared.otherMonthColor, "Background", value: ColorStore.shared.$_otherMonthColor)
             }

@@ -47,13 +47,15 @@ struct StatusBarCalendar: View {
             self.windowRef?.setFrameAutosaveName("Calendar Quick View Settings")
             self.windowRef?.isReleasedWhenClosed = false
             self.windowRef?.contentView = NSHostingView(rootView: SettingsTabView())
-            self.windowRef?.orderFrontRegardless()
-            self.windowRef?.makeKey()
-            self.windowRef?.becomeFirstResponder()
+            Self.windowToFront()
         } else {
-            self.windowRef?.orderFrontRegardless()
-            self.windowRef?.makeKey()
-            self.windowRef?.becomeFirstResponder()
+            Self.windowToFront()
         }
+    }
+    
+    static private func windowToFront() {
+        self.windowRef?.orderFrontRegardless()
+        self.windowRef?.makeKey()
+        self.windowRef?.becomeFirstResponder()
     }
 }
