@@ -64,6 +64,8 @@ enum EventDateFormat: String, CaseIterable {
     case shortDayAndMonth = "d/M"
     /// dd/MM
     case fullDayFullMonth = "dd/MM"
+    
+    case fullDayFullMonthFullYear = "dd MMMM YYYY HH:MM"
     /// The value to display in a Picker
     var displayName: String {
         switch(self) {
@@ -74,6 +76,7 @@ enum EventDateFormat: String, CaseIterable {
         case .fullMonthAndDay: return "Full Month and Day (03/07)"
         case .shortDayAndMonth: return "Short Day and Month (7/3)"
         case .fullDayFullMonth: return "Full Day and Month (07/03)"
+        case .fullDayFullMonthFullYear: return "Full Day and Month and Year (07/03/22)"
         }
     }
 }

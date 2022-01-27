@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		007DA5C327A2F7DB00AFD4E0 /* CalendarDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007DA5C227A2F7DB00AFD4E0 /* CalendarDayModel.swift */; };
+		007DA5C527A2F83600AFD4E0 /* EventDayPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007DA5C427A2F83600AFD4E0 /* EventDayPopUp.swift */; };
+		0087356C27A2FA61002A25E4 /* CalendarDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007DA5C227A2F7DB00AFD4E0 /* CalendarDayModel.swift */; };
+		0087356D27A2FA64002A25E4 /* EventDayPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007DA5C427A2F83600AFD4E0 /* EventDayPopUp.swift */; };
 		2F0B26E12748B28B00F9D54E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDFB0872730241B00BE49CC /* WidgetKit.framework */; platformFilter = maccatalyst; };
 		2F0B26E22748B28B00F9D54E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDFB0892730241C00BE49CC /* SwiftUI.framework */; platformFilter = maccatalyst; };
 		2F0B26E52748B28B00F9D54E /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */; };
@@ -99,6 +103,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		007DA5C227A2F7DB00AFD4E0 /* CalendarDayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayModel.swift; sourceTree = "<group>"; };
+		007DA5C427A2F83600AFD4E0 /* EventDayPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDayPopUp.swift; sourceTree = "<group>"; };
 		2F07D87E274B28C900C5BBB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2F0B26E02748B28B00F9D54E /* CalendarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
@@ -192,6 +198,7 @@
 			children = (
 				2F6FB96A2736A5DD00DD0ACC /* CalendarViewModel.swift */,
 				2F0B270227497B7300F9D54E /* ColorStore.swift */,
+				007DA5C227A2F7DB00AFD4E0 /* CalendarDayModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,6 +235,7 @@
 				2FEF62932738024700F0A9DF /* EventListView.swift */,
 				2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
+				007DA5C427A2F83600AFD4E0 /* EventDayPopUp.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -448,6 +456,7 @@
 				2F1765842793AA2A001D305E /* EventKitManager.swift in Sources */,
 				2F0B26E52748B28B00F9D54E /* CalendarWidget.swift in Sources */,
 				2F0B270427497BD400F9D54E /* ColorStore.swift in Sources */,
+				0087356C27A2FA61002A25E4 /* CalendarDayModel.swift in Sources */,
 				2F0B26FB2748B8E400F9D54E /* Array-Extension.swift in Sources */,
 				2F0B26F62748B87A00F9D54E /* CalendarBody.swift in Sources */,
 				2F0B26F52748B87A00F9D54E /* CalendarDay.swift in Sources */,
@@ -455,6 +464,7 @@
 				2F0B26FD2748B8E400F9D54E /* View-Extension.swift in Sources */,
 				2F0B26FA2748B8E400F9D54E /* Calendar-Extension.swift in Sources */,
 				2F0B26F92748B8D300F9D54E /* Utilities.swift in Sources */,
+				0087356D27A2FA64002A25E4 /* EventDayPopUp.swift in Sources */,
 				2F0B26F82748B8D000F9D54E /* CalendarViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,6 +475,7 @@
 			files = (
 				2FCC6D06272C80C5006D5C7D /* Date-Extention.swift in Sources */,
 				2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */,
+				007DA5C527A2F83600AFD4E0 /* EventDayPopUp.swift in Sources */,
 				2FEE6DAE2736B8DD0081C4B8 /* CalendarFooter.swift in Sources */,
 				2F0B26EC2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */,
 				2FDFB09D2730B09800BE49CC /* SettingsTabView.swift in Sources */,
@@ -476,6 +487,7 @@
 				2F6FB95527347B0300DD0ACC /* Utilities.swift in Sources */,
 				2F2D8A732738B8AA002C8EF0 /* AppColors.swift in Sources */,
 				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,
+				007DA5C327A2F7DB00AFD4E0 /* CalendarDayModel.swift in Sources */,
 				2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */,
 				2FEF62942738024700F0A9DF /* EventListView.swift in Sources */,
 				2F0B270327497B7300F9D54E /* ColorStore.swift in Sources */,
@@ -532,7 +544,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 104;
-				DEVELOPMENT_TEAM = KLQC884752;
+				DEVELOPMENT_TEAM = 4EK8A9V52S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalendarWidget/Info.plist;
@@ -564,7 +576,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 104;
-				DEVELOPMENT_TEAM = KLQC884752;
+				DEVELOPMENT_TEAM = 4EK8A9V52S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalendarWidget/Info.plist;
@@ -717,7 +729,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarQuickView/Preview Content\"";
-				DEVELOPMENT_TEAM = KLQC884752;
+				DEVELOPMENT_TEAM = 4EK8A9V52S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;
@@ -749,7 +761,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarQuickView/Preview Content\"";
-				DEVELOPMENT_TEAM = KLQC884752;
+				DEVELOPMENT_TEAM = 4EK8A9V52S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;

@@ -96,5 +96,9 @@ class EventKitManager: ObservableObject {
         let futureEvents = self.events.filter { $0.startDate > midnight }
         return futureEvents
     }
+    
+    func getEventDetails(eventDate : Date) -> [EKEvent]{
+        return events.filter { $0.startDate == eventDate}
+    }
 
 }

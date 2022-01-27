@@ -36,7 +36,12 @@ struct WidgetCalendarView: View {
                         Spacer()
                         ForEach(weekDays, id:\.self) { date in
                             // Each individual day
-                            CalendarDay(date: date, fontSize: fontSize, cellSize: parent.size.height / 10, dayShape: .roundedSquare, month: self.displayMonth)
+                            let calendarDayModel = CalendarDayModel(date: date,
+                                                                    fontSize: fontSize,
+                                                                    cellSize: parent.size.height / 10,
+                                                                    dayShape: .roundedSquare,
+                                                                    month: self.displayMonth)
+                            CalendarDay(dayModel: calendarDayModel)
                                 .padding(.vertical, 2)
                         }
                         Spacer()

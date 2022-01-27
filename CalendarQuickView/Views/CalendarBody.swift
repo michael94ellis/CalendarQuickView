@@ -57,11 +57,12 @@ struct CalendarBody: View {
                 HStack(spacing: weekDayCellSpacing) {
                     ForEach(weekDays, id:\.self) { date in
                         // Each individual day
-                        CalendarDay(date: date,
-                                    fontSize: self.fontSize,
-                                    cellSize: self.dayCellSize,
-                                    dayShape: self.dayShape,
-                                    month: self.displayMonth)
+                        let calendarDayModel = CalendarDayModel(date: date,
+                                                                fontSize: self.fontSize,
+                                                                cellSize: self.dayCellSize,
+                                                                dayShape: self.dayShape,
+                                                                month: self.displayMonth)
+                        CalendarDay(dayModel : calendarDayModel)
                             .padding(.vertical, 4)
                     }
                 }
