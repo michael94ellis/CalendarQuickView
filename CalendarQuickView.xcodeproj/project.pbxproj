@@ -33,7 +33,7 @@
 		2F0B270427497BD400F9D54E /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B270227497B7300F9D54E /* ColorStore.swift */; };
 		2F0B27052749899600F9D54E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2D8A6E2738AF09002C8EF0 /* Colors.xcassets */; };
 		2F0B27062749899900F9D54E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
-		2F1765842793AA2A001D305E /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventKitManager.swift */; };
+		2F1765842793AA2A001D305E /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventViewModel.swift */; };
 		2F1BAC01273E94BA00C4708B /* CalendarDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1BAC00273E94B900C4708B /* CalendarDay.swift */; };
 		2F2D8A6F2738AF09002C8EF0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F2D8A6E2738AF09002C8EF0 /* Colors.xcassets */; };
 		2F2D8A712738B658002C8EF0 /* View-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D8A702738B658002C8EF0 /* View-Extension.swift */; };
@@ -48,6 +48,14 @@
 		2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */; };
 		2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB96027358AAF00DD0ACC /* EventSettings.swift */; };
 		2F6FB96B2736A5DD00DD0ACC /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB96A2736A5DD00DD0ACC /* CalendarViewModel.swift */; };
+		2F8AB32927A48A7C00654FEF /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32627A48A7C00654FEF /* EventError.swift */; };
+		2F8AB32A27A48A7C00654FEF /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32627A48A7C00654FEF /* EventError.swift */; };
+		2F8AB32B27A48A7C00654FEF /* EventKitWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32727A48A7C00654FEF /* EventKitWrapper.swift */; };
+		2F8AB32C27A48A7C00654FEF /* EventKitWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32727A48A7C00654FEF /* EventKitWrapper.swift */; };
+		2F8AB32D27A48A7C00654FEF /* EKEventStore-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32827A48A7C00654FEF /* EKEventStore-Extension.swift */; };
+		2F8AB32E27A48A7C00654FEF /* EKEventStore-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32827A48A7C00654FEF /* EKEventStore-Extension.swift */; };
+		2F8AB33027A48B7B00654FEF /* Date-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32F27A48B7B00654FEF /* Date-Extension.swift */; };
+		2F8AB33127A48B7B00654FEF /* Date-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AB32F27A48B7B00654FEF /* Date-Extension.swift */; };
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
 		2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */; };
 		2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE9272C3A09006D5C7D /* Preview Assets.xcassets */; };
@@ -61,7 +69,7 @@
 		2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */; };
 		2FEF62942738024700F0A9DF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF62932738024700F0A9DF /* EventListView.swift */; };
 		2FF55752273F641C000FD5C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF55750273F641C000FD5C5 /* Main.storyboard */; };
-		41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventKitManager.swift */; };
+		41EA3BC027336B77001070CF /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EA3BBF27336B77001070CF /* EventViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +134,10 @@
 		2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		2F6FB96027358AAF00DD0ACC /* EventSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSettings.swift; sourceTree = "<group>"; };
 		2F6FB96A2736A5DD00DD0ACC /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		2F8AB32627A48A7C00654FEF /* EventError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
+		2F8AB32727A48A7C00654FEF /* EventKitWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventKitWrapper.swift; sourceTree = "<group>"; };
+		2F8AB32827A48A7C00654FEF /* EKEventStore-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EKEventStore-Extension.swift"; sourceTree = "<group>"; };
+		2F8AB32F27A48B7B00654FEF /* Date-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-Extension.swift"; sourceTree = "<group>"; };
 		2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarQuickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,7 +157,7 @@
 		2FEF62932738024700F0A9DF /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		2FF55751273F641C000FD5C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FF55753273F6562000FD5C5 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Main.strings"; sourceTree = "<group>"; };
-		41EA3BBF27336B77001070CF /* EventKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
+		41EA3BBF27336B77001070CF /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +197,7 @@
 		2F0B2701274934A200F9D54E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2F8AB32527A48A7C00654FEF /* Events */,
 				2FCC6CE6272C3A09006D5C7D /* Assets.xcassets */,
 				2F2D8A6E2738AF09002C8EF0 /* Colors.xcassets */,
 				2F6FB95427347B0300DD0ACC /* Utilities.swift */,
@@ -206,7 +219,7 @@
 		2F1BABFF273E8C9000C4708B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				41EA3BBF27336B77001070CF /* EventKitManager.swift */,
+				41EA3BBF27336B77001070CF /* EventViewModel.swift */,
 				2F6FB95A27357DF800DD0ACC /* LaunchAtLoginMonitor.swift */,
 			);
 			path = Managers;
@@ -249,6 +262,17 @@
 				2F6FB96027358AAF00DD0ACC /* EventSettings.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		2F8AB32527A48A7C00654FEF /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				2F8AB32627A48A7C00654FEF /* EventError.swift */,
+				2F8AB32727A48A7C00654FEF /* EventKitWrapper.swift */,
+				2F8AB32F27A48B7B00654FEF /* Date-Extension.swift */,
+				2F8AB32827A48A7C00654FEF /* EKEventStore-Extension.swift */,
+			);
+			path = Events;
 			sourceTree = "<group>";
 		};
 		2FCC6CD6272C3A08006D5C7D = {
@@ -453,17 +477,21 @@
 				2F0B26FC2748B8E400F9D54E /* DateFormatter-Extension.swift in Sources */,
 				2F0B26EB2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */,
 				2F0B26F42748B87A00F9D54E /* CalendarButton.swift in Sources */,
-				2F1765842793AA2A001D305E /* EventKitManager.swift in Sources */,
+				2F1765842793AA2A001D305E /* EventViewModel.swift in Sources */,
 				2F0B26E52748B28B00F9D54E /* CalendarWidget.swift in Sources */,
+				2F8AB32C27A48A7C00654FEF /* EventKitWrapper.swift in Sources */,
 				2F0B270427497BD400F9D54E /* ColorStore.swift in Sources */,
 				0087356C27A2FA61002A25E4 /* CalendarDayModel.swift in Sources */,
 				2F0B26FB2748B8E400F9D54E /* Array-Extension.swift in Sources */,
 				2F0B26F62748B87A00F9D54E /* CalendarBody.swift in Sources */,
+				2F8AB32A27A48A7C00654FEF /* EventError.swift in Sources */,
 				2F0B26F52748B87A00F9D54E /* CalendarDay.swift in Sources */,
 				2F0B26F32748B87A00F9D54E /* CalendarHeader.swift in Sources */,
+				2F8AB33127A48B7B00654FEF /* Date-Extension.swift in Sources */,
 				2F0B26FD2748B8E400F9D54E /* View-Extension.swift in Sources */,
 				2F0B26FA2748B8E400F9D54E /* Calendar-Extension.swift in Sources */,
 				2F0B26F92748B8D300F9D54E /* Utilities.swift in Sources */,
+				2F8AB32E27A48A7C00654FEF /* EKEventStore-Extension.swift in Sources */,
 				0087356D27A2FA64002A25E4 /* EventDayPopUp.swift in Sources */,
 				2F0B26F82748B8D000F9D54E /* CalendarViewModel.swift in Sources */,
 			);
@@ -480,6 +508,7 @@
 				2F0B26EC2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */,
 				2FDFB09D2730B09800BE49CC /* SettingsTabView.swift in Sources */,
 				2F1BAC01273E94BA00C4708B /* CalendarDay.swift in Sources */,
+				2F8AB32D27A48A7C00654FEF /* EKEventStore-Extension.swift in Sources */,
 				2F2D8A712738B658002C8EF0 /* View-Extension.swift in Sources */,
 				2FEE6DB02736B9840081C4B8 /* CalendarButton.swift in Sources */,
 				2F6FB94727322C7700DD0ACC /* CalendarBody.swift in Sources */,
@@ -487,13 +516,16 @@
 				2F6FB95527347B0300DD0ACC /* Utilities.swift in Sources */,
 				2F2D8A732738B8AA002C8EF0 /* AppColors.swift in Sources */,
 				2FCC6CFE272C4801006D5C7D /* Calendar-Extension.swift in Sources */,
+				2F8AB32927A48A7C00654FEF /* EventError.swift in Sources */,
+				2F8AB32B27A48A7C00654FEF /* EventKitWrapper.swift in Sources */,
 				007DA5C327A2F7DB00AFD4E0 /* CalendarDayModel.swift in Sources */,
 				2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */,
 				2FEF62942738024700F0A9DF /* EventListView.swift in Sources */,
 				2F0B270327497B7300F9D54E /* ColorStore.swift in Sources */,
 				2F6FB96B2736A5DD00DD0ACC /* CalendarViewModel.swift in Sources */,
 				2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */,
-				41EA3BC027336B77001070CF /* EventKitManager.swift in Sources */,
+				2F8AB33027A48B7B00654FEF /* Date-Extension.swift in Sources */,
+				41EA3BC027336B77001070CF /* EventViewModel.swift in Sources */,
 				2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */,
 				2F6FB95B27357DF800DD0ACC /* LaunchAtLoginMonitor.swift in Sources */,
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
@@ -544,7 +576,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 104;
-				DEVELOPMENT_TEAM = 4EK8A9V52S;
+				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalendarWidget/Info.plist;
@@ -576,7 +608,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 104;
-				DEVELOPMENT_TEAM = 4EK8A9V52S;
+				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalendarWidget/Info.plist;
@@ -729,7 +761,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarQuickView/Preview Content\"";
-				DEVELOPMENT_TEAM = 4EK8A9V52S;
+				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;
@@ -761,7 +793,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarQuickView/Preview Content\"";
-				DEVELOPMENT_TEAM = 4EK8A9V52S;
+				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_NO_COMMON_BLOCKS = NO;

@@ -11,7 +11,7 @@ import Combine
 struct SettingsTabView: View {
     
     @State var showMenuButton: Bool = true
-    @StateObject var viewModel = CalendarViewModel()
+    @ObservedObject var viewModel = CalendarViewModel.shared
     
     private enum Tabs: Hashable {
         case general

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventSettings: View {
     
-    @ObservedObject var eventManager = EventKitManager.shared
+    @ObservedObject var eventViewModel = EventViewModel.shared
     @EnvironmentObject var viewModel: CalendarViewModel 
 
     func TextWithFrame(_ text: String) -> some View {
@@ -23,25 +23,25 @@ struct EventSettings: View {
                     TextWithFrame("Calendar Access")
                     TextWithFrame("Display Event Info")
                     TextWithFrame("Event List Date Format")
-                    TextWithFrame("Events to display: \(Int(eventManager.numOfEventsToDisplay))")
+                    TextWithFrame("Events to display: \(Int(self.eventViewModel.numOfEventsToDisplay))")
                 }
                 VStack(alignment: .trailing) {
                     HStack {
-                        CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
-                            self.eventManager.requestAccessToCalendar { success in
-                                print("Event access - \(success)")
+                        CalendarButton(imageName: self.eventViewModel.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
+                            Task {
+                                try? await EventManager.shared.fetchEvents(for: Date())
                             }
                         }
-                        .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .white)
+                        .foregroundColor(self.eventViewModel.isAbleToAccessUserCalendar ? .green : .white)
                         Spacer()
                     }
                     .frame(height: 25)
                     .padding(.leading, 10)
                     HStack {
-                        CalendarButton(imageName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
-                            self.eventManager.isEventFeatureEnabled.toggle()
+                        CalendarButton(imageName: self.eventViewModel.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
+                            self.eventViewModel.isEventFeatureEnabled.toggle()
                         }
-                        .foregroundColor(eventManager.isEventFeatureEnabled ? .green : .white)
+                        .foregroundColor(self.eventViewModel.isEventFeatureEnabled ? .green : .white)
                         Spacer()
                     }
                     .frame(height: 25)
@@ -52,7 +52,7 @@ struct EventSettings: View {
                         }
                     }
                     .frame(height: 25)
-                    Slider(value: $eventManager.numOfEventsToDisplay, in: 1...10, step: 1.0)
+                    Slider(value: self.$eventViewModel.numOfEventsToDisplay, in: 1...10, step: 1.0)
                         .frame(height: 25)
                         .padding(.trailing, 3)
                         .padding(.leading, 10)

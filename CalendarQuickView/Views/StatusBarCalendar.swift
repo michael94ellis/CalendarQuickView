@@ -11,7 +11,7 @@ import Combine
 
 struct StatusBarCalendar: View {
     
-    @ObservedObject var viewModel = CalendarViewModel()
+    @ObservedObject var viewModel = CalendarViewModel.shared
     static var windowRef: NSWindow?
     private var horizontalPadding: CGFloat = 10
     

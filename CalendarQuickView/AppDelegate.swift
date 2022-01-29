@@ -24,7 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var hostingView: NSHostingView<StatusBarCalendar>?
     @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
     @AppStorage(AppStorageKeys.showWeekDayHeader) var showWeekDayHeader: Bool = true
-    let eventKitManager = EventKitManager.shared
+    @ObservedObject var eventViewModel: EventViewModel = .shared
+
     /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
     /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
     var newHostingView: NSHostingView<StatusBarCalendar> {
@@ -42,15 +43,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             size = CGSize(width: 400, height: 408)
             size.height += showWeekDayHeader ? 42 : 10
         }
-
+        
         // Alter size of window to accomodate displaying EKEvent info
-        if eventKitManager.isEventFeatureEnabled {
-            eventKitManager.checkCalendarAuthStatus() { hasAccess in
-                if hasAccess {
-                    self.eventKitManager.fetchEvents()
-                    let displayEventCount = min(Int(self.eventKitManager.numOfEventsToDisplay), self.eventKitManager.futureEvents.count)
-                    size.height += CGFloat(displayEventCount * 30)
-                }
+        if self.eventViewModel.isEventFeatureEnabled {
+            self.eventViewModel.fetchEvents(on: Date()) { events in
+                let displayEventCount = min(Int(self.eventViewModel.numOfEventsToDisplay), events.count)
+                size.height += CGFloat(displayEventCount * 30)
             }
         }
         newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -58,6 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        EventManager.configureWithAppName("Quick Menu Calendar")
         // Set the view and status menu bar item
         self.hostingView = newHostingView
         menuItem.view = newHostingView
@@ -74,9 +73,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         // Every time the menu bar view is opened it should show the current date
         // Example: User opens at 11:59PM, then re-opens at 12:01AM, two different dates
         menuItem.view = newHostingView
-        if EventKitManager.shared.isAbleToAccessUserCalendar {
-            
-        }
     }
     
 }

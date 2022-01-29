@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import EventKit
 
-final class CalendarViewModel: ObservableObject {
+class CalendarViewModel: ObservableObject {
     
     // MARK: - Date Formats
     
@@ -17,6 +18,14 @@ final class CalendarViewModel: ObservableObject {
     @AppStorage(AppStorageKeys.eventDateFormat) var eventDateFormat: EventDateFormat = .shortDayAndMonth
     var titleDateFormatter: DateFormatter { DateFormatter(dateFormat: self.titleDateFormat.rawValue, calendar: .current) }
     var eventDateFormatter: DateFormatter { DateFormatter(dateFormat: self.eventDateFormat.rawValue, calendar: .current) }
+    
+    @Published var displayDatesEvents: [EKEvent] = []
+    
+    static var shared = CalendarViewModel()
+    private init() {
+        self.displayDate = Date()
+        self.calendar = .current
+    }
     
     // MARK: - Sizing
     
@@ -50,11 +59,6 @@ final class CalendarViewModel: ObservableObject {
     /// Stored property to determine if Dock Icon should be displayed
     @AppStorage(AppStorageKeys.showDockIcon) var showDockIcon: Bool = false
     
-    init() {
-        self.displayDate = Date()
-        self.calendar = .current
-    }
-    
     public func resetDate() {
         self.displayDate = Date()
     }
@@ -79,7 +83,12 @@ final class CalendarViewModel: ObservableObject {
               }
         // get 6 weeks of days
         let dateInterval = DateInterval(start: monthFirstWeek.start, end: sixWeeksFromStart)
+        Task {
+            let events = try await EventManager.shared.fetchEvents(startDate: monthFirstWeek.start, endDate: sixWeeksFromStart)
+            DispatchQueue.main.async {
+                self.displayDatesEvents = events
+            }
+        }
         return calendar.generateDays(for: dateInterval)
     }
-    
 }

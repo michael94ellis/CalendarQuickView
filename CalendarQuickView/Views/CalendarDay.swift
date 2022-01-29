@@ -6,25 +6,32 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct CalendarDay: View {
     
-//    private let date: Date
-//    private let fontSize: Font
-//    private let cellSize: CGFloat
-//    private let dayShape: DayDisplayShape
-//    private let dayColors: (text: Color, bgColor: Color)
-//    private var showEventOverlay: Bool = false
     private let calendarDayModel: CalendarDayModel
     @State var showPopOver: Bool = false
+    private var eventsThisDay: [EKEvent]
     
     
-    init(dayModel : CalendarDayModel) {
+    init(dayModel: CalendarDayModel) {
         self.calendarDayModel = dayModel
+        self.eventsThisDay = EventViewModel.shared.events.filter { Calendar.current.isDate($0.startDate, inSameDayAs: dayModel.date) }
+    }
+    
+    @ViewBuilder
+    var popoverView: some View {
+        VStack {
+            if !self.eventsThisDay.isEmpty {
+                EventDayPopUpView(events: eventsThisDay)
+            } else {
+                Text("No data found")
+            }
+        }
     }
     
     var body: some View {
-        
         Text(String(Calendar.current.component(.day, from: self.calendarDayModel.date)))
             .frame(width: self.calendarDayModel.cellSize, height: self.calendarDayModel.cellSize)
             .font(self.calendarDayModel.fontSize)
@@ -33,32 +40,21 @@ struct CalendarDay: View {
                 textView.background(self.calendarDayModel.dayColors.bgColor)
                     .clipShape(self.calendarDayModel.dayShape.shape)
             }
-            .if(self.calendarDayModel.isAnEvent) { view in
+            .if(!self.eventsThisDay.isEmpty) { view in
                 view.overlay(Circle().fill(ColorStore.shared.eventTextColor).frame(width: self.calendarDayModel.cellSize / 8, height: self.calendarDayModel.cellSize / 8).position(x: self.calendarDayModel.cellSize / 2, y: self.calendarDayModel.cellSize - (self.calendarDayModel.cellSize / 8)))
                 // TODO: Fix the tap issue
                     .onTapGesture {
                         showPopOver.toggle()
                     }
-                
                 // 24 30 42
             }
-            .popover(isPresented: $showPopOver, content: {
-                if self.calendarDayModel.isAnEvent{
-                    if let event  = self.calendarDayModel.eventDetails.first{
-                        EventDayPopUpView(event: event)
-                    } else {
-                         Text("No data found")
-                    }
-                    
-                
-                }
-                
-            })
-        
-        
-        
-        
-        
+            .contentShape(Rectangle())
+            .onTapGesture {
+                self.showPopOver.toggle()
+            }
+            .popover(isPresented: self.$showPopOver) {
+                self.popoverView
+            }
     }
 }
 
