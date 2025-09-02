@@ -17,7 +17,7 @@ struct EventDayPopUpView : View {
     
     var body: some View {
         List {
-            ForEach(self.events) { event in
+            ForEach(self.events, id: \.self) { event in
                 VStack(alignment:.leading,spacing: 5) {
                     Text(event.title).font(.title).padding(5).padding(.top, 10)
                     Divider()

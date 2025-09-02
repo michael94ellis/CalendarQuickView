@@ -35,9 +35,9 @@ struct CalendarDay: View {
         Text(String(Calendar.current.component(.day, from: self.calendarDayModel.date)))
             .frame(width: self.calendarDayModel.cellSize, height: self.calendarDayModel.cellSize)
             .font(self.calendarDayModel.fontSize)
-            .foregroundColor(self.calendarDayModel.dayColors.text)
+            .foregroundColor(self.calendarDayModel.dayColors.1)
             .if(self.calendarDayModel.dayShape != .none) { textView in
-                textView.background(self.calendarDayModel.dayColors.bgColor)
+                textView.background(self.calendarDayModel.dayColors.0)
                     .clipShape(self.calendarDayModel.dayShape.shape)
             }
             .if(!self.eventsThisDay.isEmpty) { view in

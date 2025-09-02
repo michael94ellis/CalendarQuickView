@@ -31,7 +31,7 @@ struct EventListView: View {
                         Text(viewModel.eventDateFormatter.string(from: event.startDate))
                             .font(fontSize)
                     }
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                     .frame(height: 29)
                     Divider()
                 }

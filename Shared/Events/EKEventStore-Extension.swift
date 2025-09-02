@@ -8,7 +8,7 @@
 import Foundation
 import EventKit
 
-extension EKRecurrenceFrequency: CaseIterable, CustomStringConvertible {
+extension EKRecurrenceFrequency {
     public static var allCases: [EKRecurrenceFrequency] { [.daily, .weekly, .monthly, .yearly] }
     public var description: String {
         switch self.rawValue {
@@ -20,8 +20,7 @@ extension EKRecurrenceFrequency: CaseIterable, CustomStringConvertible {
         }
     }
 }
-extension EKEvent: Identifiable { }
-extension EKReminder: Identifiable { }
+
 extension EKReminderPriority {
 //    static let none = 0
 //    static let high = 1

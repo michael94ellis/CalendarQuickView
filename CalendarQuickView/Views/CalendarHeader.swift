@@ -19,30 +19,32 @@ struct CalendarHeader: View {
                 
                 // MARK: - Title (Month/Year)
                 Text(self.viewModel.titleDateFormatter.string(from: self.viewModel.displayDate))
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                     .font(self.viewModel.calendarTitleSize)
                 Spacer()
                 
                 // MARK: - Previous Month Button
                 
-                CalendarButton(imageName: "chevron.left", animation: .easeOut, color: .blue, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.left", animation: .easeOut, color: .accentColor, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: -1)
                 }
-                .foregroundColor(.blue)
+                .padding(.horizontal, 5)
+                .foregroundColor(.accentColor)
                 
                 // MARK: - GoTo Current Date Button
                 
-                CalendarButton(imageName: "calendar", animation: .spring(), color: .blue, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "calendar", animation: .spring(), color: .accentColor, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate = Date()
                 }
-                .foregroundColor(.blue)
+                .padding(.trailing, 5)
+                .foregroundColor(.accentColor)
                 
                 // MARK: - Next Month Button
                 
-                CalendarButton(imageName: "chevron.right", animation: .easeIn, color: .blue, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.right", animation: .easeIn, color: .accentColor, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: 1)
                 }
-                .foregroundColor(.blue)
+                .foregroundColor(.accentColor)
             }
         }
     }

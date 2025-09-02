@@ -30,7 +30,7 @@ struct WidgetCalendarView: View {
                             .font(fontSize)
                     }
                 }
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 ForEach(getGetCalendarDays().chunked(into: 7), id: \.self) { weekDays in
                     HStack(spacing: 4) {
                         Spacer()

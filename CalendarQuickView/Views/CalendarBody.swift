@@ -25,7 +25,7 @@ struct CalendarBody: View {
     init(viewModel: CalendarViewModel) {
         self.dayCellSize = viewModel.getDayCellSize
         self.fontSize = viewModel.calendarSize == .small ? .body : viewModel.calendarSize == .medium ? .title3 : .title2
-        self.titleTextColor = .black
+        self.titleTextColor = .primary
         self.days = viewModel.getGetCalendarDays().chunked(into: 7)
         self.showWeekdayHeaderRow = viewModel.showWeekDayHeader
         self.displayMonth = viewModel.displayDate.startOfMonth(using: viewModel.calendar)

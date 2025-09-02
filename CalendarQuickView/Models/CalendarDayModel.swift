@@ -19,22 +19,23 @@ struct CalendarDayModel: Identifiable {
     let dayShape: DayDisplayShape
     let month: Date
     
-    var dayColors: (text: Color, bgColor: Color) {
-        get {
-            if Calendar.current.isDateInToday(self.date) {
-                // Current Day
-                return (.black, Color(white: 0.95, opacity: 1.0))
-            } else if Calendar.current.isDate(self.date, equalTo: month, toGranularity: .month) {
-                // Day in Current Displayed Month
-                return (.black, Color(white: 0.95, opacity: 1.0))
-            } else {
-                // Day is not in Current Displayed Month
-                return (.gray, Color(white: 0.95, opacity: 1.0))
-            }
+    var dayColors: (Color, Color) {
+        if Calendar.current.isDateInToday(self.date) {
+            // Current Day
+            return (.primary, .secondarySystemBackground)
+        } else if Calendar.current.isDate(self.date, equalTo: month, toGranularity: .month) {
+            // Day in Current Displayed Month
+            return (.primary, .secondarySystemBackground)
+        } else {
+            // Day is not in Current Displayed Month
+            return (.secondary, .secondarySystemBackground)
         }
     }
-    
-    var otherMonthColors: (Color, Color) {
-        return (.gray, Color(white: 0.95, opacity: 1.0))
-    }
+}
+
+
+extension Color {
+    static let secondarySystemBackground: Color = .init(
+        NSColor.windowBackgroundColor
+    )
 }
