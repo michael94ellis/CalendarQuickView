@@ -19,32 +19,30 @@ struct CalendarHeader: View {
                 
                 // MARK: - Title (Month/Year)
                 Text(self.viewModel.titleDateFormatter.string(from: self.viewModel.displayDate))
-                    .foregroundColor(ColorStore.shared.titleTextColor)
+                    .foregroundColor(.black)
                     .font(self.viewModel.calendarTitleSize)
                 Spacer()
                 
                 // MARK: - Previous Month Button
                 
-                CalendarButton(imageName: "chevron.left", animation: .easeOut, color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.left", animation: .easeOut, color: .blue, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: -1)
                 }
-                .padding(.horizontal, 5)
-                .foregroundColor(ColorStore.shared.buttonColor)
+                .foregroundColor(.blue)
                 
                 // MARK: - GoTo Current Date Button
                 
-                CalendarButton(imageName: "calendar", animation: .spring(), color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "calendar", animation: .spring(), color: .blue, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate = Date()
                 }
-                .padding(.trailing, 5)
-                .foregroundColor(ColorStore.shared.buttonColor)
+                .foregroundColor(.blue)
                 
                 // MARK: - Next Month Button
                 
-                CalendarButton(imageName: "chevron.right", animation: .easeIn, color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.right", animation: .easeIn, color: .blue, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: 1)
                 }
-                .foregroundColor(ColorStore.shared.buttonColor)
+                .foregroundColor(.blue)
             }
         }
     }

@@ -15,7 +15,6 @@ struct SettingsTabView: View {
     
     private enum Tabs: Hashable {
         case general
-        case colors
         case events
     }
     
@@ -36,13 +35,7 @@ struct SettingsTabView: View {
                     .tabItem {
                         Label("General", systemImage: "gear")
                     }
-                    .tag(Tabs.colors)
-                    .environmentObject(viewModel)
-                ColorSettings()
-                    .tabItem {
-                        Label("Colors", systemImage: "star")
-                    }
-                    .tag(Tabs.colors)
+                    .tag(Tabs.general)
                     .environmentObject(viewModel)
                 EventSettings()
                     .tabItem {

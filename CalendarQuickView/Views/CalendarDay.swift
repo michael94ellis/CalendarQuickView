@@ -41,7 +41,7 @@ struct CalendarDay: View {
                     .clipShape(self.calendarDayModel.dayShape.shape)
             }
             .if(!self.eventsThisDay.isEmpty) { view in
-                view.overlay(Circle().fill(ColorStore.shared.eventTextColor).frame(width: self.calendarDayModel.cellSize / 8, height: self.calendarDayModel.cellSize / 8).position(x: self.calendarDayModel.cellSize / 2, y: self.calendarDayModel.cellSize - (self.calendarDayModel.cellSize / 8)))
+                view.overlay(Circle().fill(.red).frame(width: self.calendarDayModel.cellSize / 8, height: self.calendarDayModel.cellSize / 8).position(x: self.calendarDayModel.cellSize / 2, y: self.calendarDayModel.cellSize / 2))
                 // TODO: Fix the tap issue
                     .onTapGesture {
                         showPopOver.toggle()

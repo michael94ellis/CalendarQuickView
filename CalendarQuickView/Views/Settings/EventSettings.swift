@@ -27,7 +27,7 @@ struct EventSettings: View {
                 }
                 VStack(alignment: .trailing) {
                     HStack {
-                        CalendarButton(imageName: self.eventViewModel.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
+                        CalendarButton(imageName: self.eventViewModel.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: .blue, size: self.viewModel.buttonSize) {
                             Task {
                                 try? await EventManager.shared.fetchEvents(for: Date())
                             }
@@ -38,7 +38,12 @@ struct EventSettings: View {
                     .frame(height: 25)
                     .padding(.leading, 10)
                     HStack {
-                        CalendarButton(imageName: self.eventViewModel.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
+                        let color: Color = self.eventViewModel.isEventFeatureEnabled ? .blue : .gray
+                        let imageName =  self.eventViewModel.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle"
+                        CalendarButton(imageName: imageName,
+                                       animation: .linear,
+                                       color: color,
+                                       size: viewModel.buttonSize) {
                             self.eventViewModel.isEventFeatureEnabled.toggle()
                         }
                         .foregroundColor(self.eventViewModel.isEventFeatureEnabled ? .green : .white)
