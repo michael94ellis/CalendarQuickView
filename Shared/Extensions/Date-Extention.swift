@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date: RawRepresentable {
+extension Date: @retroactive RawRepresentable {
     
     private static let formatter = ISO8601DateFormatter()
     

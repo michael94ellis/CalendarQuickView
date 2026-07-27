@@ -5,6 +5,7 @@
 //  Created by Michael Ellis on 11/5/21.
 //
 
+import DesignToken
 import SwiftUI
 
 struct ColorSettings: View {
@@ -34,7 +35,7 @@ struct ColorSettings: View {
                                     .padding(.vertical, 4)
                                     .foregroundColor(AppColors.contrast.color)
                                 Spacer()
-                                Color(color.rawValue)
+                                color.color
                                     .frame(width: 40)
                                     .cornerRadius(4)
                                     .padding(.trailing, 6)
@@ -61,15 +62,15 @@ struct ColorSettings: View {
                 Text("Reset All")
                     .font(.title3)
                 CalendarButton(imageName: "arrow.triangle.2.circlepath", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
-                    ColorStore.shared._titleTextColor = "contrast"
-                    ColorStore.shared._eventTextColor = "contrast"
-                    ColorStore.shared._buttonColor = "contrast"
+                    ColorStore.shared._titleTextColor = AppColors.contrast.rawValue
+                    ColorStore.shared._eventTextColor = AppColors.contrast.rawValue
+                    ColorStore.shared._buttonColor = AppColors.contrast.rawValue
                     
-                    ColorStore.shared._currentMonthText = "contrast"
-                    ColorStore.shared._currentMonthColor = "stone"
+                    ColorStore.shared._currentMonthText = AppColors.contrast.rawValue
+                    ColorStore.shared._currentMonthColor = AppColors.stone.rawValue
                     
-                    ColorStore.shared._otherMonthText = "contrast"
-                    ColorStore.shared._otherMonthColor = "stone"
+                    ColorStore.shared._otherMonthText = AppColors.contrast.rawValue
+                    ColorStore.shared._otherMonthColor = AppColors.stone.rawValue
                 }
                 Spacer()
             }

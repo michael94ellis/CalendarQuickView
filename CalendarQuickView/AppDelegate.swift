@@ -43,13 +43,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             size.height += showWeekDayHeader ? 42 : 10
         }
 
-        // Alter size of window to accomodate displaying EKEvent info
+        // Alter size of window to accommodate displaying EKEvent info
         if eventKitManager.isEventFeatureEnabled {
-            eventKitManager.checkCalendarAuthStatus() { hasAccess in
-                if hasAccess {
-                    self.eventKitManager.fetchEvents()
-                    let displayEventCount = min(Int(self.eventKitManager.numOfEventsToDisplay), self.eventKitManager.futureEvents.count)
-                    size.height += CGFloat(displayEventCount * 30)
+            if eventKitManager.isAbleToAccessUserCalendar {
+                eventKitManager.fetchEvents()
+                let displayEventCount = min(
+                    Int(eventKitManager.numOfEventsToDisplay),
+                    eventKitManager.futureEvents.count
+                )
+                size.height += CGFloat(displayEventCount * 30)
+            } else {
+                eventKitManager.checkCalendarAuthStatus { hasAccess in
+                    if hasAccess {
+                        self.eventKitManager.fetchEvents()
+                    }
                 }
             }
         }

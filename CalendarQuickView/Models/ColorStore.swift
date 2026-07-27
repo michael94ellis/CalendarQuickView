@@ -5,6 +5,7 @@
 //  Created by Michael Ellis on 11/20/21.
 //
 
+import DesignToken
 import SwiftUI
 
 class ColorStore: ObservableObject {
@@ -14,18 +15,18 @@ class ColorStore: ObservableObject {
     
     // MARK: - Colors
     
-    @AppStorage("titleText") public var _titleTextColor: String = "contrast"
-    var titleTextColor: Color { Color("\(self._titleTextColor)") }
-    @AppStorage("eventTextColor") public var _eventTextColor: String = "contrast"
-    var eventTextColor: Color { Color("\(self._eventTextColor)") }
-    @AppStorage("buttonColor") public var _buttonColor: String = "contrast"
-    var buttonColor: Color { Color("\(self._buttonColor)") }
-    @AppStorage("currentMonthText") public var _currentMonthText: String = "contrast"
-    var currentMonthText: Color { Color("\(self._currentMonthText)") }
-    @AppStorage("currentMonthColor") public var _currentMonthColor: String = "stone"
-    var currentMonthColor: Color { Color("\(self._currentMonthColor)") }
-    @AppStorage("otherMonthText") public var _otherMonthText: String = "contrast"
-    var otherMonthText: Color { Color("\(self._otherMonthText)") }
-    @AppStorage("otherMonthColor") public var _otherMonthColor: String = "stone"
-    var otherMonthColor: Color { Color("\(self._otherMonthColor)") }
+    @AppStorage("titleText") public var _titleTextColor: String = AppColors.contrast.rawValue
+    var titleTextColor: Color { AppColors.color(named: _titleTextColor) }
+    @AppStorage("eventTextColor") public var _eventTextColor: String = AppColors.contrast.rawValue
+    var eventTextColor: Color { AppColors.color(named: _eventTextColor) }
+    @AppStorage("buttonColor") public var _buttonColor: String = AppColors.contrast.rawValue
+    var buttonColor: Color { AppColors.color(named: _buttonColor) }
+    @AppStorage("currentMonthText") public var _currentMonthText: String = AppColors.contrast.rawValue
+    var currentMonthText: Color { AppColors.color(named: _currentMonthText) }
+    @AppStorage("currentMonthColor") public var _currentMonthColor: String = AppColors.stone.rawValue
+    var currentMonthColor: Color { AppColors.color(named: _currentMonthColor) }
+    @AppStorage("otherMonthText") public var _otherMonthText: String = AppColors.contrast.rawValue
+    var otherMonthText: Color { AppColors.color(named: _otherMonthText) }
+    @AppStorage("otherMonthColor") public var _otherMonthColor: String = AppColors.stone.rawValue
+    var otherMonthColor: Color { AppColors.color(named: _otherMonthColor) }
 }

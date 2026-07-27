@@ -108,16 +108,18 @@ enum DayDisplayShape: String, CaseIterable {
 }
 
 struct AnyShape: Shape {
+    
+    private let _path: @Sendable (CGRect) -> Path
+    
     init<S: Shape>(_ wrapped: S) {
         _path = { rect in
             let path = wrapped.path(in: rect)
             return path
         }
     }
-
+    
+    @Sendable
     func path(in rect: CGRect) -> Path {
         return _path(rect)
     }
-
-    private let _path: (CGRect) -> Path
 }

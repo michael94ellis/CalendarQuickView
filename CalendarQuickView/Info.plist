@@ -27,7 +27,9 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Add, edit, and view reminders with Calendar Quick View</string>
+	<string>Calendar Quick View needs calendar access to show your upcoming events.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Calendar Quick View needs calendar access to show your upcoming events.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>CalendarQuickView would like access to your contacts for use with events and reminders</string>
 	<key>NSRemindersUsageDescription</key>

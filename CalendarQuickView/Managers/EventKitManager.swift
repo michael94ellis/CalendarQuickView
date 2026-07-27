@@ -16,85 +16,110 @@ class EventKitManager: ObservableObject {
     @AppStorage(AppStorageKeys.isEventFeatureEnabled) var isEventFeatureEnabled: Bool = false
     @AppStorage(AppStorageKeys.numOfEventsToDisplay) var numOfEventsToDisplay: Double = 4
 
-    private(set) var titles: [String] = []
-    private(set) var startDates: [Date] = []
-    private(set) var endDates: [Date] = []
-    private(set) var events: [EKEvent] = []
-    private(set) var futureEvents: [EKEvent] = []
+    @Published private(set) var titles: [String] = []
+    @Published private(set) var startDates: [Date] = []
+    @Published private(set) var endDates: [Date] = []
+    @Published private(set) var events: [EKEvent] = []
+    @Published private(set) var futureEvents: [EKEvent] = []
     
     let eventStore = EKEventStore()
     static let shared = EventKitManager()
     private init() { }
+    
+    private var hasCalendarReadAccess: Bool {
+        let status = EKEventStore.authorizationStatus(for: .event)
+        if #available(macOS 14.0, *) {
+            return status == .fullAccess
+        } else {
+            return status == .authorized
+        }
+    }
     
     func accessGranted() {
         isAbleToAccessUserCalendar = true
     }
     
     func checkCalendarAuthStatus(completion: @escaping (Bool) -> ()) {
-        switch(EKEventStore.authorizationStatus(for: EKEntityType.event)) {
-        case EKAuthorizationStatus.notDetermined:
+        switch EKEventStore.authorizationStatus(for: EKEntityType.event) {
+        case .notDetermined:
             isAbleToAccessUserCalendar = false
             requestAccessToCalendar(completion: completion)
-        case EKAuthorizationStatus.authorized:
+        case .authorized:
             accessGranted()
-            completion(isAbleToAccessUserCalendar)
-        case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
+            completion(true)
+        case .restricted, .denied:
             isAbleToAccessUserCalendar = false
-            completion(isAbleToAccessUserCalendar)
+            completion(false)
+        case .fullAccess:
+            accessGranted()
+            completion(true)
+        case .writeOnly:
+            isAbleToAccessUserCalendar = false
+            completion(false)
         @unknown default:
             isAbleToAccessUserCalendar = false
-            completion(isAbleToAccessUserCalendar)
+            completion(false)
         }
     }
     
     func requestAccessToCalendar(completion: @escaping (Bool) -> ()) {
-        eventStore.requestAccess(to: .event) { accessGranted, error in
-            if accessGranted == true {
-                DispatchQueue.main.async {
+        let handleResult: (Bool) -> Void = { granted in
+            DispatchQueue.main.async {
+                if granted {
                     self.accessGranted()
                     completion(true)
-                }
-            } else {
-                DispatchQueue.main.async {
+                } else {
                     self.isAbleToAccessUserCalendar = false
                     completion(false)
                 }
             }
         }
+        
+        if #available(macOS 14.0, *) {
+            eventStore.requestFullAccessToEvents { granted, _ in
+                handleResult(granted)
+            }
+        } else {
+            eventStore.requestAccess(to: .event) { granted, _ in
+                handleResult(granted)
+            }
+        }
     }
     
     func fetchEvents() {
-        defer { print(events) }
-        self.events = []
-        self.titles = []
-        self.startDates = []
-        self.endDates = []
-        for calendar in self.eventStore.calendars(for: EKEntityType.event) {
-            
-            let oneMonthAgo = Date(timeIntervalSinceNow: -30 * 24 * 3600)
-            let oneMonthAfterToday = Date(timeIntervalSinceNow: +30 * 24 * 3600)
-            
-            let predicate = eventStore.predicateForEvents(withStart: oneMonthAgo, end: oneMonthAfterToday, calendars: [calendar])
-            for event in eventStore.events(matching: predicate) {
-                titles.append(event.title)
-                startDates.append(event.startDate)
-                endDates.append(event.endDate)
-                events.append(event)
-                if events.count >= Int(self.numOfEventsToDisplay) {
-                    return
-                }
-            }
+        guard hasCalendarReadAccess || isAbleToAccessUserCalendar else {
+            events = []
+            titles = []
+            startDates = []
+            endDates = []
+            futureEvents = []
+            return
         }
-        self.futureEvents = self.getFutureEvents()
+        
+        let oneMonthAgo = Date(timeIntervalSinceNow: -30 * 24 * 3600)
+        let oneMonthAfterToday = Date(timeIntervalSinceNow: 30 * 24 * 3600)
+        let predicate = eventStore.predicateForEvents(
+            withStart: oneMonthAgo,
+            end: oneMonthAfterToday,
+            calendars: nil
+        )
+        let matchedEvents = eventStore.events(matching: predicate)
+            .sorted { $0.startDate < $1.startDate }
+        
+        events = matchedEvents
+        titles = matchedEvents.map(\.title)
+        startDates = matchedEvents.map(\.startDate)
+        endDates = matchedEvents.map(\.endDate)
+        futureEvents = getFutureEvents()
     }
     
     func getFutureEvents() -> [EKEvent] {
         guard let midnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date()) else {
-            print("Error: No Midnight Date can be made")
             return []
         }
-        let futureEvents = self.events.filter { $0.startDate > midnight }
-        return futureEvents
+        return events
+            .filter { $0.startDate >= midnight }
+            .sorted { $0.startDate < $1.startDate }
     }
 
 }

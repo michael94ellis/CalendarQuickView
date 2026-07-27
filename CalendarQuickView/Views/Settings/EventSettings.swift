@@ -29,7 +29,9 @@ struct EventSettings: View {
                     HStack {
                         CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
                             self.eventManager.requestAccessToCalendar { success in
-                                print("Event access - \(success)")
+                                if success {
+                                    self.eventManager.fetchEvents()
+                                }
                             }
                         }
                         .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .white)
