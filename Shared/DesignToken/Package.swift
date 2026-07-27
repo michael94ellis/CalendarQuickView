@@ -16,10 +16,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "DesignToken",
-            resources: [
-                .process("Colors.xcassets")
-            ]
+            name: "DesignToken"
         ),
     ],
     swiftLanguageModes: [.v6]

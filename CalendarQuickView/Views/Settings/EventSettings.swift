@@ -10,55 +10,64 @@ import SwiftUI
 struct EventSettings: View {
     
     @ObservedObject var eventManager = EventKitManager.shared
-    @EnvironmentObject var viewModel: CalendarViewModel 
-
-    func TextWithFrame(_ text: String) -> some View {
-        Text(text).frame(height: 25)
-    }
+    @EnvironmentObject var viewModel: CalendarViewModel
     
     var body: some View {
-        VStack {
-            HStack {
-                VStack(alignment: .leading) {
-                    TextWithFrame("Calendar Access")
-                    TextWithFrame("Display Event Info")
-                    TextWithFrame("Event List Date Format")
-                    TextWithFrame("Events to display: \(Int(eventManager.numOfEventsToDisplay))")
+        VStack(alignment: .leading, spacing: 18) {
+            settingsRow("Calendar Access") {
+                HStack(spacing: 8) {
+                    Text(eventManager.isAbleToAccessUserCalendar ? "Granted" : "Not Granted")
+                        .foregroundColor(.secondary)
+                    Button {
+                        eventManager.checkCalendarAuthStatus { _ in }
+                    } label: {
+                        Image(systemName: eventManager.isAbleToAccessUserCalendar
+                              ? "checkmark.circle.fill"
+                              : "xmark.circle.fill")
+                            .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Recheck calendar access")
                 }
-                VStack(alignment: .trailing) {
-                    HStack {
-                        CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.accentColor, size: viewModel.buttonSize) {
-                            self.eventManager.checkCalendarAuthStatus { _ in }
-                        }
-                        .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .white)
-                        Spacer()
-                    }
-                    .frame(height: 25)
-                    .padding(.leading, 10)
-                    HStack {
-                        CalendarButton(imageName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.accentColor, size: viewModel.buttonSize) {
-                            self.eventManager.isEventFeatureEnabled.toggle()
-                        }
-                        .foregroundColor(eventManager.isEventFeatureEnabled ? .green : .white)
-                        Spacer()
-                    }
-                    .frame(height: 25)
-                    .padding(.leading, 10)
-                    Picker("", selection: $viewModel.eventDateFormat) {
-                        ForEach(EventDateFormat.allCases, id: \.self) { dateFormatOption in
-                            Text(dateFormatOption.displayName)
-                        }
-                    }
-                    .frame(height: 25)
-                    Slider(value: $eventManager.numOfEventsToDisplay, in: 1...10, step: 1.0)
-                        .frame(height: 25)
-                        .padding(.trailing, 3)
-                        .padding(.leading, 10)
-                }
-                .frame(width: 215)
             }
+            
+            settingsRow("Display Event Info") {
+                Toggle("", isOn: $eventManager.isEventFeatureEnabled)
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+            }
+            
+            settingsRow("Event List Date Format") {
+                Picker("", selection: $viewModel.eventDateFormat) {
+                    ForEach(EventDateFormat.allCases, id: \.self) { dateFormatOption in
+                        Text(dateFormatOption.displayName)
+                    }
+                }
+                .labelsHidden()
+                .frame(maxWidth: 230)
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Events to display: \(Int(eventManager.numOfEventsToDisplay))")
+                Slider(value: $eventManager.numOfEventsToDisplay, in: 1...10, step: 1)
+            }
+            
             Spacer()
         }
+        .padding(.horizontal, 24)
         .padding(.vertical, 20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private func settingsRow<Control: View>(
+        _ title: String,
+        @ViewBuilder control: () -> Control
+    ) -> some View {
+        HStack(alignment: .center, spacing: 12) {
+            Text(title)
+            Spacer(minLength: 8)
+            control()
+        }
+        .frame(minHeight: 28)
     }
 }

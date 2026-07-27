@@ -40,7 +40,7 @@ struct SettingsTabView: View {
                     .environmentObject(viewModel)
                 ColorSettings()
                     .tabItem {
-                        Label("Colors", systemImage: "star")
+                        Label("Theme", systemImage: "paintpalette")
                     }
                     .tag(Tabs.colors)
                     .environmentObject(viewModel)

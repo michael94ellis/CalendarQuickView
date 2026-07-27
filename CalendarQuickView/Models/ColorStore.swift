@@ -13,28 +13,31 @@ class ColorStore: ObservableObject {
     static let shared = ColorStore()
     private init() { }
     
-    // MARK: - Accent (signature highlight)
+    /// Persisted theme id from `UITheme.all`.
+    @AppStorage("selectedUITheme") public var selectedThemeID: String = "" {
+        didSet { objectWillChange.send() }
+    }
+    
+    var selectedTheme: UITheme {
+        UITheme.theme(id: selectedThemeID)
+    }
+    
+    // MARK: - Resolved colors
     
     /// Shared highlight for today, month title, weekday headers, and button tints.
-    @AppStorage("accentColor") public var _accentColor: String = AppColors.coral.rawValue
-    var accentColor: Color { AppColors.color(named: _accentColor) }
+    var accentColor: Color { Color(hex: selectedTheme.accent) }
+    /// Text drawn on the accent (today cell).
+    var todayText: Color { Color(hex: selectedTheme.todayText) }
+    var currentMonthText: Color { Color(hex: selectedTheme.currentMonthText) }
+    var currentMonthColor: Color { Color(hex: selectedTheme.currentMonthBackground) }
+    var otherMonthText: Color { Color(hex: selectedTheme.otherMonthText) }
+    var otherMonthColor: Color { Color(hex: selectedTheme.otherMonthBackground) }
     
-    // MARK: - Content colors
-    
-    @AppStorage("currentMonthText") public var _currentMonthText: String = AppColors.contrast.rawValue
-    var currentMonthText: Color { AppColors.color(named: _currentMonthText) }
-    @AppStorage("currentMonthColor") public var _currentMonthColor: String = AppColors.stone.rawValue
-    var currentMonthColor: Color { AppColors.color(named: _currentMonthColor) }
-    @AppStorage("otherMonthText") public var _otherMonthText: String = AppColors.contrast.rawValue
-    var otherMonthText: Color { AppColors.color(named: _otherMonthText) }
-    @AppStorage("otherMonthColor") public var _otherMonthColor: String = AppColors.stone.rawValue
-    var otherMonthColor: Color { AppColors.color(named: _otherMonthColor) }
+    func selectTheme(_ theme: UITheme) {
+        selectedThemeID = theme.id
+    }
     
     func resetToDefaults() {
-        _accentColor = AppColors.coral.rawValue
-        _currentMonthText = AppColors.contrast.rawValue
-        _currentMonthColor = AppColors.stone.rawValue
-        _otherMonthText = AppColors.contrast.rawValue
-        _otherMonthColor = AppColors.stone.rawValue
+        selectedThemeID = UITheme.default.id
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Michael Ellis on 11/12/21.
 //
 
-import DesignToken
 import SwiftUI
 
 struct CalendarDay: View {
@@ -19,8 +18,7 @@ struct CalendarDay: View {
     private let isToday: Bool
     private let isSelectable: Bool
     private let onSelect: (() -> Void)?
-    
-    @ObservedObject private var eventManager = EventKitManager.shared
+    private let eventColors: [Color]?
     
     init(
         date: Date,
@@ -30,7 +28,8 @@ struct CalendarDay: View {
         month: Date,
         isSelected: Bool = false,
         isSelectable: Bool = false,
-        onSelect: (() -> Void)? = nil
+        onSelect: (() -> Void)? = nil,
+        eventColors: [Color]? = nil
     ) {
         self.date = date
         self.fontSize = fontSize
@@ -39,6 +38,7 @@ struct CalendarDay: View {
         self.isSelected = isSelected
         self.isSelectable = isSelectable
         self.onSelect = onSelect
+        self.eventColors = eventColors
         
         let isToday = Calendar.current.isDateInToday(date)
         self.isToday = isToday
@@ -51,10 +51,10 @@ struct CalendarDay: View {
             ? ColorStore.shared.currentMonthColor
             : ColorStore.shared.otherMonthColor
         let accent = ColorStore.shared.accentColor
-        let contrast = AppColors.contrast.color
+        let todayText = ColorStore.shared.todayText
         
         if isToday {
-            self.dayColors = (contrast, accent)
+            self.dayColors = (todayText, accent)
         } else if isSelected {
             self.dayColors = (normalBackground, normalText)
         } else {
@@ -62,13 +62,24 @@ struct CalendarDay: View {
         }
     }
     
-    private var eventColors: [Color] {
-        eventManager.calendarColors(on: date)
-    }
-    
     private var dotSize: CGFloat { max(cellSize / 8, 3) }
     
-    var body: some View {
+    @ViewBuilder
+    var mainBodyContainer: some View {
+        if isSelected,
+           !isToday {
+            mainBodyText
+                .overlay(
+                    AnyShape(displayShape)
+                        .stroke(ColorStore.shared.accentColor, lineWidth: 1.5)
+                )
+        } else {
+            mainBodyText
+                .contentShape(Rectangle())
+        }
+    }
+    
+    var mainBodyText: some View {
         Text(String(Calendar.current.component(.day, from: date)))
             .frame(width: cellSize, height: cellSize)
             .font(fontSize)
@@ -77,23 +88,25 @@ struct CalendarDay: View {
                 displayShape: displayShape,
                 background: dayColors.bgColor
             ))
-            .if(isSelected && !isToday) { view in
-                view.overlay(
-                    AnyShape(displayShape)
-                        .stroke(ColorStore.shared.accentColor, lineWidth: 1.5)
-                )
-            }
-            .if(!eventColors.isEmpty) { view in
-                view.overlay(eventDots)
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                guard isSelectable else { return }
-                onSelect?()
-            }
     }
     
-    private var eventDots: some View {
+    var body: some View {
+        Group {
+            if let eventColors {
+                mainBodyContainer
+                    .overlay(eventDots(eventColors))
+            } else {
+                mainBodyContainer
+            }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            guard isSelectable else { return }
+            onSelect?()
+        }
+    }
+    
+    private func eventDots(_ eventColors: [Color]) -> some View {
         HStack(spacing: 1) {
             ForEach(Array(eventColors.prefix(3).enumerated()), id: \.offset) { _, color in
                 Circle()

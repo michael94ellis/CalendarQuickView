@@ -54,7 +54,8 @@ struct CalendarBody: View {
                             month: displayMonth,
                             isSelected: viewModel.calendar.isDate(date, inSameDayAs: viewModel.selectedDate),
                             isSelectable: true,
-                            onSelect: { viewModel.selectDate(date) }
+                            onSelect: { viewModel.selectDate(date) },
+                            eventColors: EventKitManager.shared.calendarColors(on: date)
                         )
                         .padding(.vertical, 4)
                     }

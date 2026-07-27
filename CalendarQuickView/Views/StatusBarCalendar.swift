@@ -12,6 +12,7 @@ import Combine
 struct StatusBarCalendar: View {
     
     @ObservedObject var viewModel = CalendarViewModel()
+    @ObservedObject private var colorStore = ColorStore.shared
     static var windowRef: NSWindow?
     private var horizontalPadding: CGFloat = 10
     
@@ -29,10 +30,10 @@ struct StatusBarCalendar: View {
                 .environmentObject(viewModel)
             EventListView()
                 .environmentObject(viewModel)
-            Spacer()
             CalendarFooter(openSettings: Self.openSettingsWindow)
                 .environmentObject(viewModel)
         }
+        .id(colorStore.selectedThemeID)
         .padding(.horizontal, horizontalPadding)
         .padding(.vertical, 10)
     }

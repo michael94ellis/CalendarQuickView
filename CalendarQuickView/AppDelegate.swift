@@ -44,10 +44,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
 
         // Alter size of window to accommodate displaying EKEvent info.
-        // Reserve space for the configured max so day selection can change without clipping.
+        // Cap visible event rows; EventListView scrolls when there are more.
         if eventKitManager.isEventFeatureEnabled, eventKitManager.syncAuthorizationStatus() {
             eventKitManager.fetchEvents()
-            size.height += CGFloat(Int(eventKitManager.numOfEventsToDisplay) * 30)
+            let visibleEventRows = min(
+                Int(eventKitManager.numOfEventsToDisplay),
+                EventListView.maxVisibleRows
+            )
+            size.height += CGFloat(visibleEventRows) * EventListView.rowHeight
+        }
+        // Keep the menu on-screen for large calendar sizes.
+        if let visibleHeight = NSScreen.main?.visibleFrame.height {
+            size.height = min(size.height, visibleHeight * 0.75)
         }
         newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
         return newView
