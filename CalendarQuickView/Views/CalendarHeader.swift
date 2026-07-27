@@ -19,32 +19,32 @@ struct CalendarHeader: View {
                 
                 // MARK: - Title (Month/Year)
                 Text(self.viewModel.titleDateFormatter.string(from: self.viewModel.displayDate))
-                    .foregroundColor(ColorStore.shared.titleTextColor)
+                    .foregroundColor(ColorStore.shared.accentColor)
                     .font(self.viewModel.calendarTitleSize)
                 Spacer()
                 
                 // MARK: - Previous Month Button
                 
-                CalendarButton(imageName: "chevron.left", animation: .easeOut, color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.left", animation: .easeOut, color: ColorStore.shared.accentColor, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: -1)
                 }
                 .padding(.horizontal, 5)
-                .foregroundColor(ColorStore.shared.buttonColor)
+                .foregroundColor(ColorStore.shared.accentColor)
                 
                 // MARK: - GoTo Current Date Button
                 
-                CalendarButton(imageName: "calendar", animation: .spring(), color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
-                    self.viewModel.displayDate = Date()
+                CalendarButton(imageName: "calendar", animation: .spring(), color: ColorStore.shared.accentColor, size: self.viewModel.buttonSize) {
+                    self.viewModel.resetDate()
                 }
                 .padding(.trailing, 5)
-                .foregroundColor(ColorStore.shared.buttonColor)
+                .foregroundColor(ColorStore.shared.accentColor)
                 
                 // MARK: - Next Month Button
                 
-                CalendarButton(imageName: "chevron.right", animation: .easeIn, color: ColorStore.shared.buttonColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.right", animation: .easeIn, color: ColorStore.shared.accentColor, size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: 1)
                 }
-                .foregroundColor(ColorStore.shared.buttonColor)
+                .foregroundColor(ColorStore.shared.accentColor)
             }
         }
     }

@@ -30,13 +30,16 @@ struct WidgetCalendarView: View {
                             .font(fontSize)
                     }
                 }
-                .foregroundColor(ColorStore.shared.titleTextColor)
+                .foregroundColor(ColorStore.shared.accentColor)
                 ForEach(getGetCalendarDays().chunked(into: 7), id: \.self) { weekDays in
                     HStack(spacing: 4) {
                         Spacer()
                         ForEach(weekDays, id:\.self) { date in
                             // Each individual day
-                            CalendarDay(date: date, fontSize: fontSize, cellSize: parent.size.height / 10, dayShape: .roundedSquare, month: self.displayMonth)
+                            CalendarDay(date: date,
+                                        fontSize: fontSize,
+                                        cellSize: parent.size.height / 10,
+                                        dayShape: DayDisplayShape.roundedSquare.shape, month: self.displayMonth)
                                 .padding(.vertical, 2)
                         }
                         Spacer()

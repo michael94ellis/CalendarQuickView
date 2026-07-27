@@ -27,12 +27,8 @@ struct EventSettings: View {
                 }
                 VStack(alignment: .trailing) {
                     HStack {
-                        CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
-                            self.eventManager.requestAccessToCalendar { success in
-                                if success {
-                                    self.eventManager.fetchEvents()
-                                }
-                            }
+                        CalendarButton(imageName: eventManager.isAbleToAccessUserCalendar ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.accentColor, size: viewModel.buttonSize) {
+                            self.eventManager.checkCalendarAuthStatus { _ in }
                         }
                         .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .white)
                         Spacer()
@@ -40,7 +36,7 @@ struct EventSettings: View {
                     .frame(height: 25)
                     .padding(.leading, 10)
                     HStack {
-                        CalendarButton(imageName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize) {
+                        CalendarButton(imageName: eventManager.isEventFeatureEnabled ? "checkmark.circle" : "xmark.circle", animation: .linear, color: ColorStore.shared.accentColor, size: viewModel.buttonSize) {
                             self.eventManager.isEventFeatureEnabled.toggle()
                         }
                         .foregroundColor(eventManager.isEventFeatureEnabled ? .green : .white)

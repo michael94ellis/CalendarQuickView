@@ -24,6 +24,8 @@
 		2F0B26FC2748B8E400F9D54E /* DateFormatter-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */; };
 		2F0B26FD2748B8E400F9D54E /* View-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2D8A702738B658002C8EF0 /* View-Extension.swift */; };
 		2F0B26FE2748B8E400F9D54E /* Date-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */; };
+		814C52C23017DA570076D3D1 /* EKCalendar-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814C52C43017DA570076D3D1 /* EKCalendar-Extension.swift */; };
+		814C52C33017DA570076D3D1 /* EKCalendar-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814C52C43017DA570076D3D1 /* EKCalendar-Extension.swift */; };
 		2F0B27002748BA7100F9D54E /* WidgetCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B26FF2748BA0400F9D54E /* WidgetCalendarView.swift */; };
 		2F0B270327497B7300F9D54E /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B270227497B7300F9D54E /* ColorStore.swift */; };
 		2F0B270427497BD400F9D54E /* ColorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B270227497B7300F9D54E /* ColorStore.swift */; };
@@ -108,6 +110,7 @@
 		2F0B270227497B7300F9D54E /* ColorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStore.swift; sourceTree = "<group>"; };
 		2F1BAC00273E94B900C4708B /* CalendarDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDay.swift; sourceTree = "<group>"; };
 		2F2D8A702738B658002C8EF0 /* View-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Extension.swift"; sourceTree = "<group>"; };
+		814C52C43017DA570076D3D1 /* EKCalendar-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKCalendar-Extension.swift"; sourceTree = "<group>"; };
 		2F42D4872748887300D77239 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		2F6FB94627322C7700DD0ACC /* CalendarBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarBody.swift; sourceTree = "<group>"; };
 		2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Extension.swift"; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 				2FCC6CFD272C4801006D5C7D /* Calendar-Extension.swift */,
 				2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */,
 				2FCC6CFB272C47EB006D5C7D /* DateFormatter-Extension.swift */,
+				814C52C43017DA570076D3D1 /* EKCalendar-Extension.swift */,
 				2F2D8A702738B658002C8EF0 /* View-Extension.swift */,
 				2FCC6D05272C80C5006D5C7D /* Date-Extention.swift */,
 			);
@@ -443,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F0B26FE2748B8E400F9D54E /* Date-Extention.swift in Sources */,
+				814C52C33017DA570076D3D1 /* EKCalendar-Extension.swift in Sources */,
 				2F0B27002748BA7100F9D54E /* WidgetCalendarView.swift in Sources */,
 				2F0B26FC2748B8E400F9D54E /* DateFormatter-Extension.swift in Sources */,
 				2F0B26EB2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */,
@@ -466,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FCC6D06272C80C5006D5C7D /* Date-Extention.swift in Sources */,
+				814C52C23017DA570076D3D1 /* EKCalendar-Extension.swift in Sources */,
 				2FCC6CFC272C47EB006D5C7D /* DateFormatter-Extension.swift in Sources */,
 				2FEE6DAE2736B8DD0081C4B8 /* CalendarFooter.swift in Sources */,
 				2F0B26EC2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */,

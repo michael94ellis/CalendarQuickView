@@ -13,14 +13,14 @@ class ColorStore: ObservableObject {
     static let shared = ColorStore()
     private init() { }
     
-    // MARK: - Colors
+    // MARK: - Accent (signature highlight)
     
-    @AppStorage("titleText") public var _titleTextColor: String = AppColors.contrast.rawValue
-    var titleTextColor: Color { AppColors.color(named: _titleTextColor) }
-    @AppStorage("eventTextColor") public var _eventTextColor: String = AppColors.contrast.rawValue
-    var eventTextColor: Color { AppColors.color(named: _eventTextColor) }
-    @AppStorage("buttonColor") public var _buttonColor: String = AppColors.contrast.rawValue
-    var buttonColor: Color { AppColors.color(named: _buttonColor) }
+    /// Shared highlight for today, month title, weekday headers, and button tints.
+    @AppStorage("accentColor") public var _accentColor: String = AppColors.coral.rawValue
+    var accentColor: Color { AppColors.color(named: _accentColor) }
+    
+    // MARK: - Content colors
+    
     @AppStorage("currentMonthText") public var _currentMonthText: String = AppColors.contrast.rawValue
     var currentMonthText: Color { AppColors.color(named: _currentMonthText) }
     @AppStorage("currentMonthColor") public var _currentMonthColor: String = AppColors.stone.rawValue
@@ -29,4 +29,12 @@ class ColorStore: ObservableObject {
     var otherMonthText: Color { AppColors.color(named: _otherMonthText) }
     @AppStorage("otherMonthColor") public var _otherMonthColor: String = AppColors.stone.rawValue
     var otherMonthColor: Color { AppColors.color(named: _otherMonthColor) }
+    
+    func resetToDefaults() {
+        _accentColor = AppColors.coral.rawValue
+        _currentMonthText = AppColors.contrast.rawValue
+        _currentMonthColor = AppColors.stone.rawValue
+        _otherMonthText = AppColors.contrast.rawValue
+        _otherMonthColor = AppColors.stone.rawValue
+    }
 }

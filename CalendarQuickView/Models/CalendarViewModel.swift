@@ -42,7 +42,14 @@ final class CalendarViewModel: ObservableObject {
     /// Stored property to determine if the S M T W T F S row should be shown
     @AppStorage(AppStorageKeys.showWeekDayHeader) var showWeekDayHeader: Bool = true
     
-    @AppStorage(AppStorageKeys.selectedDay) var selectedDate: Date = Date()
+    @AppStorage(AppStorageKeys.selectedDay) private var storedSelectedDate: Date = Date()
+    var selectedDate: Date {
+        get { storedSelectedDate }
+        set {
+            objectWillChange.send()
+            storedSelectedDate = calendar.startOfDay(for: newValue)
+        }
+    }
     @Published public var displayDate: Date
     public var calendar: Calendar
     @AppStorage(AppStorageKeys.dayDisplayShape) var dayDisplayShape: DayDisplayShape = .roundedSquare
@@ -56,7 +63,16 @@ final class CalendarViewModel: ObservableObject {
     }
     
     public func resetDate() {
-        self.displayDate = Date()
+        displayDate = Date()
+        selectedDate = Date()
+    }
+    
+    /// Selects a day and, if needed, navigates the calendar to that day's month.
+    public func selectDate(_ date: Date) {
+        selectedDate = date
+        if !calendar.isDate(date, equalTo: displayDate, toGranularity: .month) {
+            displayDate = date
+        }
     }
     
     var getDayCellSize: CGFloat {

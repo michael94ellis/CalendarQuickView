@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     var statusBarItem: NSStatusItem?
     /// This NSMenu will show when the NSStatusItem is clicked, an alternative to NSPopover
     let menu = NSMenu()
-    /// Holds the Calendar View, belongs to the NSMenu
+    /// Holds the Calendar View, belongs to the NSMenuItem
     let menuItem = NSMenuItem()
     /// Displayed as the content of the NSMenuItem
     var hostingView: NSHostingView<StatusBarCalendar>?
@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let newView = NSHostingView(rootView: StatusBarCalendar())
         // Set the frame or it won't be shown
         var size: CGSize
-        switch(self.calendarSize) {
+        switch self.calendarSize {
         case .small:
             size = CGSize(width: 250, height: 295)
             size.height += showWeekDayHeader ? 25 : 10
@@ -43,28 +43,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             size.height += showWeekDayHeader ? 42 : 10
         }
 
-        // Alter size of window to accommodate displaying EKEvent info
-        if eventKitManager.isEventFeatureEnabled {
-            if eventKitManager.isAbleToAccessUserCalendar {
-                eventKitManager.fetchEvents()
-                let displayEventCount = min(
-                    Int(eventKitManager.numOfEventsToDisplay),
-                    eventKitManager.futureEvents.count
-                )
-                size.height += CGFloat(displayEventCount * 30)
-            } else {
-                eventKitManager.checkCalendarAuthStatus { hasAccess in
-                    if hasAccess {
-                        self.eventKitManager.fetchEvents()
-                    }
-                }
-            }
+        // Alter size of window to accommodate displaying EKEvent info.
+        // Reserve space for the configured max so day selection can change without clipping.
+        if eventKitManager.isEventFeatureEnabled, eventKitManager.syncAuthorizationStatus() {
+            eventKitManager.fetchEvents()
+            size.height += CGFloat(Int(eventKitManager.numOfEventsToDisplay) * 30)
         }
         newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
         return newView
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        _ = eventKitManager.syncAuthorizationStatus()
         // Set the view and status menu bar item
         self.hostingView = newHostingView
         menuItem.view = newHostingView
@@ -78,13 +68,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func menuWillOpen(_ menu: NSMenu) {
-        // Every time the menu bar view is opened it should show the current date
-        // Example: User opens at 11:59PM, then re-opens at 12:01AM, two different dates
-        menuItem.view = newHostingView
-        if EventKitManager.shared.isAbleToAccessUserCalendar {
-            
+        // Sync auth and refresh events before rebuilding so the list and menu height stay correct
+        if eventKitManager.isEventFeatureEnabled {
+            if eventKitManager.syncAuthorizationStatus() {
+                eventKitManager.fetchEvents()
+            } else {
+                eventKitManager.checkCalendarAuthStatus { _ in }
+            }
         }
+        menuItem.view = newHostingView
     }
     
 }
-

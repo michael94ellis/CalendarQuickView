@@ -20,8 +20,8 @@ struct CalendarFooter: View {
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
-            CalendarButton(imageName: "gear", animation: .linear, color: ColorStore.shared.buttonColor, size: viewModel.buttonSize, action: self.settingWindowCallback)
-                .foregroundColor(ColorStore.shared.buttonColor)
+            CalendarButton(imageName: "gear", animation: .linear, color: ColorStore.shared.accentColor, size: viewModel.buttonSize, action: self.settingWindowCallback)
+                .foregroundColor(ColorStore.shared.accentColor)
         }
     }
 }

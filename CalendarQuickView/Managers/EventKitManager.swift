@@ -26,7 +26,8 @@ class EventKitManager: ObservableObject {
     static let shared = EventKitManager()
     private init() { }
     
-    private var hasCalendarReadAccess: Bool {
+    /// Live EventKit authorization — prefer this over the persisted AppStorage flag.
+    var hasCalendarReadAccess: Bool {
         let status = EKEventStore.authorizationStatus(for: .event)
         if #available(macOS 14.0, *) {
             return status == .fullAccess
@@ -35,12 +36,22 @@ class EventKitManager: ObservableObject {
         }
     }
     
+    /// Keep AppStorage in sync with the system authorization status.
+    @discardableResult
+    func syncAuthorizationStatus() -> Bool {
+        let granted = hasCalendarReadAccess
+        if isAbleToAccessUserCalendar != granted {
+            isAbleToAccessUserCalendar = granted
+        }
+        return granted
+    }
+    
     func accessGranted() {
         isAbleToAccessUserCalendar = true
     }
     
     func checkCalendarAuthStatus(completion: @escaping (Bool) -> ()) {
-        switch EKEventStore.authorizationStatus(for: EKEntityType.event) {
+        switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
             isAbleToAccessUserCalendar = false
             requestAccessToCalendar(completion: completion)
@@ -54,8 +65,8 @@ class EventKitManager: ObservableObject {
             accessGranted()
             completion(true)
         case .writeOnly:
-            isAbleToAccessUserCalendar = false
-            completion(false)
+            // Write-only cannot read events — upgrade to full access.
+            requestAccessToCalendar(completion: completion)
         @unknown default:
             isAbleToAccessUserCalendar = false
             completion(false)
@@ -67,6 +78,7 @@ class EventKitManager: ObservableObject {
             DispatchQueue.main.async {
                 if granted {
                     self.accessGranted()
+                    self.fetchEvents()
                     completion(true)
                 } else {
                     self.isAbleToAccessUserCalendar = false
@@ -87,12 +99,8 @@ class EventKitManager: ObservableObject {
     }
     
     func fetchEvents() {
-        guard hasCalendarReadAccess || isAbleToAccessUserCalendar else {
-            events = []
-            titles = []
-            startDates = []
-            endDates = []
-            futureEvents = []
+        guard syncAuthorizationStatus() else {
+            clearEvents()
             return
         }
         
@@ -107,19 +115,53 @@ class EventKitManager: ObservableObject {
             .sorted { $0.startDate < $1.startDate }
         
         events = matchedEvents
-        titles = matchedEvents.map(\.title)
+        titles = matchedEvents.compactMap(\.title)
         startDates = matchedEvents.map(\.startDate)
         endDates = matchedEvents.map(\.endDate)
-        futureEvents = getFutureEvents()
+        futureEvents = upcomingEvents(from: matchedEvents)
     }
     
     func getFutureEvents() -> [EKEvent] {
-        guard let midnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date()) else {
+        upcomingEvents(from: events)
+    }
+    
+    /// Events that occur on the given calendar day (including multi-day events that span it).
+    func events(on day: Date) -> [EKEvent] {
+        let calendar = Calendar.current
+        let dayStart = calendar.startOfDay(for: day)
+        guard let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart) else {
             return []
         }
         return events
-            .filter { $0.startDate >= midnight }
+            .filter { $0.startDate < dayEnd && $0.endDate > dayStart }
             .sorted { $0.startDate < $1.startDate }
+    }
+    
+    /// Distinct calendar colors for events occurring on the given day.
+    func calendarColors(on day: Date) -> [Color] {
+        var seen = Set<String>()
+        var colors: [Color] = []
+        for event in events(on: day) {
+            let id = event.calendar.calendarIdentifier
+            guard seen.insert(id).inserted else { continue }
+            colors.append(event.calendarColor)
+        }
+        return colors
+    }
+    
+    private func upcomingEvents(from source: [EKEvent]) -> [EKEvent] {
+        let startOfToday = Calendar.current.startOfDay(for: Date())
+        return source
+            .filter { $0.startDate >= startOfToday }
+            .sorted { $0.startDate < $1.startDate }
+    }
+    
+    private func clearEvents() {
+        events = []
+        titles = []
+        startDates = []
+        endDates = []
+        futureEvents = []
     }
 
 }
