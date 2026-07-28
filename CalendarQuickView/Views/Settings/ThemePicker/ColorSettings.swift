@@ -13,6 +13,15 @@ public struct ColorSettings: View {
     
     public init() {}
     
+    private func themeRow(for theme: UITheme) -> some View {
+        ThemeRow(
+            theme: theme,
+            isSelected: colorStore.selectedTheme.id == theme.id
+        ) {
+            colorStore.selectTheme(theme)
+        }
+    }
+    
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -34,13 +43,20 @@ public struct ColorSettings: View {
                 .font(.title3)
             
             Divider()
-            
-            ForEach(UITheme.all) { theme in
-                ThemeRow(
-                    theme: theme,
-                    isSelected: colorStore.selectedTheme.id == theme.id
-                ) {
-                    colorStore.selectTheme(theme)
+            let allThemes = UITheme.all
+            let half = allThemes.count / 2
+            let firstHalf = allThemes.prefix(half)
+            let secondHalf = allThemes.suffix(half)
+            HStack {
+                VStack {
+                    ForEach(firstHalf) { theme in
+                        themeRow(for: theme)
+                    }
+                }
+                VStack {
+                    ForEach(secondHalf) { theme in
+                        themeRow(for: theme)
+                    }
                 }
             }
             

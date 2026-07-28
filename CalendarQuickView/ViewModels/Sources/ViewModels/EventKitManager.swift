@@ -14,7 +14,6 @@ public final class EventKitManager: ObservableObject {
     
     @AppStorage(AppStorageKeys.calendarAccessGranted) public var isAbleToAccessUserCalendar: Bool = false
     @AppStorage(AppStorageKeys.isEventFeatureEnabled) public var isEventFeatureEnabled: Bool = false
-    @AppStorage(AppStorageKeys.numOfEventsToDisplay) public var numOfEventsToDisplay: Double = 4
 
     @Published public private(set) var titles: [String] = []
     @Published public private(set) var startDates: [Date] = []

@@ -22,44 +22,50 @@ struct EventListView: View {
     private var eventsToShow: [EKEvent] {
         Array(
             eventManager.events(on: viewModel.selectedDate)
-                .prefix(Int(eventManager.numOfEventsToDisplay))
         )
     }
     
     /// Fixed slot height so the status-menu host does not resize when the selected day changes.
     private var listHeight: CGFloat {
-        CGFloat(min(Int(eventManager.numOfEventsToDisplay), Self.maxVisibleRows)) * Self.rowHeight
+        CGFloat(min(4, Self.maxVisibleRows)) * Self.rowHeight
     }
     
     var body: some View {
         let fontSize: Font = viewModel.calendarSize == .small ? .callout : viewModel.calendarSize == .medium ? .body : .title3
         if eventManager.isEventFeatureEnabled, eventManager.hasCalendarReadAccess {
-            ScrollView(.vertical, showsIndicators: eventsToShow.count > Self.maxVisibleRows) {
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(Array(eventsToShow.enumerated()), id: \.offset) { _, event in
-                        HStack(spacing: 6) {
-                            RoundedRectangle(cornerRadius: 1)
-                                .fill(event.calendarColor)
-                                .frame(width: 3, height: 18)
-                            Text(event.title ?? "Untitled")
-                                .font(fontSize)
-                                .foregroundColor(event.calendarColor)
-                                .lineLimit(1)
-                            Spacer(minLength: 4)
-                            Text(viewModel.eventDateFormatter.string(from: event.startDate))
-                                .font(fontSize)
-                                .foregroundColor(event.calendarColor)
-                                .opacity(0.85)
+            // Color.clear owns the height for NSHostingView fittingSize; an empty ScrollView
+            // alone often reports ~0 and the menu is measured too short for later days.
+            Color.clear
+                .frame(height: listHeight)
+                .overlay(alignment: .top) {
+                    ScrollView(.vertical, showsIndicators: eventsToShow.count > Self.maxVisibleRows) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(eventsToShow.enumerated()), id: \.offset) { _, event in
+                                HStack(spacing: 6) {
+                                    RoundedRectangle(cornerRadius: 1)
+                                        .fill(event.calendarColor)
+                                        .frame(width: 3, height: 18)
+                                    Text(event.title ?? "Untitled")
+                                        .font(fontSize)
+                                        .foregroundColor(event.calendarColor)
+                                        .lineLimit(1)
+                                    Spacer(minLength: 4)
+                                    Text(viewModel.eventDateFormatter.string(from: event.startDate))
+                                        .font(fontSize)
+                                        .foregroundColor(event.calendarColor)
+                                        .opacity(0.85)
+                                }
+                                .frame(height: Self.rowHeight - 1)
+                                Divider()
+                            }
                         }
-                        .frame(height: Self.rowHeight - 1)
-                        Divider()
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-            }
-            .frame(height: listHeight)
-            .onAppear {
-                eventManager.fetchEvents()
-            }
+                .clipped()
+                .onAppear {
+                    eventManager.fetchEvents()
+                }
         }
     }
 }

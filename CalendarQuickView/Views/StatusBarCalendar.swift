@@ -38,8 +38,7 @@ struct StatusBarCalendar: View {
         .environmentObject(eventManager)
         .id(colorStore.selectedThemeID)
         .padding(.horizontal, horizontalPadding)
-        .padding(.vertical, 10)
-        .background(colorStore.surfaceColor)
+        .padding(.vertical, 12)
     }
     
     /// Opens a window displaying a Swiftui View for app settings

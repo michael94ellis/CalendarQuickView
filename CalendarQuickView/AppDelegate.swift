@@ -37,7 +37,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         let width = CalendarViewModel().menuWidth
         let rootView = StatusBarCalendar(eventManager: eventKitManager)
             .frame(width: width)
-            .fixedSize(horizontal: true, vertical: true)
         let hostingView = NSHostingView(rootView: rootView)
         
         if #available(macOS 13.0, *) {
@@ -46,21 +45,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         
         // Propose a wide-open height so SwiftUI can report its natural size for the fixed width.
         hostingView.setFrameSize(NSSize(width: width, height: 10_000))
-        hostingView.layoutSubtreeIfNeeded()
         
-        var size = hostingView.fittingSize
-        if size.height < 1 {
-            size.height = hostingView.intrinsicContentSize.height
-        }
-        size.width = width
-        if size.height < 1 {
-            // Last resort if the host still can't measure (should be rare).
-            size.height = 400
-        }
-        if let visibleHeight = NSScreen.main?.visibleFrame.height {
-            size.height = min(size.height, visibleHeight * 0.85)
-        }
-        hostingView.frame = NSRect(origin: .zero, size: size)
+        hostingView.frame = NSRect(origin: .zero, size: hostingView.intrinsicContentSize)
+        
         return hostingView
     }
     

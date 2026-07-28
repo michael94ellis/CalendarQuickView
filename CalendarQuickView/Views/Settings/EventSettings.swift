@@ -48,11 +48,6 @@ struct EventSettings: View {
                 .frame(maxWidth: 230)
             }
             
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Events to display: \(Int(eventManager.numOfEventsToDisplay))")
-                Slider(value: $eventManager.numOfEventsToDisplay, in: 1...10, step: 1)
-            }
-            
             Spacer()
         }
         .padding(.horizontal, 24)
