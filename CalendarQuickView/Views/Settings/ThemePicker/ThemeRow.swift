@@ -38,7 +38,6 @@ public struct ThemeRow: View {
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity)
-                        .border(.red)
                     HStack(spacing: 4) {
                         ForEach(Array(swatchHexes.enumerated()), id: \.offset) { _, hex in
                             Color(hex: hex)
