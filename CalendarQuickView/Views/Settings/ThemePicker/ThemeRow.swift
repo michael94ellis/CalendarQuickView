@@ -55,7 +55,7 @@ public struct ThemeRow: View {
             .padding(.horizontal, 8)
             .background(
                 RoundedRectangle(cornerRadius: 6)
-                    .fill(isSelected ? Color(hex: theme.surface) : Color.clear)
+                    .fill(Color.clear)
                     .overlay(
                         RoundedRectangle(cornerRadius: 6)
                             .strokeBorder(isSelected ? Color(hex: theme.accent) : Color.clear, lineWidth: 1.5)

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,7 +27,6 @@
 		2F42D49227488BF900D77239 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 2F42D49127488BF900D77239 /* LaunchAtLogin */; };
 		2F6FB94727322C7700DD0ACC /* CalendarBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94627322C7700DD0ACC /* CalendarBody.swift */; };
 		2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB94927342E4F00DD0ACC /* Array-Extension.swift */; };
-		2F6FB95B27357DF800DD0ACC /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */; };
 		2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FB96027358AAF00DD0ACC /* EventSettings.swift */; };
 		2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */; };
@@ -44,8 +43,9 @@
 		814C52C23017DE670076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52C13017DE670076D3D1 /* DesignToken */; };
 		81F70F813018C89E00996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F803018C89E00996E20 /* ViewModels */; };
 		81F70F833018C8A300996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F823018C8A300996E20 /* ViewModels */; };
-		81F70F853018CA0100996E20 /* ThemePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F843018CA0100996E20 /* ThemePicker */; };
-		81F70F873018CA1200996E20 /* LaunchAtLoginMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F863018CA1200996E20 /* LaunchAtLoginMonitor.swift */; };
+		81F70F873018CA1200996E20 /* LaunchAtLoginToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F863018CA1200996E20 /* LaunchAtLoginToggle.swift */; };
+		81F70F873018CCF900996E20 /* ThemeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F853018CCF900996E20 /* ThemeRow.swift */; };
+		81F70F883018CCF900996E20 /* ColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F843018CCF900996E20 /* ColorSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,9 +123,10 @@
 		2FF55753273F6562000FD5C5 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Main.strings"; sourceTree = "<group>"; };
 		814C52BE3017DD630076D3D1 /* DesignToken */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignToken; sourceTree = "<group>"; };
 		814C52C43017DA570076D3D1 /* EKCalendar-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKCalendar-Extension.swift"; sourceTree = "<group>"; };
-		81F70F7D3018C72A00996E20 /* ThemePicker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ThemePicker; sourceTree = "<group>"; };
 		81F70F7E3018C75C00996E20 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewModels; sourceTree = "<group>"; };
-		81F70F863018CA1200996E20 /* LaunchAtLoginMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginMonitor.swift; sourceTree = "<group>"; };
+		81F70F843018CCF900996E20 /* ColorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSettings.swift; sourceTree = "<group>"; };
+		81F70F853018CCF900996E20 /* ThemeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeRow.swift; sourceTree = "<group>"; };
+		81F70F863018CA1200996E20 /* LaunchAtLoginToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginToggle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +147,6 @@
 			files = (
 				2F42D49227488BF900D77239 /* LaunchAtLogin in Frameworks */,
 				81F70F813018C89E00996E20 /* ViewModels in Frameworks */,
-				81F70F853018CA0100996E20 /* ThemePicker in Frameworks */,
 				814C52C03017DE620076D3D1 /* DesignToken in Frameworks */,
 				2F42D4882748887300D77239 /* ServiceManagement.framework in Frameworks */,
 			);
@@ -176,14 +176,6 @@
 				2F6FB93527320EDC00DD0ACC /* Extensions */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		2F1BABFF273E8C9000C4708B /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				81F70F863018CA1200996E20 /* LaunchAtLoginMonitor.swift */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		2F6FB93527320EDC00DD0ACC /* Extensions */ = {
@@ -218,7 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				2FDFB09C2730B09800BE49CC /* SettingsTabView.swift */,
+				81F70F863018CA1200996E20 /* LaunchAtLoginToggle.swift */,
 				2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */,
+				81F70F863018CCF900996E20 /* ThemePicker */,
 				2F6FB96027358AAF00DD0ACC /* EventSettings.swift */,
 			);
 			path = Settings;
@@ -249,9 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				81F70F7E3018C75C00996E20 /* ViewModels */,
-				81F70F7D3018C72A00996E20 /* ThemePicker */,
 				2FCC6CE2272C3A08006D5C7D /* AppDelegate.swift */,
-				2F1BABFF273E8C9000C4708B /* Managers */,
 				2F6FB93627320EEE00DD0ACC /* Views */,
 				2FF55750273F641C000FD5C5 /* Main.storyboard */,
 				2FCC6CEE272C3A09006D5C7D /* Info.plist */,
@@ -277,6 +269,15 @@
 				2FDFB0892730241C00BE49CC /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81F70F863018CCF900996E20 /* ThemePicker */ = {
+			isa = PBXGroup;
+			children = (
+				81F70F843018CCF900996E20 /* ColorSettings.swift */,
+				81F70F853018CCF900996E20 /* ThemeRow.swift */,
+			);
+			path = ThemePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,7 +325,6 @@
 				2F42D49127488BF900D77239 /* LaunchAtLogin */,
 				814C52BF3017DE620076D3D1 /* DesignToken */,
 				81F70F803018C89E00996E20 /* ViewModels */,
-				81F70F843018CA0100996E20 /* ThemePicker */,
 			);
 			productName = CalendarQuickView;
 			productReference = 2FCC6CDF272C3A08006D5C7D /* CalendarQuickView.app */;
@@ -362,7 +362,6 @@
 				2F42D49027488BF900D77239 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 				81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */,
 				81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */,
-				81F70F8A3018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ThemePicker" */,
 			);
 			productRefGroup = 2FCC6CE0272C3A08006D5C7D /* Products */;
 			projectDirPath = "";
@@ -418,6 +417,8 @@
 			files = (
 				2FEE6DAE2736B8DD0081C4B8 /* CalendarFooter.swift in Sources */,
 				2F0B26EC2748B28D00F9D54E /* CalendarWidget.intentdefinition in Sources */,
+				81F70F873018CCF900996E20 /* ThemeRow.swift in Sources */,
+				81F70F883018CCF900996E20 /* ColorSettings.swift in Sources */,
 				2FDFB09D2730B09800BE49CC /* SettingsTabView.swift in Sources */,
 				2F1BAC01273E94BA00C4708B /* CalendarDay.swift in Sources */,
 				2F2D8A712738B658002C8EF0 /* View-Extension.swift in Sources */,
@@ -429,7 +430,7 @@
 				2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */,
 				2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */,
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
-				81F70F873018CA1200996E20 /* LaunchAtLoginMonitor.swift in Sources */,
+				81F70F873018CA1200996E20 /* LaunchAtLoginToggle.swift in Sources */,
 				2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -769,10 +770,6 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = CalendarQuickView/ViewModels;
 		};
-		81F70F8A3018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ThemePicker" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = CalendarQuickView/ThemePicker;
-		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -811,11 +808,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */;
 			productName = ViewModels;
-		};
-		81F70F843018CA0100996E20 /* ThemePicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 81F70F8A3018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ThemePicker" */;
-			productName = ThemePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

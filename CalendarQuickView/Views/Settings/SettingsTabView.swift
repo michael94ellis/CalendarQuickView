@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 import ViewModels
-import ThemePicker
 
 struct SettingsTabView: View {
     
@@ -16,7 +15,6 @@ struct SettingsTabView: View {
     @StateObject private var viewModel = CalendarViewModel()
     @StateObject private var colorStore = ColorStore()
     @StateObject private var eventManager = EventKitManager()
-    @StateObject private var launchAtLoginMonitor = LaunchAtLoginMonitor()
     
     private enum Tabs: Hashable {
         case general
@@ -56,7 +54,6 @@ struct SettingsTabView: View {
             .environmentObject(viewModel)
             .environmentObject(colorStore)
             .environmentObject(eventManager)
-            .environmentObject(launchAtLoginMonitor)
             Spacer()
         }
         .frame(width: 480)

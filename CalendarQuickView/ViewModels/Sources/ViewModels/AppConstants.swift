@@ -28,8 +28,8 @@ public enum EventDateFormat: String, CaseIterable, Sendable {
 }
 
 public enum DayDisplayShape: String, CaseIterable, Sendable {
-    case square
     case roundedSquare
+    case square
     case circle
     case none
     

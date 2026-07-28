@@ -5,13 +5,13 @@
 //  Created by Michael Ellis on 11/5/21.
 //
 
+import LaunchAtLogin
 import SwiftUI
 import ViewModels
 
 struct GeneralSettings: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel 
-    @ObservedObject var launchAtLoginMonitor = LaunchAtLoginMonitor
         
     func TextWithFrame(_ text: String) -> some View {
         Text(text)
@@ -33,7 +33,7 @@ struct GeneralSettings: View {
                     // Show app icon in dock
                     TextWithFrame(viewModel.showDockIcon ? "App Icon Shown In Dock" : "App Icon Not In Dock")
                     // Launch app at login
-                    TextWithFrame("\(self.launchAtLoginMonitor.isLaunchAtLoginEnabled ? "App is currently in" : "Click to add to") Login Items")
+                    TextWithFrame("\(LaunchAtLogin.isEnabled ? "App is currently in" : "Click to add to") Login Items")
                 }
                 .frame(width: 200)
                 VStack(alignment: .trailing) {
@@ -78,7 +78,7 @@ struct GeneralSettings: View {
                     .frame(height: 25)
                     // Launch app at login
                     HStack {
-                        LaunchAtLoginMonitorToggle()
+                        LaunchAtLoginToggle()
                         Spacer()
                     }
                     .padding(.leading, 10)
@@ -89,9 +89,6 @@ struct GeneralSettings: View {
             Spacer()
         }
         .padding(.vertical, 20)
-        .onAppear {
-            launchAtLoginMonitor.refresh()
-        }
     }
 }
 

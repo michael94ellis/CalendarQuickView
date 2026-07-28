@@ -26,13 +26,14 @@ struct EventListView: View {
         )
     }
     
+    /// Fixed slot height so the status-menu host does not resize when the selected day changes.
     private var listHeight: CGFloat {
-        CGFloat(min(eventsToShow.count, Self.maxVisibleRows)) * Self.rowHeight
+        CGFloat(min(Int(eventManager.numOfEventsToDisplay), Self.maxVisibleRows)) * Self.rowHeight
     }
     
     var body: some View {
         let fontSize: Font = viewModel.calendarSize == .small ? .callout : viewModel.calendarSize == .medium ? .body : .title3
-        if eventManager.isEventFeatureEnabled, eventManager.hasCalendarReadAccess, !eventsToShow.isEmpty {
+        if eventManager.isEventFeatureEnabled, eventManager.hasCalendarReadAccess {
             ScrollView(.vertical, showsIndicators: eventsToShow.count > Self.maxVisibleRows) {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(Array(eventsToShow.enumerated()), id: \.offset) { _, event in
