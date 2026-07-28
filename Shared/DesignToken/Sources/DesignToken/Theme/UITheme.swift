@@ -9,6 +9,8 @@ import Foundation
 public struct UITheme: Identifiable, Equatable, Sendable {
     public let id: String
     public let name: String
+    /// Menu / calendar chrome background behind the grid.
+    public let surface: String
     /// Highlight for today, title, weekday headers, and button tints.
     public let accent: String
     /// Text drawn on top of the accent (e.g. today's day number).
@@ -21,6 +23,7 @@ public struct UITheme: Identifiable, Equatable, Sendable {
     public init(
         id: String,
         name: String,
+        surface: String,
         accent: String,
         todayText: String,
         currentMonthText: String,
@@ -30,6 +33,7 @@ public struct UITheme: Identifiable, Equatable, Sendable {
     ) {
         self.id = id
         self.name = name
+        self.surface = surface
         self.accent = accent
         self.todayText = todayText
         self.currentMonthText = currentMonthText
@@ -38,10 +42,10 @@ public struct UITheme: Identifiable, Equatable, Sendable {
         self.otherMonthBackground = otherMonthBackground
     }
     
-    /// Ordered list of selectable themes. Edit hex values here to restyle the app.
-    public static let all: [UITheme] = { Theme.allCases.compactMap { $0.uiTheme }}()
+    /// Ordered list of selectable themes.
+    public static let all: [UITheme] = Theme.allCases.map(\.uiTheme)
     
-    public static let `default`: UITheme = Theme.coral.uiTheme
+    public static let `default`: UITheme = Theme.system.uiTheme
     
     public static func theme(id: String) -> UITheme {
         all.first { $0.id == id } ?? .default

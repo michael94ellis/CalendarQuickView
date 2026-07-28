@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import ViewModels
 
 /// Displays the displayed Month Name and Year as well as buttons to view next/prev/current month
 struct CalendarHeader: View {
     
-    /// Because this view allows the user to change the display it must have a reference to the view model(tightly coupled)
     @EnvironmentObject var viewModel: CalendarViewModel
+    @EnvironmentObject private var colorStore: ColorStore
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,32 +20,41 @@ struct CalendarHeader: View {
                 
                 // MARK: - Title (Month/Year)
                 Text(self.viewModel.titleDateFormatter.string(from: self.viewModel.displayDate))
-                    .foregroundColor(ColorStore.shared.accentColor)
+                    .foregroundColor(colorStore.accentColor)
                     .font(self.viewModel.calendarTitleSize)
                 Spacer()
                 
                 // MARK: - Previous Month Button
                 
-                CalendarButton(imageName: "chevron.left", animation: .easeOut, color: ColorStore.shared.accentColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.left",
+                               animation: .easeOut,
+                               color: colorStore.accentColor,
+                               size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: -1)
                 }
                 .padding(.horizontal, 5)
-                .foregroundColor(ColorStore.shared.accentColor)
+                .foregroundColor(colorStore.accentColor)
                 
                 // MARK: - GoTo Current Date Button
                 
-                CalendarButton(imageName: "calendar", animation: .spring(), color: ColorStore.shared.accentColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "calendar",
+                               animation: .spring(),
+                               color: colorStore.accentColor,
+                               size: self.viewModel.buttonSize) {
                     self.viewModel.resetDate()
                 }
                 .padding(.trailing, 5)
-                .foregroundColor(ColorStore.shared.accentColor)
+                .foregroundColor(colorStore.accentColor)
                 
                 // MARK: - Next Month Button
                 
-                CalendarButton(imageName: "chevron.right", animation: .easeIn, color: ColorStore.shared.accentColor, size: self.viewModel.buttonSize) {
+                CalendarButton(imageName: "chevron.right",
+                               animation: .easeIn,
+                               color: colorStore.accentColor,
+                               size: self.viewModel.buttonSize) {
                     self.viewModel.displayDate.incrementMonths(by: 1)
                 }
-                .foregroundColor(ColorStore.shared.accentColor)
+                .foregroundColor(colorStore.accentColor)
             }
         }
     }

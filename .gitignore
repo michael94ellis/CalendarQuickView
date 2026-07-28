@@ -17,3 +17,6 @@ CalendarQuickView.xcodeproj/project.xcworkspace/xcuserdata/michaelellis.xcuserda
 *.zip
 fastlane_match_repo/
 *.xcuserstate
+/build
+/Shared/DesignToken/build
+/CalendarQuickView.xcodeproj/xcuserdata

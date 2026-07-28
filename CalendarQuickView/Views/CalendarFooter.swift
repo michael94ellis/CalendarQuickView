@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import ViewModels
 
 struct CalendarFooter: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel
+    @EnvironmentObject private var colorStore: ColorStore
     
     var settingWindowCallback: () -> () = { }
     
@@ -20,9 +22,8 @@ struct CalendarFooter: View {
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
-            CalendarButton(imageName: "gear", animation: .linear, color: ColorStore.shared.accentColor, size: viewModel.buttonSize, action: self.settingWindowCallback)
-                .foregroundColor(ColorStore.shared.accentColor)
+            CalendarButton(imageName: "gear", animation: .linear, color: colorStore.accentColor, size: viewModel.buttonSize, action: self.settingWindowCallback)
+                .foregroundColor(colorStore.accentColor)
         }
     }
 }
-

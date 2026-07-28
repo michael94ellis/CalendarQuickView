@@ -7,7 +7,7 @@
 
 import Cocoa
 import SwiftUI
-import LaunchAtLogin
+import ViewModels
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
@@ -21,62 +21,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// Holds the Calendar View, belongs to the NSMenuItem
     let menuItem = NSMenuItem()
     /// Displayed as the content of the NSMenuItem
-    var hostingView: NSHostingView<StatusBarCalendar>?
-    @AppStorage(AppStorageKeys.calendarSize) var calendarSize: CalendarSize = .small
-    @AppStorage(AppStorageKeys.showWeekDayHeader) var showWeekDayHeader: Bool = true
-    let eventKitManager = EventKitManager.shared
-    /// This calculated var will provide a new CalendarView when the Calendar view is opened by user
-    /// Making a new one will make sure the current date is set correctly on the calendar if the user doesn't restart their computer
-    var newHostingView: NSHostingView<StatusBarCalendar> {
-        let newView = NSHostingView(rootView: StatusBarCalendar())
-        // Set the frame or it won't be shown
-        var size: CGSize
-        switch self.calendarSize {
-        case .small:
-            size = CGSize(width: 250, height: 295)
-            size.height += showWeekDayHeader ? 25 : 10
-        case .medium:
-            size = CGSize(width: 300, height: 330)
-            size.height += showWeekDayHeader ? 30 : 10
-        case .large:
-            size = CGSize(width: 400, height: 408)
-            size.height += showWeekDayHeader ? 42 : 10
-        }
-
-        // Alter size of window to accommodate displaying EKEvent info.
-        // Cap visible event rows; EventListView scrolls when there are more.
-        if eventKitManager.isEventFeatureEnabled, eventKitManager.syncAuthorizationStatus() {
-            eventKitManager.fetchEvents()
-            let visibleEventRows = min(
-                Int(eventKitManager.numOfEventsToDisplay),
-                EventListView.maxVisibleRows
-            )
-            size.height += CGFloat(visibleEventRows) * EventListView.rowHeight
-        }
-        // Keep the menu on-screen for large calendar sizes.
-        if let visibleHeight = NSScreen.main?.visibleFrame.height {
-            size.height = min(size.height, visibleHeight * 0.75)
-        }
-        newView.frame = NSRect(x: 0, y: 0, width: size.width, height: size.height)
-        return newView
-    }
+    var hostingView: NSView?
+    let eventKitManager = EventKitManager()
     
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        _ = eventKitManager.syncAuthorizationStatus()
-        // Set the view and status menu bar item
-        self.hostingView = newHostingView
-        menuItem.view = newHostingView
-        menu.addItem(menuItem)
-        // Allow this AppDelegate, conforming to NSMenuDelegate, to know when the Calendar Quick View button is clicked
-        menu.delegate = self
-        // Configure the status bar menu item
-        self.statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        self.statusBarItem?.menu = menu
-        self.statusBarItem?.button?.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "Quick View Calendar")
-    }
-    
-    func menuWillOpen(_ menu: NSMenu) {
-        // Sync auth and refresh events before rebuilding so the list and menu height stay correct
+    /// Builds a hosting view sized to its SwiftUI content (height measured, width from layout).
+    var newHostingView: NSView {
         if eventKitManager.isEventFeatureEnabled {
             if eventKitManager.syncAuthorizationStatus() {
                 eventKitManager.fetchEvents()
@@ -84,7 +33,53 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
                 eventKitManager.checkCalendarAuthStatus { _ in }
             }
         }
-        menuItem.view = newHostingView
+        
+        let width = CalendarViewModel().menuWidth
+        let rootView = StatusBarCalendar(eventManager: eventKitManager)
+            .frame(width: width)
+            .fixedSize(horizontal: true, vertical: true)
+        let hostingView = NSHostingView(rootView: rootView)
+        
+        if #available(macOS 13.0, *) {
+            hostingView.sizingOptions = [.intrinsicContentSize]
+        }
+        
+        // Propose a wide-open height so SwiftUI can report its natural size for the fixed width.
+        hostingView.setFrameSize(NSSize(width: width, height: 10_000))
+        hostingView.layoutSubtreeIfNeeded()
+        
+        var size = hostingView.fittingSize
+        if size.height < 1 {
+            size.height = hostingView.intrinsicContentSize.height
+        }
+        size.width = width
+        if size.height < 1 {
+            // Last resort if the host still can't measure (should be rare).
+            size.height = 400
+        }
+        if let visibleHeight = NSScreen.main?.visibleFrame.height {
+            size.height = min(size.height, visibleHeight * 0.85)
+        }
+        hostingView.frame = NSRect(origin: .zero, size: size)
+        return hostingView
+    }
+    
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        _ = eventKitManager.syncAuthorizationStatus()
+        self.hostingView = newHostingView
+        menuItem.view = hostingView
+        menu.addItem(menuItem)
+        menu.delegate = self
+        self.statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        self.statusBarItem?.menu = menu
+        self.statusBarItem?.button?.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "Quick View Calendar")
+    }
+    
+    func menuWillOpen(_ menu: NSMenu) {
+        // Rebuild so the date, events, and measured height stay current
+        let view = newHostingView
+        hostingView = view
+        menuItem.view = view
     }
     
 }

@@ -7,11 +7,12 @@
 
 import SwiftUI
 import EventKit
+import ViewModels
 
 struct EventListView: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel
-    @ObservedObject var eventManager = EventKitManager.shared
+    @EnvironmentObject private var eventManager: EventKitManager
     
     /// Row height used for layout and menu sizing.
     static let rowHeight: CGFloat = 30

@@ -7,11 +7,16 @@
 
 import SwiftUI
 import Combine
+import ViewModels
+import ThemePicker
 
 struct SettingsTabView: View {
     
     @State var showMenuButton: Bool = true
-    @StateObject var viewModel = CalendarViewModel()
+    @StateObject private var viewModel = CalendarViewModel()
+    @StateObject private var colorStore = ColorStore()
+    @StateObject private var eventManager = EventKitManager()
+    @StateObject private var launchAtLoginMonitor = LaunchAtLoginMonitor()
     
     private enum Tabs: Hashable {
         case general
@@ -36,21 +41,22 @@ struct SettingsTabView: View {
                     .tabItem {
                         Label("General", systemImage: "gear")
                     }
-                    .tag(Tabs.colors)
-                    .environmentObject(viewModel)
+                    .tag(Tabs.general)
                 ColorSettings()
                     .tabItem {
                         Label("Theme", systemImage: "paintpalette")
                     }
                     .tag(Tabs.colors)
-                    .environmentObject(viewModel)
                 EventSettings()
                     .tabItem {
                         Label("Events", systemImage: "star")
                     }
                     .tag(Tabs.events)
-                    .environmentObject(viewModel)
             }
+            .environmentObject(viewModel)
+            .environmentObject(colorStore)
+            .environmentObject(eventManager)
+            .environmentObject(launchAtLoginMonitor)
             Spacer()
         }
         .frame(width: 480)

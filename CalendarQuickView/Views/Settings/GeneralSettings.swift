@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import ViewModels
 
 struct GeneralSettings: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel 
-    @ObservedObject var launchAtLoginMonitor = LaunchAtLoginMonitor.shared
+    @ObservedObject var launchAtLoginMonitor = LaunchAtLoginMonitor
         
     func TextWithFrame(_ text: String) -> some View {
         Text(text)
@@ -88,6 +89,9 @@ struct GeneralSettings: View {
             Spacer()
         }
         .padding(.vertical, 20)
+        .onAppear {
+            launchAtLoginMonitor.refresh()
+        }
     }
 }
 

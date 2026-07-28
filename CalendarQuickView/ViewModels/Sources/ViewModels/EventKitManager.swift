@@ -10,24 +10,24 @@ import EventKit
 import AppKit
 import SwiftUI
 
-class EventKitManager: ObservableObject {
+public final class EventKitManager: ObservableObject {
     
-    @AppStorage(AppStorageKeys.calendarAccessGranted) var isAbleToAccessUserCalendar: Bool = false
-    @AppStorage(AppStorageKeys.isEventFeatureEnabled) var isEventFeatureEnabled: Bool = false
-    @AppStorage(AppStorageKeys.numOfEventsToDisplay) var numOfEventsToDisplay: Double = 4
+    @AppStorage(AppStorageKeys.calendarAccessGranted) public var isAbleToAccessUserCalendar: Bool = false
+    @AppStorage(AppStorageKeys.isEventFeatureEnabled) public var isEventFeatureEnabled: Bool = false
+    @AppStorage(AppStorageKeys.numOfEventsToDisplay) public var numOfEventsToDisplay: Double = 4
 
-    @Published private(set) var titles: [String] = []
-    @Published private(set) var startDates: [Date] = []
-    @Published private(set) var endDates: [Date] = []
-    @Published private(set) var events: [EKEvent] = []
-    @Published private(set) var futureEvents: [EKEvent] = []
+    @Published public private(set) var titles: [String] = []
+    @Published public private(set) var startDates: [Date] = []
+    @Published public private(set) var endDates: [Date] = []
+    @Published public private(set) var events: [EKEvent] = []
+    @Published public private(set) var futureEvents: [EKEvent] = []
     
     let eventStore = EKEventStore()
-    static let shared = EventKitManager()
-    private init() { }
+    
+    public init() {}
     
     /// Live EventKit authorization — prefer this over the persisted AppStorage flag.
-    var hasCalendarReadAccess: Bool {
+    public var hasCalendarReadAccess: Bool {
         let status = EKEventStore.authorizationStatus(for: .event)
         if #available(macOS 14.0, *) {
             return status == .fullAccess
@@ -38,7 +38,7 @@ class EventKitManager: ObservableObject {
     
     /// Keep AppStorage in sync with the system authorization status.
     @discardableResult
-    func syncAuthorizationStatus() -> Bool {
+    public func syncAuthorizationStatus() -> Bool {
         let granted = hasCalendarReadAccess
         if isAbleToAccessUserCalendar != granted {
             isAbleToAccessUserCalendar = granted
@@ -46,11 +46,11 @@ class EventKitManager: ObservableObject {
         return granted
     }
     
-    func accessGranted() {
+    public func accessGranted() {
         isAbleToAccessUserCalendar = true
     }
     
-    func checkCalendarAuthStatus(completion: @escaping (Bool) -> ()) {
+    public func checkCalendarAuthStatus(completion: @escaping (Bool) -> ()) {
         switch EKEventStore.authorizationStatus(for: .event) {
         case .notDetermined:
             isAbleToAccessUserCalendar = false
@@ -73,7 +73,7 @@ class EventKitManager: ObservableObject {
         }
     }
     
-    func requestAccessToCalendar(completion: @escaping (Bool) -> ()) {
+    public func requestAccessToCalendar(completion: @escaping (Bool) -> ()) {
         let handleResult: (Bool) -> Void = { granted in
             DispatchQueue.main.async {
                 if granted {
@@ -98,7 +98,7 @@ class EventKitManager: ObservableObject {
         }
     }
     
-    func fetchEvents() {
+    public func fetchEvents() {
         guard syncAuthorizationStatus() else {
             clearEvents()
             return
@@ -121,12 +121,12 @@ class EventKitManager: ObservableObject {
         futureEvents = upcomingEvents(from: matchedEvents)
     }
     
-    func getFutureEvents() -> [EKEvent] {
+    public func getFutureEvents() -> [EKEvent] {
         upcomingEvents(from: events)
     }
     
     /// Events that occur on the given calendar day (including multi-day events that span it).
-    func events(on day: Date) -> [EKEvent] {
+    public func events(on day: Date) -> [EKEvent] {
         let calendar = Calendar.current
         let dayStart = calendar.startOfDay(for: day)
         guard let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart) else {
@@ -138,7 +138,7 @@ class EventKitManager: ObservableObject {
     }
     
     /// Distinct calendar colors for events occurring on the given day.
-    func calendarColors(on day: Date) -> [Color] {
+    public func calendarColors(on day: Date) -> [Color] {
         var seen = Set<String>()
         var colors: [Color] = []
         for event in events(on: day) {

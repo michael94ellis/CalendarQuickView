@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import ViewModels
+import DesignToken
 
 struct WidgetCalendarView: View {
     
     let displayMonth = Date()
     let weekDayFormatter = DateFormatter.weekDayFormatter
     var days: [[Date]] = []
+    private let colorStore = ColorStore()
     
     init() {
         let daysToDisplay = getGetCalendarDays().chunked(into: 7)
@@ -30,7 +33,7 @@ struct WidgetCalendarView: View {
                             .font(fontSize)
                     }
                 }
-                .foregroundColor(ColorStore.shared.accentColor)
+                .foregroundColor(colorStore.accentColor)
                 ForEach(getGetCalendarDays().chunked(into: 7), id: \.self) { weekDays in
                     HStack(spacing: 4) {
                         Spacer()

@@ -7,9 +7,12 @@
 
 import SwiftUI
 import WidgetKit
+import ViewModels
 
 struct CalendarBody: View {
     @EnvironmentObject var viewModel: CalendarViewModel
+    @EnvironmentObject private var colorStore: ColorStore
+    @EnvironmentObject private var eventManager: EventKitManager
     
     private let weekDayCellSpacing: CGFloat = 10
     private let verticalPadding: CGFloat = 8
@@ -34,7 +37,7 @@ struct CalendarBody: View {
                     .frame(width: dayCellSize, height: dayCellSize)
             }
         }
-        .foregroundColor(ColorStore.shared.accentColor)
+        .foregroundColor(colorStore.accentColor)
     }
     
     var body: some View {
@@ -55,7 +58,7 @@ struct CalendarBody: View {
                             isSelected: viewModel.calendar.isDate(date, inSameDayAs: viewModel.selectedDate),
                             isSelectable: true,
                             onSelect: { viewModel.selectDate(date) },
-                            eventColors: EventKitManager.shared.calendarColors(on: date)
+                            eventColors: eventManager.calendarColors(on: date)
                         )
                         .padding(.vertical, 4)
                     }

@@ -8,34 +8,38 @@
 import SwiftUI
 import AppKit
 import Combine
+import ViewModels
 
 struct StatusBarCalendar: View {
     
-    @ObservedObject var viewModel = CalendarViewModel()
-    @ObservedObject private var colorStore = ColorStore.shared
+    @StateObject private var viewModel = CalendarViewModel()
+    @StateObject private var colorStore = ColorStore()
+    @ObservedObject var eventManager: EventKitManager
     static var windowRef: NSWindow?
     private var horizontalPadding: CGFloat = 10
     
-    init() {
-        self.horizontalPadding = self.viewModel.calendarSize == .small ? 10 : viewModel.calendarSize == .medium ? 15 : 23
+    init(eventManager: EventKitManager) {
+        self.eventManager = eventManager
+        let size = CalendarViewModel().calendarSize
+        self.horizontalPadding = size == .small ? 10 : size == .medium ? 15 : 23
     }
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             CalendarHeader()
                 .padding(.bottom, 4)
-                .environmentObject(viewModel)
             CalendarBody()
                 .padding(.bottom, 4)
-                .environmentObject(viewModel)
             EventListView()
-                .environmentObject(viewModel)
             CalendarFooter(openSettings: Self.openSettingsWindow)
-                .environmentObject(viewModel)
         }
+        .environmentObject(viewModel)
+        .environmentObject(colorStore)
+        .environmentObject(eventManager)
         .id(colorStore.selectedThemeID)
         .padding(.horizontal, horizontalPadding)
         .padding(.vertical, 10)
+        .background(colorStore.surfaceColor)
     }
     
     /// Opens a window displaying a Swiftui View for app settings

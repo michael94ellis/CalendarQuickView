@@ -6,25 +6,27 @@
 //
 
 import SwiftUI
+import ViewModels
 
 struct CalendarDay: View {
         
     private let date: Date
     private let fontSize: Font
     private let cellSize: CGFloat
-    private let displayShape: any Shape
-    private let dayColors: (text: Color, bgColor: Color)
+    private let displayShape: AnyShape
+    private let month: Date
     private let isSelected: Bool
-    private let isToday: Bool
     private let isSelectable: Bool
     private let onSelect: (() -> Void)?
     private let eventColors: [Color]?
+    
+    @EnvironmentObject private var colorStore: ColorStore
     
     init(
         date: Date,
         fontSize: Font,
         cellSize: CGFloat,
-        dayShape: any Shape,
+        dayShape: AnyShape,
         month: Date,
         isSelected: Bool = false,
         isSelectable: Bool = false,
@@ -35,30 +37,32 @@ struct CalendarDay: View {
         self.fontSize = fontSize
         self.cellSize = cellSize
         self.displayShape = dayShape
+        self.month = month
         self.isSelected = isSelected
         self.isSelectable = isSelectable
         self.onSelect = onSelect
         self.eventColors = eventColors
-        
-        let isToday = Calendar.current.isDateInToday(date)
-        self.isToday = isToday
-        
+    }
+    
+    private var isToday: Bool {
+        Calendar.current.isDateInToday(date)
+    }
+    
+    private var dayColors: (text: Color, bgColor: Color) {
         let isInDisplayedMonth = Calendar.current.isDate(date, equalTo: month, toGranularity: .month)
         let normalText = isInDisplayedMonth
-            ? ColorStore.shared.currentMonthText
-            : ColorStore.shared.otherMonthText
+            ? colorStore.currentMonthText
+            : colorStore.otherMonthText
         let normalBackground = isInDisplayedMonth
-            ? ColorStore.shared.currentMonthColor
-            : ColorStore.shared.otherMonthColor
-        let accent = ColorStore.shared.accentColor
-        let todayText = ColorStore.shared.todayText
+            ? colorStore.currentMonthColor
+            : colorStore.otherMonthColor
         
         if isToday {
-            self.dayColors = (todayText, accent)
+            return (colorStore.todayText, colorStore.accentColor)
         } else if isSelected {
-            self.dayColors = (normalBackground, normalText)
+            return (normalBackground, normalText)
         } else {
-            self.dayColors = (normalText, normalBackground)
+            return (normalText, normalBackground)
         }
     }
     
@@ -70,8 +74,8 @@ struct CalendarDay: View {
            !isToday {
             mainBodyText
                 .overlay(
-                    AnyShape(displayShape)
-                        .stroke(ColorStore.shared.accentColor, lineWidth: 1.5)
+                    displayShape
+                        .stroke(colorStore.accentColor, lineWidth: 1.5)
                 )
         } else {
             mainBodyText
@@ -120,12 +124,12 @@ struct CalendarDay: View {
 }
 
 private struct DayShapeModifier: ViewModifier {
-    let displayShape: any Shape
+    let displayShape: AnyShape
     let background: Color
     
     func body(content: Content) -> some View {
         content
             .background(background)
-            .clipShape(AnyShape(displayShape))
+            .clipShape(displayShape)
     }
 }

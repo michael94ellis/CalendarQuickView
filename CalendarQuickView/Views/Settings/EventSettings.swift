@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import ViewModels
 
 struct EventSettings: View {
     
-    @ObservedObject var eventManager = EventKitManager.shared
+    @EnvironmentObject private var eventManager: EventKitManager
     @EnvironmentObject var viewModel: CalendarViewModel
     
     var body: some View {
