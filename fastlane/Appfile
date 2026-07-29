@@ -1,0 +1,4 @@
+app_identifier("com.michaellis.CalendarQuickView.CalendarWidget")
+# Optional:
+# apple_id("example@gmail.com")
+# itc_team_id("")
