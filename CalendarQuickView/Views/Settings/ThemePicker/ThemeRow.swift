@@ -35,9 +35,7 @@ public struct ThemeRow: View {
                 
                 VStack(alignment: .leading, spacing: 6) {
                     Text(theme.name)
-                        .frame(maxWidth: .infinity)
                         .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity)
                     HStack(spacing: 4) {
                         ForEach(Array(swatchHexes.enumerated()), id: \.offset) { _, hex in
                             Color(hex: hex)
@@ -50,6 +48,7 @@ public struct ThemeRow: View {
                         }
                     }
                 }
+                .frame(maxWidth: .infinity)
                 
                 Spacer(minLength: 0)
             }
