@@ -20,3 +20,5 @@ fastlane_match_repo/
 /build
 /Shared/DesignToken/build
 /CalendarQuickView.xcodeproj/xcuserdata
+/CalendarQuickView.app
+CalendarQuickView.pkg
