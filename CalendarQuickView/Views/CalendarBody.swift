@@ -11,7 +11,7 @@ import ViewModels
 
 struct CalendarBody: View {
     @EnvironmentObject var viewModel: CalendarViewModel
-    @EnvironmentObject private var colorStore: ColorStore
+    private var colorStore: ColorStore = .init()
     @EnvironmentObject private var eventManager: EventKitManager
     
     private let weekDayCellSpacing: CGFloat = 10

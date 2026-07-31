@@ -11,7 +11,7 @@ import ViewModels
 struct CalendarFooter: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel
-    @EnvironmentObject private var colorStore: ColorStore
+    private var colorStore: ColorStore = .init()
     
     var settingWindowCallback: () -> () = { }
     

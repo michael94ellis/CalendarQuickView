@@ -34,7 +34,6 @@ struct StatusBarCalendar: View {
             CalendarFooter(openSettings: Self.openSettingsWindow)
         }
         .environmentObject(viewModel)
-        .environmentObject(colorStore)
         .environmentObject(eventManager)
         .id(colorStore.selectedThemeID)
         .padding(.horizontal, horizontalPadding)

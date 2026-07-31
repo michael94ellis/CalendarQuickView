@@ -20,7 +20,7 @@ struct CalendarDay: View {
     private let onSelect: (() -> Void)?
     private let eventColors: [Color]?
     
-    @EnvironmentObject private var colorStore: ColorStore
+    private var colorStore: ColorStore = .init()
     
     init(
         date: Date,
@@ -56,10 +56,7 @@ struct CalendarDay: View {
         let normalBackground = isInDisplayedMonth
             ? colorStore.currentMonthColor
             : colorStore.otherMonthColor
-        
-        if isToday {
-            return (normalText, normalBackground)
-        } else if isSelected {
+        if isSelected {
             return (normalBackground, normalText)
         } else {
             return (normalText, normalBackground)
@@ -70,14 +67,14 @@ struct CalendarDay: View {
     
     @ViewBuilder
     var mainBodyContainer: some View {
-        if isSelected {
+        if isSelected || isToday {
             mainBodyText
                 .overlay(
                     displayShape
                         .stroke(colorStore.accentColor, lineWidth: 1.5)
                 )
         } else {
-            mainBodyText
+            mainBodyText    
                 .contentShape(Rectangle())
         }
     }
