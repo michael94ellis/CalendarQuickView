@@ -12,7 +12,7 @@ import ViewModels
 
 struct StatusBarCalendar: View {
     
-    @StateObject private var viewModel = CalendarViewModel()
+    @ObservedObject private var viewModel = CalendarViewModel()
     @StateObject private var colorStore = ColorStore()
     @ObservedObject var eventManager: EventKitManager
     static var windowRef: NSWindow?

@@ -58,7 +58,7 @@ struct CalendarDay: View {
             : colorStore.otherMonthColor
         
         if isToday {
-            return (colorStore.todayText, colorStore.accentColor)
+            return (normalText, normalBackground)
         } else if isSelected {
             return (normalBackground, normalText)
         } else {
@@ -70,8 +70,7 @@ struct CalendarDay: View {
     
     @ViewBuilder
     var mainBodyContainer: some View {
-        if isSelected,
-           !isToday {
+        if isSelected {
             mainBodyText
                 .overlay(
                     displayShape

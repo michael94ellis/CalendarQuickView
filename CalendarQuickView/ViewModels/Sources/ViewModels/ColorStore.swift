@@ -8,7 +8,9 @@ import SwiftUI
 
 public final class ColorStore: ObservableObject {
     
-    public init() { }
+    public init() {
+        print("New Color Store")
+    }
     
     @AppStorage("selectedUITheme") private(set) public var selectedThemeID: String = "" {
         didSet { objectWillChange.send() }

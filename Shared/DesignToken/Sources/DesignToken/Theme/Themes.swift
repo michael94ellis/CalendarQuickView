@@ -37,13 +37,13 @@ public enum Theme: CaseIterable {
             UITheme(
                 id: "crispWhite",
                 name: "Crisp White",
-                surface: "#FFFFFF",
-                accent: "#000000",
-                todayText: "#FFFFFF",
-                currentMonthText: "#000000",
-                currentMonthBackground: "#F4F4F5",
-                otherMonthText: "#737373",
-                otherMonthBackground: "#FAFAFA"
+                surface: NSColor.controlBackgroundColor.hexString,
+                accent: NSColor.labelColor.hexString,
+                todayText: NSColor.labelColor.hexString,
+                currentMonthText: NSColor.labelColor.hexString,
+                currentMonthBackground: NSColor.textBackgroundColor.hexString,
+                otherMonthText: NSColor.labelColor.hexString,
+                otherMonthBackground: NSColor.controlBackgroundColor.hexString
             )
         case .obsidian:
             UITheme(
@@ -52,10 +52,10 @@ public enum Theme: CaseIterable {
                 surface: "#09090B",
                 accent: "#A1A1AA",
                 todayText: "#09090B",
-                currentMonthText: "#FAFAFA",
-                currentMonthBackground: "#27272A",
-                otherMonthText: "#71717A",
-                otherMonthBackground: "#18181B"
+                currentMonthText: "#21212A",
+                currentMonthBackground: "#97979A",
+                otherMonthText: "#41414A",
+                otherMonthBackground: "#A8A8AB"
             )
         case .coral:
             UITheme(
@@ -64,10 +64,10 @@ public enum Theme: CaseIterable {
                 surface: "#F3F2EF",
                 accent: "#F67F7F",
                 todayText: "#F8F8F8",
-                currentMonthText: "#060606",
-                currentMonthBackground: "#9F9E98",
-                otherMonthText: "#060606",
-                otherMonthBackground: "#B8B7B1"
+                currentMonthText: "#1A110C",
+                currentMonthBackground: "#F6E8EA",
+                otherMonthText: "#353636",
+                otherMonthBackground: "#E8E4E5"
             )
         case .sky:
             UITheme(
@@ -76,10 +76,10 @@ public enum Theme: CaseIterable {
                 surface: "#F7F4F5",
                 accent: "#20B0DF",
                 todayText: "#F8F8F8",
-                currentMonthText: "#1A110C",
-                currentMonthBackground: "#F6E8EA",
-                otherMonthText: "#353636",
-                otherMonthBackground: "#E8E4E5"
+                currentMonthText: "#060606",
+                currentMonthBackground: "#D8D7D1",
+                otherMonthText: "#060606",
+                otherMonthBackground: "#AFAEB8"
             )
         case .forest:
             UITheme(

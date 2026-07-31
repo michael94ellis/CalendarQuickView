@@ -37,12 +37,12 @@ public final class CalendarViewModel: ObservableObject {
     
     @AppStorage(AppStorageKeys.showWeekDayHeader) public var showWeekDayHeader: Bool = true
     
-    @AppStorage(AppStorageKeys.selectedDay) private var storedSelectedDate: Date = Date()
+    private var _selectedDate: Date = Date()
     public var selectedDate: Date {
-        get { storedSelectedDate }
+        get { _selectedDate }
         set {
             objectWillChange.send()
-            storedSelectedDate = calendar.startOfDay(for: newValue)
+            _selectedDate = calendar.startOfDay(for: newValue)
         }
     }
     
@@ -52,7 +52,7 @@ public final class CalendarViewModel: ObservableObject {
     @AppStorage(AppStorageKeys.showDockIcon) public var showDockIcon: Bool = false
     
     public init() {
-        displayDate = Date()
+        displayDate = Date.now
         calendar = .current
     }
     
