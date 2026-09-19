@@ -11,8 +11,10 @@ import ViewModels
 
 struct GeneralSettings: View {
     
-    @EnvironmentObject var viewModel: CalendarViewModel 
-        
+    @EnvironmentObject var viewModel: CalendarViewModel
+
+    private static let timeZoneIdentifiers: [String] = TimeZone.knownTimeZoneIdentifiers.sorted()
+
     func TextWithFrame(_ text: String) -> some View {
         Text(text)
             .frame(width: 200, height: 25, alignment: .leading)
@@ -34,6 +36,10 @@ struct GeneralSettings: View {
                     TextWithFrame(viewModel.showDockIcon ? "App Icon Shown In Dock" : "App Icon Not In Dock")
                     // Launch app at login
                     TextWithFrame("\(LaunchAtLogin.isEnabled ? "App is currently in" : "Click to add to") Login Items")
+                    // Secondary time zone
+                    TextWithFrame("Secondary Time Zone")
+                    // Global keyboard shortcut
+                    TextWithFrame("Global Shortcut")
                 }
                 .frame(width: 200)
                 VStack(alignment: .trailing) {
@@ -82,6 +88,21 @@ struct GeneralSettings: View {
                         Spacer()
                     }
                     .padding(.leading, 10)
+                    .frame(height: 25)
+                    // Secondary time zone
+                    Picker("", selection: $viewModel.secondaryTimeZoneIdentifier) {
+                        Text("None").tag("")
+                        ForEach(Self.timeZoneIdentifiers, id: \.self) { identifier in
+                            Text(identifier).tag(identifier)
+                        }
+                    }
+                    .frame(height: 25)
+                    // Global keyboard shortcut
+                    HStack {
+                        Text("⌃⌥C")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
                     .frame(height: 25)
                 }
                 .frame(width: 200)

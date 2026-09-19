@@ -34,6 +34,8 @@
 	<string>CalendarQuickView would like access to your contacts for use with events and reminders</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>Add, edit, and view reminders with Calendar Quick View</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>Add, edit, and view reminders with Calendar Quick View</string>
 	<key>CFBundleDisplayName</key>
 	<string></string>
 	<key>NSMainStoryboardFile</key>

@@ -23,6 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// Displayed as the content of the NSMenuItem
     var hostingView: NSView?
     let eventKitManager = EventKitManager()
+    /// Refreshes the menu bar's date number shortly after midnight.
+    var dateRefreshTimer: Timer?
     
     /// Builds a hosting view sized to its SwiftUI content (height measured, width from layout).
     var newHostingView: NSView {
@@ -60,13 +62,45 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         self.statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         self.statusBarItem?.menu = menu
         self.statusBarItem?.button?.image = NSImage(systemSymbolName: "calendar", accessibilityDescription: "Quick View Calendar")
+        self.statusBarItem?.button?.imagePosition = .imageLeading
+        updateStatusBarTitle()
+        scheduleNextDateRefresh()
+        HotkeyManager.shared.registerToggleShortcut { [weak self] in
+            self?.statusBarItem?.button?.performClick(nil)
+        }
     }
-    
+
     func menuWillOpen(_ menu: NSMenu) {
         // Rebuild so the date, events, and measured height stay current
         let view = newHostingView
         hostingView = view
         menuItem.view = view
+        updateStatusBarTitle()
     }
-    
+
+    /// Shows today's day-of-month number next to the menu bar icon, like macOS's own Calendar app.
+    private func updateStatusBarTitle() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        statusBarItem?.button?.title = formatter.string(from: Date())
+    }
+
+    /// Schedules a one-shot refresh at the next midnight, then reschedules itself so the
+    /// displayed day number keeps rolling over without a timer ticking all day.
+    private func scheduleNextDateRefresh() {
+        dateRefreshTimer?.invalidate()
+        let calendar = Calendar.current
+        let now = Date()
+        guard let nextMidnight = calendar.nextDate(after: now, matching: DateComponents(hour: 0, minute: 0, second: 5), matchingPolicy: .nextTime) else {
+            return
+        }
+        dateRefreshTimer = Timer(fire: nextMidnight, interval: 0, repeats: false) { [weak self] _ in
+            self?.updateStatusBarTitle()
+            self?.scheduleNextDateRefresh()
+        }
+        if let dateRefreshTimer {
+            RunLoop.main.add(dateRefreshTimer, forMode: .common)
+        }
+    }
+
 }

@@ -36,6 +36,27 @@ public final class CalendarViewModel: ObservableObject {
     }
     
     @AppStorage(AppStorageKeys.showWeekDayHeader) public var showWeekDayHeader: Bool = true
+    @AppStorage(AppStorageKeys.viewMode) public var viewMode: CalendarViewMode = .month
+
+    /// Natural height of the month layout, remembered so the Agenda view can match it even when
+    /// the popup opens straight into Agenda mode and the month layout never renders.
+    @AppStorage(AppStorageKeys.measuredMonthContentHeight) public var measuredMonthContentHeight: Double = 0
+
+    /// Empty means "no secondary time zone selected."
+    @AppStorage(AppStorageKeys.secondaryTimeZoneIdentifier) public var secondaryTimeZoneIdentifier: String = ""
+
+    public var secondaryTimeZone: TimeZone? {
+        secondaryTimeZoneIdentifier.isEmpty ? nil : TimeZone(identifier: secondaryTimeZoneIdentifier)
+    }
+
+    /// Current time in the selected secondary time zone, e.g. "3:45 PM PST", or nil if none is set.
+    public var secondaryTimeZoneTimeString: String? {
+        guard let timeZone = secondaryTimeZone else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a zzz"
+        formatter.timeZone = timeZone
+        return formatter.string(from: Date())
+    }
     
     private var _selectedDate: Date = Date()
     public var selectedDate: Date {

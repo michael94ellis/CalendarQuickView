@@ -10,17 +10,46 @@ import EventKit
 import AppKit
 import SwiftUI
 
+public enum EventCreationError: LocalizedError, Equatable {
+    case emptyTitle
+    case invalidDateRange
+    case noAccess
+    case noWritableCalendar
+    case saveFailed(String)
+
+    public var errorDescription: String? {
+        switch self {
+        case .emptyTitle:
+            return "Please enter a title for the event."
+        case .invalidDateRange:
+            return "End time must be after the start time."
+        case .noAccess:
+            return "Calendar access isn't granted. Check Calendar Access in the Events tab."
+        case .noWritableCalendar:
+            return "No writable calendar is available to add this event to."
+        case .saveFailed(let message):
+            return "Couldn't save the event: \(message)"
+        }
+    }
+}
+
 public final class EventKitManager: ObservableObject {
     
     @AppStorage(AppStorageKeys.calendarAccessGranted) public var isAbleToAccessUserCalendar: Bool = false
     @AppStorage(AppStorageKeys.isEventFeatureEnabled) public var isEventFeatureEnabled: Bool = false
+    @AppStorage(AppStorageKeys.hiddenCalendarIdentifiers) private var hiddenCalendarIdentifiersRaw: String = ""
+    @AppStorage(AppStorageKeys.isRemindersFeatureEnabled) public var isRemindersFeatureEnabled: Bool = false
 
     @Published public private(set) var titles: [String] = []
     @Published public private(set) var startDates: [Date] = []
     @Published public private(set) var endDates: [Date] = []
     @Published public private(set) var events: [EKEvent] = []
     @Published public private(set) var futureEvents: [EKEvent] = []
-    
+    /// All calendars EventKit knows about, sorted by title.
+    @Published public private(set) var calendars: [EKCalendar] = []
+    /// Incomplete reminders, refreshed by `fetchReminders()`.
+    @Published public private(set) var reminders: [EKReminder] = []
+
     let eventStore = EKEventStore()
     
     public init() {}
@@ -102,7 +131,9 @@ public final class EventKitManager: ObservableObject {
             clearEvents()
             return
         }
-        
+
+        calendars = eventStore.calendars(for: .event).sorted { $0.title < $1.title }
+
         let oneMonthAgo = Date(timeIntervalSinceNow: -30 * 24 * 3600)
         let oneMonthAfterToday = Date(timeIntervalSinceNow: 30 * 24 * 3600)
         let predicate = eventStore.predicateForEvents(
@@ -111,17 +142,133 @@ public final class EventKitManager: ObservableObject {
             calendars: nil
         )
         let matchedEvents = eventStore.events(matching: predicate)
+            .filter { isCalendarVisible($0.calendar) }
             .sorted { $0.startDate < $1.startDate }
-        
+
         events = matchedEvents
         titles = matchedEvents.compactMap(\.title)
         startDates = matchedEvents.map(\.startDate)
         endDates = matchedEvents.map(\.endDate)
         futureEvents = upcomingEvents(from: matchedEvents)
     }
+
+    /// Whether events on the given calendar should be shown.
+    public func isCalendarVisible(_ calendar: EKCalendar) -> Bool {
+        !hiddenCalendarIdentifiers.contains(calendar.calendarIdentifier)
+    }
+
+    public func setCalendar(_ calendar: EKCalendar, visible: Bool) {
+        var hidden = hiddenCalendarIdentifiers
+        if visible {
+            hidden.remove(calendar.calendarIdentifier)
+        } else {
+            hidden.insert(calendar.calendarIdentifier)
+        }
+        hiddenCalendarIdentifiers = hidden
+        fetchEvents()
+    }
+
+    private var hiddenCalendarIdentifiers: Set<String> {
+        get { Set(hiddenCalendarIdentifiersRaw.split(separator: ",").map(String.init)) }
+        set { hiddenCalendarIdentifiersRaw = newValue.joined(separator: ",") }
+    }
+
+    /// Creates and saves a new event. Requires calendar write access, which is granted
+    /// alongside read access by `requestAccessToCalendar`.
+    @discardableResult
+    public func createEvent(title: String, start: Date, end: Date, calendar: EKCalendar? = nil) -> Result<Void, EventCreationError> {
+        let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedTitle.isEmpty else { return .failure(.emptyTitle) }
+        guard end > start else { return .failure(.invalidDateRange) }
+        guard hasCalendarReadAccess else { return .failure(.noAccess) }
+
+        let event = EKEvent(eventStore: eventStore)
+        event.title = trimmedTitle
+        event.startDate = start
+        event.endDate = end
+        event.calendar = calendar
+            ?? eventStore.defaultCalendarForNewEvents
+            ?? eventStore.calendars(for: .event).first { $0.allowsContentModifications }
+
+        guard event.calendar != nil else { return .failure(.noWritableCalendar) }
+
+        do {
+            try eventStore.save(event, span: .thisEvent)
+            fetchEvents()
+            return .success(())
+        } catch {
+            return .failure(.saveFailed(error.localizedDescription))
+        }
+    }
     
     public func getFutureEvents() -> [EKEvent] {
         upcomingEvents(from: events)
+    }
+
+    // MARK: - Reminders
+
+    public var hasReminderReadAccess: Bool {
+        let status = EKEventStore.authorizationStatus(for: .reminder)
+        if #available(macOS 14.0, *) {
+            return status == .fullAccess
+        } else {
+            return status == .authorized
+        }
+    }
+
+    public func requestReminderAccess(completion: @escaping (Bool) -> Void = { _ in }) {
+        let handleResult: (Bool) -> Void = { granted in
+            DispatchQueue.main.async {
+                if granted {
+                    self.fetchReminders()
+                } else {
+                    self.reminders = []
+                }
+                completion(granted)
+            }
+        }
+        if #available(macOS 14.0, *) {
+            eventStore.requestFullAccessToReminders { granted, _ in handleResult(granted) }
+        } else {
+            eventStore.requestAccess(to: .reminder) { granted, _ in handleResult(granted) }
+        }
+    }
+
+    public func fetchReminders() {
+        guard hasReminderReadAccess else {
+            reminders = []
+            return
+        }
+        let predicate = eventStore.predicateForReminders(in: nil)
+        eventStore.fetchReminders(matching: predicate) { [weak self] fetched in
+            DispatchQueue.main.async {
+                self?.reminders = (fetched ?? []).filter { !$0.isCompleted }
+            }
+        }
+    }
+
+    /// Reminders due on the given calendar day. Reminders without a due date are not day-scoped
+    /// and are excluded here.
+    public func reminders(on day: Date) -> [EKReminder] {
+        let calendar = Calendar.current
+        let dayStart = calendar.startOfDay(for: day)
+        guard let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart) else { return [] }
+        return reminders.filter { reminder in
+            guard let components = reminder.dueDateComponents, let due = calendar.date(from: components) else { return false }
+            return due >= dayStart && due < dayEnd
+        }
+    }
+
+    @discardableResult
+    public func setReminderCompleted(_ reminder: EKReminder, completed: Bool) -> Result<Void, EventCreationError> {
+        reminder.isCompleted = completed
+        do {
+            try eventStore.save(reminder, commit: true)
+            fetchReminders()
+            return .success(())
+        } catch {
+            return .failure(.saveFailed(error.localizedDescription))
+        }
     }
     
     /// Events that occur on the given calendar day (including multi-day events that span it).

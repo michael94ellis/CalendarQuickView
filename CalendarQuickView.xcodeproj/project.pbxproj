@@ -46,6 +46,12 @@
 		81F70F873018CA1200996E20 /* LaunchAtLoginToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F863018CA1200996E20 /* LaunchAtLoginToggle.swift */; };
 		81F70F873018CCF900996E20 /* ThemeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F853018CCF900996E20 /* ThemeRow.swift */; };
 		81F70F883018CCF900996E20 /* ColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F843018CCF900996E20 /* ColorSettings.swift */; };
+		840987A7A579842569B90AD9 /* AgendaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E173822D3FF52D203EA378D /* AgendaListView.swift */; };
+		9CADBC7E1711649AEAA9CD6B /* ReminderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7968D0732398FB01F8E606 /* ReminderListView.swift */; };
+		A82E830F198D44088DAA5DAE /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47F6EDB9A7BA438252DD142 /* CalendarSettings.swift */; };
+		D61539E2A12AE29B0175F698 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE21864EAF8F19B8D45E34 /* HotkeyManager.swift */; };
+		DC1B8C947D53F150DE69DA27 /* QuickAddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C35C5C9E8502BA3E0BFB5F /* QuickAddEventView.swift */; };
+		FA74F41093061A888CBC4F2A /* SearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186835891DC4F20A09DA161 /* SearchSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E173822D3FF52D203EA378D /* AgendaListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AgendaListView.swift; sourceTree = "<group>"; };
 		2F07D87E274B28C900C5BBB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2F0B26E02748B28B00F9D54E /* CalendarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
@@ -126,6 +133,11 @@
 		81F70F843018CCF900996E20 /* ColorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSettings.swift; sourceTree = "<group>"; };
 		81F70F853018CCF900996E20 /* ThemeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeRow.swift; sourceTree = "<group>"; };
 		81F70F863018CA1200996E20 /* LaunchAtLoginToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginToggle.swift; sourceTree = "<group>"; };
+		ABFE21864EAF8F19B8D45E34 /* HotkeyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
+		DA7968D0732398FB01F8E606 /* ReminderListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReminderListView.swift; sourceTree = "<group>"; };
+		E5C35C5C9E8502BA3E0BFB5F /* QuickAddEventView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuickAddEventView.swift; sourceTree = "<group>"; };
+		F186835891DC4F20A09DA161 /* SearchSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchSettings.swift; sourceTree = "<group>"; };
+		F47F6EDB9A7BA438252DD142 /* CalendarSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +212,9 @@
 				2FEF62932738024700F0A9DF /* EventListView.swift */,
 				2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
+				E5C35C5C9E8502BA3E0BFB5F /* QuickAddEventView.swift */,
+				DA7968D0732398FB01F8E606 /* ReminderListView.swift */,
+				2E173822D3FF52D203EA378D /* AgendaListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,6 +227,8 @@
 				2F6FB95E27358A7B00DD0ACC /* GeneralSettings.swift */,
 				81F70F863018CCF900996E20 /* ThemePicker */,
 				2F6FB96027358AAF00DD0ACC /* EventSettings.swift */,
+				F47F6EDB9A7BA438252DD142 /* CalendarSettings.swift */,
+				F186835891DC4F20A09DA161 /* SearchSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -247,6 +264,7 @@
 				2FCC6CEE272C3A09006D5C7D /* Info.plist */,
 				2FCC6CEF272C3A09006D5C7D /* CalendarQuickView.entitlements */,
 				2FCC6CE8272C3A09006D5C7D /* Preview Content */,
+				ABFE21864EAF8F19B8D45E34 /* HotkeyManager.swift */,
 			);
 			path = CalendarQuickView;
 			sourceTree = "<group>";
@@ -358,8 +376,8 @@
 			mainGroup = 2FCC6CD6272C3A08006D5C7D;
 			packageReferences = (
 				2F42D49027488BF900D77239 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
-				81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */,
-				81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */,
+				81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "DesignToken" */,
+				81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "ViewModels" */,
 			);
 			productRefGroup = 2FCC6CE0272C3A08006D5C7D /* Products */;
 			projectDirPath = "";
@@ -430,6 +448,12 @@
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
 				81F70F873018CA1200996E20 /* LaunchAtLoginToggle.swift in Sources */,
 				2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */,
+				DC1B8C947D53F150DE69DA27 /* QuickAddEventView.swift in Sources */,
+				9CADBC7E1711649AEAA9CD6B /* ReminderListView.swift in Sources */,
+				840987A7A579842569B90AD9 /* AgendaListView.swift in Sources */,
+				A82E830F198D44088DAA5DAE /* CalendarSettings.swift in Sources */,
+				FA74F41093061A888CBC4F2A /* SearchSettings.swift in Sources */,
+				D61539E2A12AE29B0175F698 /* HotkeyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,11 +784,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */ = {
+		81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "DesignToken" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Shared/DesignToken;
 		};
-		81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */ = {
+		81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "ViewModels" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = CalendarQuickView/ViewModels;
 		};
@@ -789,22 +813,22 @@
 		};
 		814C52BF3017DE620076D3D1 /* DesignToken */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */;
+			package = 81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "DesignToken" */;
 			productName = DesignToken;
 		};
 		814C52C13017DE670076D3D1 /* DesignToken */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */;
+			package = 81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "DesignToken" */;
 			productName = DesignToken;
 		};
 		81F70F803018C89E00996E20 /* ViewModels */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */;
+			package = 81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "ViewModels" */;
 			productName = ViewModels;
 		};
 		81F70F823018C8A300996E20 /* ViewModels */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */;
+			package = 81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "ViewModels" */;
 			productName = ViewModels;
 		};
 /* End XCSwiftPackageProductDependency section */

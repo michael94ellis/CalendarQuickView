@@ -38,6 +38,34 @@ struct EventSettings: View {
                     .toggleStyle(.switch)
             }
             
+            settingsRow("Reminder Access") {
+                HStack(spacing: 8) {
+                    Text(eventManager.hasReminderReadAccess ? "Granted" : "Not Granted")
+                        .foregroundColor(.secondary)
+                    Button {
+                        eventManager.requestReminderAccess()
+                    } label: {
+                        Image(systemName: eventManager.hasReminderReadAccess
+                              ? "checkmark.circle.fill"
+                              : "xmark.circle.fill")
+                            .foregroundColor(eventManager.hasReminderReadAccess ? .green : .secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Request or recheck Reminders access")
+                }
+            }
+
+            settingsRow("Show Reminders") {
+                Toggle("", isOn: $eventManager.isRemindersFeatureEnabled)
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+                    .onChange(of: eventManager.isRemindersFeatureEnabled) { enabled in
+                        if enabled {
+                            eventManager.requestReminderAccess()
+                        }
+                    }
+            }
+
             settingsRow("Event List Date Format") {
                 Picker("", selection: $viewModel.eventDateFormat) {
                     ForEach(EventDateFormat.allCases, id: \.self) { dateFormatOption in
