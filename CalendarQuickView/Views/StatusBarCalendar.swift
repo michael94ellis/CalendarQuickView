@@ -124,7 +124,7 @@ struct StatusBarCalendar: View {
                 styleMask: [.titled, .closable, .miniaturizable, .resizable],
                 backing: .buffered, defer: false)
             self.windowRef = newWindowRef
-            self.windowRef?.title = "Calendar Quick View Settings"
+            self.windowRef?.title = "Settings"
             self.windowRef?.setFrameAutosaveName("Calendar Quick View Settings")
             self.windowRef?.isReleasedWhenClosed = false
             let hostingView = NSHostingView(rootView: SettingsTabView())
