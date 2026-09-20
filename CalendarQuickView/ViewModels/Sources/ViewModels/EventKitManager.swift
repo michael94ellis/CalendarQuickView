@@ -45,8 +45,8 @@ public final class EventKitManager: ObservableObject {
     @Published public private(set) var endDates: [Date] = []
     @Published public private(set) var events: [EKEvent] = []
     @Published public private(set) var futureEvents: [EKEvent] = []
-    /// All calendars EventKit knows about, sorted by title.
-    @Published public private(set) var calendars: [EKCalendar] = []
+    @Published public private(set) var eventCalendars: [EKCalendar] = []
+    @Published public private(set) var reminderCalendars: [EKCalendar] = []
     /// Incomplete reminders, refreshed by `fetchReminders()`.
     @Published public private(set) var reminders: [EKReminder] = []
 
@@ -132,7 +132,7 @@ public final class EventKitManager: ObservableObject {
             return
         }
 
-        calendars = eventStore.calendars(for: .event).sorted { $0.title < $1.title }
+        eventCalendars = eventStore.calendars(for: .event).sorted { $0.title < $1.title }
 
         let oneMonthAgo = Date(timeIntervalSinceNow: -30 * 24 * 3600)
         let oneMonthAfterToday = Date(timeIntervalSinceNow: 30 * 24 * 3600)
@@ -249,7 +249,9 @@ public final class EventKitManager: ObservableObject {
             reminders = []
             return
         }
-        let predicate = eventStore.predicateForReminders(in: nil)
+        
+        reminderCalendars = eventStore.calendars(for: .reminder).sorted { $0.title < $1.title }
+        let predicate = eventStore.predicateForReminders(in: reminderCalendars)
         eventStore.fetchReminders(matching: predicate) { [weak self] fetched in
             DispatchQueue.main.async {
                 self?.reminders = (fetched ?? []).filter { !$0.isCompleted }

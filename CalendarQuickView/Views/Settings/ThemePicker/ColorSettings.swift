@@ -24,21 +24,6 @@ public struct ColorSettings: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Spacer()
-                Text("Reset")
-                    .font(.title3)
-                Button {
-                    colorStore.resetToDefaults()
-                } label: {
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                        .frame(width: viewModel.buttonSize, height: viewModel.buttonSize)
-                        .foregroundColor(colorStore.accentColor)
-                }
-                .buttonStyle(.plain)
-                Spacer()
-            }
-            
             Text("Theme")
                 .font(.title3)
             
@@ -61,6 +46,21 @@ public struct ColorSettings: View {
             }
             
             Spacer()
+            
+            HStack {
+                Spacer()
+                Text("Reset")
+                    .font(.title3)
+                Button {
+                    colorStore.resetToDefaults()
+                } label: {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .frame(width: viewModel.buttonSize, height: viewModel.buttonSize)
+                        .foregroundColor(colorStore.accentColor)
+                }
+                .buttonStyle(.plain)
+                Spacer()
+            }
         }
         .frame(width: 250)
         .padding(.vertical, 20)

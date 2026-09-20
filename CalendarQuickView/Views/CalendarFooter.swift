@@ -39,12 +39,6 @@ struct CalendarFooter: View {
                     .foregroundColor(colorStore.accentColor)
                     .help("New event")
             }
-            if let secondaryTime = viewModel.secondaryTimeZoneTimeString {
-                Text(secondaryTime)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal, 4)
-            }
             Spacer()
             CalendarButton(imageName: "gear", animation: .linear, color: colorStore.accentColor, size: viewModel.buttonSize, action: self.settingWindowCallback)
                 .foregroundColor(colorStore.accentColor)

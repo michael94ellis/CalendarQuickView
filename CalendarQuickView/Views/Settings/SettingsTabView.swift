@@ -15,7 +15,6 @@ struct SettingsTabView: View {
     @StateObject private var colorStore = ColorStore()
     @StateObject private var eventManager = EventKitManager()
     @State private var selectedSection: Section? = .general
-    @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
     private enum Section: String, CaseIterable, Identifiable {
         case general
@@ -48,25 +47,17 @@ struct SettingsTabView: View {
     }
 
     var body: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
+        HStack {
             VStack(spacing: 0) {
                 List(Section.allCases, selection: $selectedSection) { section in
                     Label(section.title, systemImage: section.icon)
                 }
-                .listStyle(.sidebar)
-
-                Divider()
-
-                Button("Quit App") {
-                    NSApp.terminate(nil)
-                }
-                .padding(10)
-                .frame(maxWidth: .infinity)
             }
-            .navigationSplitViewColumnWidth(min: 160, ideal: 180, max: 220)
-        } detail: {
+            .frame(maxWidth: 200)
+            Divider()
             detailContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .padding(16)
         }
         .navigationSplitViewStyle(.balanced)
         // The General pane's two columns are a fixed 400pt wide, so the detail side needs

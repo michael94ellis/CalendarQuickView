@@ -18,41 +18,42 @@ struct CalendarSettings: View {
                 .padding(.horizontal, 24)
                 .padding(.top, 20)
 
-            if eventManager.calendars.isEmpty {
+            if eventManager.eventCalendars.isEmpty {
                 Text("No calendars found. Check Calendar Access in the Events tab.")
                     .foregroundColor(.secondary)
                     .padding(.horizontal, 24)
                 Spacer()
             } else {
+                Text("Event Calendars")
+                    .foregroundColor(.secondary)
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(eventManager.calendars, id: \.calendarIdentifier) { calendar in
-                            calendarRow(for: calendar)
+                    VStack {
+                        ForEach(eventManager.eventCalendars, id: \.calendarIdentifier) { calendar in
+                            CalendCalendarRowView(calendar: calendar,
+                                                  visibilityBinding: visibilityBinding(for:))
                             Divider()
                         }
                     }
+                    .padding(.horizontal, 24)
+                    
+                    Text("Reminder Calendars")
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 24)
+                    VStack {
+                        ForEach(eventManager.reminderCalendars, id: \.calendarIdentifier) { calendar in
+                            CalendCalendarRowView(calendar: calendar,
+                                                  visibilityBinding: visibilityBinding(for:))
+                            Divider()
+                        }
+                    }
+                    .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
             }
         }
-        .padding(.bottom, 20)
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear {
             eventManager.fetchEvents()
         }
-    }
-
-    private func calendarRow(for calendar: EKCalendar) -> some View {
-        Toggle(isOn: visibilityBinding(for: calendar)) {
-            HStack(spacing: 8) {
-                Circle()
-                    .fill(calendar.color)
-                    .frame(width: 10, height: 10)
-                Text(calendar.title)
-            }
-        }
-        .toggleStyle(.checkbox)
-        .padding(.vertical, 8)
     }
 
     private func visibilityBinding(for calendar: EKCalendar) -> Binding<Bool> {

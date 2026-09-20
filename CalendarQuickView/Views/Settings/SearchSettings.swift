@@ -27,7 +27,7 @@ struct SearchSettings: View {
     }()
 
     private var visibleCalendars: [EKCalendar] {
-        eventManager.calendars.filter { eventManager.isCalendarVisible($0) }
+        eventManager.eventCalendars.filter { eventManager.isCalendarVisible($0) }
     }
 
     private var results: [EKEvent] {

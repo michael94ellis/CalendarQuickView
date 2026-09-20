@@ -17,7 +17,6 @@ public struct AppStorageKeys {
     public static let showDockIcon = "showDockIcon"
     public static let hiddenCalendarIdentifiers = "hiddenCalendarIdentifiers"
     public static let isRemindersFeatureEnabled = "isRemindersFeatureEnabled"
-    public static let secondaryTimeZoneIdentifier = "secondaryTimeZoneIdentifier"
     public static let viewMode = "viewMode"
     public static let measuredMonthContentHeight = "measuredMonthContentHeight"
 }

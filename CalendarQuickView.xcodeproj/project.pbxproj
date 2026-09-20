@@ -42,6 +42,7 @@
 		39C4A9B5DB551EA15FA476AB /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 7460C860525C5FDC4D537767 /* KeyboardShortcuts */; };
 		814C52C03017DE620076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52BF3017DE620076D3D1 /* DesignToken */; };
 		814C52C23017DE670076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52C13017DE670076D3D1 /* DesignToken */; };
+		81D0CBA4306074050077A04B /* CalendarRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0CBA3306074050077A04B /* CalendarRowView.swift */; };
 		81F70F813018C89E00996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F803018C89E00996E20 /* ViewModels */; };
 		81F70F833018C8A300996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F823018C8A300996E20 /* ViewModels */; };
 		81F70F873018CA1200996E20 /* LaunchAtLoginToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F70F863018CA1200996E20 /* LaunchAtLoginToggle.swift */; };
@@ -130,6 +131,7 @@
 		2FF55753273F6562000FD5C5 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Main.strings"; sourceTree = "<group>"; };
 		814C52BE3017DD630076D3D1 /* DesignToken */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignToken; sourceTree = "<group>"; };
 		814C52C43017DA570076D3D1 /* EKCalendar-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKCalendar-Extension.swift"; sourceTree = "<group>"; };
+		81D0CBA3306074050077A04B /* CalendarRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRowView.swift; sourceTree = "<group>"; };
 		81F70F7E3018C75C00996E20 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewModels; sourceTree = "<group>"; };
 		81F70F843018CCF900996E20 /* ColorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSettings.swift; sourceTree = "<group>"; };
 		81F70F853018CCF900996E20 /* ThemeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeRow.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				81F70F863018CCF900996E20 /* ThemePicker */,
 				2F6FB96027358AAF00DD0ACC /* EventSettings.swift */,
 				F47F6EDB9A7BA438252DD142 /* CalendarSettings.swift */,
+				81D0CBA3306074050077A04B /* CalendarRowView.swift */,
 				F186835891DC4F20A09DA161 /* SearchSettings.swift */,
 			);
 			path = Settings;
@@ -448,6 +451,7 @@
 				2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */,
 				2FEF62942738024700F0A9DF /* EventListView.swift in Sources */,
 				2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */,
+				81D0CBA4306074050077A04B /* CalendarRowView.swift in Sources */,
 				2F6FB94A27342E4F00DD0ACC /* Array-Extension.swift in Sources */,
 				2FCC6CE3272C3A08006D5C7D /* AppDelegate.swift in Sources */,
 				81F70F873018CA1200996E20 /* LaunchAtLoginToggle.swift in Sources */,

@@ -42,8 +42,6 @@ struct GeneralSettings: View {
                     TextWithFrame(viewModel.showDockIcon ? "App Icon Shown In Dock" : "App Icon Not In Dock")
                     // Launch app at login
                     TextWithFrame("\(LaunchAtLogin.isEnabled ? "App is currently in" : "Click to add to") Login Items")
-                    // Secondary time zone
-                    TextWithFrame("Secondary Time Zone")
                     // Global keyboard shortcut
                     TextWithFrame("Global Shortcut")
                     // Rate the app on the App Store
@@ -55,31 +53,38 @@ struct GeneralSettings: View {
                     Picker("", selection: $viewModel.titleDateFormat) {
                         ForEach(TitleDateFormat.allCases, id: \.self) { dateFormatOption in
                             Text(dateFormatOption.displayName)
+                                .frame(maxWidth: .infinity)
                         }
                     }
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     // Day Shape
                     Picker("", selection: $viewModel.dayDisplayShape) {
                         ForEach(DayDisplayShape.allCases, id: \.self) { option in
                             Text(option.displayName)
+                                .frame(maxWidth: .infinity)
                         }
                     }
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     // Calendar Size
                     Picker("", selection: $viewModel.calendarSize) {
                         ForEach(CalendarSize.allCases, id: \.self) { calendarSize in
                             Text(calendarSize.rawValue)
+                                .frame(maxWidth: .infinity)
                         }
                     }
                     .pickerStyle(.segmented)
                     // SMTWTFS Calendar Header Row
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     HStack {
                         Toggle("", isOn: viewModel.$showWeekDayHeader)
                         Spacer()
                     }
                     .padding(.leading, 10)
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     // Week of year number in front of each week
                     HStack {
                         Toggle("", isOn: viewModel.$showWeekNumbers)
@@ -87,6 +92,7 @@ struct GeneralSettings: View {
                     }
                     .padding(.leading, 10)
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     // Show app icon in dock
                     HStack {
                         Toggle("", isOn: $viewModel.showDockIcon)
@@ -97,6 +103,7 @@ struct GeneralSettings: View {
                     }
                     .padding(.leading, 10)
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     // Launch app at login
                     HStack {
                         LaunchAtLoginToggle()
@@ -104,20 +111,14 @@ struct GeneralSettings: View {
                     }
                     .padding(.leading, 10)
                     .frame(height: 25)
-                    // Secondary time zone
-                    Picker("", selection: $viewModel.secondaryTimeZoneIdentifier) {
-                        Text("None").tag("")
-                        ForEach(Self.timeZoneIdentifiers, id: \.self) { identifier in
-                            Text(identifier).tag(identifier)
-                        }
-                    }
-                    .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     // Global keyboard shortcut
                     HStack {
                         KeyboardShortcuts.Recorder("", name: .toggleCalendar)
                         Spacer()
                     }
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                     // Rate the app on the App Store
                     HStack {
                         Button("Rate on the App Store") {
@@ -126,6 +127,7 @@ struct GeneralSettings: View {
                         Spacer()
                     }
                     .frame(height: 25)
+                    .frame(maxWidth: .infinity)
                 }
                 .frame(width: 200)
             }
