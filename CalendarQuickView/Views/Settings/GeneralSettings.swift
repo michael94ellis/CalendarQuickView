@@ -15,6 +15,9 @@ struct GeneralSettings: View {
 
     private static let timeZoneIdentifiers: [String] = TimeZone.knownTimeZoneIdentifiers.sorted()
 
+    /// Deep link that opens the App Store straight to the review sheet for Quick Menu Calendar.
+    private static let appStoreReviewURL = URL(string: "https://apps.apple.com/app/id1594094974?action=write-review")!
+
     func TextWithFrame(_ text: String) -> some View {
         Text(text)
             .frame(width: 200, height: 25, alignment: .leading)
@@ -40,6 +43,8 @@ struct GeneralSettings: View {
                     TextWithFrame("Secondary Time Zone")
                     // Global keyboard shortcut
                     TextWithFrame("Global Shortcut")
+                    // Rate the app on the App Store
+                    TextWithFrame("Enjoying Quick Calendar?")
                 }
                 .frame(width: 200)
                 VStack(alignment: .trailing) {
@@ -101,6 +106,14 @@ struct GeneralSettings: View {
                     HStack {
                         Text("⌃⌥C")
                             .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    .frame(height: 25)
+                    // Rate the app on the App Store
+                    HStack {
+                        Button("Rate on the App Store") {
+                            NSWorkspace.shared.open(Self.appStoreReviewURL)
+                        }
                         Spacer()
                     }
                     .frame(height: 25)
