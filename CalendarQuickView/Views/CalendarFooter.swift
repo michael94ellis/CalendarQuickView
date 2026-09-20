@@ -24,7 +24,7 @@ struct CalendarFooter: View {
     }
 
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 4) {
             CalendarButton(imageName: viewModel.viewMode == .month ? "list.bullet" : "calendar",
                            animation: .easeInOut,
                            color: colorStore.accentColor,
@@ -43,6 +43,7 @@ struct CalendarFooter: View {
                 Text(secondaryTime)
                     .font(.caption)
                     .foregroundColor(.secondary)
+                    .padding(.horizontal, 4)
             }
             Spacer()
             CalendarButton(imageName: "gear", animation: .linear, color: colorStore.accentColor, size: viewModel.buttonSize, action: self.settingWindowCallback)
