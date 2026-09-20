@@ -152,6 +152,16 @@ public final class EventKitManager: ObservableObject {
         futureEvents = upcomingEvents(from: matchedEvents)
     }
 
+    /// Queries EventKit directly over an arbitrary range, so results are not capped to the
+    /// ±30 day window `fetchEvents()` keeps in memory. Hidden calendars are excluded.
+    public func events(from start: Date, to end: Date) -> [EKEvent] {
+        guard hasCalendarReadAccess, end > start else { return [] }
+        let predicate = eventStore.predicateForEvents(withStart: start, end: end, calendars: nil)
+        return eventStore.events(matching: predicate)
+            .filter { isCalendarVisible($0.calendar) }
+            .sorted { $0.startDate < $1.startDate }
+    }
+
     /// Whether events on the given calendar should be shown.
     public func isCalendarVisible(_ calendar: EKCalendar) -> Bool {
         !hiddenCalendarIdentifiers.contains(calendar.calendarIdentifier)
