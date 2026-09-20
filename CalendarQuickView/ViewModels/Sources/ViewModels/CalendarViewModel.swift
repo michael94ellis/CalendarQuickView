@@ -36,6 +36,18 @@ public final class CalendarViewModel: ObservableObject {
     }
     
     @AppStorage(AppStorageKeys.showWeekDayHeader) public var showWeekDayHeader: Bool = true
+
+    /// Shows the week-of-year number in a gutter in front of each week row.
+    @AppStorage(AppStorageKeys.showWeekNumbers) public var showWeekNumbers: Bool = false
+
+    /// Width of the week-number gutter, sized to fit two digits at the current calendar size.
+    public var weekNumberColumnWidth: CGFloat { getDayCellSize * 0.8 }
+
+    /// Week of the year for the week containing `date`, following the user's locale for when a
+    /// year's first week begins.
+    public func weekOfYear(for date: Date) -> Int {
+        calendar.component(.weekOfYear, from: date)
+    }
     @AppStorage(AppStorageKeys.viewMode) public var viewMode: CalendarViewMode = .month
 
     /// Natural height of the month layout, remembered so the Agenda view can match it even when
@@ -105,7 +117,8 @@ public final class CalendarViewModel: ObservableObject {
         case .large: horizontalPadding = 23
         }
         let weekDaySpacing: CGFloat = 10
-        return (getDayCellSize * 7) + (weekDaySpacing * 6) + (horizontalPadding * 2)
+        let weekNumberGutter = showWeekNumbers ? weekNumberColumnWidth + weekDaySpacing : 0
+        return (getDayCellSize * 7) + (weekDaySpacing * 6) + (horizontalPadding * 2) + weekNumberGutter
     }
     
     public func getGetCalendarDays() -> [Date] {

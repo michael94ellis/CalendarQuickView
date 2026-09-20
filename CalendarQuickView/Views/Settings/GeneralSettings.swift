@@ -35,6 +35,8 @@ struct GeneralSettings: View {
                     TextWithFrame("Calendar Size")
                     // SMTWTFS Calendar Header Row
                     TextWithFrame("Show Weekday Header Row")
+                    // Week of year number in front of each week
+                    TextWithFrame("Show Week Numbers")
                     // Show app icon in dock
                     TextWithFrame(viewModel.showDockIcon ? "App Icon Shown In Dock" : "App Icon Not In Dock")
                     // Launch app at login
@@ -73,6 +75,13 @@ struct GeneralSettings: View {
                     .frame(height: 25)
                     HStack {
                         Toggle("", isOn: viewModel.$showWeekDayHeader)
+                        Spacer()
+                    }
+                    .padding(.leading, 10)
+                    .frame(height: 25)
+                    // Week of year number in front of each week
+                    HStack {
+                        Toggle("", isOn: viewModel.$showWeekNumbers)
                         Spacer()
                     }
                     .padding(.leading, 10)

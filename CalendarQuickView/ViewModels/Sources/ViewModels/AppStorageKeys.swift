@@ -7,6 +7,7 @@ public struct AppStorageKeys {
     public static let titleDateFormat = "titleDateFormat"
     public static let eventDateFormat = "eventDateFormat"
     public static let showWeekDayHeader = "showWeekDayHeader"
+    public static let showWeekNumbers = "showWeekNumbers"
     public static let selectedDay = "selectedDay"
     public static let calendarSize = "calendarSize"
     public static let calendarAccessGranted = "calendarAccessGranted"

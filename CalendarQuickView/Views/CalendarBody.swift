@@ -31,6 +31,11 @@ struct CalendarBody: View {
     private func weekDayHeaders(for weekDays: [Date]) -> some View {
         let weekDayFormatter = DateFormatter.weekDayFormatter
         return HStack(spacing: weekDayCellSpacing) {
+            if viewModel.showWeekNumbers {
+                // Empty gutter keeps the weekday letters above their day columns.
+                Color.clear
+                    .frame(width: viewModel.weekNumberColumnWidth, height: dayCellSize)
+            }
             ForEach(weekDays, id: \.self) { date in
                 Text(weekDayFormatter.string(from: date))
                     .font(fontSize)
@@ -48,6 +53,12 @@ struct CalendarBody: View {
             }
             ForEach(days, id: \.self) { weekDays in
                 HStack(spacing: weekDayCellSpacing) {
+                    if viewModel.showWeekNumbers, let firstDay = weekDays.first {
+                        Text("\(viewModel.weekOfYear(for: firstDay))")
+                            .font(fontSize)
+                            .foregroundColor(.secondary)
+                            .frame(width: viewModel.weekNumberColumnWidth, height: dayCellSize)
+                    }
                     ForEach(weekDays, id: \.self) { date in
                         CalendarDay(
                             date: date,
