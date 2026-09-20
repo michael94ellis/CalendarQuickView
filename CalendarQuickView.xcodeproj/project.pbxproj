@@ -39,6 +39,7 @@
 		2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */; };
 		2FEF62942738024700F0A9DF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF62932738024700F0A9DF /* EventListView.swift */; };
 		2FF55752273F641C000FD5C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF55750273F641C000FD5C5 /* Main.storyboard */; };
+		39C4A9B5DB551EA15FA476AB /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 7460C860525C5FDC4D537767 /* KeyboardShortcuts */; };
 		814C52C03017DE620076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52BF3017DE620076D3D1 /* DesignToken */; };
 		814C52C23017DE670076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52C13017DE670076D3D1 /* DesignToken */; };
 		81F70F813018C89E00996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F803018C89E00996E20 /* ViewModels */; };
@@ -160,6 +161,7 @@
 				81F70F813018C89E00996E20 /* ViewModels in Frameworks */,
 				814C52C03017DE620076D3D1 /* DesignToken in Frameworks */,
 				2F42D4882748887300D77239 /* ServiceManagement.framework in Frameworks */,
+				39C4A9B5DB551EA15FA476AB /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +343,7 @@
 				2F42D49127488BF900D77239 /* LaunchAtLogin */,
 				814C52BF3017DE620076D3D1 /* DesignToken */,
 				81F70F803018C89E00996E20 /* ViewModels */,
+				7460C860525C5FDC4D537767 /* KeyboardShortcuts */,
 			);
 			productName = CalendarQuickView;
 			productReference = 2FCC6CDF272C3A08006D5C7D /* Quick Menu Calendar.app */;
@@ -378,6 +381,7 @@
 				2F42D49027488BF900D77239 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 				81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */,
 				81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */,
+				6144CAAE63E83525D208409E /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = 2FCC6CE0272C3A08006D5C7D /* Products */;
 			projectDirPath = "";
@@ -803,6 +807,14 @@
 				minimumVersion = 1.1.0;
 			};
 		};
+		6144CAAE63E83525D208409E /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -810,6 +822,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F42D49027488BF900D77239 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
 			productName = LaunchAtLogin;
+		};
+		7460C860525C5FDC4D537767 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6144CAAE63E83525D208409E /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 		814C52BF3017DE620076D3D1 /* DesignToken */ = {
 			isa = XCSwiftPackageProductDependency;

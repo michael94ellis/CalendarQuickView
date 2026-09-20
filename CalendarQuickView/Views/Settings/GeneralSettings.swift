@@ -5,6 +5,7 @@
 //  Created by Michael Ellis on 11/5/21.
 //
 
+import KeyboardShortcuts
 import LaunchAtLogin
 import SwiftUI
 import ViewModels
@@ -113,8 +114,7 @@ struct GeneralSettings: View {
                     .frame(height: 25)
                     // Global keyboard shortcut
                     HStack {
-                        Text("⌃⌥C")
-                            .foregroundColor(.secondary)
+                        KeyboardShortcuts.Recorder("", name: .toggleCalendar)
                         Spacer()
                     }
                     .frame(height: 25)
