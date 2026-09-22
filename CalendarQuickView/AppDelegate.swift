@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import FirebaseCore
 import SwiftUI
 import ViewModels
 
@@ -54,6 +55,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Must run before anything else touches Firebase: Analytics and Crashlytics are both
+        // inert until the app is configured from GoogleService-Info.plist.
+        FirebaseApp.configure()
+
         _ = eventKitManager.syncAuthorizationStatus()
         self.hostingView = newHostingView
         menuItem.view = hostingView

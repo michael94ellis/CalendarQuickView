@@ -43,6 +43,7 @@
 		814C52C03017DE620076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52BF3017DE620076D3D1 /* DesignToken */; };
 		814C52C23017DE670076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52C13017DE670076D3D1 /* DesignToken */; };
 		819308023062A06D00E00533 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 819308013062A06D00E00533 /* FirebaseAnalytics */; };
+		81A0F1023062B11000E00533 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81A0F1013062B11000E00533 /* GoogleService-Info.plist */; };
 		819308043062A06D00E00533 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 819308033062A06D00E00533 /* FirebaseCrashlytics */; };
 		81D0CBA4306074050077A04B /* CalendarRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0CBA3306074050077A04B /* CalendarRowView.swift */; };
 		81F70F813018C89E00996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F803018C89E00996E20 /* ViewModels */; };
@@ -100,6 +101,7 @@
 /* Begin PBXFileReference section */
 		2E173822D3FF52D203EA378D /* AgendaListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AgendaListView.swift; sourceTree = "<group>"; };
 		2F07D87E274B28C900C5BBB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		81A0F1013062B11000E00533 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F0B26E02748B28B00F9D54E /* CalendarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		2F0B26E62748B28B00F9D54E /* CalendarWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CalendarWidget.intentdefinition; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				2F07D87E274B28C900C5BBB0 /* README.md */,
+				81A0F1013062B11000E00533 /* GoogleService-Info.plist */,
 				2F0B2701274934A200F9D54E /* Shared */,
 				2FCC6CE1272C3A08006D5C7D /* CalendarQuickView */,
 				2F0B26E32748B28B00F9D54E /* CalendarWidget */,
@@ -340,6 +343,7 @@
 				2FCC6CDC272C3A08006D5C7D /* Frameworks */,
 				2FCC6CDD272C3A08006D5C7D /* Resources */,
 				2FDFB0982730241F00BE49CC /* Embed Foundation Extensions */,
+				81A0F1033062B11000E00533 /* Upload Crashlytics dSYMs */,
 			);
 			buildRules = (
 			);
@@ -422,10 +426,31 @@
 				2FF55752273F641C000FD5C5 /* Main.storyboard in Resources */,
 				2FCC6CEA272C3A09006D5C7D /* Preview Assets.xcassets in Resources */,
 				2FCC6CE7272C3A09006D5C7D /* Assets.xcassets in Resources */,
+				81A0F1023062B11000E00533 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		81A0F1033062B11000E00533 /* Upload Crashlytics dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${EXECUTABLE_NAME}",
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Upload Crashlytics dSYMs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then exit 0; fi\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2F0B26DC2748B28B00F9D54E /* Sources */ = {
