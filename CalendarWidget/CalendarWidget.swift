@@ -10,6 +10,10 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
+
+    /// How many upcoming day boundaries the timeline covers before WidgetKit asks for more.
+    private let upcomingDayCount = 5
+
     func placeholder(in context: Context) -> CalendarWidgetData {
         CalendarWidgetData(date: Date(), configuration: ConfigurationIntent())
     }
@@ -20,20 +24,15 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [CalendarWidgetData] = []
-
-        let currentDate = Date()
-        // Current time and Current time + 1 hour
-        for hourOffset in 0 ..< 2 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = CalendarWidgetData(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-        // Today and the next 4 days
-        for dayOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .day, value: dayOffset, to: currentDate)!
-            let entry = CalendarWidgetData(date: entryDate, configuration: configuration)
-            entries.append(entry)
+        let calendar = Calendar.current
+        let now = Date()
+        // The grid only changes when the day changes, so an entry per upcoming midnight
+        // is all that is needed. Entries must be strictly ascending and free of
+        // duplicates or WidgetKit will not schedule them reliably.
+        var entries = [CalendarWidgetData(date: now, configuration: configuration)]
+        for dayOffset in 1...upcomingDayCount {
+            guard let day = calendar.date(byAdding: .day, value: dayOffset, to: now) else { continue }
+            entries.append(CalendarWidgetData(date: calendar.startOfDay(for: day), configuration: configuration))
         }
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
@@ -52,9 +51,10 @@ struct CalendarWidget: Widget {
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            WidgetCalendarView()
+            WidgetCalendarView(date: entry.date)
         }
         .configurationDisplayName("Current Month View")
         .description("This is a calendar view displaying the current month.")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

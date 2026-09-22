@@ -15,6 +15,9 @@ struct CalendarDay: View {
     private let cellSize: CGFloat
     private let displayShape: AnyShape
     private let month: Date
+    /// What counts as "today". The widget renders timeline entries ahead of time and
+    /// passes the entry's date here so the highlight lands on the right day.
+    private let referenceDate: Date
     private let isSelected: Bool
     private let isSelectable: Bool
     private let onSelect: (() -> Void)?
@@ -28,6 +31,7 @@ struct CalendarDay: View {
         cellSize: CGFloat,
         dayShape: AnyShape,
         month: Date,
+        referenceDate: Date = Date(),
         isSelected: Bool = false,
         isSelectable: Bool = false,
         onSelect: (() -> Void)? = nil,
@@ -38,6 +42,7 @@ struct CalendarDay: View {
         self.cellSize = cellSize
         self.displayShape = dayShape
         self.month = month
+        self.referenceDate = referenceDate
         self.isSelected = isSelected
         self.isSelectable = isSelectable
         self.onSelect = onSelect
@@ -45,7 +50,7 @@ struct CalendarDay: View {
     }
     
     private var isToday: Bool {
-        Calendar.current.isDateInToday(date)
+        Calendar.current.isDate(date, inSameDayAs: referenceDate)
     }
     
     private var dayColors: (text: Color, bgColor: Color) {
