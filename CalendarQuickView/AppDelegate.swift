@@ -73,6 +73,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         HotkeyManager.shared.registerToggleShortcut { [weak self] in
             self?.statusBarItem?.button?.performClick(nil)
         }
+        // Last, so the status item already exists behind it: the walkthrough points at it, and
+        // the permissions it asks for feed the same EventKitManager the menu reads from.
+        OnboardingWindow.showIfNeeded(eventManager: eventKitManager)
     }
 
     func menuWillOpen(_ menu: NSMenu) {

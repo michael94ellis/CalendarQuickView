@@ -19,4 +19,5 @@ public struct AppStorageKeys {
     public static let isRemindersFeatureEnabled = "isRemindersFeatureEnabled"
     public static let viewMode = "viewMode"
     public static let measuredMonthContentHeight = "measuredMonthContentHeight"
+    public static let hasCompletedOnboarding = "hasCompletedOnboarding"
 }

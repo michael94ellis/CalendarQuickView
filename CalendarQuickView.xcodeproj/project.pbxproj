@@ -37,6 +37,8 @@
 		2FEE6DAE2736B8DD0081C4B8 /* CalendarFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */; };
 		2FEE6DB02736B9840081C4B8 /* CalendarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */; };
 		2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */; };
+		81A0E1010001000000000002 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0E1010001000000000001 /* OnboardingView.swift */; };
+		81A0E1010001000000000004 /* OnboardingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0E1010001000000000003 /* OnboardingWindow.swift */; };
 		2FEF62942738024700F0A9DF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEF62932738024700F0A9DF /* EventListView.swift */; };
 		2FF55752273F641C000FD5C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF55750273F641C000FD5C5 /* Main.storyboard */; };
 		39C4A9B5DB551EA15FA476AB /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 7460C860525C5FDC4D537767 /* KeyboardShortcuts */; };
@@ -130,6 +132,8 @@
 		2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFooter.swift; sourceTree = "<group>"; };
 		2FEE6DAF2736B9840081C4B8 /* CalendarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarButton.swift; sourceTree = "<group>"; };
 		2FEF628F2737510300F0A9DF /* StatusBarCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarCalendar.swift; sourceTree = "<group>"; };
+		81A0E1010001000000000001 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		81A0E1010001000000000003 /* OnboardingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWindow.swift; sourceTree = "<group>"; };
 		2FEF62932738024700F0A9DF /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		2FF55751273F641C000FD5C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FF55753273F6562000FD5C5 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -213,6 +217,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		81A0E1010001000000000005 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				81A0E1010001000000000001 /* OnboardingView.swift */,
+				81A0E1010001000000000003 /* OnboardingWindow.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		2F6FB93627320EEE00DD0ACC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +241,7 @@
 				E5C35C5C9E8502BA3E0BFB60 /* QuickAddReminderView.swift */,
 				DA7968D0732398FB01F8E606 /* ReminderListView.swift */,
 				2E173822D3FF52D203EA378D /* AgendaListView.swift */,
+				81A0E1010001000000000005 /* Onboarding */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -484,6 +498,8 @@
 				2F6FB94727322C7700DD0ACC /* CalendarBody.swift in Sources */,
 				2FEE6DAD2736B8DD0081C4B8 /* CalendarHeader.swift in Sources */,
 				2FEF62902737510300F0A9DF /* StatusBarCalendar.swift in Sources */,
+				81A0E1010001000000000002 /* OnboardingView.swift in Sources */,
+				81A0E1010001000000000004 /* OnboardingWindow.swift in Sources */,
 				2FEF62942738024700F0A9DF /* EventListView.swift in Sources */,
 				2F6FB96127358AAF00DD0ACC /* EventSettings.swift in Sources */,
 				81D0CBA4306074050077A04B /* CalendarRowView.swift in Sources */,

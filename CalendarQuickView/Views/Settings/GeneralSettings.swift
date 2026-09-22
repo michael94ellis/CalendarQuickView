@@ -13,6 +13,7 @@ import ViewModels
 struct GeneralSettings: View {
     
     @EnvironmentObject var viewModel: CalendarViewModel
+    @EnvironmentObject private var eventManager: EventKitManager
 
     private static let timeZoneIdentifiers: [String] = TimeZone.knownTimeZoneIdentifiers.sorted()
 
@@ -44,6 +45,8 @@ struct GeneralSettings: View {
                     TextWithFrame("\(LaunchAtLogin.isEnabled ? "App is currently in" : "Click to add to") Login Items")
                     // Global keyboard shortcut
                     TextWithFrame("Global Shortcut")
+                    // Replay the first-run walkthrough
+                    TextWithFrame("Features and Permissions")
                     // Rate the app on the App Store
                     TextWithFrame("Enjoying Quick Calendar?")
                 }
@@ -115,6 +118,15 @@ struct GeneralSettings: View {
                     HStack {
                         KeyboardShortcuts.Recorder("", name: .toggleCalendar)
                         Spacer()
+                    }
+                    .frame(height: 25)
+                    .frame(maxWidth: .infinity)
+                    // Replay the first-run walkthrough
+                    HStack {
+                        Spacer()
+                        Button("Show Welcome Guide") {
+                            OnboardingWindow.show(eventManager: eventManager)
+                        }
                     }
                     .frame(height: 25)
                     .frame(maxWidth: .infinity)

@@ -53,6 +53,15 @@ public enum ReminderCreationError: LocalizedError, Equatable {
     }
 }
 
+/// Coarse authorization state for one of the privacy prompts. Denial is separated from
+/// "not yet asked" because EventKit will not prompt a second time — the only way back from a
+/// denial is System Settings.
+public enum EventAccessState: Equatable {
+    case notDetermined
+    case granted
+    case denied
+}
+
 public final class EventKitManager: ObservableObject {
     
     @AppStorage(AppStorageKeys.calendarAccessGranted) public var isAbleToAccessUserCalendar: Bool = false
@@ -84,6 +93,26 @@ public final class EventKitManager: ObservableObject {
         }
     }
     
+    public var calendarAccessState: EventAccessState { Self.accessState(for: .event) }
+
+    public var reminderAccessState: EventAccessState { Self.accessState(for: .reminder) }
+
+    private static func accessState(for entityType: EKEntityType) -> EventAccessState {
+        switch EKEventStore.authorizationStatus(for: entityType) {
+        case .notDetermined:
+            return .notDetermined
+        case .restricted, .denied:
+            return .denied
+        case .authorized, .fullAccess:
+            return .granted
+        case .writeOnly:
+            // Write-only cannot read events, so full access still has to be requested.
+            return .notDetermined
+        @unknown default:
+            return .notDetermined
+        }
+    }
+
     /// Keep AppStorage in sync with the system authorization status.
     @discardableResult
     public func syncAuthorizationStatus() -> Bool {
