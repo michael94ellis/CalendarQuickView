@@ -14,7 +14,13 @@ struct EventSettings: View {
     @EnvironmentObject var viewModel: CalendarViewModel
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Events and Reminders Setting")
+                .font(.title3)
+                .foregroundColor(.secondary)
+            Text("Choose which calendars appear in the popup and widget.")
+                .foregroundColor(.secondary)
+            
             settingsRow("Calendar Access") {
                 Button {
                     eventManager.checkCalendarAuthStatus { _ in }
@@ -31,11 +37,13 @@ struct EventSettings: View {
                 }
                 .buttonStyle(.plain)
             }
+            Divider()
             
             settingsRow("Display Event Info") {
                 Toggle("", isOn: $eventManager.isEventFeatureEnabled)
                     .labelsHidden()
             }
+            Divider()
             
             settingsRow("Reminder Access") {
                 Button {
@@ -53,6 +61,7 @@ struct EventSettings: View {
                 }
                 .buttonStyle(.plain)
             }
+            Divider()
             
             settingsRow("Show Reminders") {
                 Toggle("", isOn: $eventManager.isRemindersFeatureEnabled)
@@ -63,6 +72,7 @@ struct EventSettings: View {
                         }
                     }
             }
+            Divider()
             
             settingsRow("Event List Date Format") {
                 Picker("", selection: $viewModel.eventDateFormat) {
@@ -76,9 +86,9 @@ struct EventSettings: View {
             
             Spacer()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .padding(.vertical, 20)
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private func settingsRow<Control: View>(

@@ -12,16 +12,16 @@ struct CalendarSettings: View {
     @EnvironmentObject private var eventManager: EventKitManager
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Select Calendars")
+                .font(.title3)
+                .foregroundColor(.secondary)
             Text("Choose which calendars appear in the popup and widget.")
                 .foregroundColor(.secondary)
-                .padding(.horizontal, 24)
-                .padding(.top, 20)
 
             if eventManager.eventCalendars.isEmpty {
                 Text("No calendars found. Check Calendar Access in the Events tab.")
                     .foregroundColor(.secondary)
-                    .padding(.horizontal, 24)
                 Spacer()
             } else {
                 Text("Event Calendars")
@@ -34,11 +34,9 @@ struct CalendarSettings: View {
                             Divider()
                         }
                     }
-                    .padding(.horizontal, 24)
                     
                     Text("Reminder Calendars")
                         .foregroundColor(.secondary)
-                        .padding(.horizontal, 24)
                     VStack {
                         ForEach(eventManager.reminderCalendars, id: \.calendarIdentifier) { calendar in
                             CalendCalendarRowView(calendar: calendar,
@@ -46,7 +44,6 @@ struct CalendarSettings: View {
                             Divider()
                         }
                     }
-                    .padding(.horizontal, 24)
                 }
             }
         }

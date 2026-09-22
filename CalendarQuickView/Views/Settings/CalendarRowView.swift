@@ -14,6 +14,7 @@ struct CalendCalendarRowView: View {
                 Text(calendar.title)
                 Spacer()
             }
+            .padding(.leading, 4)
         }
         .toggleStyle(.checkbox)
         .padding(.vertical, 8)

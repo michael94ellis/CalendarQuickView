@@ -33,12 +33,12 @@ public struct ColorSettings: View {
             let firstHalf = allThemes.prefix(half)
             let secondHalf = allThemes.suffix(half)
             HStack {
-                VStack {
+                VStack(alignment: .leading, spacing: 12) {
                     ForEach(firstHalf) { theme in
                         themeRow(for: theme)
                     }
                 }
-                VStack {
+                VStack(alignment: .leading, spacing: 12) {
                     ForEach(secondHalf) { theme in
                         themeRow(for: theme)
                     }
@@ -46,23 +46,7 @@ public struct ColorSettings: View {
             }
             
             Spacer()
-            
-            HStack {
-                Spacer()
-                Text("Reset")
-                    .font(.title3)
-                Button {
-                    colorStore.resetToDefaults()
-                } label: {
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                        .frame(width: viewModel.buttonSize, height: viewModel.buttonSize)
-                        .foregroundColor(colorStore.accentColor)
-                }
-                .buttonStyle(.plain)
-                Spacer()
-            }
         }
-        .frame(width: 250)
         .padding(.vertical, 20)
     }
 }

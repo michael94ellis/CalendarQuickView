@@ -99,10 +99,10 @@ struct SearchSettings: View {
 
             Spacer()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .padding(.top, 20)
         .padding(.bottom, 20)
-        .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear {
             // Populates the calendar list backing the scope picker.
             eventManager.fetchEvents()
