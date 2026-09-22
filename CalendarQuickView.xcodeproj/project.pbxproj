@@ -43,8 +43,8 @@
 		814C52C03017DE620076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52BF3017DE620076D3D1 /* DesignToken */; };
 		814C52C23017DE670076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52C13017DE670076D3D1 /* DesignToken */; };
 		819308023062A06D00E00533 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 819308013062A06D00E00533 /* FirebaseAnalytics */; };
-		81A0F1023062B11000E00533 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81A0F1013062B11000E00533 /* GoogleService-Info.plist */; };
 		819308043062A06D00E00533 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 819308033062A06D00E00533 /* FirebaseCrashlytics */; };
+		81A0F1023062B11000E00533 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81A0F1013062B11000E00533 /* GoogleService-Info.plist */; };
 		81D0CBA4306074050077A04B /* CalendarRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0CBA3306074050077A04B /* CalendarRowView.swift */; };
 		81F70F813018C89E00996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F803018C89E00996E20 /* ViewModels */; };
 		81F70F833018C8A300996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F823018C8A300996E20 /* ViewModels */; };
@@ -101,7 +101,6 @@
 /* Begin PBXFileReference section */
 		2E173822D3FF52D203EA378D /* AgendaListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AgendaListView.swift; sourceTree = "<group>"; };
 		2F07D87E274B28C900C5BBB0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		81A0F1013062B11000E00533 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2F0B26E02748B28B00F9D54E /* CalendarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0B26E42748B28B00F9D54E /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		2F0B26E62748B28B00F9D54E /* CalendarWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = CalendarWidget.intentdefinition; sourceTree = "<group>"; };
@@ -136,6 +135,7 @@
 		2FF55753273F6562000FD5C5 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Main.strings"; sourceTree = "<group>"; };
 		814C52BE3017DD630076D3D1 /* DesignToken */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignToken; sourceTree = "<group>"; };
 		814C52C43017DA570076D3D1 /* EKCalendar-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EKCalendar-Extension.swift"; sourceTree = "<group>"; };
+		81A0F1013062B11000E00533 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81D0CBA3306074050077A04B /* CalendarRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRowView.swift; sourceTree = "<group>"; };
 		81F70F7E3018C75C00996E20 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ViewModels; sourceTree = "<group>"; };
 		81F70F843018CCF900996E20 /* ColorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSettings.swift; sourceTree = "<group>"; };
@@ -542,7 +542,7 @@
 				CODE_SIGN_ENTITLEMENTS = CalendarWidget/CalendarWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -575,7 +575,7 @@
 				CODE_SIGN_ENTITLEMENTS = CalendarWidget/CalendarWidget.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = KLQC884752;
 				ENABLE_HARDENED_RUNTIME = YES;
