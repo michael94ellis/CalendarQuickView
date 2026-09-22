@@ -16,11 +16,14 @@ struct CalendarFooter: View {
 
     var settingWindowCallback: () -> () = { }
     var quickAddCallback: () -> () = { }
+    var quickAddReminderCallback: () -> () = { }
 
     init(openSettings settingWindowCallback: @escaping () -> (),
-         openQuickAdd quickAddCallback: @escaping () -> ()) {
+         openQuickAdd quickAddCallback: @escaping () -> (),
+         openQuickAddReminder quickAddReminderCallback: @escaping () -> ()) {
         self.settingWindowCallback = settingWindowCallback
         self.quickAddCallback = quickAddCallback
+        self.quickAddReminderCallback = quickAddReminderCallback
     }
 
     var body: some View {
@@ -35,9 +38,15 @@ struct CalendarFooter: View {
             .help(viewModel.viewMode == .month ? "Switch to Agenda view" : "Switch to Month view")
 
             if eventManager.hasCalendarReadAccess {
-                CalendarButton(imageName: "plus", animation: .linear, color: colorStore.accentColor, size: viewModel.buttonSize, action: self.quickAddCallback)
+                CalendarButton(imageName: "calendar.badge.plus", animation: .linear, color: colorStore.accentColor, size: viewModel.buttonSize, action: self.quickAddCallback)
                     .foregroundColor(colorStore.accentColor)
                     .help("New event")
+            }
+
+            if eventManager.hasReminderReadAccess {
+                CalendarButton(imageName: "text.badge.plus", animation: .linear, color: colorStore.accentColor, size: viewModel.buttonSize, action: self.quickAddReminderCallback)
+                    .foregroundColor(colorStore.accentColor)
+                    .help("New reminder")
             }
             Spacer()
             CalendarButton(imageName: "gear", animation: .linear, color: colorStore.accentColor, size: viewModel.buttonSize, action: self.settingWindowCallback)

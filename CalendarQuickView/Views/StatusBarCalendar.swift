@@ -25,6 +25,7 @@ struct StatusBarCalendar: View {
     @ObservedObject var eventManager: EventKitManager
     static var windowRef: NSWindow?
     static var quickAddWindowRef: NSWindow?
+    static var quickAddReminderWindowRef: NSWindow?
     private var horizontalPadding: CGFloat = 10
 
     init(eventManager: EventKitManager) {
@@ -57,6 +58,12 @@ struct StatusBarCalendar: View {
                 openSettings: Self.openSettingsWindow,
                 openQuickAdd: {
                     Self.openQuickAddWindow(
+                        defaultDate: viewModel.selectedDate,
+                        eventManager: eventManager
+                    )
+                },
+                openQuickAddReminder: {
+                    Self.openQuickAddReminderWindow(
                         defaultDate: viewModel.selectedDate,
                         eventManager: eventManager
                     )
@@ -156,6 +163,36 @@ struct StatusBarCalendar: View {
         // Rebuilt on each open so the form starts empty, on whichever day is selected.
         let form = QuickAddEventView(defaultDate: defaultDate) {
             quickAddWindowRef?.close()
+        }
+        .environmentObject(eventManager)
+        let hostingView = NSHostingView(rootView: form)
+        window.contentView = hostingView
+        window.setContentSize(hostingView.fittingSize)
+        if isNewWindow {
+            window.center()
+        }
+
+        activateApp()
+        window.makeKeyAndOrderFront(nil)
+    }
+
+    /// Opens the add-reminder form in its own window, for the same first-responder reason as
+    /// `openQuickAddWindow`.
+    static func openQuickAddReminderWindow(defaultDate: Date, eventManager: EventKitManager) {
+        (NSApp.delegate as? AppDelegate)?.menu.cancelTracking()
+
+        let isNewWindow = quickAddReminderWindowRef == nil
+        let window = quickAddReminderWindowRef ?? NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 300, height: 180),
+            styleMask: [.titled, .closable],
+            backing: .buffered, defer: false)
+        quickAddReminderWindowRef = window
+        window.title = "New Reminder"
+        window.isReleasedWhenClosed = false
+
+        // Rebuilt on each open so the form starts empty, on whichever day is selected.
+        let form = QuickAddReminderView(defaultDate: defaultDate) {
+            quickAddReminderWindowRef?.close()
         }
         .environmentObject(eventManager)
         let hostingView = NSHostingView(rootView: form)

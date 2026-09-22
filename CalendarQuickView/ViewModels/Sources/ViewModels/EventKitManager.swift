@@ -33,6 +33,26 @@ public enum EventCreationError: LocalizedError, Equatable {
     }
 }
 
+public enum ReminderCreationError: LocalizedError, Equatable {
+    case emptyTitle
+    case noAccess
+    case noWritableList
+    case saveFailed(String)
+
+    public var errorDescription: String? {
+        switch self {
+        case .emptyTitle:
+            return "Please enter a title for the reminder."
+        case .noAccess:
+            return "Reminders access isn't granted. Check Reminders Access in the Events tab."
+        case .noWritableList:
+            return "No writable reminder list is available to add this reminder to."
+        case .saveFailed(let message):
+            return "Couldn't save the reminder: \(message)"
+        }
+    }
+}
+
 public final class EventKitManager: ObservableObject {
     
     @AppStorage(AppStorageKeys.calendarAccessGranted) public var isAbleToAccessUserCalendar: Bool = false
@@ -268,6 +288,35 @@ public final class EventKitManager: ObservableObject {
         return reminders.filter { reminder in
             guard let components = reminder.dueDateComponents, let due = calendar.date(from: components) else { return false }
             return due >= dayStart && due < dayEnd
+        }
+    }
+
+    /// Creates and saves a new reminder due on the given date. A due date is always set so the
+    /// reminder is day-scoped, which is what `reminders(on:)` and the day list filter on.
+    @discardableResult
+    public func createReminder(title: String, dueDate: Date, calendar: EKCalendar? = nil) -> Result<Void, ReminderCreationError> {
+        let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedTitle.isEmpty else { return .failure(.emptyTitle) }
+        guard hasReminderReadAccess else { return .failure(.noAccess) }
+
+        let reminder = EKReminder(eventStore: eventStore)
+        reminder.title = trimmedTitle
+        reminder.dueDateComponents = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute],
+            from: dueDate
+        )
+        reminder.calendar = calendar
+            ?? eventStore.defaultCalendarForNewReminders()
+            ?? eventStore.calendars(for: .reminder).first { $0.allowsContentModifications }
+
+        guard reminder.calendar != nil else { return .failure(.noWritableList) }
+
+        do {
+            try eventStore.save(reminder, commit: true)
+            fetchReminders()
+            return .success(())
+        } catch {
+            return .failure(.saveFailed(error.localizedDescription))
         }
     }
 

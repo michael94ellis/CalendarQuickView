@@ -53,6 +53,7 @@
 		A82E830F198D44088DAA5DAE /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47F6EDB9A7BA438252DD142 /* CalendarSettings.swift */; };
 		D61539E2A12AE29B0175F698 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE21864EAF8F19B8D45E34 /* HotkeyManager.swift */; };
 		DC1B8C947D53F150DE69DA27 /* QuickAddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C35C5C9E8502BA3E0BFB5F /* QuickAddEventView.swift */; };
+		DC1B8C947D53F150DE69DA28 /* QuickAddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C35C5C9E8502BA3E0BFB60 /* QuickAddReminderView.swift */; };
 		FA74F41093061A888CBC4F2A /* SearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186835891DC4F20A09DA161 /* SearchSettings.swift */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +140,7 @@
 		ABFE21864EAF8F19B8D45E34 /* HotkeyManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
 		DA7968D0732398FB01F8E606 /* ReminderListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReminderListView.swift; sourceTree = "<group>"; };
 		E5C35C5C9E8502BA3E0BFB5F /* QuickAddEventView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuickAddEventView.swift; sourceTree = "<group>"; };
+		E5C35C5C9E8502BA3E0BFB60 /* QuickAddReminderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuickAddReminderView.swift; sourceTree = "<group>"; };
 		F186835891DC4F20A09DA161 /* SearchSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchSettings.swift; sourceTree = "<group>"; };
 		F47F6EDB9A7BA438252DD142 /* CalendarSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -217,6 +219,7 @@
 				2FEE6DAC2736B8DD0081C4B8 /* CalendarFooter.swift */,
 				2F6FB9622735953F00DD0ACC /* Settings */,
 				E5C35C5C9E8502BA3E0BFB5F /* QuickAddEventView.swift */,
+				E5C35C5C9E8502BA3E0BFB60 /* QuickAddReminderView.swift */,
 				DA7968D0732398FB01F8E606 /* ReminderListView.swift */,
 				2E173822D3FF52D203EA378D /* AgendaListView.swift */,
 			);
@@ -457,6 +460,7 @@
 				81F70F873018CA1200996E20 /* LaunchAtLoginToggle.swift in Sources */,
 				2F6FB95F27358A7B00DD0ACC /* GeneralSettings.swift in Sources */,
 				DC1B8C947D53F150DE69DA27 /* QuickAddEventView.swift in Sources */,
+				DC1B8C947D53F150DE69DA28 /* QuickAddReminderView.swift in Sources */,
 				9CADBC7E1711649AEAA9CD6B /* ReminderListView.swift in Sources */,
 				840987A7A579842569B90AD9 /* AgendaListView.swift in Sources */,
 				A82E830F198D44088DAA5DAE /* CalendarSettings.swift in Sources */,
