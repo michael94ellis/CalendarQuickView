@@ -40,69 +40,51 @@ struct SearchSettings: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            TextField("Search events by title", text: $query)
-                .textFieldStyle(.roundedBorder)
-
-            HStack(spacing: 16) {
+        SettingsPane(title: "Events Search",
+                     subtitle: "Find events across the calendars you have made visible.") {
+            Section("Search") {
+                TextField("Title contains", text: $query)
                 DatePicker("From", selection: $startDate, displayedComponents: .date)
                 DatePicker("To", selection: $endDate, in: startDate..., displayedComponents: .date)
-            }
-
-            HStack(spacing: 8) {
-                Text("Calendar")
-                Picker("", selection: $calendarFilter) {
+                Picker("Calendar", selection: $calendarFilter) {
                     Text("All Calendars").tag(String?.none)
                     ForEach(visibleCalendars, id: \.calendarIdentifier) { calendar in
                         Text(calendar.title).tag(String?.some(calendar.calendarIdentifier))
                     }
                 }
-                .labelsHidden()
-                .frame(maxWidth: 200)
-
-                Spacer()
-
-                Text("\(results.count) event\(results.count == 1 ? "" : "s")")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
             }
 
-            Divider()
-
-            if !eventManager.hasCalendarReadAccess {
-                Text("Calendar access isn't granted. Check Calendar Access in the Events tab.")
-                    .foregroundColor(.secondary)
-            } else if results.isEmpty {
-                Text("No events in this range.")
-                    .foregroundColor(.secondary)
-            } else {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(Array(results.enumerated()), id: \.offset) { _, event in
-                            HStack(spacing: 8) {
-                                RoundedRectangle(cornerRadius: 1)
-                                    .fill(event.calendarColor)
-                                    .frame(width: 3, height: 16)
-                                Text(event.title ?? "Untitled")
-                                    .lineLimit(1)
-                                Spacer(minLength: 8)
-                                Text(Self.resultFormatter.string(from: event.startDate))
-                                    .foregroundColor(.secondary)
-                                    .font(.caption)
-                            }
-                            .padding(.vertical, 6)
-                            Divider()
+            Section {
+                if !eventManager.hasCalendarReadAccess {
+                    Text("Calendar access isn't granted. Check Calendar Access in Events and Reminders.")
+                        .foregroundColor(.secondary)
+                } else if results.isEmpty {
+                    Text("No events in this range.")
+                        .foregroundColor(.secondary)
+                } else {
+                    ForEach(Array(results.enumerated()), id: \.offset) { _, event in
+                        HStack(spacing: 8) {
+                            RoundedRectangle(cornerRadius: 1)
+                                .fill(event.calendarColor)
+                                .frame(width: 3, height: 16)
+                            Text(event.title ?? "Untitled")
+                                .lineLimit(1)
+                            Spacer(minLength: 8)
+                            Text(Self.resultFormatter.string(from: event.startDate))
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
+            } header: {
+                HStack {
+                    Text("Results")
+                    Spacer()
+                    Text("\(results.count) event\(results.count == 1 ? "" : "s")")
+                        .foregroundColor(.secondary)
+                }
             }
-
-            Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 24)
-        .padding(.top, 20)
-        .padding(.bottom, 20)
         .onAppear {
             // Populates the calendar list backing the scope picker.
             eventManager.fetchEvents()

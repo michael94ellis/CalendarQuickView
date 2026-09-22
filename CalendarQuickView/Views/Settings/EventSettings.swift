@@ -9,97 +9,58 @@ import SwiftUI
 import ViewModels
 
 struct EventSettings: View {
-    
+
     @EnvironmentObject private var eventManager: EventKitManager
     @EnvironmentObject var viewModel: CalendarViewModel
-    
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Events and Reminders Setting")
-                .font(.title3)
-                .foregroundColor(.secondary)
-            Text("Choose which calendars appear in the popup and widget.")
-                .foregroundColor(.secondary)
-            
-            settingsRow("Calendar Access") {
-                Button {
-                    eventManager.checkCalendarAuthStatus { _ in }
-                } label: {
-                    HStack(spacing: 8) {
-                        Text(eventManager.isAbleToAccessUserCalendar ? "Granted" : "Not Granted")
-                            .foregroundColor(.secondary)
-                        Image(systemName: eventManager.isAbleToAccessUserCalendar
-                              ? "checkmark.circle.fill"
-                              : "xmark.circle.fill")
-                        .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .secondary)
+        SettingsPane(title: "Events and Reminders",
+                     subtitle: "Control access and how events and reminders are displayed.") {
+            Section("Access") {
+                LabeledContent("Calendar Access") {
+                    accessButton(isGranted: eventManager.isAbleToAccessUserCalendar,
+                                 help: "Recheck calendar access") {
+                        eventManager.checkCalendarAuthStatus { _ in }
                     }
-                    .help("Recheck calendar access")
                 }
-                .buttonStyle(.plain)
-            }
-            Divider()
-            
-            settingsRow("Display Event Info") {
-                Toggle("", isOn: $eventManager.isEventFeatureEnabled)
-                    .labelsHidden()
-            }
-            Divider()
-            
-            settingsRow("Reminder Access") {
-                Button {
-                    eventManager.requestReminderAccess()
-                } label: {
-                    HStack(spacing: 8) {
-                        Text(eventManager.hasReminderReadAccess ? "Granted" : "Not Granted")
-                            .foregroundColor(.secondary)
-                        Image(systemName: eventManager.hasReminderReadAccess
-                              ? "checkmark.circle.fill"
-                              : "xmark.circle.fill")
-                        .foregroundColor(eventManager.hasReminderReadAccess ? .green : .secondary)
+                LabeledContent("Reminder Access") {
+                    accessButton(isGranted: eventManager.hasReminderReadAccess,
+                                 help: "Request or recheck Reminders access") {
+                        eventManager.requestReminderAccess()
                     }
-                    .help("Request or recheck Reminders access")
                 }
-                .buttonStyle(.plain)
             }
-            Divider()
-            
-            settingsRow("Show Reminders") {
-                Toggle("", isOn: $eventManager.isRemindersFeatureEnabled)
-                    .labelsHidden()
+
+            Section("Display") {
+                Toggle("Display Event Info", isOn: $eventManager.isEventFeatureEnabled)
+                Toggle("Show Reminders", isOn: $eventManager.isRemindersFeatureEnabled)
                     .onChange(of: eventManager.isRemindersFeatureEnabled) { enabled in
                         if enabled {
                             eventManager.requestReminderAccess()
                         }
                     }
-            }
-            Divider()
-            
-            settingsRow("Event List Date Format") {
-                Picker("", selection: $viewModel.eventDateFormat) {
+                Picker("Event List Date Format", selection: $viewModel.eventDateFormat) {
                     ForEach(EventDateFormat.allCases, id: \.self) { dateFormatOption in
                         Text(dateFormatOption.displayName)
                     }
                 }
-                .labelsHidden()
-                .frame(maxWidth: 230)
             }
-            
-            Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 24)
-        .padding(.vertical, 20)
     }
-    
-    private func settingsRow<Control: View>(
-        _ title: String,
-        @ViewBuilder control: () -> Control
-    ) -> some View {
-        HStack(alignment: .center, spacing: 12) {
-            Text(title)
-            Spacer(minLength: 8)
-            control()
+
+    /// Granted/Not Granted status that doubles as the button to re-request access.
+    private func accessButton(isGranted: Bool,
+                              help: String,
+                              action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Text(isGranted ? "Granted" : "Not Granted")
+                    .foregroundColor(.secondary)
+                Image(systemName: isGranted ? "checkmark.circle.fill" : "xmark.circle.fill")
+                    .foregroundColor(isGranted ? .green : .secondary)
+            }
+            .help(help)
         }
-        .frame(minHeight: 28)
+        .buttonStyle(.plain)
     }
 }

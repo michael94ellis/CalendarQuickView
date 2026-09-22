@@ -58,11 +58,10 @@ struct SettingsTabView: View {
             detailContent
                 .frame(maxHeight: .infinity, alignment: .top)
                 .frame(width: 440)
-                .padding(16)
         }
         .navigationSplitViewStyle(.balanced)
-        // The General pane's two columns are a fixed 400pt wide, so the detail side needs
-        // roughly that plus padding on top of the sidebar.
+        // Each pane is a grouped Form that supplies its own insets, so the detail side
+        // only needs room for the widest row plus the sidebar.
         .frame(minWidth: 640, minHeight: 480)
         .environmentObject(viewModel)
         .environmentObject(colorStore)
