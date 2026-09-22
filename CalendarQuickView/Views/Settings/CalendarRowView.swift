@@ -12,6 +12,7 @@ struct CalendCalendarRowView: View {
                     .fill(Color(nsColor: calendar.color))
                     .frame(width: 10, height: 10)
                 Text(calendar.title)
+                Spacer()
             }
         }
         .toggleStyle(.checkbox)

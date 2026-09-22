@@ -42,6 +42,8 @@
 		39C4A9B5DB551EA15FA476AB /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 7460C860525C5FDC4D537767 /* KeyboardShortcuts */; };
 		814C52C03017DE620076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52BF3017DE620076D3D1 /* DesignToken */; };
 		814C52C23017DE670076D3D1 /* DesignToken in Frameworks */ = {isa = PBXBuildFile; productRef = 814C52C13017DE670076D3D1 /* DesignToken */; };
+		819308023062A06D00E00533 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 819308013062A06D00E00533 /* FirebaseAnalytics */; };
+		819308043062A06D00E00533 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 819308033062A06D00E00533 /* FirebaseCrashlytics */; };
 		81D0CBA4306074050077A04B /* CalendarRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0CBA3306074050077A04B /* CalendarRowView.swift */; };
 		81F70F813018C89E00996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F803018C89E00996E20 /* ViewModels */; };
 		81F70F833018C8A300996E20 /* ViewModels in Frameworks */ = {isa = PBXBuildFile; productRef = 81F70F823018C8A300996E20 /* ViewModels */; };
@@ -163,6 +165,8 @@
 			files = (
 				2F42D49227488BF900D77239 /* LaunchAtLogin in Frameworks */,
 				81F70F813018C89E00996E20 /* ViewModels in Frameworks */,
+				819308023062A06D00E00533 /* FirebaseAnalytics in Frameworks */,
+				819308043062A06D00E00533 /* FirebaseCrashlytics in Frameworks */,
 				814C52C03017DE620076D3D1 /* DesignToken in Frameworks */,
 				2F42D4882748887300D77239 /* ServiceManagement.framework in Frameworks */,
 				39C4A9B5DB551EA15FA476AB /* KeyboardShortcuts in Frameworks */,
@@ -350,6 +354,8 @@
 				814C52BF3017DE620076D3D1 /* DesignToken */,
 				81F70F803018C89E00996E20 /* ViewModels */,
 				7460C860525C5FDC4D537767 /* KeyboardShortcuts */,
+				819308013062A06D00E00533 /* FirebaseAnalytics */,
+				819308033062A06D00E00533 /* FirebaseCrashlytics */,
 			);
 			productName = CalendarQuickView;
 			productReference = 2FCC6CDF272C3A08006D5C7D /* Quick Menu Calendar.app */;
@@ -388,6 +394,7 @@
 				81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */,
 				81F70F893018CA2000996E20 /* XCLocalSwiftPackageReference "CalendarQuickView/ViewModels" */,
 				6144CAAE63E83525D208409E /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				819308003062A06D00E00533 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 2FCC6CE0272C3A08006D5C7D /* Products */;
 			projectDirPath = "";
@@ -823,6 +830,14 @@
 				minimumVersion = 1.10.0;
 			};
 		};
+		819308003062A06D00E00533 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.19.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -845,6 +860,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 81F70F883018CA2000996E20 /* XCLocalSwiftPackageReference "Shared/DesignToken" */;
 			productName = DesignToken;
+		};
+		819308013062A06D00E00533 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 819308003062A06D00E00533 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		819308033062A06D00E00533 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 819308003062A06D00E00533 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		81F70F803018C89E00996E20 /* ViewModels */ = {
 			isa = XCSwiftPackageProductDependency;

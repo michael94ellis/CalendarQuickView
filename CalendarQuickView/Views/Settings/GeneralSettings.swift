@@ -25,8 +25,8 @@ struct GeneralSettings: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     // Calendar Month/Year Title Date Format
                     TextWithFrame("Title Date Format")
@@ -48,6 +48,7 @@ struct GeneralSettings: View {
                     TextWithFrame("Enjoying Quick Calendar?")
                 }
                 .frame(width: 200)
+                Spacer()
                 VStack(alignment: .trailing) {
                     // Calendar Month/Year Title Date Format
                     Picker("", selection: $viewModel.titleDateFormat) {
@@ -57,7 +58,6 @@ struct GeneralSettings: View {
                         }
                     }
                     .frame(height: 25)
-                    .frame(maxWidth: .infinity)
                     // Day Shape
                     Picker("", selection: $viewModel.dayDisplayShape) {
                         ForEach(DayDisplayShape.allCases, id: \.self) { option in
@@ -66,7 +66,6 @@ struct GeneralSettings: View {
                         }
                     }
                     .frame(height: 25)
-                    .frame(maxWidth: .infinity)
                     // Calendar Size
                     Picker("", selection: $viewModel.calendarSize) {
                         ForEach(CalendarSize.allCases, id: \.self) { calendarSize in
@@ -121,10 +120,10 @@ struct GeneralSettings: View {
                     .frame(maxWidth: .infinity)
                     // Rate the app on the App Store
                     HStack {
+                        Spacer()
                         Button("Rate on the App Store") {
                             NSWorkspace.shared.open(Self.appStoreReviewURL)
                         }
-                        Spacer()
                     }
                     .frame(height: 25)
                     .frame(maxWidth: .infinity)

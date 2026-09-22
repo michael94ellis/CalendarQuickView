@@ -27,11 +27,11 @@ struct SettingsTabView: View {
 
         var title: String {
             switch self {
-            case .general: return "General"
-            case .colors: return "Theme"
-            case .events: return "Events"
-            case .calendars: return "Calendars"
-            case .search: return "Search"
+            case .general: return "General Settings"
+            case .colors: return "Color Theme"
+            case .events: return "Events and Reminders"
+            case .calendars: return "Selected Calendars"
+            case .search: return "Events Search"
             }
         }
 
@@ -53,10 +53,11 @@ struct SettingsTabView: View {
                     Label(section.title, systemImage: section.icon)
                 }
             }
-            .frame(maxWidth: 200)
+            .frame(width: 200)
             Divider()
             detailContent
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .frame(width: 440)
                 .padding(16)
         }
         .navigationSplitViewStyle(.balanced)

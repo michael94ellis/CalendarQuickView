@@ -16,56 +16,54 @@ struct EventSettings: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             settingsRow("Calendar Access") {
-                HStack(spacing: 8) {
-                    Text(eventManager.isAbleToAccessUserCalendar ? "Granted" : "Not Granted")
-                        .foregroundColor(.secondary)
-                    Button {
-                        eventManager.checkCalendarAuthStatus { _ in }
-                    } label: {
+                Button {
+                    eventManager.checkCalendarAuthStatus { _ in }
+                } label: {
+                    HStack(spacing: 8) {
+                        Text(eventManager.isAbleToAccessUserCalendar ? "Granted" : "Not Granted")
+                            .foregroundColor(.secondary)
                         Image(systemName: eventManager.isAbleToAccessUserCalendar
                               ? "checkmark.circle.fill"
                               : "xmark.circle.fill")
-                            .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .secondary)
+                        .foregroundColor(eventManager.isAbleToAccessUserCalendar ? .green : .secondary)
                     }
-                    .buttonStyle(.plain)
                     .help("Recheck calendar access")
                 }
+                .buttonStyle(.plain)
             }
             
             settingsRow("Display Event Info") {
                 Toggle("", isOn: $eventManager.isEventFeatureEnabled)
                     .labelsHidden()
-                    .toggleStyle(.switch)
             }
             
             settingsRow("Reminder Access") {
-                HStack(spacing: 8) {
-                    Text(eventManager.hasReminderReadAccess ? "Granted" : "Not Granted")
-                        .foregroundColor(.secondary)
-                    Button {
-                        eventManager.requestReminderAccess()
-                    } label: {
+                Button {
+                    eventManager.requestReminderAccess()
+                } label: {
+                    HStack(spacing: 8) {
+                        Text(eventManager.hasReminderReadAccess ? "Granted" : "Not Granted")
+                            .foregroundColor(.secondary)
                         Image(systemName: eventManager.hasReminderReadAccess
                               ? "checkmark.circle.fill"
                               : "xmark.circle.fill")
-                            .foregroundColor(eventManager.hasReminderReadAccess ? .green : .secondary)
+                        .foregroundColor(eventManager.hasReminderReadAccess ? .green : .secondary)
                     }
-                    .buttonStyle(.plain)
                     .help("Request or recheck Reminders access")
                 }
+                .buttonStyle(.plain)
             }
-
+            
             settingsRow("Show Reminders") {
                 Toggle("", isOn: $eventManager.isRemindersFeatureEnabled)
                     .labelsHidden()
-                    .toggleStyle(.switch)
                     .onChange(of: eventManager.isRemindersFeatureEnabled) { enabled in
                         if enabled {
                             eventManager.requestReminderAccess()
                         }
                     }
             }
-
+            
             settingsRow("Event List Date Format") {
                 Picker("", selection: $viewModel.eventDateFormat) {
                     ForEach(EventDateFormat.allCases, id: \.self) { dateFormatOption in
